@@ -19,7 +19,7 @@ body{margin:0;font:14px system-ui,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<!-- Pip's Treehouse v1.3.0 -->
+<!-- Pip's Treehouse v1.4.0 -->
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>Pip's Treehouse</title>
 <style>
@@ -123,7 +123,7 @@ button:disabled{cursor:default}
 .room-card .big{font-family:var(--f-print);font-weight:700;font-size:clamp(60px,14vmin,150px);line-height:1}
 .room-card .name{font-family:var(--f-display);font-weight:900;font-size:clamp(24px,4.8vmin,44px);line-height:1.05}
 .room-card .sub{font-size:clamp(15px,2.3vmin,19px);font-weight:700;opacity:.8}
-.extras{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;max-width:1000px;margin:0 auto 6px}
+.extras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;width:100%;max-width:1000px;margin:0 auto 6px}
 .extra{display:flex;align-items:center;gap:14px;padding:10px 18px;text-align:left;border-radius:22px;min-height:76px}
 .extra.mix{background:var(--leaf)}
 .extra.stk{background:var(--berry)}
@@ -140,8 +140,10 @@ button:disabled{cursor:default}
 .room[data-room=read]{--room:var(--read);--room-tint:var(--read-tint)}
 .room[data-room=math]{--room:var(--math);--room-tint:var(--math-tint)}
 .room .head .tag{width:18px;height:18px;border-radius:50%;background:var(--room);border:3px solid var(--ink)}
-.tiles{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:18px;width:100%;max-width:1040px;margin:0 auto 8px}
-.tile{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:10px;min-height:0;border-radius:24px}
+.tiles{flex:1;min-height:0;display:flex;flex-wrap:wrap;justify-content:center;align-content:stretch;gap:16px;width:100%;max-width:1060px;margin:0 auto 8px;--cols:3}
+.tiles[data-n="7"],.tiles[data-n="8"]{--cols:4}
+.tiles[data-n="4"]{--cols:2;max-width:780px}
+.tile{flex:0 0 calc((100% - (var(--cols) - 1) * 16px) / var(--cols));display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:10px;min-height:0;min-width:0;border-radius:24px}
 .tile .thumb{flex:1;min-height:70px;display:flex;align-items:center;justify-content:center;gap:.14em;border-radius:16px;background:var(--room-tint);font-size:clamp(34px,6.4vmin,60px);line-height:1}
 .tile .tname{font-family:var(--f-display);font-weight:800;font-size:clamp(18px,3vmin,26px);line-height:1.1}
 .tile .tfoot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 4px 2px}
@@ -332,6 +334,101 @@ button:disabled{cursor:default}
 .fine{font-size:14px;color:var(--ink-soft)}
 .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:4px 0 2px;font-size:14px;align-items:center}
 
+.extra.shop{background:var(--grape)}
+.adv{overflow-y:auto;gap:14px}
+
+/* ---------- Daily Adventure ---------- */
+.adv-banner{display:flex;align-items:center;gap:14px;width:100%;max-width:1000px;margin:0 auto;padding:8px 18px;border-radius:22px;background:var(--sea);text-align:left}
+.adv-banner .adv-ic{font-size:38px;flex:none}
+.adv-txt{display:flex;flex-direction:column;flex:1;min-width:0}
+.adv-t{font-family:var(--f-display);font-weight:900;font-size:clamp(20px,3.6vmin,30px);line-height:1.05}
+.adv-s{font-size:15px;font-weight:700}
+.adv-dots{display:flex;gap:6px}
+.adv-dots i{width:18px;height:18px;border-radius:50%;border:3px solid var(--ink);background:var(--paper)}
+.adv-dots i.on{background:var(--math)}
+.adv-chest-mini{font-size:32px}
+.adv-banner:not(.complete) .adv-chest-mini{animation:wiggle 1.6s ease-in-out infinite}
+.adv-banner.complete{background:var(--leaf)}
+.adv-note{text-align:center;margin:0;font-family:var(--f-display);font-weight:800;font-size:clamp(20px,3.4vmin,28px)}
+.adv-path{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;row-gap:16px;padding-top:10px}
+.adv-link{width:clamp(16px,4vmin,44px);height:8px;border-radius:4px;background:repeating-linear-gradient(90deg,var(--ink-soft) 0 8px,transparent 8px 14px)}
+.adv-link.lit{background:var(--math);border:2px solid var(--ink)}
+.adv-stop{display:flex;flex-direction:column;align-items:stretch;gap:6px;width:clamp(120px,22vmin,200px);padding:8px;border-radius:22px;position:relative}
+.adv-stop .thumb{display:flex;align-items:center;justify-content:center;gap:.12em;height:clamp(64px,12vmin,110px);border-radius:14px;background:var(--math-tint);font-size:clamp(28px,5vmin,46px)}
+.adv-stop.boo .thumb{background:var(--pumpkin-tint)}
+.adv-name{font-family:var(--f-display);font-weight:800;font-size:clamp(15px,2.4vmin,20px);line-height:1.1;text-align:center}
+.adv-badge{position:absolute;top:-12px;right:-12px;min-width:38px;height:38px;padding:0 8px;border-radius:999px;border:3px solid var(--ink);background:var(--paper);display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:16px}
+.adv-badge .ico{width:22px;height:22px;stroke-width:3.4}
+.adv-stop.done .adv-badge{background:var(--leaf)}
+.adv-stop.now{animation:glow 1.4s ease-in-out infinite}
+.adv-stop.now .adv-badge{background:var(--math)}
+.adv-stop.later{opacity:.6}
+.adv-chest{width:clamp(96px,17vmin,150px);border-radius:20px;padding:4px}
+.adv-chest.ready{animation:wiggle 1.2s ease-in-out infinite}
+.chest-svg{display:block;width:100%;height:auto}
+.adv-cal{align-self:center;background:var(--paper);border:3px solid var(--ink);border-radius:20px;padding:10px 14px;width:min(100%,420px)}
+.cal-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-display);font-size:18px;margin-bottom:6px}
+.cal-top span{font-size:15px;color:var(--ink-soft);font-weight:700}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-variant-numeric:tabular-nums}
+.cal-h{font-weight:700;font-size:13px;color:var(--ink-soft)}
+.cal-d{display:grid;place-items:center;height:min(40px,9vw);border-radius:50%;font-size:14px}
+.cal-d.today{outline:3px solid var(--sea);outline-offset:-1px}
+.cal-d.got .star-ico{width:30px;height:30px}
+
+/* ---------- Pip's Shop ---------- */
+.head .shop-wallet{margin-left:auto}
+.shop-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;width:100%;max-width:1100px;margin:0 auto}
+.shop-view{min-height:0;display:flex;align-items:center;justify-content:center;background:var(--sky-hi);border:3px solid var(--ink);border-radius:24px;overflow:hidden}
+.tree-svg{display:block;width:100%;height:100%;max-height:100%}
+.shop-view{position:relative}
+.shop-pip{position:absolute;left:3%;bottom:3%;width:clamp(80px,24%,170px)}
+.shop-pip .pip{width:100%;height:auto;animation:bob 2.6s ease-in-out infinite}
+.shop-side{display:flex;flex-direction:column;gap:10px;min-height:0}
+.shop-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.shop-tab{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:3px solid var(--ink);border-radius:999px;background:var(--paper);font-family:var(--f-display);font-weight:800;font-size:16px}
+.shop-tab .emoji{font-size:20px}
+.shop-tab.on{background:var(--math)}
+.shop-grid{flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;align-content:start;padding:4px 4px 10px}
+.shop-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 6px;border-radius:18px;box-shadow:0 4px 0 var(--ink)}
+.shop-item .emoji{font-size:40px;line-height:1.1}
+.shop-item.picked{background:var(--math-tint);outline:4px solid var(--math);outline-offset:1px}
+.swatch{width:44px;height:44px;border-radius:50%;border:3px solid var(--ink)}
+.mini-pip{width:54px;height:56px;display:block}
+.mini-pip svg{width:100%;height:100%}
+.si-name{font-family:var(--f-display);font-weight:800;font-size:14px;line-height:1.1;text-align:center}
+.si-price{display:inline-flex;align-items:center;gap:3px;font-family:var(--f-display);font-weight:900;font-size:16px;font-variant-numeric:tabular-nums}
+.si-price .star-ico{width:18px;height:18px}
+.si-tag{font-size:12px;font-weight:700;background:var(--leaf);border:2px solid var(--ink);border-radius:999px;padding:0 8px}
+.shop-act{min-height:58px;display:flex;align-items:center;justify-content:center}
+.shop-act .btn .star-ico{display:inline-block;width:24px;height:24px;vertical-align:-4px}
+.shop-hint{margin:0;font-family:var(--f-display);font-weight:700;font-size:18px;text-align:center}
+
+/* ---------- Pip sleeping ---------- */
+.pip .p-lid{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round;display:none}
+.pip-wrap.sleeping .p-lid{display:inline}
+.pip-wrap.sleeping .p-eye,.pip-wrap.sleeping .p-pupil,.pip-wrap.sleeping .p-shine{display:none}
+.sleep{align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,var(--night) 0%,var(--night-2) 100%)}
+.sleep .pip-wrap{width:clamp(130px,26vmin,220px);animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04,.97)}}
+.sleep h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(30px,6vmin,52px);color:var(--paper)}
+.sleep-text{margin:0;max-width:34ch;font-size:19px;font-weight:700;color:var(--mist)}
+.zzz{margin:0;font-family:var(--f-display);font-weight:900;font-size:34px;color:var(--moon);letter-spacing:.2em;animation:floaty 2.4s ease-in-out infinite}
+
+/* ---------- Story Time ---------- */
+.story-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;width:min(100%,760px);font-family:var(--f-display)}
+.st-title{font-weight:900;font-size:clamp(20px,3.6vmin,30px)}
+.st-page{font-weight:700;font-size:15px;color:var(--ink-soft)}
+.story-hero{font-size:clamp(64px,13vmin,120px);line-height:1}
+.story-words .sw{transition:background-color .15s ease}
+.story-words .sw.lit{background:var(--math-tint);border-radius:10px}
+.story-words .sw.mystery{outline:4px dashed var(--berry);outline-offset:-4px;border-radius:12px;background:rgba(232,100,154,.08)}
+.story-words.solved .sw.mystery{outline-color:var(--leaf);outline-style:solid;background:rgba(76,186,104,.16)}
+
+/* ---------- Tracing ---------- */
+.trace-wrap{display:flex;justify-content:center;width:100%}
+.trace-cv{display:block;background:var(--paper);border:3px solid var(--ink);border-radius:24px;touch-action:none;cursor:crosshair;max-width:100%}
+.t-trace{font-family:var(--f-print);font-weight:700;color:transparent;-webkit-text-stroke:2px var(--ink);letter-spacing:.04em}
+
 /* celebrations */
 .fly-star{position:fixed;left:0;top:0;width:46px;height:46px;z-index:61;pointer-events:none}
 .fly-star .star-ico{width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(255,196,63,.9))}
@@ -369,7 +466,6 @@ button:disabled{cursor:default}
     radial-gradient(circle 1.4px at 6% 34%,#fff 98%,transparent),radial-gradient(circle 1.2px at 95% 38%,#fff 98%,transparent),
     linear-gradient(180deg,var(--night) 0%,var(--night-2) 100%)}
 .spooky .head h2{color:var(--paper)}
-.room.spooky .tiles{grid-template-columns:repeat(2,minmax(0,1fr));max-width:780px}
 .stage{overflow-x:clip}
 .spooky .dot.now{background:var(--paper)}
 .spooky .ltile{background:var(--potion)}
@@ -428,14 +524,15 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
   .rooms,.rooms.three,.extras{grid-template-columns:1fr}
   .home{overflow-y:auto}
   .home .rooms{flex:none}
-  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tiles,.tiles[data-n]{--cols:2}
   .skill{grid-template-columns:1fr}
   .sk-right{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
   .ask{gap:14px}
   .bubble::before,.bubble::after{display:none}
 }
 @media (orientation:portrait) and (min-width:641px){
-  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tiles,.tiles[data-n]{--cols:2}
+  .shop-body{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
 }
 @media (max-height:560px){
   .greet .pip-wrap{width:70px}
@@ -470,6 +567,12 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
       <div class="pip-wrap" data-pip></div>
       <button class="bubble" id="home-bubble">Hi there! Pick a room.</button>
     </div>
+    <button class="chunk adv-banner" id="adv-btn" aria-label="Today's Adventure">
+      <span class="emoji adv-ic">🗺️</span>
+      <span class="adv-txt"><span class="adv-t">Today&rsquo;s Adventure</span><span class="adv-s" id="adv-sub">3 stops and a treasure chest</span></span>
+      <span class="adv-dots" id="adv-dots" aria-hidden="true"></span>
+      <span class="adv-chest-mini emoji" aria-hidden="true">🎁</span>
+    </button>
     <div class="rooms">
       <button class="chunk room-card read" id="room-read" aria-label="Reading Room">
         <span class="big">Aa</span><span class="name">Reading Room</span><span class="sub">letters · sounds · words</span>
@@ -483,6 +586,7 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
     </div>
     <div class="extras">
       <button class="chunk extra mix" id="mix-btn"><span class="ex-ic emoji">🎲</span><span class="ex-txt"><span class="ex-t">Surprise Mix</span><span class="ex-s">5 different games</span></span></button>
+      <button class="chunk extra shop" id="shop-btn"><span class="ex-ic emoji">🛍️</span><span class="ex-txt"><span class="ex-t">Pip&rsquo;s Shop</span><span class="ex-s">spend your stars</span></span></button>
       <button class="chunk extra stk" id="stk-btn"><span class="ex-ic emoji" id="stk-ic">🦊</span><span class="ex-txt"><span class="ex-t">Sticker Book</span><span class="meter" aria-hidden="true"><i id="stk-meter"></i></span></span></button>
     </div>
   </section>
@@ -521,6 +625,44 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
     </div>
     <p class="note" id="stk-note"></p>
     <div class="grid" id="stk-grid"></div>
+  </section>
+
+  <section class="screen adv" id="s-adv" hidden>
+    <div class="head">
+      <button class="chunk icon-btn" id="adv-back" aria-label="Back home"></button>
+      <h2>Today&rsquo;s Adventure</h2>
+    </div>
+    <p class="adv-note" id="adv-note"></p>
+    <div class="adv-path" id="adv-path"></div>
+    <div class="adv-cal" id="adv-cal"></div>
+  </section>
+
+  <section class="screen shop" id="s-shop" hidden>
+    <div class="head">
+      <button class="chunk icon-btn" id="shop-back" aria-label="Back home"></button>
+      <h2>Pip&rsquo;s Shop</h2>
+      <span class="pill shop-wallet" id="shop-wallet" aria-label="Stars to spend"></span>
+    </div>
+    <div class="shop-body">
+      <div class="shop-view" id="shop-view"></div>
+      <div class="shop-side">
+        <div class="shop-tabs" id="shop-tabs" role="group" aria-label="Shop sections"></div>
+        <div class="shop-grid" id="shop-grid"></div>
+        <div class="shop-act" id="shop-act"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen sleep" id="s-sleep" hidden>
+    <div class="pip-wrap sleeping" data-pip></div>
+    <p class="zzz" aria-hidden="true">Z z z</p>
+    <h2>Pip is sleeping</h2>
+    <p class="sleep-text" id="sleep-text"></p>
+    <div class="end-btns">
+      <button class="chunk btn" id="sleep-stk">Sticker Book</button>
+      <button class="chunk btn" id="sleep-shop">Pip&rsquo;s Shop</button>
+      <button class="chunk btn" id="sleep-grown">Grown-ups</button>
+    </div>
   </section>
 
   <section class="screen parents" id="s-parents" hidden>
@@ -1079,6 +1221,118 @@ window.PipContent = (function () {
       praise: 'Boo! You found the ghost behind door ' + ans + '!', hint: lv === 3 ? 'Count from ' + n + '. Try another door.' : 'Look for ' + ans + '. Try another door.' };
   }
 
+  /* ---------- TRACING ---------- */
+  function genTrace(lv) {
+    if (lv === 3) {
+      var w = R.pick(CVC.filter(function (x) { return x !== 'six' && x !== 'ten'; }));
+      return { type: 'trace', key: w, glyph: w, text: 'Trace the word', say: 'Trace the word ' + w + ' with your finger.', praise: 'You wrote ' + w + '!' };
+    }
+    var t = lv === 1 ? R.pick(UP) : R.pick(LOW);
+    return { type: 'trace', key: t, glyph: t, text: lv === 1 ? 'Trace the big letter' : 'Trace the small letter',
+      say: 'Trace the ' + (lv === 1 ? 'big' : 'small') + ' letter ' + L(t) + ' with your finger.', praise: 'You wrote ' + L(t) + '!' };
+  }
+  function genTraceNum(lv) {
+    var n = lv === 1 ? R.int(0, 5) : lv === 2 ? R.int(6, 10) : R.int(11, 20);
+    return { type: 'trace', key: String(n), glyph: String(n), text: 'Trace the number', say: 'Trace the number ' + n + ' with your finger.', praise: 'You wrote ' + n + '!' };
+  }
+
+  /* ---------- STORY TIME ----------
+     Each story: 4 pages + 1 question = one 5-step round. On each page Pip reads every word but the
+     last; she reads the last word herself and taps its picture. First choice listed is correct. */
+  var STORIES = [
+    { lv: 1, title: 'My Pets', hero: '🧒', pages: [
+      ['I see a cat.', [['cat', '🐱'], ['hat', '🎩'], ['bat', '🦇']]],
+      ['I see a dog.', [['dog', '🐶'], ['log', '🪵'], ['pig', '🐷']]],
+      ['The cat is in a box.', [['box', '📦'], ['fox', '🦊'], ['bus', '🚌']]],
+      ['The dog is in the sun.', [['sun', '☀️'], ['nut', '🥜'], ['bus', '🚌']]]],
+      quiz: ['Where is the cat?', 'The cat is in the box!', [['box', '📦'], ['sun', '☀️'], ['bed', '🛏️']]] },
+    { lv: 1, title: 'The Bug', hero: '🌿', pages: [
+      ['Look at the bug.', [['bug', '🐛'], ['mug', '☕'], ['bed', '🛏️']]],
+      ['The bug is on a log.', [['log', '🪵'], ['dog', '🐶'], ['leg', '🦵']]],
+      ['Here is a hen.', [['hen', '🐔'], ['pen', '🖊️'], ['ten', '🔟']]],
+      ['The hen has a hat.', [['hat', '🎩'], ['cat', '🐱'], ['bat', '🦇']]]],
+      quiz: ['Who has a hat?', 'The hen has a hat!', [['hen', '🐔'], ['bug', '🐛'], ['dog', '🐶']]] },
+    { lv: 1, title: 'Go, Van, Go!', hero: '🛣️', pages: [
+      ['We get in the van.', [['van', '🚐'], ['fan', '🪭'], ['pan', '🍳']]],
+      ['Mom has a bag.', [['bag', '👜'], ['bug', '🐛'], ['pig', '🐷']]],
+      ['Dad has a map.', [['map', '🗺️'], ['man', '👨'], ['mug', '☕']]],
+      ['We see the sun.', [['sun', '☀️'], ['bus', '🚌'], ['nut', '🥜']]]],
+      quiz: ['What does Dad have?', 'Dad has a map!', [['map', '🗺️'], ['bag', '👜'], ['van', '🚐']]] },
+    { lv: 1, title: 'My Pig', hero: '🏡', pages: [
+      ['I have a pig.', [['pig', '🐷'], ['pin', '📌'], ['pen', '🖊️']]],
+      ['My pig is in a tub.', [['tub', '🛁'], ['cup', '🥤'], ['sun', '☀️']]],
+      ['My pig has a cup.', [['cup', '🥤'], ['cat', '🐱'], ['bus', '🚌']]],
+      ['My pig naps in bed.', [['bed', '🛏️'], ['web', '🕸️'], ['box', '📦']]]],
+      quiz: ['Where does the pig nap?', 'The pig naps in bed!', [['bed', '🛏️'], ['tub', '🛁'], ['van', '🚐']]] },
+    { lv: 2, title: 'Fox and Hen', hero: '🌾', pages: [
+      ['A fox ran to a box.', [['box', '📦'], ['fox', '🦊'], ['sock', '🧦']]],
+      ['He saw a hen.', [['hen', '🐔'], ['pen', '🖊️'], ['ten', '🔟']]],
+      ['The hen ran up on a log.', [['log', '🪵'], ['dog', '🐶'], ['leg', '🦵']]],
+      ['The fox sat down in the sun.', [['sun', '☀️'], ['bus', '🚌'], ['nut', '🥜']]]],
+      quiz: ['Who ran up on the log?', 'The hen ran up on the log!', [['hen', '🐔'], ['fox', '🦊'], ['bug', '🐛']]] },
+    { lv: 2, title: 'The Bus Trip', hero: '🏙️', pages: [
+      ['We get on the bus.', [['bus', '🚌'], ['bug', '🐛'], ['box', '📦']]],
+      ['The bus went past a big ship.', [['ship', '🚢'], ['fish', '🐟'], ['chick', '🐤']]],
+      ['She saw a man with a flag.', [['flag', '🚩'], ['frog', '🐸'], ['fish', '🐟']]],
+      ['Then we all had cake.', [['cake', '🎂'], ['snake', '🐍'], ['kite', '🪁']]]],
+      quiz: ['What did the man have?', 'The man had a flag!', [['flag', '🚩'], ['cake', '🎂'], ['ship', '🚢']]] },
+    { lv: 2, title: 'Duck and Frog', hero: '🏞️', pages: [
+      ['A duck swam to a frog.', [['frog', '🐸'], ['flag', '🚩'], ['clock', '🕐']]],
+      ['The frog sat on a rock.', [['rock', '🪨'], ['sock', '🧦'], ['lock', '🔒']]],
+      ['They saw a fish.', [['fish', '🐟'], ['ship', '🚢'], ['fan', '🪭']]],
+      ['The fish had a bell.', [['bell', '🔔'], ['ball', '⚽'], ['sled', '🛷']]]],
+      quiz: ['Where did the frog sit?', 'The frog sat on a rock!', [['rock', '🪨'], ['bell', '🔔'], ['ship', '🚢']]] },
+    { lv: 2, title: 'The Tent', hero: '🌲', pages: [
+      ['We put up a tent.', [['tent', '⛺'], ['ten', '🔟'], ['net', '🥅']]],
+      ['Dad had a drum.', [['drum', '🥁'], ['crab', '🦀'], ['cup', '🥤']]],
+      ['I got a gift.', [['gift', '🎁'], ['milk', '🥛'], ['ring', '💍']]],
+      ['It was a red sock.', [['sock', '🧦'], ['rock', '🪨'], ['clock', '🕐']]]],
+      quiz: ['What did Dad have?', 'Dad had a drum!', [['drum', '🥁'], ['sock', '🧦'], ['tent', '⛺']]] },
+    { lv: 3, title: 'The King’s Clock', hero: '🏰', pages: [
+      ['Once there was a king.', [['king', '🤴'], ['ring', '💍'], ['wing', '🪽']]],
+      ['The king had a big clock.', [['clock', '🕐'], ['sock', '🧦'], ['lock', '🔒']]],
+      ['Every day the clock rang like a bell.', [['bell', '🔔'], ['ball', '⚽'], ['shell', '🐚']]],
+      ['One day it woke up a little chick.', [['chick', '🐤'], ['duck', '🦆'], ['crab', '🦀']]]],
+      quiz: ['Who had a big clock?', 'The king had a big clock!', [['king', '🤴'], ['chick', '🐤'], ['crab', '🦀']]] },
+    { lv: 3, title: 'Little Crab', hero: '🏖️', pages: [
+      ['A little crab lived by the sea.', [['sea', '🌊'], ['bee', '🐝'], ['tree', '🌳']]],
+      ['When the sun came up, it found a shell.', [['shell', '🐚'], ['bell', '🔔'], ['ship', '🚢']]],
+      ['Then a big wave came over the rock.', [['rock', '🪨'], ['clock', '🕐'], ['duck', '🦆']]],
+      ['The crab ran back home to its mom.', [['mom', '👩'], ['man', '👨'], ['map', '🗺️']]]],
+      quiz: ['What did the crab find?', 'The crab found a shell!', [['shell', '🐚'], ['clock', '🕐'], ['king', '🤴']]] },
+    { lv: 3, title: 'Fish Wish', hero: '🐠', pages: [
+      ['A little fish swam up to a ship.', [['ship', '🚢'], ['sheep', '🐑'], ['shell', '🐚']]],
+      ['On the ship was a cat in a hat.', [['hat', '🎩'], ['bat', '🦇'], ['rat', '🐀']]],
+      ['The cat gave the fish a star.', [['star', '⭐'], ['car', '🚗'], ['jar', '🫙']]],
+      ['Then the fish swam home to the sea.', [['sea', '🌊'], ['bee', '🐝'], ['tree', '🌳']]]],
+      quiz: ['What did the cat give the fish?', 'The cat gave the fish a star!', [['star', '⭐'], ['hat', '🎩'], ['ship', '🚢']]] },
+    { lv: 3, title: 'Rainy Day', hero: '🏠', pages: [
+      ['It was a wet day with lots of rain.', [['rain', '🌧️'], ['train', '🚆'], ['chain', '⛓️']]],
+      ['We stayed in and read a book.', [['book', '📖'], ['hook', '🪝'], ['boat', '⛵']]],
+      ['After lunch the sun came out from a cloud.', [['cloud', '☁️'], ['clock', '🕐'], ['crab', '🦀']]],
+      ['Then we ran out to fly my kite.', [['kite', '🪁'], ['bike', '🚲'], ['light', '💡']]]],
+      quiz: ['What did we fly?', 'We flew a kite!', [['kite', '🪁'], ['book', '📖'], ['cloud', '☁️']]] }
+  ];
+  function genStoryRound(lv, recent) {
+    var pool = STORIES.filter(function (s) { return s.lv === lv; });
+    var fresh = pool.filter(function (s) { return (recent || []).indexOf(s.title) < 0; });
+    var st = R.pick(fresh.length ? fresh : pool);
+    var qs = st.pages.map(function (pg, i) {
+      var words = pg[0].split(' '), last = words[words.length - 1].replace(/[.!?,]/g, '');
+      var lead = words.slice(0, -1).join(' ');
+      return { type: 'story', key: st.title + i, story: st.title, hero: st.hero, page: i + 1, pages: st.pages.length, words: words,
+        text: 'Read the last word', say: [{ t: lead, read: true, gap: 500 }, 'What does the last word say? Tap the picture.'],
+        stage: { type: 'story' },
+        choices: R.shuffle(pg[1].map(function (c, k) { return { kind: 'pic', e: c[1], word: c[0], correct: k === 0 }; })),
+        praise: 'That says ' + last + '! ' + pg[0], hint: 'Look at the first letter of the last word.' };
+    });
+    qs.push({ type: 'storyq', key: st.title + 'q', story: st.title, hero: st.hero,
+      text: st.quiz[0], say: [{ t: 'Story question!', gap: 450 }, st.quiz[0]], stage: { type: 'storyq' },
+      choices: R.shuffle(st.quiz[2].map(function (c, k) { return { kind: 'pic', e: c[1], word: c[0], label: true, correct: k === 0 }; })),
+      praise: st.quiz[1], hint: 'Think about the story. Try again.' });
+    return { title: st.title, questions: qs };
+  }
+
   /* ---------- game catalog (Illinois Learning Standards = Common Core codes) ---------- */
   var GAMES = [
     { id: 'letters', world: 'read', name: 'Letter Hunt', std: 'RF.K.1d', gen: genLetters,
@@ -1099,6 +1353,12 @@ window.PipContent = (function () {
     { id: 'read', world: 'read', name: 'Read & Match', std: 'RF.K.3 · RF.K.4', gen: genRead,
       thumb: '<span class="t-print t-sm">cat</span><span class="emoji">🐱</span>',
       levels: [['Read a word', 'k'], ['Read a phrase', 'k'], ['Read a sentence', 'beyond']] },
+    { id: 'story', world: 'read', name: 'Story Time', std: 'RF.K.4 · RL.K.1', genRound: genStoryRound, noMix: true,
+      thumb: '<span class="emoji">📖</span><span class="emoji">🐸</span>',
+      levels: [['Short stories', 'start'], ['Longer stories', 'k'], ['Chapter-style stories', 'beyond']] },
+    { id: 'trace', world: 'read', name: 'Trace Letters', std: 'L.K.1a', gen: genTrace,
+      thumb: '<span class="t-trace">Aa</span><span class="emoji">✍️</span>',
+      levels: [['Big letters', 'start'], ['Small letters', 'k'], ['Short words', 'beyond']] },
     { id: 'count', world: 'math', name: 'Count It', std: 'K.CC.4 · K.CC.5', gen: genCount,
       thumb: '<span class="emoji">🍎</span><span class="emoji">🍎</span><span class="emoji">🍎</span>',
       levels: [['Count to 5', 'start'], ['Count to 10', 'k'], ['Count to 20', 'k'], ['Tens and ones', 'beyond']] },
@@ -1117,6 +1377,9 @@ window.PipContent = (function () {
     { id: 'shapes', world: 'math', name: 'Shape Finder', std: 'K.G.2 · K.G.3 · K.G.4', gen: genShapes,
       thumb: '<svg class="t-shapes" viewBox="0 0 190 120" aria-hidden="true"><circle cx="38" cy="66" r="30" fill="#5AA9EC" stroke="#1D2A44" stroke-width="7"/><polygon points="98,22 136,96 60,96" fill="#FF7A62" stroke="#1D2A44" stroke-width="7" stroke-linejoin="round"/><rect x="128" y="50" width="52" height="52" rx="4" fill="#FFC43F" stroke="#1D2A44" stroke-width="7"/></svg>',
       levels: [['Basic shapes', 'start'], ['Turned shapes + hexagon', 'k'], ['3D shapes', 'k'], ['Sides & corners', 'k']] },
+    { id: 'tracenum', world: 'math', name: 'Trace Numbers', std: 'K.CC.3', gen: genTraceNum,
+      thumb: '<span class="t-trace">12</span><span class="emoji">✍️</span>',
+      levels: [['Numbers 0–5', 'start'], ['Numbers 6–10', 'k'], ['Numbers 11–20', 'k']] },
     { id: 'ghosts', world: 'boo', name: 'Ghost Letters', std: 'RF.K.1d · RF.K.3a', gen: genGhosts,
       thumb: '<span class="emoji">👻</span><span class="t-print t-sm">Bb</span>',
       levels: [['Big letters', 'start'], ['Small letters', 'k'], ['First sounds', 'k']] },
@@ -1137,7 +1400,7 @@ window.PipContent = (function () {
 
   return { R: R, L: L, P: P, GAMES: GAMES, STICKERS: STICKERS, SIDES: SIDES, cap: cap,
     _lists: { CVC: CVC, BLEND: BLEND, FS_CONS: FS_CONS, FS_VOW: FS_VOW, FAM: FAM, SW1: SW1, SW2: SW2, SW3: SW3, NOUNS: NOUNS, HOMO: HOMO,
-      BOO_P: BOO_P, BOO_SHORT: BOO_SHORT, BOO_LONG: BOO_LONG, BOO_FIRST: BOO_FIRST } };
+      BOO_P: BOO_P, BOO_SHORT: BOO_SHORT, BOO_LONG: BOO_LONG, BOO_FIRST: BOO_FIRST, STORIES: STORIES } };
 })();
 </script>
 
@@ -1192,9 +1455,37 @@ window.PipContent = (function () {
     '<circle class="p-cheek" cx="34" cy="76" r="5.5"/><circle class="p-cheek" cx="86" cy="76" r="5.5"/>' +
     '<path class="p-beak" d="M53 71 L67 71 L60 80Z"/></svg>';
 
+  /* ---------------- Pip's outfits (bought in Pip's Shop) ---------------- */
+  var PIP_COLORS = { green: ['#5CC97A', '#46B064'], blue: ['#6EC3F0', '#3FA3DE'], pink: ['#F7A1C4', '#E7779F'], purple: ['#B49BF5', '#9277E6'], orange: ['#FFAA5C', '#F28A2E'], gold: ['#FFD54F', '#F2B620'] };
+  var INK = '#1D2A44';
+  var HAT_SVG = {
+    party: '<path d="M47 37 L60 5 L73 37 Z" fill="#E8649A" stroke="' + INK + '" stroke-width="3.5" stroke-linejoin="round"/><path d="M52 25 L68 25 M49 32 L71 32" stroke="#FFC43F" stroke-width="3"/><circle cx="60" cy="5" r="5" fill="#FFC43F" stroke="' + INK + '" stroke-width="3"/>',
+    crown: '<path d="M40 39 L40 18 L50 28 L60 12 L70 28 L80 18 L80 39 Z" fill="#FFC43F" stroke="' + INK + '" stroke-width="3.5" stroke-linejoin="round"/><circle cx="50" cy="33" r="3" fill="#E8649A"/><circle cx="60" cy="31" r="3.5" fill="#5AA9EC"/><circle cx="70" cy="33" r="3" fill="#4CBA68"/>',
+    cap: '<path d="M37 40 C38 19 82 19 83 40 Z" fill="#5AA9EC" stroke="' + INK + '" stroke-width="3.5" stroke-linejoin="round"/><path d="M80 38 C92 36 100 38 102 42 C96 44 86 43 79 41 Z" fill="#3E8ED6" stroke="' + INK + '" stroke-width="3" stroke-linejoin="round"/><circle cx="60" cy="22" r="3" fill="' + INK + '"/>',
+    witch: '<ellipse cx="60" cy="37" rx="32" ry="6" fill="#36275F" stroke="' + INK + '" stroke-width="3.5"/><path d="M44 36 C48 22 56 10 70 2 C68 14 72 26 76 36 Z" fill="#4B3B82" stroke="' + INK + '" stroke-width="3.5" stroke-linejoin="round"/><path d="M46 30 L74 30" stroke="#FF8A1F" stroke-width="4"/>',
+    flower: '<g transform="translate(86 33)" stroke="' + INK + '" stroke-width="2.5"><circle cx="0" cy="-8" r="6" fill="#F7A1C4"/><circle cx="7.6" cy="-2.5" r="6" fill="#F7A1C4"/><circle cx="4.7" cy="6.5" r="6" fill="#F7A1C4"/><circle cx="-4.7" cy="6.5" r="6" fill="#F7A1C4"/><circle cx="-7.6" cy="-2.5" r="6" fill="#F7A1C4"/><circle r="4.5" fill="#FFC43F"/></g>',
+    bow: '<g transform="translate(84 32)" stroke="' + INK + '" stroke-width="3" stroke-linejoin="round" fill="#E8649A"><path d="M0 0 L-13 -9 L-13 9 Z"/><path d="M0 0 L13 -9 L13 9 Z"/><circle r="4"/></g>'
+  };
+  var HAT_COVERS = { party: 1, crown: 1, cap: 1, witch: 1 };
+  var EXTRA_SVG = {
+    glasses: '<g fill="rgba(255,255,255,.18)" stroke="' + INK + '" stroke-width="3"><circle cx="45" cy="61" r="12.5"/><circle cx="75" cy="61" r="12.5"/><path d="M57.5 60 Q60 57 62.5 60" fill="none"/></g>',
+    shades: '<g stroke="' + INK + '" stroke-width="3"><rect x="30" y="52" width="29" height="18" rx="8" fill="' + INK + '"/><rect x="61" y="52" width="29" height="18" rx="8" fill="' + INK + '"/><path d="M59 58 L61 58"/></g><path d="M36 57 L42 57 M67 57 L73 57" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>',
+    bowtie: '<g transform="translate(60 90)" stroke="' + INK + '" stroke-width="3" stroke-linejoin="round" fill="#FF7A62"><path d="M0 0 L-14 -8 L-14 8 Z"/><path d="M0 0 L14 -8 L14 8 Z"/><circle r="4.5"/></g>'
+  };
+  function pipSVG(o) {
+    o = o || (S && S.pip) || {};
+    var s = PIP_SVG, col = PIP_COLORS[o.color];
+    if (col && o.color !== 'green') {
+      s = s.replace('class="p-body"', 'class="p-body" style="fill:' + col[0] + '"').split('class="p-wing"').join('class="p-wing" style="fill:' + col[1] + '"');
+    }
+    if (o.hat && HAT_COVERS[o.hat]) s = s.replace(/<path class="p-stem"[^>]*\/>/, '').replace(/<path class="p-leaf"[^>]*\/>/g, '');
+    return s.replace('</svg>', '<path class="p-lid" d="M36 62 Q45 69 54 62 M66 62 Q75 69 84 62"/>' + (EXTRA_SVG[o.extra] || '') + (HAT_SVG[o.hat] || '') + '</svg>');
+  }
+  function refreshPips() { document.querySelectorAll('[data-pip]').forEach(function (n) { n.innerHTML = pipSVG(); }); }
+
   /* ---------------- state ---------------- */
   var KEY = 'pips-treehouse-v1';
-  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', celebrate: 'big' } }; }
+  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, spent: 0, owned: ['c-green'], pip: { color: 'green', hat: null, extra: null }, adv: null, advDays: [], rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', celebrate: 'big', limit: 'none' } }; }
   function normalize(s) {
     var d = freshState();
     if (!s || typeof s !== 'object') return d;
@@ -1202,6 +1493,10 @@ window.PipContent = (function () {
     out.settings = Object.assign(freshState().settings, s.settings || {});
     out.games = s.games && typeof s.games === 'object' ? s.games : {};
     out.days = s.days && typeof s.days === 'object' ? s.days : {};
+    out.owned = Array.isArray(s.owned) ? s.owned : ['c-green'];
+    out.pip = Object.assign({ color: 'green', hat: null, extra: null }, s.pip || {});
+    out.advDays = Array.isArray(s.advDays) ? s.advDays : [];
+    out.spent = s.spent | 0;
     Object.keys(out.games).forEach(function (id) {
       var g = out.games[id], meta = G[id];
       if (!meta) return;
@@ -1312,8 +1607,9 @@ window.PipContent = (function () {
       voice = found || vs[0];
     }
     if (ok) { choose(); try { synth.addEventListener('voiceschanged', choose); } catch (e) { synth.onvoiceschanged = choose; } }
-    function say(text, done) {
+    function say(text, done, opts) {
       var my = ++token, fired = false;
+      opts = opts || {};
       function fin() { if (fired) return; fired = true; if (done && my === token) done(); }
       var est = 900 + String(text || '').length * (S.settings.rate === 'slow' ? 95 : 72);
       if (!ok || !text) { setTimeout(fin, ok ? 60 : Math.min(est, 2600)); return; }
@@ -1324,6 +1620,8 @@ window.PipContent = (function () {
         u.rate = S.settings.rate === 'slow' ? 0.72 : 0.9;
         u.pitch = 1.08;
         u.onend = fin; u.onerror = fin;
+        if (opts.boundary) u.onboundary = function (e) { if (my === token && (!e.name || e.name === 'word')) opts.boundary(e.charIndex); };
+        if (opts.start) u.onstart = function () { if (my === token) opts.start(); };
         live = u; /* keep a reference: iPad Safari can drop the "finished" event for collected utterances */
         if (synth.speaking || synth.pending) { synth.cancel(); setTimeout(function () { if (my === token) synth.speak(u); }, 70); }
         else synth.speak(u);
@@ -1340,11 +1638,13 @@ window.PipContent = (function () {
         if (i >= list.length) { if (hooks.end) hooks.end(); if (done) done(); return; }
         var p = list[i++];
         if (hooks.start) hooks.start(p);
+        var o = hooks.opts ? hooks.opts(p) : null;
         say(p.t, function () {
+          if (o && o.end) o.end();
           if (hooks.stop) hooks.stop(p);
           var mine = token;
           setTimeout(function () { if (mine === token) next(); }, p.gap != null ? p.gap : 650);
-        });
+        }, o);
       })();
     }
     return { ok: ok, say: say, sayParts: sayParts, stop: stop, list: list, choose: choose };
@@ -1506,8 +1806,10 @@ window.PipContent = (function () {
   }
 
   /* ---------------- shared bits ---------------- */
-  document.querySelectorAll('[data-pip]').forEach(function (n) { n.innerHTML = PIP_SVG; });
+  refreshPips();
   $('#room-back').innerHTML = ICON.home;
+  $('#adv-back').innerHTML = ICON.home;
+  $('#shop-back').innerHTML = ICON.home;
   $('#stk-back').innerHTML = ICON.home;
   $('#quit-btn').innerHTML = ICON.home;
   $('#again-btn').innerHTML = ICON.speaker;
@@ -1550,14 +1852,19 @@ window.PipContent = (function () {
   /* ---------------- screens ---------------- */
   var current = 'splash';
   function show(name) {
-    ['splash', 'home', 'room', 'game', 'end', 'stickers', 'parents'].forEach(function (n) { $('#s-' + n).hidden = n !== name; });
+    ['splash', 'home', 'room', 'game', 'end', 'stickers', 'parents', 'adv', 'shop', 'sleep'].forEach(function (n) { $('#s-' + n).hidden = n !== name; });
     current = name;
     if (name !== 'game') Voice.stop();
   }
 
   function renderHome(speak) {
+    if (isSleepy()) { renderSleep(); return; }
     var name = S.name.trim();
-    $('#home-stars').innerHTML = ICON.star() + '<span>' + S.totalStars + '</span>';
+    $('#home-stars').innerHTML = ICON.star() + '<span>' + wallet() + '</span>';
+    var adv = advStage(), dots = $('#adv-dots'); dots.innerHTML = '';
+    adv.a.done.forEach(function (d) { dots.append(el('i', { class: d ? 'on' : '' })); });
+    $('#adv-sub').textContent = adv.a.chest ? 'Done for today! See your calendar.' : adv.n === 3 ? 'Open your treasure chest!' : adv.n ? 'Stop ' + (adv.n + 1) + ' of 3' : '3 stops and a treasure chest';
+    $('#adv-btn').classList.toggle('complete', !!adv.a.chest);
     var greet = name ? 'Hi, ' + name + '! Pick a room.' : 'Hi there! Pick a room.';
     $('#home-bubble').textContent = greet;
     var have = stickersEarned();
@@ -1589,6 +1896,7 @@ window.PipContent = (function () {
     sec.classList.toggle('spooky', world === 'boo');
     $('#room-title').textContent = ROOM_NAME[world];
     var box = $('#tiles'); box.innerHTML = '';
+    box.setAttribute('data-n', String(GAMES.filter(function (g) { return g.world === world; }).length));
     GAMES.filter(function (g) { return g.world === world; }).forEach(function (g) {
       var st = gs(g.id);
       var dots = el('span', { class: 'lvl', 'aria-label': 'Level ' + st.level + ' of ' + g.levels.length });
@@ -1621,18 +1929,27 @@ window.PipContent = (function () {
   var CHEER2 = ['You figured it out!', 'There you go!', 'Good thinking!', 'You did it!'];
   var OOPS = ['Oops, try again!', 'Not quite. Try again!', 'Almost! Try another one.'];
 
-  function startRound(id) {
+  function startRound(id, advStop) {
     var mix = id === 'mix';
-    var pool = GAMES.filter(function (g) { return g.world !== 'boo' || halloweenOn(); }).map(function (g) { return g.id; });
+    var pool = GAMES.filter(function (g) { return (g.world !== 'boo' || halloweenOn()) && !g.noMix; }).map(function (g) { return g.id; });
     var ids = mix ? R.sample(pool, ROUND_LEN) : Array(ROUND_LEN).fill(id);
-    round = { id: id, mix: mix, ids: ids, i: 0, res: [], keys: {}, q: null, wrong: 0, locked: false, token: 0, pos: 0 };
+    round = { id: id, mix: mix, ids: ids, i: 0, res: [], keys: {}, q: null, wrong: 0, locked: false, token: 0, pos: 0, adv: advStop == null ? null : advStop };
+    if (!mix && G[id].genRound) {
+      var st = gs(id); st.recentStories = st.recentStories || [];
+      var built = G[id].genRound(st.level, st.recentStories);
+      round.pre = built.questions;
+      st.recentStories.push(built.title); if (st.recentStories.length > 3) st.recentStories.shift();
+    }
     show('game');
     nextQuestion();
   }
   function makeQ(gid) {
     var g = G[gid], lv = gs(gid).level, q, t;
-    for (t = 0; t < 15; t++) { q = g.gen(lv); if (!round.keys[gid + '|' + q.key]) break; }
-    round.keys[gid + '|' + q.key] = 1;
+    if (round.pre) q = round.pre[round.i];
+    else {
+      for (t = 0; t < 15; t++) { q = g.gen(lv); if (!round.keys[gid + '|' + q.key]) break; }
+      round.keys[gid + '|' + q.key] = 1;
+    }
     q.game = gid; q.level = lv;
     return q;
   }
@@ -1647,13 +1964,49 @@ window.PipContent = (function () {
     stage.innerHTML = ''; choices.innerHTML = '';
     if (q.type === 'spell') renderSpell(q, stage, choices);
     else if (q.type === 'bucket') renderBucket(q, stage, choices);
+    else if (q.type === 'trace') renderTrace(q, stage, choices);
     else if (q.type === 'doors') { renderStage(q.stage, stage); renderHouse(q, stage); }
-    else { renderStage(q.stage, stage); q.choices.forEach(function (c) { choices.append(renderChoice(c)); }); }
+    else {
+      if (q.type === 'story') renderStoryPage(q, stage);
+      else if (q.type === 'storyq') renderStoryQ(q, stage);
+      else renderStage(q.stage, stage);
+      q.choices.forEach(function (c) { choices.append(renderChoice(c)); });
+    }
     var first = round.i === 0 || round.mix;
-    setTimeout(function () { if (round && round.q === q) speakQ(q, first ? G[q.game].name + '!' : null); }, 260);
+    var intro = first ? (q.story ? G[q.game].name + '! ' + q.story + '.' : G[q.game].name + '!') : null;
+    setTimeout(function () { if (round && round.q === q) speakQ(q, intro); }, 260);
+  }
+  /* Story reading: light up each word as Pip says it. Uses the voice's word timing when the
+     device reports it, otherwise an estimate. */
+  function wordLighter(p) {
+    var spans = Array.prototype.slice.call(document.querySelectorAll('#stage .story-words .sw'));
+    var words = p.t.split(' '), starts = [], pos = 0, timer = 0, gotBoundary = false, mine = lightTok;
+    words.forEach(function (w) { starts.push(pos); pos += w.length + 1; });
+    function light(k) { if (mine !== lightTok) return; spans.forEach(function (s, j) { s.classList.toggle('lit', j === k); if (j < k) s.classList.add('said'); }); }
+    function byChar(ci) { var k = 0; for (var j = 0; j < starts.length; j++) if (ci >= starts[j]) k = j; light(k); }
+    function fallback() {
+      var k = 0, per = (S.settings.rate === 'slow' ? 1.35 : 1);
+      (function tick() {
+        if (gotBoundary || k >= words.length || mine !== lightTok) return;
+        light(k);
+        timer = setTimeout(tick, (230 + words[k].length * 65) * per); k++;
+      })();
+    }
+    var started = false;
+    function begin() { if (started) return; started = true; timer = setTimeout(function () { if (!gotBoundary) fallback(); }, 300); }
+    setTimeout(begin, 450); /* in case the device never reports that speech started */
+    return {
+      start: begin,
+      boundary: function (ci) { gotBoundary = true; clearTimeout(timer); byChar(ci); },
+      end: function () { gotBoundary = true; clearTimeout(timer); spans.forEach(function (s, j) { s.classList.remove('lit'); if (j < words.length) s.classList.add('said'); }); }
+    };
   }
   /* Read the question in parts with pauses; light up each choice or row item as Pip names it. */
-  function clearReading() { Array.prototype.forEach.call(document.querySelectorAll('#s-game .reading'), function (n) { n.classList.remove('reading'); }); }
+  var lightTok = 0;
+  function clearReading() {
+    lightTok++;
+    Array.prototype.forEach.call(document.querySelectorAll('#s-game .reading, #s-game .sw.lit'), function (n) { n.classList.remove('reading', 'lit'); });
+  }
   function partTarget(p) {
     if (p.c != null) return document.querySelectorAll('#s-game .choice')[p.c] || null;
     if (p.s != null) { var row = $('#stage .seq'); return row ? row.children[p.s] || null : null; }
@@ -1662,9 +2015,11 @@ window.PipContent = (function () {
   function speakQ(q, intro) {
     var parts = (intro ? [{ t: intro, gap: 450 }] : []).concat(Array.isArray(q.say) ? q.say : [q.say]);
     clearReading();
+    Array.prototype.forEach.call(document.querySelectorAll('#stage .story-words .sw'), function (s) { s.classList.remove('lit', 'said'); });
     Voice.sayParts(parts, {
       start: function (p) { clearReading(); var t = partTarget(p); if (t) t.classList.add('reading'); },
       stop: function (p) { var t = partTarget(p); if (t) t.classList.remove('reading'); },
+      opts: function (p) { return p.read ? wordLighter(p) : null; },
       end: clearReading
     });
   }
@@ -1832,6 +2187,7 @@ window.PipContent = (function () {
     r.streak = first ? (r.streak || 0) + 1 : 0;
     var spooky = G[r.q.game].world === 'boo';
     var cheer = first ? R.pick(CHEER) : R.pick(CHEER2);
+    var solved = $('#stage .story-words'); if (solved) solved.classList.add('solved');
     renderDots();
     /* celebrate: sparkles from the answer, the cheer word floats up, a gold star flies to the top */
     if (origin) { var c = centerOf(origin); FX.burst(c.x, c.y, { n: first ? 30 : 16, spooky: spooky }); praisePop(cheer, origin); }
@@ -1898,6 +2254,93 @@ window.PipContent = (function () {
     }
   }
 
+  /* ---------- Story Time pages ---------- */
+  function storyHead(q, right) {
+    return el('div', { class: 'story-head' }, [el('span', { class: 'st-title', text: q.story }), el('span', { class: 'st-page', text: right })]);
+  }
+  function renderStoryPage(q, stage) {
+    stage.append(storyHead(q, 'Page ' + q.page + ' of ' + q.pages));
+    stage.append(el('div', { class: 'story-hero emoji', text: q.hero, 'aria-hidden': 'true' }));
+    var line = el('div', { class: 'readline story-words' + (q.words.length > 5 ? ' long' : '') });
+    q.words.forEach(function (w, i) { line.append(ruled(w, 'sw' + (i === q.words.length - 1 ? ' mystery' : ''))); });
+    stage.append(line);
+  }
+  function renderStoryQ(q, stage) {
+    stage.append(storyHead(q, 'Story question'));
+    stage.append(el('div', { class: 'story-hero emoji', text: q.hero, 'aria-hidden': 'true' }));
+  }
+
+  /* ---------- Tracing: she traces the gray letter on school lines with a finger ---------- */
+  function renderTrace(q, stage, choices) {
+    var r = round;
+    /* buttons first, so the drawing area is measured in the space that is left */
+    choices.append(el('button', { class: 'chunk btn', text: 'Start over', onclick: function () { if (!r.locked) { clearInk(); SFX.tick(); } } }));
+    choices.append(el('button', { class: 'chunk btn go', text: 'I’m done!', onclick: function () { if (!r.locked) check(true); } }));
+    var cv = el('canvas', { class: 'trace-cv', 'aria-label': 'Tracing area for ' + q.glyph });
+    stage.append(el('div', { class: 'trace-wrap' }, cv));
+    var W = Math.min(stage.clientWidth - 8, 820), H = Math.min(stage.clientHeight - 8, Math.round(W * 0.58));
+    W = Math.max(W, 260); H = Math.max(H, 170);
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var top = H * 0.1, base = H * 0.66;
+    function font(s) { return '700 ' + s + 'px Andika, "Avenir Next", "Century Gothic", "Helvetica Neue", Arial, sans-serif'; }
+    ctx.font = font(100);
+    var capA = (ctx.measureText('H').actualBoundingBoxAscent || 70) / 100;
+    var fs = (base - top) / capA;
+    ctx.font = font(fs);
+    var tw = ctx.measureText(q.glyph).width;
+    if (tw > W * 0.86) { fs *= W * 0.86 / tw; ctx.font = font(fs); tw = ctx.measureText(q.glyph).width; }
+    var xh = ctx.measureText('x').actualBoundingBoxAscent || fs * 0.5;
+    var gx = (W - tw) / 2, brush = Math.max(12, fs * 0.15);
+    var A = 0.25, aw = Math.ceil(W * A), ah = Math.ceil(H * A);
+    function layer() { var c = document.createElement('canvas'); c.width = aw; c.height = ah; var x = c.getContext('2d'); x.scale(A, A); return x; }
+    function alpha(x) { var d = x.getImageData(0, 0, aw, ah).data, o = new Uint8Array(aw * ah); for (var i = 0; i < o.length; i++) o[i] = d[i * 4 + 3] > 60 ? 1 : 0; return o; }
+    var tgt = layer(), near = layer(), ink = layer();
+    tgt.font = ctx.font; tgt.fillText(q.glyph, gx, base);
+    near.font = ctx.font; near.lineWidth = brush * 1.8; near.lineJoin = 'round'; near.fillText(q.glyph, gx, base); near.strokeText(q.glyph, gx, base);
+    ink.lineWidth = brush; ink.lineCap = 'round'; ink.lineJoin = 'round';
+    var tMask = alpha(tgt), nMask = alpha(near), tCount = 0;
+    for (var i = 0; i < tMask.length; i++) tCount += tMask[i];
+    function paintBase() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.lineWidth = 3; ctx.setLineDash([]);
+      ctx.strokeStyle = '#8DBBE8'; ctx.beginPath(); ctx.moveTo(10, top); ctx.lineTo(W - 10, top); ctx.stroke();
+      ctx.strokeStyle = '#EE8577'; ctx.beginPath(); ctx.moveTo(10, base); ctx.lineTo(W - 10, base); ctx.stroke();
+      ctx.strokeStyle = '#8DBBE8'; ctx.setLineDash([10, 9]); ctx.beginPath(); ctx.moveTo(10, base - xh); ctx.lineTo(W - 10, base - xh); ctx.stroke();
+      ctx.fillStyle = 'rgba(29,42,68,.12)'; ctx.fillText(q.glyph, gx, base);
+      ctx.setLineDash([6, 7]); ctx.lineWidth = 2.5; ctx.strokeStyle = 'rgba(29,42,68,.5)'; ctx.strokeText(q.glyph, gx, base);
+      ctx.setLineDash([]);
+    }
+    paintBase();
+    var drawing = false, last = null;
+    function pt(e) { var b = cv.getBoundingClientRect(); return { x: (e.clientX - b.left) * (W / b.width), y: (e.clientY - b.top) * (H / b.height) }; }
+    function seg(a, b) {
+      ctx.strokeStyle = '#E8649A'; ctx.lineWidth = brush; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x + 0.01, b.y); ctx.stroke();
+      ink.beginPath(); ink.moveTo(a.x, a.y); ink.lineTo(b.x + 0.01, b.y); ink.stroke();
+    }
+    function check(fromDone) {
+      var iMask = alpha(ink), cov = 0, n = 0, onIt = 0;
+      for (var k = 0; k < iMask.length; k++) { if (!iMask[k]) continue; n++; if (tMask[k]) cov++; if (nMask[k]) onIt++; }
+      var coverage = tCount ? cov / tCount : 0, precision = n ? onIt / n : 0;
+      if (coverage >= 0.7 && precision >= 0.6) { success(cv); return; }
+      if (!fromDone) return;
+      r.wrong++; SFX.bad(); pipDo('think');
+      if (precision < 0.6 || coverage < 0.25) { clearInk(); Voice.say('Let’s try again. Trace right on top of the gray dots.'); }
+      else Voice.say('Almost! Trace the gray parts you missed.');
+    }
+    function clearInk() { ink.clearRect(0, 0, W, H); paintBase(); }
+    cv.addEventListener('pointerdown', function (e) {
+      if (r.locked) return;
+      e.preventDefault(); if (cv.setPointerCapture) try { cv.setPointerCapture(e.pointerId); } catch (x) {}
+      drawing = true; last = pt(e); seg(last, last);
+    });
+    cv.addEventListener('pointermove', function (e) { if (!drawing || r.locked) return; e.preventDefault(); var p = pt(e); seg(last, p); last = p; });
+    function up() { if (!drawing) return; drawing = false; if (!r.locked) check(false); }
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('pointerleave', up);
+  }
+
   /* ---------- Halloween pieces ---------- */
   function ghostSVG(letter) {
     return '<svg class="ghost-svg" viewBox="0 0 100 112" aria-hidden="true">' +
@@ -1962,6 +2405,7 @@ window.PipContent = (function () {
     var r = round, first = r.res.filter(Boolean).length, earned = first + 1;
     var before = stickersEarned();
     S.totalStars += earned; S.rounds++; today().r++;
+    if (r.adv != null && S.adv && S.adv.date === dayKey()) S.adv.done[r.adv] = true;
     var levelUp = false, g = null;
     if (!r.mix) {
       g = gs(r.id); g.rounds = (g.rounds || 0) + 1;
@@ -1985,7 +2429,7 @@ window.PipContent = (function () {
     for (var i = 0; i < ROUND_LEN; i++) { var sp = el('span', { html: ICON.star(i >= first) }); if (i < first) sp.firstChild.style.animationDelay = (i * 0.12) + 's'; starsRow.append(sp); }
     starsRow.append(el('span', { class: 'bonus', html: '+' + ICON.star() }));
     var spooky = !r.mix && G[r.id].world === 'boo';
-    card.append(el('div', { class: 'pip-wrap dance', html: PIP_SVG, style: 'width:clamp(80px,14vmin,120px)' }), starsRow, el('h2', { text: title }));
+    card.append(el('div', { class: 'pip-wrap dance', html: pipSVG(), style: 'width:clamp(80px,14vmin,120px)' }), starsRow, el('h2', { text: title }));
     card.append(el('p', { class: 'sub', text: 'You earned ' + earned + ' ' + (earned === 1 ? 'star' : 'stars') + ' (one bonus for finishing).' }));
     if (levelUp) card.append(el('div', { class: 'ribbon', text: 'Level up! Now: ' + G[r.id].levels[g.level - 1][0] }));
     if (newSt) {
@@ -2006,8 +2450,13 @@ window.PipContent = (function () {
       card.append(el('p', { class: 'sub', text: need + ' more ' + (need === 1 ? 'star' : 'stars') + ' to the next sticker' }));
     }
     var btns = el('div', { class: 'end-btns' });
-    btns.append(el('button', { class: 'chunk btn go', text: 'Play again', onclick: function () { startRound(r.id); } }));
-    if (!r.mix) btns.append(el('button', { class: 'chunk btn', text: 'Pick a game', onclick: function () { renderRoom(G[r.id].world, true); } }));
+    if (r.adv != null) {
+      var allDone = S.adv && S.adv.done.every(Boolean);
+      btns.append(el('button', { class: 'chunk btn go', text: allDone ? 'Open the treasure!' : 'Next stop', onclick: function () { renderAdventure(true); } }));
+    } else {
+      btns.append(el('button', { class: 'chunk btn go', text: 'Play again', onclick: function () { startRound(r.id); } }));
+      if (!r.mix) btns.append(el('button', { class: 'chunk btn', text: 'Pick a game', onclick: function () { renderRoom(G[r.id].world, true); } }));
+    }
     if (newSt) btns.append(el('button', { class: 'chunk btn', text: 'See stickers', onclick: renderStickers }));
     btns.append(el('button', { class: 'chunk btn', 'aria-label': 'Home', html: ICON.home, style: 'padding:8px 16px', onclick: function () { renderHome(true); } }));
     card.append(btns);
@@ -2017,6 +2466,7 @@ window.PipContent = (function () {
 
     var speech = title + ' You got ' + earned + ' stars!';
     if (levelUp) speech += ' You moved up a level!';
+    if (r.adv != null) speech += S.adv && S.adv.done.every(Boolean) ? ' Now go open your treasure chest!' : ' On to the next stop of your adventure!';
     if (newSt) speech += ' And you earned a new sticker! Tap the present to open it.';
     /* each star dings as it lands, then the fanfare and confetti */
     for (var d = 0; d <= first; d++) (function (d) { setTimeout(function () { SFX.ding(d); }, 120 + d * 120); })(d);
@@ -2024,6 +2474,215 @@ window.PipContent = (function () {
     FX.rain({ n: first === 5 ? 150 : first >= 3 ? 110 : 70, spooky: spooky });
     if (first === 5 || levelUp) setTimeout(function () { FX.fireworks(first === 5 ? 6 : 3, spooky); }, 700);
     setTimeout(function () { Voice.say(speech); }, 600);
+  }
+
+  /* ================= PIP'S SHOP: spend stars on Pip and the treehouse ================= */
+  var SHOP = [
+    { id: 'c-green', cat: 'color', name: 'Green', price: 0, color: 'green' },
+    { id: 'c-blue', cat: 'color', name: 'Blue', price: 5, color: 'blue' },
+    { id: 'c-pink', cat: 'color', name: 'Pink', price: 5, color: 'pink' },
+    { id: 'c-purple', cat: 'color', name: 'Purple', price: 8, color: 'purple' },
+    { id: 'c-orange', cat: 'color', name: 'Orange', price: 8, color: 'orange' },
+    { id: 'c-gold', cat: 'color', name: 'Gold', price: 15, color: 'gold' },
+    { id: 'h-party', cat: 'hat', name: 'Party hat', price: 6, hat: 'party' },
+    { id: 'h-flower', cat: 'hat', name: 'Flower', price: 6, hat: 'flower' },
+    { id: 'h-bow', cat: 'hat', name: 'Bow', price: 6, hat: 'bow' },
+    { id: 'h-cap', cat: 'hat', name: 'Ball cap', price: 8, hat: 'cap' },
+    { id: 'h-witch', cat: 'hat', name: 'Witch hat', price: 10, hat: 'witch' },
+    { id: 'h-crown', cat: 'hat', name: 'Crown', price: 12, hat: 'crown' },
+    { id: 'x-bowtie', cat: 'extra', name: 'Bow tie', price: 6, extra: 'bowtie' },
+    { id: 'x-glasses', cat: 'extra', name: 'Glasses', price: 8, extra: 'glasses' },
+    { id: 'x-shades', cat: 'extra', name: 'Sunglasses', price: 10, extra: 'shades' },
+    { id: 'd-flowers', cat: 'decor', name: 'Flower pots', price: 8, icon: '🌷' },
+    { id: 'd-flag', cat: 'decor', name: 'Flag', price: 8, icon: '🚩' },
+    { id: 'd-lantern', cat: 'decor', name: 'Lantern', price: 10, icon: '🏮' },
+    { id: 'd-ladder', cat: 'decor', name: 'Rope ladder', price: 10, icon: '🪜' },
+    { id: 'd-bird', cat: 'decor', name: 'Bird friend', price: 12, icon: '🐦' },
+    { id: 'd-slide', cat: 'decor', name: 'Slide', price: 12, icon: '🛝' },
+    { id: 'd-lights', cat: 'decor', name: 'Twinkle lights', price: 15, icon: '✨' },
+    { id: 'd-scope', cat: 'decor', name: 'Telescope', price: 20, icon: '🔭' }
+  ];
+  var SHOP_BY = {}; SHOP.forEach(function (it) { SHOP_BY[it.id] = it; });
+  var SHOP_TABS = [['color', 'Colors', '🎨'], ['hat', 'Hats', '🎩'], ['extra', 'Extras', '👓'], ['decor', 'Treehouse', '🏡']];
+  function wallet() { return Math.max(0, S.totalStars - (S.spent || 0)); }
+  function owns(id) { return id === 'c-green' || S.owned.indexOf(id) >= 0; }
+  function wearing(it) { return (it.cat === 'color' && S.pip.color === it.color) || (it.cat === 'hat' && S.pip.hat === it.hat) || (it.cat === 'extra' && S.pip.extra === it.extra); }
+
+  /* Pip's treehouse; owned decorations appear, and one being looked at shows faintly */
+  function treeSVG(pip, peek) {
+    function has(id) { return owns(id) || peek === id; }
+    function op(id) { return !owns(id) && peek === id ? ' opacity=".55"' : ''; }
+    var k = 'stroke="' + INK + '" stroke-width="4" stroke-linejoin="round"';
+    var out = '<svg class="tree-svg" viewBox="0 0 420 320" role="img" aria-label="Pip’s treehouse">' +
+      '<path d="M0 292 Q210 252 420 292 V320 H0 Z" fill="#7FD18C"/>' +
+      '<path d="M192 292 L202 175 L228 175 L240 292 Z" fill="#8A5A34" ' + k + '/>' +
+      '<path d="M206 230 L170 206 M226 220 L262 196" stroke="#8A5A34" stroke-width="10" stroke-linecap="round"/>' +
+      '<circle cx="150" cy="112" r="58" fill="#46B064" ' + k + '/><circle cx="285" cy="116" r="58" fill="#46B064" ' + k + '/>' +
+      '<circle cx="215" cy="78" r="68" fill="#5CC97A" ' + k + '/><circle cx="215" cy="140" r="52" fill="#5CC97A"/>';
+    if (has('d-bird')) out += '<g' + op('d-bird') + ' transform="translate(312 160)"><path d="M-30 6 L22 6" stroke="#8A5A34" stroke-width="7" stroke-linecap="round"/><ellipse cx="0" cy="-6" rx="13" ry="11" fill="#5AA9EC" ' + k + '/><circle cx="4" cy="-9" r="2.5" fill="' + INK + '"/><path d="M12 -8 L20 -5 L12 -3 Z" fill="#FF9F43"/></g>';
+    if (has('d-lantern')) out += '<g' + op('d-lantern') + '><path d="M118 150 L118 172" stroke="' + INK + '" stroke-width="2.5"/><rect x="106" y="172" width="24" height="30" rx="8" fill="#FFC43F" ' + k + '/><rect x="112" y="179" width="12" height="16" rx="4" fill="#FFF0B3"/></g>';
+    out += '<rect x="128" y="190" width="176" height="14" rx="3" fill="#A06A3E" ' + k + '/>' +
+      '<rect x="150" y="130" width="132" height="62" fill="#FFD27A" ' + k + '/>' +
+      '<path d="M138 132 L216 90 L294 132 Z" fill="#FF7A62" ' + k + '/>' +
+      '<rect x="160" y="146" width="28" height="22" rx="3" fill="#CDEBF5" ' + k + '/><path d="M174 146 V168 M160 157 H188" stroke="' + INK + '" stroke-width="3"/>' +
+      '<path d="M202 192 V164 Q216 148 230 164 V192 Z" fill="#8A5A34" ' + k + '/>';
+    if (has('d-lights')) { out += '<g' + op('d-lights') + '>'; var cols = ['#FF7A62', '#FFC43F', '#5AA9EC', '#E8649A', '#4CBA68']; for (var i = 0; i <= 12; i++) { var t = i / 12, x = 140 + t * 152, y = t <= 0.5 ? 131 - t * 2 * 41 : 90 + (t - 0.5) * 2 * 41; out += '<circle cx="' + x.toFixed(1) + '" cy="' + (y + 5).toFixed(1) + '" r="4.5" fill="' + cols[i % 5] + '" stroke="' + INK + '" stroke-width="1.5"/>'; } out += '</g>'; }
+    if (has('d-flag')) out += '<g' + op('d-flag') + '><path d="M216 90 L216 52" stroke="' + INK + '" stroke-width="4" stroke-linecap="round"/><path d="M216 52 L246 60 L216 70 Z" fill="#E8649A" ' + k + '/></g>';
+    if (has('d-flowers')) out += '<g' + op('d-flowers') + '><path d="M134 190 L138 176 H154 L158 190 Z" fill="#FF8A1F" ' + k + '/><circle cx="141" cy="170" r="6" fill="#E8649A" stroke="' + INK + '" stroke-width="2"/><circle cx="151" cy="168" r="6" fill="#FFC43F" stroke="' + INK + '" stroke-width="2"/></g>';
+    if (has('d-scope')) out += '<g' + op('d-scope') + '><path d="M268 190 L276 172 L284 190" stroke="' + INK + '" stroke-width="3" fill="none"/><rect x="262" y="160" width="34" height="11" rx="4" transform="rotate(-28 279 165)" fill="#9C7CF0" ' + k + '/></g>';
+    if (has('d-ladder')) out += '<g' + op('d-ladder') + ' stroke="#C08A52" stroke-width="4" stroke-linecap="round"><path d="M146 204 L140 290 M166 204 L172 290"/><path d="M145 222 H167 M144 240 H168 M142 258 H169 M141 276 H171"/></g>';
+    if (has('d-slide')) out += '<path' + op('d-slide') + ' d="M298 198 C330 210 340 256 384 280 L376 292 C330 270 320 222 290 210 Z" fill="#5AA9EC" ' + k + '/>';
+    out += '<svg class="pip" x="236" y="132" width="56" height="58" viewBox="0 0 120 124">' + pip.replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '') + '</svg>';
+    return out + '</svg>';
+  }
+
+  var shopTab = 'color', shopPick = null;
+  function renderShop(speak) {
+    var view = $('#shop-view'), grid = $('#shop-grid'), tabs = $('#shop-tabs'), act = $('#shop-act');
+    $('#shop-wallet').innerHTML = ICON.star() + '<span>' + wallet() + '</span>';
+    var pick = shopPick ? SHOP_BY[shopPick] : null;
+    var look = Object.assign({}, S.pip);
+    if (pick && pick.cat === 'color') look.color = pick.color;
+    if (pick && pick.cat === 'hat') look.hat = pick.hat;
+    if (pick && pick.cat === 'extra') look.extra = pick.extra;
+    view.innerHTML = treeSVG(pipSVG(look), pick && pick.cat === 'decor' ? pick.id : null) + '<div class="shop-pip" aria-hidden="true">' + pipSVG(look) + '</div>';
+    tabs.innerHTML = '';
+    SHOP_TABS.forEach(function (t) {
+      tabs.append(el('button', { class: 'shop-tab' + (shopTab === t[0] ? ' on' : ''), 'aria-pressed': String(shopTab === t[0]), onclick: function () { shopTab = t[0]; shopPick = null; renderShop(false); } },
+        [el('span', { class: 'emoji', text: t[2] }), t[1]]));
+    });
+    grid.innerHTML = '';
+    SHOP.filter(function (it) { return it.cat === shopTab; }).forEach(function (it) {
+      var icon;
+      if (it.cat === 'color') icon = el('span', { class: 'swatch', style: 'background:' + PIP_COLORS[it.color][0] });
+      else if (it.cat === 'decor') icon = el('span', { class: 'emoji', text: it.icon });
+      else { var o = { color: S.pip.color }; o[it.cat] = it.hat || it.extra; icon = el('span', { class: 'mini-pip', html: pipSVG(o) }); }
+      var tag = owns(it.id) ? (wearing(it) ? 'On Pip' : it.cat === 'decor' ? 'Yours' : 'Yours') : null;
+      grid.append(el('button', { class: 'chunk shop-item' + (shopPick === it.id ? ' picked' : '') + (owns(it.id) ? ' owned' : ''), 'aria-label': it.name, onclick: function () {
+          shopPick = it.id; renderShop(false);
+          Voice.say(owns(it.id) ? it.name + '! You have this one.' : it.name + '! It costs ' + it.price + ' stars.');
+        } }, [icon, el('span', { class: 'si-name', text: it.name }),
+        tag ? el('span', { class: 'si-tag', text: tag }) : el('span', { class: 'si-price', html: ICON.star() + it.price })]));
+    });
+    act.innerHTML = '';
+    if (!pick) act.append(el('p', { class: 'shop-hint', text: 'Tap something to try it on!' }));
+    else if (!owns(pick.id)) {
+      var short = pick.price - wallet();
+      if (short > 0) act.append(el('p', { class: 'shop-hint', text: 'You need ' + short + ' more ' + (short === 1 ? 'star' : 'stars') + '. Play games to earn them!' }));
+      else act.append(el('button', { class: 'chunk btn go', html: 'Buy for ' + pick.price + ' ' + ICON.star(), onclick: function (e) { buy(pick, e.currentTarget); } }));
+    } else if (pick.cat === 'decor') act.append(el('p', { class: 'shop-hint', text: 'It’s in your treehouse!' }));
+    else if (wearing(pick) && pick.cat !== 'color') act.append(el('button', { class: 'chunk btn', text: 'Take it off', onclick: function () { S.pip[pick.cat] = null; save(true); refreshPips(); renderShop(false); } }));
+    else if (!wearing(pick)) act.append(el('button', { class: 'chunk btn go', text: pick.cat === 'color' ? 'Use this color' : 'Put it on', onclick: function () { wear(pick); renderShop(false); } }));
+    else act.append(el('p', { class: 'shop-hint', text: 'Pip is wearing it!' }));
+    show('shop');
+    if (speak) Voice.say('Welcome to Pip’s Shop! You have ' + wallet() + ' stars to spend.');
+  }
+  function wear(it) {
+    if (it.cat === 'color') S.pip.color = it.color; else if (it.cat === 'hat') S.pip.hat = it.hat; else if (it.cat === 'extra') S.pip.extra = it.extra;
+    save(true); refreshPips();
+  }
+  function buy(it, btn) {
+    if (owns(it.id) || wallet() < it.price) return;
+    S.spent = (S.spent || 0) + it.price; S.owned.push(it.id);
+    if (it.cat !== 'decor') wear(it); else save(true);
+    var c = centerOf(btn); FX.burst(c.x, c.y, { n: 40, speed: 11, spread: 6.3 }); SFX.fanfare();
+    Voice.say('You got the ' + it.name.toLowerCase() + '!');
+    renderShop(false);
+  }
+
+  /* ================= DAILY ADVENTURE ================= */
+  var BOO_READ = { ghosts: 1, brew: 1 };
+  function visibleGames() { return GAMES.filter(function (g) { return g.world !== 'boo' || halloweenOn(); }); }
+  function isReading(g) { return g.world === 'read' || !!BOO_READ[g.id]; }
+  function accOf(g) { var r = gs(g.id).recent; return r.length ? r.reduce(function (a, b) { return a + b; }, 0) / r.length : 0.5; }
+  function pickAdventure() {
+    var vis = visibleGames();
+    function need(g) { var s = statusOf(g); return (s === 'working' ? 2 : s === 'new' ? 1.4 : s === 'meets' ? 0.7 : 0.4) + (1 - accOf(g)) + Math.random() * 0.9; }
+    function best(list) { return list.slice().sort(function (a, b) { return need(b) - need(a); })[0]; }
+    var readG = best(vis.filter(isReading)), mathG = best(vis.filter(function (g) { return !isReading(g); }));
+    var rest = vis.filter(function (g) { return g !== readG && g !== mathG; });
+    var played = rest.filter(function (g) { return gs(g.id).rounds > 0; });
+    var fav = played.length ? played.sort(function (a, b) { return gs(b.id).rounds - gs(a.id).rounds; })[0] : R.pick(rest);
+    return [readG.id, fav.id, mathG.id];
+  }
+  function ensureAdventure() {
+    var today = dayKey();
+    if (!S.adv || S.adv.date !== today || !Array.isArray(S.adv.ids)) { S.adv = { date: today, ids: pickAdventure(), done: [false, false, false], chest: false }; save(false); }
+    return S.adv;
+  }
+  function advStage() { var a = ensureAdventure(); var n = a.done.filter(Boolean).length; return { a: a, n: n }; }
+  function isSleepy() { return S.settings.limit === 'after' && S.adv && S.adv.date === dayKey() && S.adv.chest; }
+
+  var CHEST = function (open) {
+    return '<svg class="chest-svg" viewBox="0 0 120 100" aria-hidden="true">' +
+      (open ? '<path d="M14 40 L24 6 L104 6 L106 40 Z" fill="#B97A45" stroke="' + INK + '" stroke-width="4" stroke-linejoin="round"/><path d="M28 42 L44 26 L60 40 L74 22 L92 42 Z" fill="#FFC43F" stroke="' + INK + '" stroke-width="3"/>'
+            : '<path d="M14 44 Q14 18 60 18 Q106 18 106 44 Z" fill="#B97A45" stroke="' + INK + '" stroke-width="4" stroke-linejoin="round"/>') +
+      '<rect x="14" y="42" width="92" height="50" rx="6" fill="#A06A3E" stroke="' + INK + '" stroke-width="4"/>' +
+      '<rect x="14" y="58" width="92" height="9" fill="#FFC43F" stroke="' + INK + '" stroke-width="3"/>' +
+      '<rect x="51" y="52" width="18" height="22" rx="4" fill="#FFC43F" stroke="' + INK + '" stroke-width="3"/></svg>';
+  };
+
+  function renderAdventure(speak) {
+    var st = advStage(), a = st.a, box = $('#adv-path'); box.innerHTML = '';
+    var cur = a.done.indexOf(false);
+    a.ids.forEach(function (id, i) {
+      var g = G[id], state = a.done[i] ? 'done' : i === cur ? 'now' : 'later';
+      if (i) box.append(el('span', { class: 'adv-link' + (a.done[i - 1] ? ' lit' : ''), 'aria-hidden': 'true' }));
+      var b = el('button', { class: 'chunk adv-stop ' + state + (g.world === 'boo' ? ' boo' : ''), 'aria-label': 'Stop ' + (i + 1) + ': ' + g.name, onclick: function () {
+          if (state === 'later') { Voice.say('Finish the stop before this one first!'); return; }
+          startRound(id, i);
+        } }, [el('span', { class: 'thumb', html: g.thumb }), el('span', { class: 'adv-name', text: g.name }),
+        el('span', { class: 'adv-badge', html: state === 'done' ? ICON.check : state === 'now' ? 'Play!' : String(i + 1) })]);
+      box.append(b);
+    });
+    box.append(el('span', { class: 'adv-link' + (cur < 0 ? ' lit' : ''), 'aria-hidden': 'true' }));
+    var chest = el('button', { class: 'adv-chest' + (cur < 0 && !a.chest ? ' ready' : '') + (a.chest ? ' opened' : ''), 'aria-label': 'Treasure chest', html: CHEST(a.chest) });
+    chest.addEventListener('click', function () {
+      if (a.chest) { Voice.say('You already opened today’s treasure. Come back tomorrow for a new adventure!'); return; }
+      if (cur >= 0) { Voice.say('Finish all three stops to open the treasure!'); return; }
+      openChest(chest);
+    });
+    box.append(chest);
+    $('#adv-note').textContent = a.chest ? 'Adventure complete! A new one starts tomorrow.' : cur < 0 ? 'Tap the treasure chest!' : 'Stop ' + (cur + 1) + ' of 3';
+    renderCalendar();
+    show('adv');
+    if (speak) Voice.say(a.chest ? 'You finished today’s adventure! Come back tomorrow for a new one.' : cur < 0 ? 'You did all three stops! Tap the treasure chest!' : cur === 0 ? 'Today’s adventure has three stops and a treasure chest. Tap the first stop!' : 'On to stop ' + (cur + 1) + '!');
+  }
+  function openChest(btn) {
+    var before = stickersEarned();
+    S.adv.chest = true; S.totalStars += 5;
+    var today = dayKey(); if (S.advDays.indexOf(today) < 0) S.advDays.push(today);
+    if (S.advDays.length > 400) S.advDays = S.advDays.slice(-400);
+    save(true);
+    var c = centerOf(btn);
+    FX.burst(c.x, c.y, { n: 80, speed: 14, spread: 6.3 }); FX.fireworks(4); SFX.fanfare();
+    var newSt = stickersEarned() > before ? STICKERS[stickersEarned() - 1] : null;
+    renderAdventure(false);
+    var msg = 'Treasure! You found 5 bonus stars, and a stamp for today!';
+    if (newSt) msg += ' And a new sticker: ' + (newSt.name === 'T. rex' ? 'a T rex!' : 'a ' + newSt.name + '!');
+    if (S.settings.limit === 'after') msg += ' Great job today. Pip is getting sleepy!';
+    Voice.say(msg);
+  }
+  function renderCalendar() {
+    var box = $('#adv-cal'); box.innerHTML = '';
+    var now = new Date(), y = now.getFullYear(), m = now.getMonth(), first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate();
+    var month = now.toLocaleDateString(undefined, { month: 'long' });
+    var count = 0;
+    var grid = el('div', { class: 'cal-grid' });
+    ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(function (d) { grid.append(el('span', { class: 'cal-h', text: d })); });
+    for (var i = 0; i < first; i++) grid.append(el('span', { class: 'cal-d blank' }));
+    for (var d = 1; d <= days; d++) {
+      var key = dayKey(new Date(y, m, d)), got = S.advDays.indexOf(key) >= 0;
+      if (got) count++;
+      grid.append(el('span', { class: 'cal-d' + (got ? ' got' : '') + (d === now.getDate() ? ' today' : '') }, got ? el('span', { html: ICON.star() }) : String(d)));
+    }
+    box.append(el('div', { class: 'cal-top' }, [el('b', { text: month }), el('span', { text: count + (count === 1 ? ' adventure day' : ' adventure days') })]), grid);
+  }
+
+  function renderSleep() {
+    $('#sleep-text').textContent = (S.name.trim() ? 'Great job today, ' + S.name.trim() + '!' : 'Great job today!') + ' Pip is sleeping. Come back tomorrow for a new adventure.';
+    show('sleep');
+    Voice.say('Shh. Pip is sleeping. Great job today! Come back tomorrow for a new adventure.');
   }
 
   /* ---------------- grown-ups gate ---------------- */
@@ -2084,7 +2743,8 @@ window.PipContent = (function () {
     sum.append(el('h3', { text: name ? name + "'s week" : 'This week' }));
     sum.append(el('div', { class: 'summary' }, [
       stat(wd + ' / 7', 'days played'), stat(String(wq), 'questions answered'), stat(wq ? Math.round(wc / wq * 100) + '%' : '—', 'right on the first try'),
-      stat(String(S.rounds), 'rounds all time'), stat(String(S.totalStars), 'stars · ' + stickersEarned() + ' stickers')
+      stat(String(S.advDays.filter(function (k) { return k.slice(0, 7) === dayKey().slice(0, 7); }).length), 'adventure days this month'),
+      stat(String(S.rounds), 'rounds all time'), stat(String(S.totalStars), 'stars earned · ' + stickersEarned() + ' stickers')
     ]));
     var week = el('div', { class: 'week', role: 'img', 'aria-label': 'Questions answered each day this week' });
     days.forEach(function (d, i) {
@@ -2130,6 +2790,8 @@ window.PipContent = (function () {
     }
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Talking speed' }), seg([['normal', 'Normal'], ['slow', 'Slower']], S.settings.rate, function (v) { S.settings.rate = v; save(true); Voice.say('This is how fast I talk.'); })]));
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Sound effects' }), seg([['on', 'On'], ['off', 'Off']], S.settings.sfx ? 'on' : 'off', function (v) { S.settings.sfx = v === 'on'; save(true); SFX.good(); })]));
+    set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Play time' }), seg([['none', 'Any time'], ['after', 'Stop after the daily adventure']], S.settings.limit || 'none', function (v) { S.settings.limit = v; save(true); }),
+      el('span', { class: 'fine', text: 'With "Stop after the daily adventure," Pip goes to sleep once she opens the treasure chest, and the games wait until tomorrow. The shop and sticker book stay open.' })]));
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Celebrations' }), seg([['big', 'Big (confetti & stars)'], ['calm', 'Calm']], S.settings.celebrate || 'big', function (v) { S.settings.celebrate = v; save(true); })]));
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Halloween Hollow' }), seg([['auto', 'Oct 1 – Nov 7'], ['on', 'Always'], ['off', 'Hide']], S.settings.halloween || 'auto', function (v) { S.settings.halloween = v; save(true); })]));
     w.append(set);
@@ -2213,8 +2875,11 @@ window.PipContent = (function () {
   /* ---------------- wiring ---------------- */
   var App = {
     refresh: function () {
+      refreshPips();
       if (current === 'home') renderHome(false);
       else if (current === 'room') renderRoom(roomWorld, false);
+      else if (current === 'adv') renderAdventure(false);
+      else if (current === 'shop') renderShop(false);
       else if (current === 'parents') renderParents();
     },
     refreshSync: function () { var l = $('#sync-line'); if (l) l.textContent = syncText(); }
@@ -2232,14 +2897,21 @@ window.PipContent = (function () {
   $('#room-boo').addEventListener('click', function () { renderRoom('boo', true); });
   $('#mix-btn').addEventListener('click', function () { startRound('mix'); });
   $('#stk-btn').addEventListener('click', renderStickers);
+  $('#adv-btn').addEventListener('click', function () { renderAdventure(true); });
+  $('#shop-btn').addEventListener('click', function () { shopPick = null; renderShop(true); });
+  $('#adv-back').addEventListener('click', function () { renderHome(false); });
+  $('#shop-back').addEventListener('click', function () { renderHome(false); });
+  $('#sleep-stk').addEventListener('click', renderStickers);
+  $('#sleep-shop').addEventListener('click', function () { shopPick = null; renderShop(true); });
+  $('#sleep-grown').addEventListener('click', openGate);
   $('#stk-back').addEventListener('click', function () { renderHome(true); });
   $('#room-back').addEventListener('click', function () { renderHome(true); });
   $('#grown-btn').addEventListener('click', openGate);
   $('#quit-btn').addEventListener('click', function () {
     if (round && round.res.length) save(true);
-    var world = round && !round.mix ? G[round.id].world : null;
+    var world = round && !round.mix ? G[round.id].world : null, adv = round && round.adv != null;
     round = null;
-    if (world) renderRoom(world, false); else renderHome(false);
+    if (adv) renderAdventure(false); else if (world) renderRoom(world, false); else renderHome(false);
   });
   $('#again-btn').addEventListener('click', function () { if (round && round.q) speakQ(round.q); });
   $('#q-text').addEventListener('click', function () { if (round && round.q) speakQ(round.q); });
