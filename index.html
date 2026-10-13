@@ -19,7 +19,7 @@ body{margin:0;font:14px system-ui,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<!-- Pip's Treehouse v1.2.0 -->
+<!-- Pip's Treehouse v1.3.0 -->
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>Pip's Treehouse</title>
 <style>
@@ -331,6 +331,25 @@ button:disabled{cursor:default}
 .sbtn.danger{background:#FFD6CE}
 .fine{font-size:14px;color:var(--ink-soft)}
 .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:4px 0 2px;font-size:14px;align-items:center}
+
+/* celebrations */
+.fly-star{position:fixed;left:0;top:0;width:46px;height:46px;z-index:61;pointer-events:none}
+.fly-star .star-ico{width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(255,196,63,.9))}
+.dot.incoming .star-ico{opacity:0;animation:none}
+.dot.landed .star-ico{animation:land .5s ease}
+@keyframes land{0%{transform:scale(1.8)}50%{transform:scale(.85)}100%{transform:scale(1)}}
+.praise-pop{position:fixed;z-index:61;pointer-events:none;white-space:nowrap;font-family:var(--f-display);font-weight:900;font-size:clamp(30px,6vmin,58px);color:var(--math);text-shadow:0 4px 0 var(--ink),3px 0 0 var(--ink),-3px 0 0 var(--ink),0 -3px 0 var(--ink),2px 2px 0 var(--ink),-2px 2px 0 var(--ink),2px -2px 0 var(--ink),-2px -2px 0 var(--ink);animation:praise-pop 1.25s ease-out forwards}
+@keyframes praise-pop{0%{transform:translate(-50%,-50%) scale(.3) rotate(-10deg);opacity:0}18%{transform:translate(-50%,-110%) scale(1.2) rotate(4deg);opacity:1}65%{transform:translate(-50%,-150%) scale(1) rotate(0);opacity:1}100%{transform:translate(-50%,-210%) scale(.95);opacity:0}}
+.streak-banner{position:fixed;left:50%;top:24%;z-index:62;pointer-events:none;white-space:nowrap;font-family:var(--f-display);font-weight:900;font-size:clamp(32px,7vmin,66px);background:var(--math);color:var(--ink);border:4px solid var(--ink);border-radius:999px;padding:6px 30px;box-shadow:0 7px 0 var(--ink);animation:banner 1.8s cubic-bezier(.3,1.4,.5,1) forwards}
+.streak-banner.boo{background:var(--pumpkin)}
+@keyframes banner{0%{transform:translateX(-50%) scale(0) rotate(-12deg)}18%{transform:translateX(-50%) scale(1.12) rotate(3deg)}30%{transform:translateX(-50%) scale(1) rotate(0)}80%{transform:translateX(-50%) scale(1);opacity:1}100%{transform:translateX(-50%) translateY(-30px) scale(.9);opacity:0}}
+.pip-wrap.spin{animation:spinjump .85s ease}
+@keyframes spinjump{0%{transform:none}30%{transform:translateY(-26px) rotate(180deg)}60%{transform:translateY(-10px) rotate(360deg)}80%{transform:translateY(2px) scale(1.06,.94) rotate(360deg)}100%{transform:rotate(360deg)}}
+.pip-wrap.dance{animation:dance 1s ease-in-out 4}
+@keyframes dance{0%,100%{transform:none}25%{transform:translateY(-14px) rotate(-10deg)}50%{transform:translateY(0) scale(1.06,.94)}75%{transform:translateY(-14px) rotate(10deg)}}
+.gift{display:flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--f-display);font-weight:800;font-size:20px;padding:6px 18px}
+.gift-box{font-size:76px;display:block;animation:wiggle 1.3s ease-in-out infinite}
+@keyframes wiggle{0%,60%,100%{transform:rotate(0) scale(1)}70%{transform:rotate(-12deg) scale(1.08)}80%{transform:rotate(10deg) scale(1.08)}90%{transform:rotate(-6deg)}}
 
 /* Pip is naming this one right now */
 .choice,.seq>span{transition:transform .15s ease,box-shadow .15s ease,background-color .2s ease}
@@ -1175,7 +1194,7 @@ window.PipContent = (function () {
 
   /* ---------------- state ---------------- */
   var KEY = 'pips-treehouse-v1';
-  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto' } }; }
+  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', celebrate: 'big' } }; }
   function normalize(s) {
     var d = freshState();
     if (!s || typeof s !== 'object') return d;
@@ -1351,39 +1370,140 @@ window.PipContent = (function () {
     function on() { return S.settings.sfx; }
     return {
       unlock: function () { ac(); },
-      good: function () { if (!on()) return; tone(659, 0, 0.16); tone(784, 0.09, 0.16); tone(1047, 0.18, 0.32); },
+      /* a few different "right answer" jingles so it never gets old */
+      good: function () {
+        if (!on()) return;
+        var v = Math.floor(Math.random() * 3);
+        if (v === 0) { tone(659, 0, 0.16); tone(784, 0.09, 0.16); tone(1047, 0.18, 0.32); }
+        else if (v === 1) { tone(784, 0, 0.12); tone(988, 0.08, 0.12); tone(1175, 0.16, 0.12); tone(1568, 0.24, 0.3, 'sine', 0.12); }
+        else { tone(523, 0, 0.1); tone(1047, 0.1, 0.14); tone(1319, 0.2, 0.3); }
+      },
       bad: function () { if (!on()) return; tone(311, 0, 0.18, 'sine', 0.12); tone(247, 0.15, 0.26, 'sine', 0.1); },
       tick: function () { if (!on()) return; tone(988, 0, 0.08, 'sine', 0.07); },
+      ding: function (i) { if (!on()) return; tone(880 * Math.pow(1.1225, i || 0), 0, 0.22, 'sine', 0.13); },
+      streak: function () { if (!on()) return; [659, 784, 988, 1319, 1568, 1976].forEach(function (f, i) { tone(f, i * 0.06, 0.2, 'triangle', 0.12); }); },
+      pop: function () { if (!on()) return; tone(1400, 0, 0.06, 'square', 0.04); tone(700, 0.04, 0.12, 'sine', 0.1); },
       fanfare: function () { if (!on()) return; [523, 659, 784, 1047, 1319].forEach(function (f, i) { tone(f, i * 0.11, 0.34); }); }
     };
   })();
 
-  /* ---------------- confetti ---------------- */
-  var Confetti = (function () {
-    var cv = $('#confetti'), raf = 0;
-    function burst() {
-      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var ctx = cv.getContext('2d'); if (!ctx) return;
-      var dpr = Math.min(2, window.devicePixelRatio || 1), w = cv.clientWidth, h = cv.clientHeight;
-      cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var cols = ['#FF7A62', '#FFC43F', '#4CBA68', '#E8649A', '#5AA9EC', '#9C7CF0'];
-      var parts = [];
-      for (var i = 0; i < 120; i++) parts.push({ x: w / 2 + (Math.random() - 0.5) * w * 0.5, y: h * 0.38, vx: (Math.random() - 0.5) * 15, vy: -Math.random() * 15 - 4, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.3, s: 7 + Math.random() * 7, c: R.pick(cols) });
-      cancelAnimationFrame(raf);
-      var t0 = performance.now();
-      (function step(t) {
-        ctx.clearRect(0, 0, w, h);
-        var alive = false;
-        parts.forEach(function (p) {
-          p.vy += 0.45; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
-          if (p.y < h + 20) alive = true;
-          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 3, p.s, p.s * 0.66); ctx.restore();
-        });
-        if (alive && t - t0 < 4500) raf = requestAnimationFrame(step); else ctx.clearRect(0, 0, w, h);
-      })(t0);
+  /* ---------------- celebrations: confetti, stars, sparkles ---------------- */
+  var FX = (function () {
+    var cv = $('#confetti'), ctx = null, parts = [], raf = 0, last = 0, w = 0, h = 0;
+    var COLS = ['#FF7A62', '#FFC43F', '#4CBA68', '#E8649A', '#5AA9EC', '#9C7CF0'];
+    var BOO_COLS = ['#FF8A1F', '#9C7CF0', '#FFC43F', '#4CBA68'];
+    var BOO_EMOJI = ['🍬', '🎃', '👻', '🦇', '🍭'];
+    function ok() {
+      if (S.settings.celebrate === 'calm') return false;
+      return !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
     }
-    return { burst: burst };
+    function fit() {
+      ctx = ctx || cv.getContext('2d');
+      var dpr = Math.min(2, window.devicePixelRatio || 1), cw = cv.clientWidth, ch = cv.clientHeight;
+      if (cw !== w || ch !== h) { w = cw; h = ch; cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    }
+    function star(r) {
+      ctx.beginPath();
+      for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); }
+      ctx.closePath(); ctx.fill();
+    }
+    function frame(t) {
+      var dt = Math.min(3, (t - last) / 16.7 || 1); last = t;
+      ctx.clearRect(0, 0, w, h);
+      parts = parts.filter(function (p) { return p.life > 0 && p.y < h + 60; });
+      parts.forEach(function (p) {
+        p.vy += p.g * dt; p.vx *= Math.pow(p.drag, dt); p.vy *= Math.pow(p.drag, dt);
+        p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt; p.life -= 16.7 * dt;
+        ctx.save(); ctx.globalAlpha = Math.max(0, Math.min(1, p.life / 350));
+        ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c;
+        if (p.k === 'star') star(p.s);
+        else if (p.k === 'dot') { ctx.beginPath(); ctx.arc(0, 0, p.s / 2, 0, 6.3); ctx.fill(); }
+        else if (p.k === 'emoji') { ctx.font = p.s + 'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(p.e, 0, 0); }
+        else ctx.fillRect(-p.s / 2, -p.s / 3, p.s, p.s * 0.6);
+        ctx.restore();
+      });
+      if (parts.length) raf = requestAnimationFrame(frame); else { raf = 0; ctx.clearRect(0, 0, w, h); }
+    }
+    function add(list) {
+      fit();
+      parts = parts.concat(list).slice(-420);
+      if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+    }
+    function piece(o, spooky, kinds) {
+      var k = R.pick(kinds);
+      var p = { x: o.x, y: o.y, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.3, g: 0.32, drag: 0.985, life: o.life || 1600, k: k,
+        c: R.pick(spooky ? BOO_COLS : COLS), s: k === 'emoji' ? 22 + Math.random() * 14 : k === 'star' ? 7 + Math.random() * 6 : 7 + Math.random() * 7 };
+      if (k === 'emoji') p.e = R.pick(BOO_EMOJI);
+      return p;
+    }
+    /* a pop of stars and paper from one spot (a tapped answer) */
+    function burst(x, y, o) {
+      if (!ok()) return;
+      o = o || {};
+      var n = o.n || 26, list = [], kinds = o.spooky ? ['emoji', 'paper', 'star'] : ['star', 'star', 'paper', 'dot'];
+      for (var i = 0; i < n; i++) {
+        var a = -Math.PI / 2 + (Math.random() - 0.5) * (o.spread || 2.6), sp = (o.speed || 9) * (0.5 + Math.random() * 0.7);
+        var p = piece({ x: x, y: y, life: o.life || 1100 + Math.random() * 500 }, o.spooky, o.kinds || kinds);
+        p.vx = Math.cos(a) * sp; p.vy = Math.sin(a) * sp; list.push(p);
+      }
+      add(list);
+    }
+    /* confetti falling across the whole screen (end of a round) */
+    function rain(o) {
+      if (!ok()) return;
+      fit(); o = o || {};
+      var n = o.n || 90, list = [], kinds = o.spooky ? ['emoji', 'emoji', 'paper', 'star'] : ['paper', 'paper', 'star', 'dot'];
+      for (var i = 0; i < n; i++) {
+        var p = piece({ x: Math.random() * w, y: -20 - Math.random() * h * 0.5, life: 4200 }, o.spooky, kinds);
+        p.vx = (Math.random() - 0.5) * 3; p.vy = 2 + Math.random() * 3; p.g = 0.06; p.drag = 0.995; list.push(p);
+      }
+      add(list);
+    }
+    /* several bursts popping around the screen (perfect rounds, streaks) */
+    function fireworks(times, spooky) {
+      if (!ok()) return;
+      fit();
+      for (var i = 0; i < times; i++) (function (i) {
+        setTimeout(function () { burst(w * (0.2 + Math.random() * 0.6), h * (0.18 + Math.random() * 0.3), { n: 34, speed: 11, spread: 6.3, spooky: spooky }); if (i % 2 === 0) SFX.pop(); }, i * 260);
+      })(i);
+    }
+    return { ok: ok, burst: burst, rain: rain, fireworks: fireworks };
   })();
+
+  function centerOf(node) {
+    var b = node.getBoundingClientRect();
+    return { x: b.left + b.width / 2, y: b.top + b.height / 2 };
+  }
+  /* a gold star flies from the answer up to its spot in the progress row */
+  function flyStar(from, dot, done) {
+    if (!FX.ok() || !from || !dot || !Element.prototype.animate) { done(); return; }
+    var a = centerOf(from), b = centerOf(dot), s = 46;
+    var star = el('div', { class: 'fly-star', html: ICON.star() });
+    document.body.append(star);
+    var mx = (a.x + b.x) / 2 + (Math.random() < 0.5 ? -1 : 1) * 80, my = Math.min(a.y, b.y) - 60;
+    var anim = star.animate([
+      { transform: 'translate(' + (a.x - s / 2) + 'px,' + (a.y - s / 2) + 'px) scale(.6) rotate(0deg)' },
+      { transform: 'translate(' + (mx - s / 2) + 'px,' + (my - s / 2) + 'px) scale(1.7) rotate(200deg)', offset: 0.45 },
+      { transform: 'translate(' + (b.x - s / 2) + 'px,' + (b.y - s / 2) + 'px) scale(.9) rotate(360deg)' }
+    ], { duration: 760, easing: 'cubic-bezier(.45,0,.3,1)' });
+    var finished = false;
+    function end() { if (finished) return; finished = true; star.remove(); done(); }
+    anim.onfinish = end; setTimeout(end, 1100);
+  }
+  /* the cheer word pops up and floats away */
+  function praisePop(word, at) {
+    if (!FX.ok() || !at) return;
+    var c = centerOf(at);
+    var n = el('div', { class: 'praise-pop', text: word, style: 'left:' + c.x + 'px;top:' + c.y + 'px' });
+    document.body.append(n);
+    setTimeout(function () { n.remove(); }, 1300);
+  }
+  function banner(text, spooky) {
+    if (!FX.ok()) return;
+    var n = el('div', { class: 'streak-banner' + (spooky ? ' boo' : ''), text: text });
+    document.body.append(n);
+    setTimeout(function () { n.remove(); }, 1900);
+  }
 
   /* ---------------- shared bits ---------------- */
   document.querySelectorAll('[data-pip]').forEach(function (n) { n.innerHTML = PIP_SVG; });
@@ -1394,8 +1514,8 @@ window.PipContent = (function () {
 
   function pipDo(cls) {
     var p = $('#game-pip'); if (!p) return;
-    p.classList.remove('cheer', 'think'); void p.offsetWidth; p.classList.add(cls);
-    setTimeout(function () { p.classList.remove(cls); }, 800);
+    p.classList.remove('cheer', 'think', 'spin'); void p.offsetWidth; p.classList.add(cls);
+    setTimeout(function () { p.classList.remove(cls); }, 900);
   }
   function ruled(text, extra) {
     return el('span', { class: 'ruled' + (extra ? ' ' + extra : '') }, [el('span', { class: 'rule', 'aria-hidden': 'true' }), el('span', { class: 'rt', text: text })]);
@@ -1681,7 +1801,7 @@ window.PipContent = (function () {
   function choose(c, btn) {
     if (!round || round.locked || btn.disabled) return;
     clearReading();
-    if (c.correct) { btn.classList.add('correct'); success(); }
+    if (c.correct) { btn.classList.add('correct'); success(btn); }
     else {
       round.wrong++;
       btn.classList.add('wrong'); btn.disabled = true;
@@ -1702,18 +1822,35 @@ window.PipContent = (function () {
     save(false);
   }
 
-  function success() {
+  function success(origin) {
     var r = round, tok = r.token, first = r.wrong === 0;
     r.locked = true;
     clearReading();
-    SFX.good(); pipDo('cheer');
+    SFX.good(); pipDo(Math.random() < 0.4 ? 'spin' : 'cheer');
     record(r.q, first);
     r.res.push(first);
+    r.streak = first ? (r.streak || 0) + 1 : 0;
+    var spooky = G[r.q.game].world === 'boo';
+    var cheer = first ? R.pick(CHEER) : R.pick(CHEER2);
     renderDots();
+    /* celebrate: sparkles from the answer, the cheer word floats up, a gold star flies to the top */
+    if (origin) { var c = centerOf(origin); FX.burst(c.x, c.y, { n: first ? 30 : 16, spooky: spooky }); praisePop(cheer, origin); }
+    var dot = $('#dots').children[r.res.length - 1];
+    if (first && dot && FX.ok()) {
+      dot.classList.add('incoming');
+      var starNo = r.res.filter(Boolean).length - 1;
+      flyStar(origin || $('#stage'), dot, function () { dot.classList.remove('incoming'); dot.classList.add('landed'); SFX.ding(starNo); });
+    }
+    var extra = '';
+    if (r.streak >= 3) {
+      banner(r.streak + ' in a row!', spooky);
+      setTimeout(function () { SFX.streak(); FX.fireworks(r.streak >= 4 ? 3 : 2, spooky); }, 300);
+      extra = r.streak === 3 ? ' Three in a row!' : r.streak === 4 ? ' Four in a row!' : '';
+    }
     var moved = false;
     function go() { if (moved || round !== r || tok !== r.token) return; moved = true; r.i++; nextQuestion(); }
-    Voice.say((first ? R.pick(CHEER) : R.pick(CHEER2)) + ' ' + (r.q.praise || ''), function () { setTimeout(go, 380); });
-    setTimeout(go, 7000);
+    Voice.say(cheer + extra + ' ' + (r.q.praise || ''), function () { setTimeout(go, 380); });
+    setTimeout(go, 7500);
   }
 
   /* spelling */
@@ -1740,9 +1877,10 @@ window.PipContent = (function () {
       tile.disabled = true; tile.classList.add('used'); tile.classList.remove('hint');
       var slots = row.querySelectorAll('.slot');
       var s = slots[r.pos]; s.textContent = ch; s.classList.remove('faint', 'next'); s.classList.add('in');
+      var sc = centerOf(s); FX.burst(sc.x, sc.y, { n: 9, speed: 5, life: 700, kinds: ['star', 'dot'], spooky: q.theme === 'brew' });
       r.pos++;
       if (r.pos < q.word.length) { slots[r.pos].classList.add('next'); SFX.tick(); Voice.say(L(ch)); }
-      else success();
+      else success(row);
     } else {
       r.wrong++;
       tile.classList.remove('nope'); void tile.offsetWidth; tile.classList.add('nope');
@@ -1809,7 +1947,7 @@ window.PipContent = (function () {
     var done = el('button', { class: 'chunk btn go done-btn' }, [el('span', { html: ICON.check }), 'Done!']);
     done.addEventListener('click', function () {
       if (r.locked) return;
-      if (r.count === q.target) { done.classList.add('correct'); success(); return; }
+      if (r.count === q.target) { done.classList.add('correct'); success(bucket); return; }
       r.wrong++; SFX.bad(); pipDo('think');
       done.classList.remove('nope'); void done.offsetWidth; done.classList.add('nope');
       if (r.wrong >= 2) { r.showNums = true; renumber(); }
@@ -1846,10 +1984,23 @@ window.PipContent = (function () {
     var starsRow = el('div', { class: 'end-stars', 'aria-label': first + ' stars plus 1 bonus star' });
     for (var i = 0; i < ROUND_LEN; i++) { var sp = el('span', { html: ICON.star(i >= first) }); if (i < first) sp.firstChild.style.animationDelay = (i * 0.12) + 's'; starsRow.append(sp); }
     starsRow.append(el('span', { class: 'bonus', html: '+' + ICON.star() }));
-    card.append(el('div', { class: 'pip-wrap', html: PIP_SVG, style: 'width:clamp(80px,14vmin,120px)' }), starsRow, el('h2', { text: title }));
+    var spooky = !r.mix && G[r.id].world === 'boo';
+    card.append(el('div', { class: 'pip-wrap dance', html: PIP_SVG, style: 'width:clamp(80px,14vmin,120px)' }), starsRow, el('h2', { text: title }));
     card.append(el('p', { class: 'sub', text: 'You earned ' + earned + ' ' + (earned === 1 ? 'star' : 'stars') + ' (one bonus for finishing).' }));
     if (levelUp) card.append(el('div', { class: 'ribbon', text: 'Level up! Now: ' + G[r.id].levels[g.level - 1][0] }));
-    if (newSt) card.append(el('div', { class: 'newstk' }, [el('span', { class: 'disc' }, emoji(newSt.e)), 'New sticker!']));
+    if (newSt) {
+      /* a present she taps to open, so the new sticker is a surprise */
+      var gift = el('button', { class: 'gift', 'aria-label': 'Open your new sticker' }, [el('span', { class: 'emoji gift-box', text: '🎁' }), el('span', { class: 'gift-t', text: 'Tap to open!' })]);
+      gift.addEventListener('click', function () {
+        if (gift.disabled) return;
+        gift.disabled = true;
+        var gc = centerOf(gift);
+        gift.replaceWith(el('div', { class: 'newstk' }, [el('span', { class: 'disc' }, emoji(newSt.e)), 'New sticker!']));
+        SFX.fanfare(); FX.burst(gc.x, gc.y, { n: 70, speed: 13, spread: 6.3, spooky: spooky });
+        Voice.say((newSt.name === 'T. rex' ? 'A T rex!' : 'A ' + newSt.name + '!') + ' It’s in your sticker book.');
+      });
+      card.append(gift);
+    }
     else if (after < STICKERS.length) {
       var need = STARS_PER_STICKER - (S.totalStars % STARS_PER_STICKER);
       card.append(el('p', { class: 'sub', text: need + ' more ' + (need === 1 ? 'star' : 'stars') + ' to the next sticker' }));
@@ -1860,16 +2011,19 @@ window.PipContent = (function () {
     if (newSt) btns.append(el('button', { class: 'chunk btn', text: 'See stickers', onclick: renderStickers }));
     btns.append(el('button', { class: 'chunk btn', 'aria-label': 'Home', html: ICON.home, style: 'padding:8px 16px', onclick: function () { renderHome(true); } }));
     card.append(btns);
-    $('#s-end').classList.toggle('spooky', !r.mix && G[r.id].world === 'boo');
+    $('#s-end').classList.toggle('spooky', spooky);
     show('end');
     round = null;
 
     var speech = title + ' You got ' + earned + ' stars!';
     if (levelUp) speech += ' You moved up a level!';
-    if (newSt) speech += ' And a new sticker: ' + (newSt.name === 'T. rex' ? 'a T rex!' : 'a ' + newSt.name + '!');
-    SFX.fanfare();
-    if (first >= 3 || newSt || levelUp) Confetti.burst();
-    setTimeout(function () { Voice.say(speech); }, 500);
+    if (newSt) speech += ' And you earned a new sticker! Tap the present to open it.';
+    /* each star dings as it lands, then the fanfare and confetti */
+    for (var d = 0; d <= first; d++) (function (d) { setTimeout(function () { SFX.ding(d); }, 120 + d * 120); })(d);
+    setTimeout(function () { SFX.fanfare(); }, 260 + first * 120);
+    FX.rain({ n: first === 5 ? 150 : first >= 3 ? 110 : 70, spooky: spooky });
+    if (first === 5 || levelUp) setTimeout(function () { FX.fireworks(first === 5 ? 6 : 3, spooky); }, 700);
+    setTimeout(function () { Voice.say(speech); }, 600);
   }
 
   /* ---------------- grown-ups gate ---------------- */
@@ -1976,6 +2130,7 @@ window.PipContent = (function () {
     }
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Talking speed' }), seg([['normal', 'Normal'], ['slow', 'Slower']], S.settings.rate, function (v) { S.settings.rate = v; save(true); Voice.say('This is how fast I talk.'); })]));
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Sound effects' }), seg([['on', 'On'], ['off', 'Off']], S.settings.sfx ? 'on' : 'off', function (v) { S.settings.sfx = v === 'on'; save(true); SFX.good(); })]));
+    set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Celebrations' }), seg([['big', 'Big (confetti & stars)'], ['calm', 'Calm']], S.settings.celebrate || 'big', function (v) { S.settings.celebrate = v; save(true); })]));
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Halloween Hollow' }), seg([['auto', 'Oct 1 – Nov 7'], ['on', 'Always'], ['off', 'Hide']], S.settings.halloween || 'auto', function (v) { S.settings.halloween = v; save(true); })]));
     w.append(set);
 
