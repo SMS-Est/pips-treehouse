@@ -1,0 +1,1788 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#BDE5F2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Pip's Treehouse">
+<meta name="description" content="Kindergarten reading, spelling and math games with spoken directions.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<style>
+/* page reset (the artifact viewer supplied this; the standalone site needs its own) */
+:root{color-scheme:light;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<!-- Pip's Treehouse v1.1.0 -->
+<link rel="stylesheet" href="fonts/fonts.css">
+<title>Pip's Treehouse</title>
+<style>
+:root{
+  /* Layout: one-screen treehouse app. Sky backdrop, chunky ink-outlined cards that press down like real buttons, school-ruled lines (blue top, dashed middle, red base) under every printed word. */
+  --sky:#BDE5F2; --sky-hi:#E8F7FC; --ink:#1D2A44; --ink-soft:#56658A; --paper:#FFFDF6;
+  --read:#FF7A62; --read-tint:#FFE0D8; --math:#FFC43F; --math-tint:#FFEFC2;
+  --leaf:#4CBA68; --berry:#E8649A; --sea:#5AA9EC; --grape:#9C7CF0;
+  --rule-blue:#8DBBE8; --rule-red:#EE8577; --dim:#DCE3EC;
+  --f-display:"Grandstander","Chalkboard SE","Marker Felt","Trebuchet MS",sans-serif;
+  --f-print:"Andika","Avenir Next","Century Gothic","Helvetica Neue",Arial,sans-serif;
+  --f-emoji:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  --r:22px;
+  color-scheme:light;
+}
+html{height:100%;box-sizing:border-box;background:var(--sky)}
+*,*::before,*::after{box-sizing:inherit}
+body{height:100%;margin:0;overflow:hidden;background:linear-gradient(180deg,var(--sky) 0%,var(--sky-hi) 100%);color:var(--ink);font-family:var(--f-print);font-size:18px;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,select{-webkit-user-select:text;user-select:text;font:inherit;color:var(--ink)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;touch-action:manipulation}
+button:disabled{cursor:default}
+:focus-visible{outline:4px solid var(--berry);outline-offset:3px}
+.emoji{font-family:var(--f-emoji);line-height:1;font-weight:400}
+
+.app{height:100%;display:flex;flex-direction:column;position:relative}
+.screen{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:12px 16px;position:relative}
+
+/* chunky sticker buttons */
+.chunk{background:var(--paper);border:3px solid var(--ink);border-radius:var(--r);box-shadow:0 6px 0 var(--ink);transition:transform .08s ease,box-shadow .08s ease,background-color .2s ease,opacity .2s}
+.chunk:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 var(--ink)}
+.icon-btn{width:60px;height:60px;flex:none;display:grid;place-items:center;border-radius:18px}
+.ico{width:32px;height:32px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.star-ico{display:block}
+.star-ico path{fill:var(--math);stroke:var(--ink);stroke-width:1.7;stroke-linejoin:round}
+.star-ico.empty path{fill:var(--paper);stroke:var(--ink-soft);stroke-dasharray:2.4 2}
+
+/* Pip the treehouse bird */
+.pip{display:block;overflow:visible}
+.pip .p-body{fill:#5CC97A;stroke:var(--ink);stroke-width:4}
+.pip .p-belly{fill:var(--paper)}
+.pip .p-eye{fill:#fff;stroke:var(--ink);stroke-width:3}
+.pip .p-pupil{fill:var(--ink)}
+.pip .p-shine{fill:#fff}
+.pip .p-beak{fill:#FF9F43;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.pip .p-cheek{fill:#FF8FAB;opacity:.75}
+.pip .p-wing{fill:#46B064;stroke:var(--ink);stroke-width:3.5;stroke-linejoin:round}
+.pip .p-stem{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round}
+.pip .p-leaf{fill:#8EDC8A;stroke:var(--ink);stroke-width:3}
+.pip .p-foot{fill:none;stroke:#E8862A;stroke-width:4;stroke-linecap:round}
+.pip-wrap{transform-origin:50% 100%;animation:bob 2.6s ease-in-out infinite}
+.pip-wrap.cheer{animation:cheer .7s ease}
+.pip-wrap.think{animation:think .6s ease}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes cheer{0%{transform:translateY(0) scale(1)}25%{transform:translateY(4px) scale(1.08,.9)}55%{transform:translateY(-22px) scale(.95,1.06)}80%{transform:translateY(0) scale(1.05,.95)}100%{transform:none}}
+@keyframes think{0%,100%{transform:rotate(0)}30%{transform:rotate(-8deg)}70%{transform:rotate(6deg)}}
+
+/* speech bubble */
+.bubble{position:relative;background:var(--paper);border:3px solid var(--ink);border-radius:24px;padding:10px 18px;font-family:var(--f-display);font-weight:700;font-size:clamp(19px,3.4vmin,30px);line-height:1.2;text-align:left;max-width:min(34ch,100%);text-wrap:balance}
+.bubble::before,.bubble::after{content:"";position:absolute;top:50%;width:0;height:0;border-style:solid;transform:translateY(-50%)}
+.bubble::before{left:-17px;border-width:11px 16px 11px 0;border-color:transparent var(--ink) transparent transparent}
+.bubble::after{left:-12px;border-width:8px 12px 8px 0;border-color:transparent var(--paper) transparent transparent}
+
+/* ruled school-paper words */
+.ruled{position:relative;display:inline-block;overflow:hidden;padding:0 .28em;line-height:1.5;font-family:var(--f-print);font-weight:700;white-space:nowrap;vertical-align:middle}
+.rule{position:relative;display:inline-block;width:0;height:0;vertical-align:baseline}
+.rule::before{content:"";position:absolute;left:-3em;width:80em;top:-1px;height:2px;background:var(--rule-red)}
+.rule::after{content:"";position:absolute;left:-3em;width:80em;bottom:0;height:.74em;border-top:2px solid var(--rule-blue);background:repeating-linear-gradient(90deg,var(--rule-blue) 0 .16em,transparent .16em .3em) 0 calc(100% - .5em)/100% 2px no-repeat}
+@supports (height:1cap){.rule::after{height:calc(1cap + .04em);background-position:0 calc(100% - 1ex)}}
+.ruled .rt,.ruled .slot{position:relative;z-index:1}
+
+/* ---------- splash ---------- */
+.splash{align-items:center;justify-content:center;text-align:center;gap:18px}
+.splash h1{font-family:var(--f-display);font-weight:900;font-size:clamp(44px,10vmin,96px);line-height:.95;margin:0;letter-spacing:.01em;text-wrap:balance}
+.splash h1 span{display:block;font-size:.42em;font-weight:700;color:var(--ink-soft);letter-spacing:.04em;margin-bottom:.25em}
+.splash .pip-wrap{width:clamp(150px,32vmin,260px)}
+.btn-go{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,5.4vmin,44px);padding:.35em 1.5em;background:var(--leaf)}
+.splash .fine{font-size:15px;color:var(--ink-soft);max-width:36ch}
+
+/* scenery */
+.hill{position:absolute;left:0;right:0;bottom:0;height:16vh;pointer-events:none;z-index:0;background:radial-gradient(120% 100% at 20% 100%,#7FD18C 60%,transparent 61%),radial-gradient(110% 90% at 85% 100%,#6CC67C 58%,transparent 59%)}
+.cloud{position:absolute;pointer-events:none;z-index:0;width:150px;height:46px;background:#fff;border-radius:40px;opacity:.85}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:62px;height:62px;left:24px;top:-30px}
+.cloud::after{width:46px;height:46px;left:76px;top:-20px}
+.screen>*:not(.hill):not(.cloud){position:relative;z-index:1}
+
+/* ---------- home ---------- */
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:800;font-size:24px;background:var(--paper);border:3px solid var(--ink);border-radius:999px;padding:3px 16px 3px 6px;font-variant-numeric:tabular-nums}
+.pill .star-ico{width:34px;height:34px}
+.grownups{font-family:var(--f-display);font-weight:700;font-size:16px;padding:9px 16px;border-radius:999px;box-shadow:0 4px 0 var(--ink)}
+.greet{display:flex;align-items:center;justify-content:center;gap:22px}
+.greet .pip-wrap{width:clamp(90px,17vmin,150px);flex:none}
+.rooms{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;max-width:1000px;margin:0 auto}
+.room-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:14px;min-height:0;border-radius:28px}
+.room-card.read{background:var(--read)}
+.room-card.math{background:var(--math)}
+.room-card .big{font-family:var(--f-print);font-weight:700;font-size:clamp(60px,14vmin,150px);line-height:1}
+.room-card .name{font-family:var(--f-display);font-weight:900;font-size:clamp(24px,4.8vmin,44px);line-height:1.05}
+.room-card .sub{font-size:clamp(15px,2.3vmin,19px);font-weight:700;opacity:.8}
+.extras{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;max-width:1000px;margin:0 auto 6px}
+.extra{display:flex;align-items:center;gap:14px;padding:10px 18px;text-align:left;border-radius:22px;min-height:76px}
+.extra.mix{background:var(--leaf)}
+.extra.stk{background:var(--berry)}
+.extra .ex-ic{font-size:40px;flex:none}
+.extra .ex-txt{display:flex;flex-direction:column;flex:1;min-width:0}
+.extra .ex-t{display:block;font-family:var(--f-display);font-weight:800;font-size:clamp(20px,3.4vmin,28px);line-height:1.1}
+.extra .ex-s{display:block;font-size:15px;font-weight:700}
+.meter{display:block;height:10px;border-radius:6px;background:rgba(255,253,246,.7);border:2px solid var(--ink);overflow:hidden;margin-top:5px;width:min(220px,100%)}
+.meter i{display:block;height:100%;background:var(--math)}
+
+/* ---------- room ---------- */
+.head{display:flex;align-items:center;gap:14px}
+.head h2{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,5.2vmin,46px);margin:0;line-height:1}
+.room[data-room=read]{--room:var(--read);--room-tint:var(--read-tint)}
+.room[data-room=math]{--room:var(--math);--room-tint:var(--math-tint)}
+.room .head .tag{width:18px;height:18px;border-radius:50%;background:var(--room);border:3px solid var(--ink)}
+.tiles{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:18px;width:100%;max-width:1040px;margin:0 auto 8px}
+.tile{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:10px;min-height:0;border-radius:24px}
+.tile .thumb{flex:1;min-height:70px;display:flex;align-items:center;justify-content:center;gap:.14em;border-radius:16px;background:var(--room-tint);font-size:clamp(34px,6.4vmin,60px);line-height:1}
+.tile .tname{font-family:var(--f-display);font-weight:800;font-size:clamp(18px,3vmin,26px);line-height:1.1}
+.tile .tfoot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 4px 2px}
+.lvl{display:flex;gap:5px}
+.lvl i{width:13px;height:13px;border-radius:50%;border:2.5px solid var(--ink);display:block}
+.lvl i.on{background:var(--room)}
+.t-print{font-family:var(--f-print);font-weight:700}
+.t-sm{font-size:.8em}
+.t-op{font-family:var(--f-print);font-weight:700;font-size:.7em;color:var(--ink-soft)}
+.t-tiles{display:flex;gap:.08em}
+.t-tiles i{font-style:normal;display:grid;place-items:center;width:1.05em;height:1.05em;border:2.5px solid var(--ink);border-radius:.2em;background:var(--paper);font-family:var(--f-print);font-weight:700;font-size:.72em}
+.t-word{font-family:var(--f-print);font-weight:700;border-bottom:3px solid var(--rule-red);padding:0 .1em;line-height:1.1}
+.t-q{display:inline-block;border:3px dashed var(--ink);border-radius:.18em;padding:0 .12em;margin-left:.08em;line-height:1}
+.t-shapes{width:1.9em;height:1.2em}
+
+/* ---------- game ---------- */
+.game{gap:10px}
+.topbar{display:flex;align-items:center;gap:12px}
+.dots{flex:1;display:flex;justify-content:center;align-items:center;gap:clamp(6px,1.6vmin,14px)}
+.dot{width:clamp(30px,5.4vmin,46px);height:clamp(30px,5.4vmin,46px);border-radius:50%;border:3px dashed var(--ink-soft);display:grid;place-items:center;transition:transform .2s}
+.dot.now{border:3px solid var(--ink);background:var(--paper);transform:scale(1.08)}
+.dot.star,.dot.ok{border:0}
+.dot.star .star-ico{width:120%;height:120%;animation:pop .45s ease}
+.dot.ok{background:var(--leaf);border:3px solid var(--ink)}
+.dot.ok .ico{width:62%;height:62%;stroke-width:3.4}
+.speak{background:var(--sea)}
+.ask{display:flex;align-items:center;justify-content:center;gap:20px;min-height:0}
+.ask .pip-wrap{width:clamp(60px,11vmin,100px);flex:none}
+.ask .bubble{cursor:pointer}
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.choices{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:clamp(12px,2.4vmin,24px);padding:0 0 12px}
+.choice{min-width:clamp(92px,15.5vmin,150px);min-height:clamp(92px,15.5vmin,150px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 14px;border-radius:24px}
+.choice.correct{background:var(--leaf);animation:pop .45s ease}
+.choice.wrong{background:var(--dim);opacity:.55;transform:translateY(4px);box-shadow:0 2px 0 var(--ink);animation:shake .4s ease}
+.choice.hint{animation:glow 1.1s ease-in-out infinite}
+.choice .glyph,.glyph{font-family:var(--f-print);font-weight:700;font-size:clamp(54px,11vmin,108px);line-height:1}
+.choice .glyph.pair{font-size:clamp(46px,9vmin,90px);letter-spacing:.04em}
+.choice .num{font-family:var(--f-print);font-weight:700;font-size:clamp(50px,10vmin,100px);line-height:1;font-variant-numeric:tabular-nums}
+.choice.lbl{font-family:var(--f-display);font-weight:900;font-size:clamp(26px,4.6vmin,40px);padding:10px 26px}
+.choice .ruled{font-size:clamp(38px,7.4vmin,72px)}
+.picset{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:2px;max-width:5.4em;font-size:clamp(46px,9vmin,86px)}
+.picset[data-n="2"],.picset[data-n="3"]{font-size:clamp(34px,6.4vmin,62px)}
+.picset[data-n="4"],.picset[data-n="5"]{font-size:clamp(28px,5.2vmin,50px)}
+.picset.small .emoji{font-size:.5em}
+.picset.big .emoji{font-size:1.15em}
+.picset .emoji{display:block}
+.wlabel{font-family:var(--f-print);font-weight:700;font-size:clamp(16px,2.6vmin,22px);margin-top:6px}
+.choice svg.shape{width:clamp(80px,14vmin,140px);height:clamp(80px,14vmin,140px)}
+.grp-in{display:grid;grid-template-columns:repeat(var(--cols),auto);gap:4px;font-size:clamp(28px,5.4vmin,50px)}
+.choice.group{padding:14px 18px;min-width:clamp(150px,30vmin,300px)}
+
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{translate:0}20%{translate:-9px}40%{translate:8px}60%{translate:-6px}80%{translate:4px}}
+@keyframes glow{0%,100%{box-shadow:0 6px 0 var(--ink),0 0 0 0 rgba(232,100,154,.0)}50%{box-shadow:0 6px 0 var(--ink),0 0 0 10px rgba(232,100,154,.55)}}
+
+/* stage pieces */
+.stage-pic{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 26px 8px;border-radius:28px;position:relative}
+.stage-pic .emoji{font-size:clamp(84px,20vmin,190px)}
+.stage-pic .hear{position:absolute;right:-12px;top:-12px;width:42px;height:42px;border-radius:50%;background:var(--sea);border:3px solid var(--ink);display:grid;place-items:center}
+.stage-pic .hear .ico{width:24px;height:24px}
+.stage-pic.letter .glyph{font-size:clamp(100px,22vmin,200px);padding:0 .15em}
+.objs{position:relative;width:min(100%,720px);aspect-ratio:5/3;max-height:100%}
+.objs.rows{display:grid;grid-template-columns:repeat(5,auto);justify-content:center;align-content:center;gap:10px 14px;aspect-ratio:auto}
+.obj{position:absolute;transform:translate(-50%,-50%);font-size:clamp(38px,8.4vmin,74px);line-height:1;padding:4px;border-radius:16px}
+.objs.rows .obj,.frame .obj{position:relative;transform:none}
+.obj .cnt{position:absolute;top:-8px;right:-10px;min-width:30px;height:30px;padding:0 6px;border-radius:999px;background:var(--berry);border:2.5px solid var(--ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:17px;color:var(--ink);animation:pop .3s ease}
+.obj.counted .emoji{opacity:.55}
+.frames{display:flex;flex-direction:column;gap:14px;align-items:center}
+.frame{--cell:clamp(46px,8.4vmin,78px);display:grid;grid-template-columns:repeat(5,var(--cell));grid-auto-rows:var(--cell);gap:3px;background:var(--ink);border:3px solid var(--ink);border-radius:12px;overflow:hidden}
+.frame>span,.frame>button{background:var(--paper);display:grid;place-items:center}
+.frame .obj{font-size:calc(var(--cell)*.66);padding:0;border-radius:0;width:100%;height:100%;display:grid;place-items:center}
+.frame .obj .cnt{top:2px;right:2px;min-width:24px;height:24px;font-size:14px}
+.frame .dotfill{width:70%;height:70%;border-radius:50%;background:var(--berry);border:3px solid var(--ink)}
+.frame .empty{background:repeating-linear-gradient(45deg,var(--paper) 0 6px,#F3EFE2 6px 12px)}
+.tens{display:flex;align-items:flex-end;gap:clamp(8px,1.8vmin,16px);--d:clamp(15px,2.9vmin,26px)}
+.stick{display:flex;flex-direction:column;gap:3px;padding:5px;border:3px solid var(--ink);border-radius:12px;background:var(--math)}
+.stick i,.one{display:block;width:var(--d);height:var(--d);border-radius:50%;background:var(--paper);border:2.5px solid var(--ink)}
+.ones{display:flex;flex-direction:column-reverse;gap:6px;margin-left:10px}
+.one{background:var(--berry)}
+.mathrow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:clamp(10px,2vmin,18px)}
+.grp{display:grid;grid-template-columns:repeat(var(--cols),auto);gap:4px;padding:10px 12px;background:var(--paper);border:3px solid var(--ink);border-radius:18px;font-size:clamp(30px,6vmin,56px)}
+.grp .x{position:relative}
+.grp .x .emoji{opacity:.35}
+.grp .x::after{content:"";position:absolute;inset:8%;background:linear-gradient(45deg,transparent 44%,var(--read) 44% 56%,transparent 56%),linear-gradient(-45deg,transparent 44%,var(--read) 44% 56%,transparent 56%)}
+.op{font-family:var(--f-print);font-weight:700;font-size:clamp(44px,8vmin,80px);line-height:1}
+.eq{font-family:var(--f-print);font-weight:700;font-size:clamp(42px,8.6vmin,86px);line-height:1;display:flex;align-items:center;gap:.25em;font-variant-numeric:tabular-nums}
+.qbox{display:inline-grid;place-items:center;min-width:1.15em;height:1.15em;border:3px dashed var(--ink);border-radius:.18em;color:var(--ink-soft);background:rgba(255,253,246,.7)}
+.seq{display:flex;gap:clamp(8px,1.6vmin,14px);flex-wrap:wrap;justify-content:center}
+.seq>span{min-width:1.35em;padding:.08em .18em;border:3px solid var(--ink);border-radius:16px;background:var(--paper);font-family:var(--f-print);font-weight:700;font-size:clamp(40px,8vmin,78px);line-height:1.15;text-align:center;font-variant-numeric:tabular-nums}
+.seq>span.blank{border-style:dashed;color:var(--ink-soft);background:rgba(255,253,246,.6)}
+.readline{display:flex;flex-wrap:wrap;justify-content:center;max-width:100%;padding:12px 10px;background:var(--paper);border:3px solid var(--ink);border-radius:24px}
+.readline .ruled{font-size:clamp(46px,10vmin,100px);padding:0 .18em}
+.readline.long .ruled{font-size:clamp(32px,6.6vmin,64px)}
+.stage svg.shape{width:clamp(140px,26vmin,240px);height:clamp(140px,26vmin,240px)}
+
+/* spelling */
+.spellbox{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center}
+.spellbox .stage-pic .emoji{font-size:clamp(70px,15vmin,140px)}
+.spellrow{font-size:clamp(56px,12vmin,116px);background:var(--paper);border:3px solid var(--ink);border-radius:24px;padding:4px .3em}
+.spellrow .slot{display:inline-block;width:.86em;margin:0 .03em;text-align:center;border-radius:.12em;box-shadow:inset 0 0 0 3px rgba(29,42,68,.16)}
+.spellrow .slot.faint{color:rgba(29,42,68,.2)}
+.spellrow .slot.next{background:rgba(255,196,63,.42)}
+.spellrow .slot.in{animation:pop .3s ease}
+.ltile{min-width:clamp(70px,11.5vmin,108px);min-height:clamp(70px,11.5vmin,108px);display:grid;place-items:center;border-radius:20px;background:var(--math-tint)}
+.ltile .glyph{font-size:clamp(44px,8.6vmin,82px)}
+.ltile.used{visibility:hidden}
+.ltile.nope{animation:shake .4s ease;background:var(--dim)}
+
+/* ---------- round end ---------- */
+.end{align-items:center;justify-content:center;text-align:center}
+.end-card{background:var(--paper);border:3px solid var(--ink);border-radius:32px;box-shadow:0 8px 0 var(--ink);padding:22px 26px;max-width:640px;width:100%;display:flex;flex-direction:column;align-items:center;gap:12px}
+.end-stars{display:flex;gap:6px;align-items:center}
+.end-stars .star-ico{width:clamp(44px,9vmin,72px);height:clamp(44px,9vmin,72px)}
+.end-stars .bonus{font-family:var(--f-display);font-weight:900;font-size:22px;margin-left:6px;display:flex;align-items:center;gap:2px}
+.end-stars .bonus .star-ico{width:32px;height:32px}
+.end-stars .star-ico:not(.empty){animation:pop .5s ease both}
+.end h2{font-family:var(--f-display);font-weight:900;font-size:clamp(30px,6vmin,52px);margin:0;line-height:1.05;text-wrap:balance}
+.end .sub{margin:0;font-size:18px;color:var(--ink-soft);font-weight:700}
+.ribbon{font-family:var(--f-display);font-weight:900;font-size:22px;background:var(--grape);color:#fff;border:3px solid var(--ink);border-radius:999px;padding:6px 18px}
+.newstk{display:flex;align-items:center;gap:14px;font-family:var(--f-display);font-weight:800;font-size:22px}
+.newstk .disc{width:84px;height:84px;border-radius:50%;background:var(--math-tint);border:3px solid var(--ink);display:grid;place-items:center;font-size:52px;animation:spin-in .8s ease both}
+@keyframes spin-in{0%{transform:scale(0) rotate(-200deg)}70%{transform:scale(1.15) rotate(10deg)}100%{transform:none}}
+.end-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.btn{font-family:var(--f-display);font-weight:800;font-size:clamp(19px,3.2vmin,24px);padding:12px 22px;border-radius:20px}
+.btn.go{background:var(--leaf)}
+
+/* ---------- stickers ---------- */
+.stickers .grid{flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:14px;align-content:start;padding:6px 4px 16px;max-width:1000px;width:100%;margin:0 auto}
+.stk-disc{aspect-ratio:1;border-radius:50%;border:3px solid var(--ink);background:var(--paper);display:grid;place-items:center;font-size:clamp(40px,7vmin,58px);box-shadow:0 4px 0 var(--ink)}
+.stk-disc.locked{background:repeating-linear-gradient(45deg,#EAF2F7 0 8px,#DCE8F0 8px 16px);font-family:var(--f-display);font-weight:900;color:var(--ink-soft);font-size:clamp(28px,5vmin,40px);box-shadow:none}
+.stickers .note{text-align:center;font-family:var(--f-display);font-weight:700;font-size:20px;margin:0}
+
+/* ---------- gate ---------- */
+.gate{position:fixed;inset:0;z-index:50;background:rgba(29,42,68,.55);display:grid;place-items:center;padding:16px}
+.gate-card{background:var(--paper);border:3px solid var(--ink);border-radius:26px;box-shadow:0 8px 0 var(--ink);padding:20px;width:100%;max-width:360px;display:flex;flex-direction:column;gap:12px;text-align:center}
+.gate-card h3{margin:0;font-family:var(--f-display);font-weight:800;font-size:22px}
+.gate-card p{margin:0;font-size:16px;color:var(--ink-soft)}
+.gate-q{font-family:var(--f-print);font-weight:700;font-size:40px;font-variant-numeric:tabular-nums}
+.gate-in{min-height:52px;border:3px dashed var(--ink-soft);border-radius:14px;font-family:var(--f-print);font-weight:700;font-size:34px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.gate-in.bad{animation:shake .4s ease;border-color:var(--read)}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.keys button{height:58px;font-family:var(--f-print);font-weight:700;font-size:26px;border-radius:16px;box-shadow:0 4px 0 var(--ink)}
+.gate-x{font-family:var(--f-display);font-weight:700;font-size:16px;color:var(--ink-soft);padding:8px}
+
+/* ---------- grown-ups ---------- */
+.parents{overflow-y:auto;display:block;padding-block:12px 28px;-webkit-overflow-scrolling:touch;font-size:16px;line-height:1.45}
+.pwrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--paper);border:3px solid var(--ink);border-radius:20px;padding:16px 18px}
+.panel h3{margin:0 0 4px;font-family:var(--f-display);font-weight:800;font-size:22px}
+.panel .lede{margin:0 0 10px;color:var(--ink-soft);max-width:68ch}
+.summary{display:flex;flex-wrap:wrap;gap:10px 26px;margin:6px 0 12px}
+.summary div{display:flex;flex-direction:column}
+.summary b{font-family:var(--f-display);font-weight:900;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.summary span{font-size:14px;color:var(--ink-soft)}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end;height:130px;padding-top:8px}
+.week .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:100%}
+.week .bar{width:100%;max-width:46px;border-radius:8px 8px 3px 3px;background:var(--sea);border:2px solid var(--ink);min-height:3px}
+.week .bar.zero{background:var(--dim);border-color:var(--dim)}
+.week .v{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.week .d{font-size:13px;color:var(--ink-soft)}
+.week .col.today .d{color:var(--ink);font-weight:700}
+.skill{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1.1fr) auto;gap:10px 16px;align-items:center;padding:12px 0;border-top:2px dashed var(--dim)}
+.skill:first-of-type{border-top:0}
+.sk-name{font-family:var(--f-display);font-weight:800;font-size:18px;line-height:1.15}
+.sk-std{font-size:13px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.sk-lvl{font-size:14px;margin-top:2px}
+.sk-acc{font-size:14px;font-variant-numeric:tabular-nums}
+.acc{height:10px;border-radius:6px;background:var(--dim);overflow:hidden;margin-top:4px}
+.acc i{display:block;height:100%;background:var(--leaf);border-radius:6px}
+.sk-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.chip{display:inline-block;font-family:var(--f-display);font-weight:700;font-size:13px;line-height:1.2;padding:4px 10px;border-radius:999px;border:2px solid var(--ink);white-space:nowrap}
+.chip.new{background:var(--dim)}
+.chip.working{background:#FFE6A6}
+.chip.meets{background:#BFEACB}
+.chip.ahead{background:#F7C5DB}
+.stepper{display:flex;align-items:center;gap:6px;font-size:14px;font-variant-numeric:tabular-nums}
+.stepper button{width:34px;height:34px;border-radius:10px;box-shadow:0 3px 0 var(--ink);font-family:var(--f-print);font-weight:700;font-size:20px;line-height:1}
+.stepper button:disabled{opacity:.35}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label,.field .lab{font-weight:700;font-size:15px}
+.field input,.field select{border:2.5px solid var(--ink);border-radius:12px;padding:10px 12px;background:#fff;font-size:17px;max-width:420px}
+.seg{display:inline-flex;border:2.5px solid var(--ink);border-radius:12px;overflow:hidden;width:max-content}
+.seg button{padding:9px 16px;font-weight:700;font-size:15px;background:#fff}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.rowbtns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sbtn{font-family:var(--f-display);font-weight:700;font-size:16px;padding:9px 16px;border-radius:14px;box-shadow:0 4px 0 var(--ink)}
+.sbtn.danger{background:#FFD6CE}
+.fine{font-size:14px;color:var(--ink-soft)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:4px 0 2px;font-size:14px;align-items:center}
+
+canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+
+@media (max-width:640px){
+  .rooms,.extras{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skill{grid-template-columns:1fr}
+  .sk-right{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
+  .ask{gap:14px}
+  .bubble::before,.bubble::after{display:none}
+}
+@media (orientation:portrait) and (min-width:641px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-height:560px){
+  .greet .pip-wrap{width:70px}
+  .hill{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <section class="screen splash" id="s-splash">
+    <div class="cloud" style="left:6%;top:12%"></div>
+    <div class="cloud" style="right:8%;top:24%;transform:scale(.75)"></div>
+    <div class="pip-wrap" data-pip></div>
+    <h1><span>Welcome to</span>Pip's Treehouse</h1>
+    <button class="chunk btn-go" id="go-btn">Let's play!</button>
+    <p class="fine">Turn the sound up. Pip reads everything out loud.</p>
+    <div class="hill"></div>
+  </section>
+
+  <section class="screen home" id="s-home" hidden>
+    <div class="cloud" style="left:30%;top:9%;transform:scale(.7)"></div>
+    <div class="topline">
+      <span class="pill" id="home-stars" aria-label="Stars"></span>
+      <button class="chunk grownups" id="grown-btn">Grown-ups</button>
+    </div>
+    <div class="greet">
+      <div class="pip-wrap" data-pip></div>
+      <button class="bubble" id="home-bubble">Hi there! Pick a room.</button>
+    </div>
+    <div class="rooms">
+      <button class="chunk room-card read" id="room-read" aria-label="Reading Room">
+        <span class="big">Aa</span><span class="name">Reading Room</span><span class="sub">letters · sounds · words</span>
+      </button>
+      <button class="chunk room-card math" id="room-math" aria-label="Number Nook">
+        <span class="big">123</span><span class="name">Number Nook</span><span class="sub">count · add · shapes</span>
+      </button>
+    </div>
+    <div class="extras">
+      <button class="chunk extra mix" id="mix-btn"><span class="ex-ic emoji">🎲</span><span class="ex-txt"><span class="ex-t">Surprise Mix</span><span class="ex-s">5 different games</span></span></button>
+      <button class="chunk extra stk" id="stk-btn"><span class="ex-ic emoji" id="stk-ic">🦊</span><span class="ex-txt"><span class="ex-t">Sticker Book</span><span class="meter" aria-hidden="true"><i id="stk-meter"></i></span></span></button>
+    </div>
+  </section>
+
+  <section class="screen room" id="s-room" hidden>
+    <div class="head">
+      <button class="chunk icon-btn" id="room-back" aria-label="Back home"></button>
+      <span class="tag"></span>
+      <h2 id="room-title">Reading Room</h2>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="screen game" id="s-game" hidden>
+    <div class="topbar">
+      <button class="chunk icon-btn" id="quit-btn" aria-label="Stop and go back"></button>
+      <div class="dots" id="dots"></div>
+      <button class="chunk icon-btn speak" id="again-btn" aria-label="Hear it again"></button>
+    </div>
+    <div class="ask">
+      <div class="pip-wrap" data-pip id="game-pip"></div>
+      <button class="bubble" id="q-text"></button>
+    </div>
+    <div class="stage" id="stage"></div>
+    <div class="choices" id="choices"></div>
+  </section>
+
+  <section class="screen end" id="s-end" hidden>
+    <div class="end-card" id="end-card"></div>
+  </section>
+
+  <section class="screen stickers" id="s-stickers" hidden>
+    <div class="head">
+      <button class="chunk icon-btn" id="stk-back" aria-label="Back home"></button>
+      <h2>Sticker Book</h2>
+    </div>
+    <p class="note" id="stk-note"></p>
+    <div class="grid" id="stk-grid"></div>
+  </section>
+
+  <section class="screen parents" id="s-parents" hidden>
+    <div class="pwrap" id="pwrap"></div>
+  </section>
+
+  <div class="gate" id="gate" hidden>
+    <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gate-h">
+      <h3 id="gate-h">Grown-ups only</h3>
+      <p>Type the answer to open progress and settings.</p>
+      <div class="gate-q" id="gate-q"></div>
+      <div class="gate-in" id="gate-in" aria-live="polite"></div>
+      <div class="keys" id="gate-keys"></div>
+      <button class="gate-x" id="gate-x">Cancel</button>
+    </div>
+  </div>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+</div>
+
+<script id="pip-content">
+/* =====================================================================
+   CONTENT: word lists, standards map, and question generators.
+   Pure data + functions (no DOM) so they can be tested on their own.
+   ===================================================================== */
+window.PipContent = (function () {
+  'use strict';
+  var R = {
+    int: function (a, b) { return a + Math.floor(Math.random() * (b - a + 1)); },
+    pick: function (a) { return a[Math.floor(Math.random() * a.length)]; },
+    shuffle: function (a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; },
+    sample: function (a, k) { return R.shuffle(a).slice(0, k); },
+    chance: function (p) { return Math.random() < p; }
+  };
+  var UP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  var LOW = UP.map(function (c) { return c.toLowerCase(); });
+  /* Letter names spelled so speech engines say the name, not a sound. */
+  var LN = { a: 'ay', b: 'bee', c: 'see', d: 'dee', e: 'ee', f: 'eff', g: 'jee', h: 'aitch', i: 'eye', j: 'jay', k: 'kay', l: 'ell', m: 'em', n: 'en', o: 'oh', p: 'pee', q: 'cue', r: 'are', s: 'ess', t: 'tee', u: 'you', v: 'vee', w: 'double you', x: 'ex', y: 'why', z: 'zee' };
+  function L(c) { return LN[String(c).toLowerCase()]; }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  var NUM = ['zero', 'one', 'two', 'three', 'four', 'five'];
+
+  var P = {
+    cat: '🐱', dog: '🐶', pig: '🐷', sun: '☀️', bus: '🚌', hat: '🎩', bed: '🛏️', bat: '🦇', box: '📦', fox: '🦊', hen: '🐔', cup: '🥤', web: '🕸️', pen: '🖊️', map: '🗺️', van: '🚐', bug: '🐛', mug: '☕', log: '🪵', nut: '🥜', pan: '🍳', ram: '🐏', tub: '🛁', pin: '📌', rat: '🐀', hut: '🛖', man: '👨', bag: '👜', lip: '👄', six: '6️⃣', ten: '🔟', net: '🥅', leg: '🦵',
+    fish: '🐟', ship: '🚢', frog: '🐸', duck: '🦆', crab: '🦀', drum: '🥁', flag: '🚩', sock: '🧦', milk: '🥛', nest: '🪹', tent: '⛺', hand: '✋', bell: '🔔', ring: '💍', king: '🤴', sled: '🛷', rock: '🪨', gift: '🎁', lock: '🔒', truck: '🚚', clock: '🕐', chick: '🐤',
+    apple: '🍎', ant: '🐜', ball: '⚽', bee: '🐝', cake: '🎂', cow: '🐮', egg: '🥚', elephant: '🐘', goat: '🐐', horse: '🐴', juice: '🧃', kite: '🪁', key: '🔑', lion: '🦁', leaf: '🍃', lemon: '🍋', moon: '🌙', monkey: '🐒', mouse: '🐭', nose: '👃', octopus: '🐙', ox: '🐂', pizza: '🍕', pear: '🍐', rabbit: '🐰', rain: '🌧️', snake: '🐍', tiger: '🐯', turtle: '🐢', umbrella: '☂️', violin: '🎻', volcano: '🌋', watermelon: '🍉', worm: '🪱', 'yo-yo': '🪀', yarn: '🧶', zebra: '🦓', zero: '0️⃣',
+    tree: '🌳', three: '3️⃣', car: '🚗', star: '⭐', jar: '🫙', wing: '🪽', hug: '🫂', spoon: '🥄', bear: '🐻', chair: '🪑', house: '🏠', boat: '⛵', coat: '🧥', fan: '🪭', train: '🚆', chain: '⛓️', light: '💡', snail: '🐌', nail: '💅', mail: '📬'
+  };
+
+  var CVC = ['cat', 'dog', 'pig', 'sun', 'bus', 'hat', 'bed', 'bat', 'box', 'fox', 'hen', 'cup', 'web', 'pen', 'map', 'van', 'bug', 'mug', 'log', 'nut', 'pan', 'ram', 'tub', 'pin', 'rat', 'hut', 'man', 'bag', 'lip', 'six', 'ten', 'net', 'leg'];
+  var BLEND = ['fish', 'ship', 'frog', 'duck', 'crab', 'drum', 'flag', 'sock', 'milk', 'nest', 'tent', 'hand', 'bell', 'ring', 'king', 'sled', 'rock', 'gift', 'lock', 'truck', 'clock', 'chick'];
+  var FS_CONS = ['ball', 'bee', 'bus', 'bed', 'cat', 'cake', 'cow', 'dog', 'duck', 'drum', 'fish', 'fox', 'frog', 'goat', 'gift', 'hat', 'horse', 'hen', 'juice', 'kite', 'key', 'king', 'lion', 'leaf', 'lemon', 'moon', 'monkey', 'mouse', 'nest', 'nut', 'nose', 'pig', 'pizza', 'pear', 'rabbit', 'ring', 'rain', 'sun', 'sock', 'snake', 'tiger', 'tent', 'turtle', 'van', 'violin', 'volcano', 'web', 'watermelon', 'worm', 'yo-yo', 'yarn', 'zebra', 'zero'];
+  var FS_VOW = ['apple', 'ant', 'egg', 'elephant', 'octopus', 'ox', 'umbrella'];
+  var CONS = 'bcdfghjklmnprstvwyz'.split('');
+  var SOUNDALIKE = { c: ['k', 's'], k: ['c'], x: ['k', 's', 'c'], s: ['c'] };
+  var CONFUSE = [['b', 'd', 'p', 'q'], ['m', 'n', 'h'], ['n', 'u'], ['i', 'l', 'j'], ['f', 't'], ['g', 'q', 'y'], ['v', 'w', 'y'], ['c', 'e', 'o'], ['a', 'o', 'd']];
+
+  var FAM = [
+    ['at', ['cat', 'hat', 'bat', 'rat']], ['og', ['dog', 'frog', 'log']], ['ug', ['bug', 'mug', 'hug']], ['ee', ['bee', 'tree', 'three']],
+    ['ar', ['car', 'star', 'jar']], ['ake', ['cake', 'snake']], ['ing', ['ring', 'king', 'wing']], ['ock', ['sock', 'clock', 'rock', 'lock']],
+    ['ox', ['box', 'fox']], ['en', ['hen', 'pen', 'ten']], ['oon', ['moon', 'spoon']], ['air', ['bear', 'pear', 'chair']],
+    ['ouse', ['house', 'mouse']], ['oat', ['boat', 'goat', 'coat']], ['an', ['pan', 'van', 'man', 'fan']], ['ain', ['train', 'rain', 'chain']],
+    ['ite', ['kite', 'light']], ['ip', ['ship', 'lip']], ['ed', ['bed', 'sled']], ['ail', ['snail', 'nail', 'mail']]
+  ];
+  var CLASH = { ain: ['ail'], ail: ['ain'], ock: ['ox'], ox: ['ock'] };
+
+  /* Dolch sight words: pre-primer, primer, first grade */
+  var SW1 = 'a and away big blue can come down find for funny go help here I in is it jump little look make me my not one play red run said see the three to two up we where yellow you'.split(' ');
+  var SW2 = 'all am are at ate be black brown but came did do eat four get good have he into like must new no now on our out please pretty ran ride saw say she so soon that there they this too under want was well went what white who will with yes'.split(' ');
+  var SW3 = 'after again any ask by could every fly from give going had has her him his how just know let may of old once open over put round some stop take thank them then think walk were when'.split(' ');
+  var HOMO = [['to', 'two', 'too'], ['for', 'four'], ['no', 'know'], ['be', 'bee'], ['one', 'won'], ['by', 'buy'], ['new', 'knew'], ['so', 'sew']];
+
+  var NOUNS = ['cat', 'dog', 'pig', 'hat', 'bug', 'hen', 'duck', 'frog', 'cup', 'sock', 'bee'];
+  var COLORS = [{ w: 'red', e: '❤️' }, { w: 'blue', e: '💙' }, { w: 'green', e: '💚' }, { w: 'yellow', e: '💛' }, { w: 'purple', e: '💜' }, { w: 'orange', e: '🧡' }, { w: 'black', e: '🖤' }, { w: 'brown', e: '🤎' }];
+
+  var COUNT = [
+    { e: '🍎', one: 'apple', many: 'apples', away1: 'gets eaten', awayN: 'get eaten' },
+    { e: '🦆', one: 'duck', many: 'ducks', away1: 'swims away', awayN: 'swim away' },
+    { e: '🐞', one: 'ladybug', many: 'ladybugs', away1: 'flies away', awayN: 'fly away' },
+    { e: '⭐', one: 'star', many: 'stars' },
+    { e: '🌸', one: 'flower', many: 'flowers', away1: 'gets picked', awayN: 'get picked' },
+    { e: '🍓', one: 'strawberry', many: 'strawberries', away1: 'gets eaten', awayN: 'get eaten' },
+    { e: '🐟', one: 'fish', many: 'fish', away1: 'swims away', awayN: 'swim away' },
+    { e: '🎈', one: 'balloon', many: 'balloons', away1: 'floats away', awayN: 'float away' },
+    { e: '🐢', one: 'turtle', many: 'turtles', away1: 'walks away', awayN: 'walk away' },
+    { e: '🍪', one: 'cookie', many: 'cookies', away1: 'gets eaten', awayN: 'get eaten' },
+    { e: '🐸', one: 'frog', many: 'frogs', away1: 'hops away', awayN: 'hop away' },
+    { e: '🦋', one: 'butterfly', many: 'butterflies', away1: 'flies away', awayN: 'fly away' }
+  ];
+  var AWAY = COUNT.filter(function (o) { return o.away1; });
+
+  var SHAPES = ['circle', 'square', 'triangle', 'rectangle', 'hexagon'];
+  var BASIC = ['circle', 'square', 'triangle', 'rectangle'];
+  var SIDES = { circle: 0, square: 4, triangle: 3, rectangle: 4, hexagon: 6 };
+  var SHAPE_FACT = { circle: 'It is round, with no corners.', square: 'It has 4 sides that are all the same.', triangle: 'It has 3 sides.', rectangle: 'It has 4 sides. Two are long and two are short.', hexagon: 'It has 6 sides.' };
+  var SOLIDS = ['cube', 'sphere', 'cone', 'cylinder'];
+  var FLAT = { cube: 'square', sphere: 'circle', cone: 'triangle', cylinder: 'rectangle' };
+  var SOLID_FACT = { cube: 'A block is shaped like a cube.', sphere: 'A ball is shaped like a sphere.', cone: 'An ice cream cone is shaped like a cone.', cylinder: 'A can is shaped like a cylinder.' };
+  var SHAPE_COLORS = ['#FF7A62', '#FFC43F', '#4CBA68', '#5AA9EC', '#E8649A', '#9C7CF0'];
+
+  var STICKERS = [
+    ['🦊', 'fox'], ['🐼', 'panda'], ['🦁', 'lion'], ['🐯', 'tiger'], ['🐨', 'koala'], ['🐸', 'frog'], ['🐙', 'octopus'], ['🦄', 'unicorn'], ['🐳', 'whale'], ['🦋', 'butterfly'],
+    ['🐢', 'turtle'], ['🦉', 'owl'], ['🐧', 'penguin'], ['🦒', 'giraffe'], ['🐘', 'elephant'], ['🦜', 'parrot'], ['🐬', 'dolphin'], ['🦔', 'hedgehog'], ['🐿️', 'chipmunk'], ['🦩', 'flamingo'],
+    ['🐞', 'ladybug'], ['🐝', 'bee'], ['🦀', 'crab'], ['🐠', 'fish'], ['🦕', 'dinosaur'], ['🦖', 'T. rex'], ['🐲', 'dragon'], ['🌈', 'rainbow'], ['🚀', 'rocket'], ['🌻', 'sunflower']
+  ].map(function (s) { return { e: s[0], name: s[1] }; });
+
+  /* ---------- helpers ---------- */
+  function opts(right, wrongs, make) {
+    var out = [Object.assign(make(right), { correct: true })];
+    wrongs.forEach(function (w) { out.push(Object.assign(make(w), { correct: false })); });
+    return R.shuffle(out);
+  }
+  function numChoices(ans, k, lo, hi, extras) {
+    var set = [ans];
+    (extras || []).forEach(function (x) { if (set.length < k && x >= lo && x <= hi && set.indexOf(x) < 0) set.push(x); });
+    var d = 1;
+    while (set.length < k && d < 60) {
+      R.shuffle([ans - d, ans + d]).forEach(function (c) { if (set.length < k && c >= lo && c <= hi && set.indexOf(c) < 0) set.push(c); });
+      d++;
+    }
+    return opts(ans, set.slice(1), function (v) { return { kind: 'num', v: v }; });
+  }
+  function range(a, b) { var r = []; for (var i = a; i <= b; i++) r.push(i); return r; }
+  function others(list, not, k) { return R.sample(list.filter(function (x) { return not.indexOf(x) < 0; }), k); }
+  function letterDistractors(t, pool, k) {
+    var bad = [t].concat(SOUNDALIKE[t] || []);
+    return R.sample(pool.filter(function (c) { return bad.indexOf(c) < 0; }), k);
+  }
+  function lookalikes(t, pool, k) {
+    var homo = HOMO.filter(function (g) { return g.indexOf(t) >= 0; })[0] || [];
+    var lt = t.toLowerCase();
+    var seen = {};
+    return pool.filter(function (w) {
+      if (w === t || homo.indexOf(w) >= 0 || seen[w]) return false;
+      seen[w] = 1; return true;
+    }).map(function (w) {
+      var lw = w.toLowerCase();
+      var s = (lw[0] === lt[0] ? 3 : 0) + (lw.length === lt.length ? 2 : 0) + (lw.slice(-1) === lt.slice(-1) ? 1 : 0) + Math.random() * 2.5;
+      return [s, w];
+    }).sort(function (a, b) { return b[0] - a[0]; }).slice(0, k).map(function (x) { return x[1]; });
+  }
+  function names(choices) { return choices.map(function (c) { return c.word; }).join('... '); }
+
+  /* ---------- READING ---------- */
+  function genLetters(lv) {
+    var t, ds, g;
+    if (lv === 1) {
+      t = R.pick(UP);
+      ds = others(UP, [t], 2);
+      return { key: t, text: 'Find the letter you hear', say: 'Find the letter ' + L(t) + '.', stage: { type: 'none' },
+        choices: opts(t, ds, function (v) { return { kind: 'letter', v: v }; }), praise: "That's " + L(t) + '!', hint: 'Listen. Find ' + L(t) + '.' };
+    }
+    if (lv === 2) {
+      if (R.chance(0.45)) { g = R.pick(CONFUSE); t = R.pick(g); ds = R.shuffle(g.filter(function (c) { return c !== t; })).slice(0, 3); }
+      else { t = R.pick(LOW); ds = []; }
+      while (ds.length < 3) { var c = R.pick(LOW); if (c !== t && ds.indexOf(c) < 0) ds.push(c); }
+      return { key: t, text: 'Find the small letter you hear', say: 'Find the small letter ' + L(t) + '.', stage: { type: 'none' },
+        choices: opts(t, ds, function (v) { return { kind: 'letter', v: v }; }), praise: "That's small " + L(t) + '!', hint: 'Listen. Find small ' + L(t) + '.' };
+    }
+    if (lv === 3) {
+      var up = R.chance(0.5);
+      t = R.pick(UP);
+      var lo = t.toLowerCase();
+      var shown = up ? t : lo, want = up ? lo : t;
+      g = CONFUSE.filter(function (x) { return x.indexOf(lo) >= 0; })[0];
+      ds = g ? R.shuffle(g.filter(function (c) { return c !== lo; })).slice(0, 2).map(function (c) { return up ? c : c.toUpperCase(); }) : [];
+      var pool = up ? LOW : UP;
+      while (ds.length < 3) { var d = R.pick(pool); if (d !== want && ds.indexOf(d) < 0) ds.push(d); }
+      return { key: shown, text: up ? 'Find its small letter' : 'Find its big letter',
+        say: up ? 'Find the small letter that goes with this big letter.' : 'Find the big letter that goes with this small letter.',
+        stage: { type: 'letter', ch: shown, word: L(t) },
+        choices: opts(want, ds, function (v) { return { kind: 'letter', v: v }; }),
+        praise: 'Big ' + L(t) + ' and small ' + L(t) + ' go together!', hint: 'Look at the shape. Try again.' };
+    }
+    var i = R.int(2, 24);
+    var seq = [UP[i - 2], UP[i - 1], UP[i]], ans = UP[i + 1];
+    var near = [UP[i - 1], UP[i], UP[i + 2], UP[i + 3], UP[i - 2]].filter(function (x, n, a) { return x && x !== ans && a.indexOf(x) === n; });
+    return { key: ans, text: 'What letter comes next?', say: seq.map(L).join(', ') + '. What letter comes next?',
+      stage: { type: 'seq', items: seq.concat([null]) },
+      choices: opts(ans, R.sample(near, 3), function (v) { return { kind: 'letter', v: v }; }),
+      praise: seq.map(L).join(', ') + ', ' + L(ans) + '!', hint: 'Sing the A B Cs in your head. Try again.' };
+  }
+
+  function genSounds(lv) {
+    var w, t, ds;
+    if (lv <= 2) {
+      w = lv === 1 || R.chance(0.65) ? R.pick(FS_CONS) : R.pick(FS_VOW);
+      t = w[0];
+      ds = letterDistractors(t, lv === 1 ? CONS : 'abcdefghijklmnoprstuvwyz'.split(''), lv === 1 ? 2 : 3);
+      return { key: w, text: 'What letter does it start with?', say: w + '. What letter does ' + w + ' start with?',
+        stage: { type: 'pic', e: P[w], word: w },
+        choices: opts(t, ds, function (v) { return { kind: 'pair', v: v }; }),
+        praise: cap(w) + ' starts with ' + L(t) + '!', hint: 'Listen: ' + w + '. Try again.' };
+    }
+    w = R.pick(CVC);
+    if (lv === 3) {
+      t = w[2];
+      ds = letterDistractors(t, CONS, 3);
+      return { key: w, text: 'What letter does it end with?', say: w + '. What letter does ' + w + ' end with?',
+        stage: { type: 'pic', e: P[w], word: w },
+        choices: opts(t, ds, function (v) { return { kind: 'letter', v: v }; }),
+        praise: cap(w) + ' ends with ' + L(t) + '!', hint: 'Listen to the end: ' + w + '. Try again.' };
+    }
+    t = w[1];
+    ds = others('aeiou'.split(''), [t], 3);
+    return { key: w, text: 'What letter is in the middle?', say: w + '. What letter is in the middle of ' + w + '?',
+      stage: { type: 'pic', e: P[w], word: w },
+      choices: opts(t, ds, function (v) { return { kind: 'letter', v: v }; }),
+      praise: cap(w) + ' has ' + L(t) + ' in the middle!', hint: 'Say it slowly: ' + w + '. Try again.' };
+  }
+
+  function otherFams(fi, k) {
+    var clash = CLASH[FAM[fi][0]] || [];
+    return R.sample(range(0, FAM.length - 1).filter(function (i) { return i !== fi && clash.indexOf(FAM[i][0]) < 0; }), k);
+  }
+  function genRhyme(lv) {
+    var fi = R.int(0, FAM.length - 1);
+    if (lv === 3) {
+      var two = R.sample(FAM[fi][1], 2);
+      var odd = R.pick(FAM[otherFams(fi, 1)[0]][1]);
+      var ch3 = R.shuffle(two.map(function (w) { return { kind: 'pic', e: P[w], word: w, label: true, correct: false }; }).concat([{ kind: 'pic', e: P[odd], word: odd, label: true, correct: true }]));
+      return { key: two.join() + odd, text: 'Which one does NOT rhyme?', say: 'Which one does not rhyme? ' + names(ch3) + '?',
+        stage: { type: 'none' }, choices: ch3,
+        praise: cap(two[0]) + ' and ' + two[1] + ' rhyme. ' + cap(odd) + ' does not!', hint: 'Listen to the ends of the words. Try again.' };
+    }
+    var pair = R.sample(FAM[fi][1], 2), t = pair[0], m = pair[1];
+    var wrong = otherFams(fi, lv === 1 ? 2 : 3).map(function (i) { return R.pick(FAM[i][1]); });
+    var asWords = lv === 4;
+    var ch = opts(m, wrong, function (w) { return asWords ? { kind: 'word', v: w, word: w } : { kind: 'pic', e: P[w], word: w, label: true }; });
+    return { key: t + m, text: asWords ? 'Read the words. Which one rhymes?' : 'Which one rhymes?',
+      say: asWords ? 'Which word rhymes with ' + t + '?' : 'Which one rhymes with ' + t + '? ' + names(ch) + '?',
+      stage: { type: 'pic', e: P[t], word: t, label: true }, choices: ch,
+      praise: cap(t) + ' and ' + m + ' rhyme!', hint: 'Listen: ' + t + '. Which one sounds the same at the end?' };
+  }
+
+  function genSight(lv) {
+    var t, ds;
+    if (lv === 1) { t = R.pick(SW1); ds = R.sample(lookalikes(t, SW1, 12), 2); }
+    else if (lv === 2) { t = R.chance(0.7) ? R.pick(SW2) : R.pick(SW1); ds = lookalikes(t, SW1.concat(SW2), 3); }
+    else { t = R.pick(SW3); ds = lookalikes(t, SW1.concat(SW2, SW3), 3); }
+    return { key: t, text: 'Find the word you hear', say: 'Find the word: ' + t + '.', stage: { type: 'none' },
+      choices: opts(t, ds, function (v) { return { kind: 'word', v: v, word: v }; }),
+      praise: 'That word is ' + t + '.', hint: 'Listen: ' + t + '. Look at the first letter.' };
+  }
+
+  function genSpell(lv) {
+    var w = lv === 3 ? R.pick(BLEND) : R.pick(CVC);
+    var extras = R.sample(LOW.filter(function (c) { return w.indexOf(c) < 0 && 'qx'.indexOf(c) < 0; }), lv);
+    return { type: 'spell', key: w, word: w, e: P[w], faint: lv === 1, tiles: R.shuffle(w.split('').concat(extras)),
+      text: lv === 1 ? 'Copy the word with the letters' : 'Spell the word', say: 'Spell ' + w + '.',
+      praise: w.split('').map(L).join(', ') + '. ' + w + '!' };
+  }
+
+  function genRead(lv) {
+    var w, d1, d2, pool;
+    if (lv === 1) {
+      w = R.pick(CVC.filter(function (x) { return x !== 'six' && x !== 'ten'; }));
+      pool = CVC.filter(function (x) { return x !== w && x !== 'six' && x !== 'ten'; });
+      var rimes = pool.filter(function (x) { return x.slice(1) === w.slice(1); });
+      d1 = rimes.length ? R.pick(rimes) : R.pick(pool);
+      var onset = pool.filter(function (x) { return x !== d1 && x[0] === w[0]; });
+      d2 = onset.length ? R.pick(onset) : R.pick(pool.filter(function (x) { return x !== d1; }));
+      return { key: w, text: 'Read it, then tap the picture', say: 'Read the word. Tap the picture that matches.',
+        stage: { type: 'read', words: [w] },
+        choices: opts(w, [d1, d2], function (x) { return { kind: 'pic', e: P[x], word: x }; }),
+        praise: 'That says ' + w + '!', hint: 'Look at each letter. Try again.' };
+    }
+    var kind = R.pick(['count', 'count', 'color', 'size']);
+    var four = lv === 3;
+    var text, items, right, wrong = [];
+    if (kind === 'count') {
+      var noun = R.pick(NOUNS), noun2 = R.pick(NOUNS.filter(function (x) { return x !== noun; }));
+      var n = R.int(1, 5), m = R.pick(range(1, 5).filter(function (x) { return x !== n; }));
+      var phrase = n === 1 ? 'one ' + noun : NUM[n] + ' ' + noun + 's';
+      if (four) text = n === 1 ? R.pick(['I see one ' + noun + '.', 'Here is one ' + noun + '.']) : R.pick(['I see ' + phrase + '.', 'Here are ' + phrase + '.', 'Look at the ' + phrase + '.', 'Can you see ' + phrase + '?']);
+      else text = phrase;
+      right = { e: P[noun], n: n, word: phrase };
+      wrong = [{ e: P[noun], n: m }, { e: P[noun2], n: n }];
+      if (four) wrong.push({ e: P[noun2], n: m });
+    } else if (kind === 'color') {
+      var cs = R.sample(COLORS, four ? 4 : 3);
+      text = four ? R.pick(['I like the ' + cs[0].w + ' heart.', 'Look at the ' + cs[0].w + ' heart.']) : 'a ' + cs[0].w + ' heart';
+      right = { e: cs[0].e, n: 1, word: cs[0].w + ' heart' };
+      wrong = cs.slice(1).map(function (c) { return { e: c.e, n: 1 }; });
+    } else {
+      var a = R.pick(NOUNS), b = R.pick(NOUNS.filter(function (x) { return x !== a; }));
+      var big = R.chance(0.5), sz = big ? 'big' : 'small', other = big ? 'small' : 'big';
+      text = four ? 'The ' + a + ' is ' + (big ? 'big' : 'little') + '.' : 'a ' + (big ? 'big' : 'little') + ' ' + a;
+      right = { e: P[a], n: 1, size: sz, word: a };
+      wrong = [{ e: P[a], n: 1, size: other }, { e: P[b], n: 1, size: sz }];
+      if (four) wrong.push({ e: P[b], n: 1, size: other });
+    }
+    items = opts(right, wrong, function (o) { return Object.assign({ kind: 'pic' }, o); });
+    return { key: text, text: four ? 'Read the sentence, then tap the picture' : 'Read it, then tap the picture',
+      say: four ? 'Read the sentence. Tap the picture that matches.' : 'Read the words. Tap the picture that matches.',
+      stage: { type: 'read', words: text.split(' ') }, choices: items,
+      praise: 'That says: ' + text, hint: 'Read each word. Try again.' };
+  }
+
+  /* ---------- MATH ---------- */
+  function genCount(lv) {
+    var o = R.pick(COUNT), n;
+    if (lv === 4) {
+      var tn = R.int(2, 5), on = R.int(0, 9); n = tn * 10 + on;
+      var ex = [n + 10, n - 10, n + 1];
+      if (on > 0 && on !== tn) ex.unshift(on * 10 + tn);
+      return { key: String(n), text: 'How many dots?', say: 'How many dots? Each stick has ten.', stage: { type: 'tens', tens: tn, ones: on },
+        choices: numChoices(n, 4, 10, 99, ex), praise: tn + ' tens and ' + on + ' ones make ' + n + '!', hint: 'Count the sticks by tens. Then count the ones.' };
+    }
+    if (lv === 1) n = R.int(1, 5); else if (lv === 2) n = R.int(6, 10); else n = R.int(11, 20);
+    var layout = lv === 1 ? 'scatter' : lv === 2 ? (R.chance(0.5) ? 'scatter' : 'rows') : 'frames';
+    var ch = lv === 1 ? numChoices(n, 3, 1, 7) : lv === 2 ? numChoices(n, 4, 3, 12) : numChoices(n, 4, 9, 22);
+    return { key: String(n), text: 'How many?', say: 'How many ' + o.many + '? Tap each one to count.',
+      stage: { type: 'objects', e: o.e, n: n, layout: layout }, choices: ch,
+      praise: 'There ' + (n === 1 ? 'is 1 ' + o.one : 'are ' + n + ' ' + o.many) + '!', hint: 'Tap each one and count out loud.' };
+  }
+
+  function genCompare(lv) {
+    var o = R.pick(COUNT), a, b, mode, hi, lo;
+    if (lv <= 2) {
+      var same = lv === 2 && R.chance(0.25);
+      var top = lv === 1 ? 5 : 10;
+      a = R.int(1, top);
+      b = same ? a : R.pick(range(1, top).filter(function (x) { return x !== a; }));
+      mode = lv === 1 ? 'more' : R.pick(['more', 'fewer']);
+      hi = Math.max(a, b); lo = Math.min(a, b);
+      var ch = [a, b].map(function (n, i) {
+        var other = i ? a : b;
+        return { kind: 'group', e: o.e, n: n, v: i, correct: !same && (mode === 'more' ? n > other : n < other) };
+      });
+      if (lv === 2) ch.push({ kind: 'text', v: 'same', label: 'Same', correct: same });
+      return { key: a + '-' + b + mode, text: mode === 'more' ? 'Which has more?' : 'Which has fewer?',
+        say: 'Which group has ' + mode + ' ' + o.many + '?' + (lv === 2 ? ' If they are the same, tap Same.' : ''),
+        stage: { type: 'none' }, choices: ch,
+        praise: same ? 'They are the same! ' + a + ' and ' + b + '.' : mode === 'more' ? hi + ' is more than ' + lo + '!' : lo + ' is fewer than ' + hi + '!',
+        hint: 'Count each group. Try again.' };
+    }
+    if (lv === 3) { a = R.int(1, 10); b = R.pick(range(1, 10).filter(function (x) { return x !== a; })); }
+    else {
+      var kind = R.pick(['tens', 'swap', 'any']);
+      if (kind === 'tens') { var t = R.int(1, 9); a = t * 10 + R.int(0, 9); do { b = t * 10 + R.int(0, 9); } while (b === a); }
+      else if (kind === 'swap') { var x = R.int(1, 9), y; do { y = R.int(1, 9); } while (y === x); a = x * 10 + y; b = y * 10 + x; }
+      else { a = R.int(10, 99); do { b = R.int(10, 99); } while (b === a); }
+    }
+    mode = R.pick(['bigger', 'smaller']);
+    hi = Math.max(a, b); lo = Math.min(a, b);
+    return { key: a + '-' + b + mode, text: 'Which number is ' + mode + '?', say: 'Which number is ' + mode + '?', stage: { type: 'none' },
+      choices: [a, b].map(function (n) { return { kind: 'num', v: n, correct: mode === 'bigger' ? n === hi : n === lo }; }),
+      praise: mode === 'bigger' ? hi + ' is bigger than ' + lo + '!' : lo + ' is smaller than ' + hi + '!',
+      hint: lv === 4 ? 'Look at the tens first. Try again.' : 'Count up from 1. Which comes later?' };
+  }
+
+  function genAdd(lv) {
+    var a, b, o = R.pick(COUNT);
+    if (lv === 3) {
+      var n = R.int(1, 9), ans = 10 - n;
+      return { key: 'm' + n, text: 'How many more make 10?', say: 'There are ' + n + ' dots. How many more make ten?', stage: { type: 'frame10', n: n },
+        choices: numChoices(ans, 4, 0, 10, [n]), praise: n + ' and ' + ans + ' make ten!', hint: 'Count the empty boxes.' };
+    }
+    if (lv === 1) { a = R.int(1, 4); b = R.int(1, 5 - a); }
+    else if (lv === 2) { a = R.int(1, 9); b = R.int(1, 10 - a); }
+    else { a = R.int(2, 10); b = R.int(Math.max(2, 11 - a), 10); }
+    var s = a + b;
+    return { key: a + '+' + b, text: lv === 4 ? 'Add the numbers' : 'How many in all?',
+      say: lv === 4 ? 'What is ' + a + ' plus ' + b + '?' : a + ' plus ' + b + '. How many in all?',
+      stage: { type: 'math', a: a, b: b, op: '+', e: lv === 4 ? null : o.e },
+      choices: lv === 1 ? numChoices(s, 3, 1, 7) : lv === 2 ? numChoices(s, 4, 1, 12) : numChoices(s, 4, 5, 20, [s - 10 >= 5 ? s - 10 : -1, s + 1]),
+      praise: a + ' plus ' + b + ' is ' + s + '!', hint: lv === 4 ? 'Start at ' + Math.max(a, b) + ' and count up.' : 'Count them all. Try again.' };
+  }
+
+  function genSub(lv) {
+    var a, b, o = R.pick(AWAY);
+    if (lv === 1) { a = R.int(2, 5); b = R.int(1, a - 1); }
+    else if (lv === 2) { a = R.int(4, 10); b = R.int(1, a - 1); }
+    else if (lv === 3) { a = R.int(3, 10); b = R.int(1, a); }
+    else { a = R.int(11, 20); b = R.int(2, 10); }
+    var d = a - b, pics = lv <= 2;
+    return { key: a + '-' + b, text: pics ? 'How many are left?' : 'Subtract the numbers',
+      say: pics ? 'There are ' + a + ' ' + o.many + '. ' + b + ' ' + (b === 1 ? o.away1 : o.awayN) + '. How many are left?' : 'What is ' + a + ' minus ' + b + '?',
+      stage: { type: 'math', a: a, b: b, op: '-', e: pics ? o.e : null },
+      choices: lv === 1 ? numChoices(d, 3, 0, 6) : lv === 4 ? numChoices(d, 4, 0, 20, [a + b <= 20 ? a + b : -1]) : numChoices(d, 4, 0, 10),
+      praise: a + ' take away ' + b + ' is ' + d + '!', hint: pics ? 'Count the ones that are left.' : 'Start at ' + a + ' and count back ' + b + '.' };
+  }
+
+  function genNext(lv) {
+    var items, ans, say, ch, kind;
+    if (lv === 1) {
+      var n = R.int(1, 9);
+      items = range(Math.max(0, n - 2), n).concat([null]); ans = n + 1;
+      say = items.slice(0, -1).join(', ') + '. What comes next?';
+      ch = numChoices(ans, 3, 0, 11);
+    } else if (lv === 2) {
+      kind = R.pick(['after', 'before', 'missing']);
+      if (kind === 'after') { n = R.int(9, 19); items = [n - 2, n - 1, n, null]; ans = n + 1; say = items.slice(0, 3).join(', ') + '. What comes next?'; }
+      else if (kind === 'before') { n = R.int(2, 18); items = [null, n, n + 1, n + 2]; ans = n - 1; say = 'What number comes before ' + n + '?'; }
+      else { var a = R.int(1, 18); items = [a, null, a + 2]; ans = a + 1; say = a + ', something, ' + (a + 2) + '. What number is missing?'; }
+      ch = numChoices(ans, 4, 0, 22);
+    } else if (lv === 3) {
+      if (R.chance(0.5)) {
+        var t = R.int(1, 7); items = [t * 10, t * 10 + 10, t * 10 + 20, null]; ans = t * 10 + 30;
+        say = 'Count by tens. ' + items.slice(0, 3).join(', ') + '. What comes next?';
+        ch = numChoices(ans, 4, 0, 100, [ans + 10, ans - 9, ans + 1]);
+      } else {
+        n = R.chance(0.45) ? R.int(2, 9) * 10 + 9 : R.int(20, 98);
+        items = [n - 2, n - 1, n, null]; ans = n + 1;
+        say = items.slice(0, 3).join(', ') + '. What comes next?';
+        ch = numChoices(ans, 4, 0, 100, [n + 2, n + 10, n - 9]);
+      }
+    } else {
+      kind = R.pick(['two', 'five', 'before']);
+      if (kind === 'two') { var s = 2 * R.int(1, 7); items = [s, s + 2, s + 4, null]; ans = s + 6; say = 'Count by twos. ' + items.slice(0, 3).join(', ') + '. What comes next?'; ch = numChoices(ans, 4, 0, 30, [ans - 1, ans + 1, ans + 2]); }
+      else if (kind === 'five') { var f = 5 * R.int(1, 8); items = [f, f + 5, f + 10, null]; ans = f + 15; say = 'Count by fives. ' + items.slice(0, 3).join(', ') + '. What comes next?'; ch = numChoices(ans, 4, 0, 60, [ans - 1, ans + 5, ans + 1]); }
+      else { n = R.chance(0.5) ? R.int(3, 9) * 10 : R.int(21, 99); items = [null, n, n + 1]; ans = n - 1; say = 'What number comes before ' + n + '?'; ch = numChoices(ans, 4, 0, 100, [n - 10, n - 2, n - 11]); }
+    }
+    var shown = items.filter(function (x) { return x !== null; });
+    return { key: items.join(','), text: items[0] === null ? 'What comes before?' : items[items.length - 1] === null ? 'What comes next?' : 'What number is missing?',
+      say: say, stage: { type: 'seq', items: items }, choices: ch,
+      praise: items.map(function (x) { return x === null ? ans : x; }).join(', ') + '!', hint: 'Count it out loud: ' + shown.join(', ') + '.' };
+  }
+
+  function colorize(ch) { var cols = R.shuffle(SHAPE_COLORS); ch.forEach(function (c, i) { c.color = cols[i % cols.length]; }); return ch; }
+  function genShapes(lv) {
+    var t, ds, ch;
+    if (lv === 1 || lv === 2) {
+      t = R.pick(lv === 1 ? BASIC : SHAPES);
+      ds = others(lv === 1 ? BASIC : SHAPES, [t], lv === 1 ? 2 : 3);
+      ch = opts(t, ds, function (v) {
+        return { kind: 'shape', v: v, rot: lv === 1 || v === 'circle' ? 0 : R.pick([0, 15, 30, 45, 90, 160, -25]), scale: lv === 1 ? 1 : R.pick([0.68, 0.82, 1]) };
+      });
+      return { key: t, text: 'Find the shape you hear', say: 'Find the ' + t + '.', stage: { type: 'none' }, choices: colorize(ch),
+        praise: "That's a " + t + '! ' + SHAPE_FACT[t], hint: SHAPE_FACT[t] + ' Try again.' };
+    }
+    if (lv === 3) {
+      t = R.pick(SOLIDS);
+      ds = R.chance(0.5) ? [FLAT[t], R.pick(SOLIDS.filter(function (x) { return x !== t; }))] : others(SOLIDS, [t], 2);
+      ch = opts(t, ds, function (v) { return SOLIDS.indexOf(v) >= 0 ? { kind: 'solid', v: v } : { kind: 'shape', v: v, rot: 0, scale: 0.9 }; });
+      return { key: t + ds.join(), text: 'Find the shape you hear', say: 'Find the ' + t + '.', stage: { type: 'none' }, choices: colorize(ch),
+        praise: "That's a " + t + '! ' + SOLID_FACT[t], hint: SOLID_FACT[t] + ' Try again.' };
+    }
+    if (R.chance(0.5)) {
+      var four = R.pick(['square', 'rectangle']);
+      var q = R.pick([['Which shape has 3 sides?', 'triangle'], ['Which shape has 6 sides?', 'hexagon'], ['Which shape has no corners?', 'circle'], ['Which shape has 4 sides?', four]]);
+      t = q[1];
+      var pool = SHAPES.filter(function (s) { return s !== t && !(SIDES[t] === 4 && SIDES[s] === 4); });
+      ch = opts(t, R.sample(pool, 2), function (v) { return { kind: 'shape', v: v, rot: 0, scale: 0.9 }; });
+      return { key: q[0] + t, text: q[0], say: q[0], stage: { type: 'none' }, choices: colorize(ch),
+        praise: 'Yes, the ' + t + '. ' + SHAPE_FACT[t], hint: 'Count the sides. Try again.' };
+    }
+    var s = R.pick(['triangle', 'square', 'rectangle', 'hexagon']), what = R.pick(['sides', 'corners']), ans = SIDES[s];
+    return { key: s + what, text: 'How many ' + what + '?', say: 'How many ' + what + ' does a ' + s + ' have?',
+      stage: { type: 'shape', shape: s, color: R.pick(SHAPE_COLORS) },
+      choices: opts(ans, [3, 4, 5, 6].filter(function (x) { return x !== ans; }), function (v) { return { kind: 'num', v: v }; }),
+      praise: 'A ' + s + ' has ' + ans + ' ' + what + '!', hint: 'Touch each ' + (what === 'sides' ? 'side' : 'corner') + ' and count.' };
+  }
+
+  /* ---------- game catalog (Illinois Learning Standards = Common Core codes) ---------- */
+  var GAMES = [
+    { id: 'letters', world: 'read', name: 'Letter Hunt', std: 'RF.K.1d', gen: genLetters,
+      thumb: '<span class="t-print">Aa</span>',
+      levels: [['Big letters', 'start'], ['Small letters', 'k'], ['Big & small pairs', 'k'], ['ABC order', 'beyond']] },
+    { id: 'sounds', world: 'read', name: 'Letter Sounds', std: 'RF.K.2d · RF.K.3a', gen: genSounds,
+      thumb: '<span class="emoji">🐶</span><span class="t-print t-sm">d</span>',
+      levels: [['First letter', 'start'], ['First letter, all 26', 'k'], ['Last letter', 'k'], ['Middle vowel', 'k']] },
+    { id: 'rhyme', world: 'read', name: 'Rhyme Time', std: 'RF.K.2a', gen: genRhyme,
+      thumb: '<span class="emoji">🐱</span><span class="emoji">🎩</span>',
+      levels: [['Rhymes (3 pictures)', 'start'], ['Rhymes (4 pictures)', 'k'], ['Odd one out', 'k'], ['Read the rhyme', 'beyond']] },
+    { id: 'sight', world: 'read', name: 'Sight Words', std: 'RF.K.3c', gen: genSight,
+      thumb: '<span class="t-word">the</span>',
+      levels: [['Pre-primer words', 'start'], ['Primer words', 'k'], ['First-grade words', 'beyond']] },
+    { id: 'spell', world: 'read', name: 'Spell It', std: 'L.K.2d', gen: genSpell,
+      thumb: '<span class="t-tiles"><i>c</i><i>a</i><i>t</i></span>',
+      levels: [['Copy the word', 'start'], ['Spell 3-letter words', 'k'], ['Blends & digraphs', 'beyond']] },
+    { id: 'read', world: 'read', name: 'Read & Match', std: 'RF.K.3 · RF.K.4', gen: genRead,
+      thumb: '<span class="t-print t-sm">cat</span><span class="emoji">🐱</span>',
+      levels: [['Read a word', 'k'], ['Read a phrase', 'k'], ['Read a sentence', 'beyond']] },
+    { id: 'count', world: 'math', name: 'Count It', std: 'K.CC.4 · K.CC.5', gen: genCount,
+      thumb: '<span class="emoji">🍎</span><span class="emoji">🍎</span><span class="emoji">🍎</span>',
+      levels: [['Count to 5', 'start'], ['Count to 10', 'k'], ['Count to 20', 'k'], ['Tens and ones', 'beyond']] },
+    { id: 'compare', world: 'math', name: 'More or Less', std: 'K.CC.6 · K.CC.7', gen: genCompare,
+      thumb: '<span class="t-print">3</span><span class="t-op">or</span><span class="t-print">5</span>',
+      levels: [['More (to 5)', 'start'], ['More, fewer, same', 'k'], ['Bigger number', 'k'], ['Compare to 100', 'beyond']] },
+    { id: 'add', world: 'math', name: 'Add It Up', std: 'K.OA.2 · K.OA.4 · K.OA.5', gen: genAdd,
+      thumb: '<span class="t-print">2+3</span>',
+      levels: [['Add within 5', 'start'], ['Add within 10', 'k'], ['Make 10', 'k'], ['Add within 20', 'beyond']] },
+    { id: 'sub', world: 'math', name: 'Take Away', std: 'K.OA.2 · K.OA.5', gen: genSub,
+      thumb: '<span class="t-print">5−2</span>',
+      levels: [['Take away within 5', 'start'], ['Take away within 10', 'k'], ['Subtract numbers to 10', 'beyond'], ['Subtract within 20', 'beyond']] },
+    { id: 'next', world: 'math', name: 'What Comes Next', std: 'K.CC.1 · K.CC.2', gen: genNext,
+      thumb: '<span class="t-print">7 8<span class="t-q">?</span></span>',
+      levels: [['Next number to 10', 'start'], ['Before & after to 20', 'k'], ['Tens and on to 100', 'k'], ['Count by 2s and 5s', 'beyond']] },
+    { id: 'shapes', world: 'math', name: 'Shape Finder', std: 'K.G.2 · K.G.3 · K.G.4', gen: genShapes,
+      thumb: '<svg class="t-shapes" viewBox="0 0 190 120" aria-hidden="true"><circle cx="38" cy="66" r="30" fill="#5AA9EC" stroke="#1D2A44" stroke-width="7"/><polygon points="98,22 136,96 60,96" fill="#FF7A62" stroke="#1D2A44" stroke-width="7" stroke-linejoin="round"/><rect x="128" y="50" width="52" height="52" rx="4" fill="#FFC43F" stroke="#1D2A44" stroke-width="7"/></svg>',
+      levels: [['Basic shapes', 'start'], ['Turned shapes + hexagon', 'k'], ['3D shapes', 'k'], ['Sides & corners', 'k']] }
+  ];
+  GAMES.forEach(function (g) {
+    var k = 0; g.levels.forEach(function (l, i) { if (l[1] === 'k') k = i; });
+    g.kGoal = k + 1;
+  });
+
+  return { R: R, L: L, P: P, GAMES: GAMES, STICKERS: STICKERS, SIDES: SIDES, cap: cap,
+    _lists: { CVC: CVC, BLEND: BLEND, FS_CONS: FS_CONS, FS_VOW: FS_VOW, FAM: FAM, SW1: SW1, SW2: SW2, SW3: SW3, NOUNS: NOUNS, HOMO: HOMO } };
+})();
+</script>
+
+<script>
+/* =====================================================================
+   APP: state, speech, sounds, screens, round engine, grown-ups page.
+   ===================================================================== */
+(function () {
+  'use strict';
+  var C = window.PipContent, R = C.R, L = C.L, GAMES = C.GAMES, STICKERS = C.STICKERS;
+  var G = {}; GAMES.forEach(function (g) { G[g.id] = g; });
+  var STARS_PER_STICKER = 8, ROUND_LEN = 5;
+  var $ = function (s, root) { return (root || document).querySelector(s); };
+
+  function el(tag, p, kids) {
+    var e = document.createElement(tag);
+    if (p) Object.keys(p).forEach(function (k) {
+      var v = p[k]; if (v == null || v === false) return;
+      if (k === 'class') e.className = v;
+      else if (k === 'text') e.textContent = v;
+      else if (k === 'html') e.innerHTML = v;
+      else if (k === 'style') e.style.cssText = v;
+      else if (k.slice(0, 2) === 'on') e.addEventListener(k.slice(2), v);
+      else e.setAttribute(k, v === true ? '' : v);
+    });
+    if (kids != null) (Array.isArray(kids) ? kids : [kids]).forEach(function (c) {
+      if (c == null || c === false) return;
+      e.append(c.nodeType ? c : document.createTextNode(String(c)));
+    });
+    return e;
+  }
+
+  var ICON = {
+    home: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 12 4.5l8.5 7"/><path d="M6 10v9.5h4.5v-5.5h3v5.5H18V10"/></svg>',
+    back: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+    speaker: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12.5 5.5v13L7.5 14.5H4z" fill="currentColor"/><path d="M15.8 9a4.3 4.3 0 0 1 0 6M18.6 6.4a8 8 0 0 1 0 11.2"/></svg>',
+    check: '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    star: function (empty) { return '<svg class="star-ico' + (empty ? ' empty' : '') + '" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.85 5.95 6.5.85-4.78 4.5 1.22 6.45L12 17.2l-5.79 3.15 1.22-6.45L2.65 9.4l6.5-.85z"/></svg>'; }
+  };
+  var PIP_SVG = '<svg class="pip" viewBox="0 0 120 124" aria-hidden="true">' +
+    '<path class="p-stem" d="M60 33 C60 26 61 20 63 15"/>' +
+    '<path class="p-leaf" d="M63 16 C70 6 82 6 86 10 C80 17 70 19 63 16Z"/>' +
+    '<path class="p-leaf" d="M61 19 C54 10 43 10 39 14 C45 21 55 22 61 19Z"/>' +
+    '<path class="p-foot" d="M48 108 L45 117 M48 108 L51 117 M72 108 L69 117 M72 108 L75 117"/>' +
+    '<ellipse class="p-body" cx="60" cy="72" rx="42" ry="39"/>' +
+    '<ellipse class="p-belly" cx="60" cy="86" rx="25" ry="20"/>' +
+    '<path class="p-wing" d="M20 72 C9 78 10 92 22 95 C27 88 27 79 20 72Z"/>' +
+    '<path class="p-wing" d="M100 72 C111 78 110 92 98 95 C93 88 93 79 100 72Z"/>' +
+    '<circle class="p-eye" cx="45" cy="61" r="10"/><circle class="p-eye" cx="75" cy="61" r="10"/>' +
+    '<circle class="p-pupil" cx="46.5" cy="62.5" r="5"/><circle class="p-pupil" cx="76.5" cy="62.5" r="5"/>' +
+    '<circle class="p-shine" cx="48.5" cy="60" r="1.8"/><circle class="p-shine" cx="78.5" cy="60" r="1.8"/>' +
+    '<circle class="p-cheek" cx="34" cy="76" r="5.5"/><circle class="p-cheek" cx="86" cy="76" r="5.5"/>' +
+    '<path class="p-beak" d="M53 71 L67 71 L60 80Z"/></svg>';
+
+  /* ---------------- state ---------------- */
+  var KEY = 'pips-treehouse-v1';
+  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '' } }; }
+  function normalize(s) {
+    var d = freshState();
+    if (!s || typeof s !== 'object') return d;
+    var out = Object.assign(d, s);
+    out.settings = Object.assign(freshState().settings, s.settings || {});
+    out.games = s.games && typeof s.games === 'object' ? s.games : {};
+    out.days = s.days && typeof s.days === 'object' ? s.days : {};
+    Object.keys(out.games).forEach(function (id) {
+      var g = out.games[id], meta = G[id];
+      if (!meta) return;
+      g.level = Math.min(Math.max(1, g.level | 0 || 1), meta.levels.length);
+      g.mastered = Array.isArray(g.mastered) ? g.mastered : [];
+      g.recent = Array.isArray(g.recent) ? g.recent : [];
+      g.lv = g.lv || {};
+    });
+    return out;
+  }
+  function loadLocal() {
+    try { var raw = localStorage.getItem(KEY); if (raw) return normalize(JSON.parse(raw)); } catch (e) { /* storage blocked */ }
+    return freshState();
+  }
+  var S = loadLocal();
+  function saveLocal() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* storage blocked */ } }
+  var dirty = false;
+  function save(toCloud) {
+    S.updatedAt = Date.now();
+    saveLocal();
+    dirty = true;
+    if (toCloud) Cloud.push();
+  }
+  function gs(id) {
+    if (!S.games[id]) S.games[id] = { level: 1, mastered: [], weak: 0, rounds: 0, q: 0, ft: 0, recent: [], lv: {} };
+    return S.games[id];
+  }
+  function dayKey(d) { d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function today() { var k = dayKey(); if (!S.days[k]) S.days[k] = { q: 0, c: 0, r: 0 }; return S.days[k]; }
+  function pruneDays() {
+    var keys = Object.keys(S.days).sort();
+    while (keys.length > 60) delete S.days[keys.shift()];
+  }
+  function stickersEarned() { return Math.min(STICKERS.length, Math.floor(S.totalStars / STARS_PER_STICKER)); }
+
+  /* ---------------- cloud sync (signed-in viewers) ---------------- */
+  var Cloud = {
+    ref: null, writing: false, again: false, on: false,
+    init: function () {
+      var self = this;
+      if (!window.claude || typeof window.claude.use !== 'function') return;
+      Promise.all([window.claude.use('db'), window.claude.use('user')]).then(function (r) {
+        var db = r[0], user = r[1];
+        if (!db || !user) return null;
+        return user.id().then(function (id) {
+          if (!id) return null;
+          self.ref = db.doc('data/users/' + id + '/progress');
+          return self.ref.get();
+        });
+      }).then(function (snap) {
+        if (!snap || !self.ref) return;
+        self.on = true;
+        var remote = snap.exists ? (snap.data() || {}).state : null;
+        if (remote && (remote.updatedAt || 0) > (S.updatedAt || 0)) { S = normalize(JSON.parse(JSON.stringify(remote))); saveLocal(); App.refresh(); }
+        else if (S.updatedAt && (!remote || (remote.updatedAt || 0) < S.updatedAt)) self.push();
+        App.refreshSync();
+      }).catch(function () { self.ref = null; self.on = false; });
+    },
+    push: function () {
+      var self = this;
+      if (!self.ref) return;
+      if (self.writing) { self.again = true; return; }
+      self.writing = true;
+      var body = { state: JSON.parse(JSON.stringify(S)) };
+      self.ref.set(body).then(function () { dirty = false; }, function (e) {
+        var code = e && e.code;
+        if (code === 'unavailable' || code === 'resource_exhausted') { setTimeout(function () { self.writing = false; self.push(); }, 1500 + Math.random() * 1500); return 'retry'; }
+        self.ref = null; self.on = false; App.refreshSync();
+      }).then(function (r) {
+        if (r === 'retry') return;
+        self.writing = false;
+        if (self.again) { self.again = false; self.push(); }
+      });
+    },
+    pull: function (cb) {
+      var self = this;
+      if (!self.ref) { cb && cb(); return; }
+      self.ref.get().then(function (snap) {
+        var remote = snap.exists ? (snap.data() || {}).state : null;
+        if (remote && (remote.updatedAt || 0) > (S.updatedAt || 0)) { S = normalize(JSON.parse(JSON.stringify(remote))); saveLocal(); }
+      }).catch(function () {}).then(function () { cb && cb(); });
+    }
+  };
+
+  /* ---------------- speech ---------------- */
+  var Voice = (function () {
+    var synth = window.speechSynthesis;
+    var ok = !!(synth && window.SpeechSynthesisUtterance);
+    var voice = null, token = 0;
+    var PREF = ['Samantha', 'Ava', 'Allison', 'Nicky', 'Susan', 'Zoe', 'Joelle', 'Karen', 'Moira', 'Google US English', 'Microsoft Aria', 'Microsoft Jenny'];
+    function list() {
+      if (!ok) return [];
+      try { return synth.getVoices().filter(function (v) { return /^en([-_]|$)/i.test(v.lang); }); } catch (e) { return []; }
+    }
+    function choose() {
+      var vs = list(); if (!vs.length) { voice = null; return; }
+      var want = S.settings.voice;
+      var found = want && vs.filter(function (v) { return v.name === want; })[0];
+      /* On-device voices first: they keep talking with no internet (car rides). */
+      var local = vs.filter(function (v) { return v.localService !== false; });
+      var pools = local.length ? [local, vs] : [vs];
+      for (var p = 0; p < pools.length && !found; p++) {
+        var pool = pools[p];
+        for (var i = 0; i < PREF.length && !found; i++) found = pool.filter(function (v) { return v.name.indexOf(PREF[i]) === 0 && /en[-_]US/i.test(v.lang); })[0];
+        for (i = 0; i < PREF.length && !found; i++) found = pool.filter(function (v) { return v.name.indexOf(PREF[i]) === 0; })[0];
+        if (!found) found = pool.filter(function (v) { return /en[-_]US/i.test(v.lang); })[0];
+      }
+      voice = found || vs[0];
+    }
+    if (ok) { choose(); try { synth.addEventListener('voiceschanged', choose); } catch (e) { synth.onvoiceschanged = choose; } }
+    function say(text, done) {
+      var my = ++token, fired = false;
+      function fin() { if (fired) return; fired = true; if (done && my === token) done(); }
+      var est = 900 + String(text || '').length * (S.settings.rate === 'slow' ? 95 : 72);
+      if (!ok || !text) { setTimeout(fin, ok ? 60 : Math.min(est, 2600)); return; }
+      try {
+        var u = new SpeechSynthesisUtterance(text);
+        if (voice) u.voice = voice;
+        u.lang = (voice && voice.lang) || 'en-US';
+        u.rate = S.settings.rate === 'slow' ? 0.72 : 0.9;
+        u.pitch = 1.08;
+        u.onend = fin; u.onerror = fin;
+        if (synth.speaking || synth.pending) { synth.cancel(); setTimeout(function () { if (my === token) synth.speak(u); }, 70); }
+        else synth.speak(u);
+        setTimeout(fin, est + 2500);
+      } catch (e) { setTimeout(fin, 600); }
+    }
+    function stop() { token++; if (ok) try { synth.cancel(); } catch (e) {} }
+    return { ok: ok, say: say, stop: stop, list: list, choose: choose };
+  })();
+
+  /* ---------------- sound effects ---------------- */
+  var SFX = (function () {
+    var ctx = null;
+    function ac() {
+      if (!ctx) { var A = window.AudioContext || window.webkitAudioContext; if (!A) return null; try { ctx = new A(); } catch (e) { return null; } }
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    }
+    function tone(f, t0, dur, type, vol) {
+      var c = ac(); if (!c) return;
+      var o = c.createOscillator(), g = c.createGain(), t = c.currentTime + t0;
+      o.type = type || 'triangle'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.16, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur + 0.05);
+    }
+    function on() { return S.settings.sfx; }
+    return {
+      unlock: function () { ac(); },
+      good: function () { if (!on()) return; tone(659, 0, 0.16); tone(784, 0.09, 0.16); tone(1047, 0.18, 0.32); },
+      bad: function () { if (!on()) return; tone(311, 0, 0.18, 'sine', 0.12); tone(247, 0.15, 0.26, 'sine', 0.1); },
+      tick: function () { if (!on()) return; tone(988, 0, 0.08, 'sine', 0.07); },
+      fanfare: function () { if (!on()) return; [523, 659, 784, 1047, 1319].forEach(function (f, i) { tone(f, i * 0.11, 0.34); }); }
+    };
+  })();
+
+  /* ---------------- confetti ---------------- */
+  var Confetti = (function () {
+    var cv = $('#confetti'), raf = 0;
+    function burst() {
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var ctx = cv.getContext('2d'); if (!ctx) return;
+      var dpr = Math.min(2, window.devicePixelRatio || 1), w = cv.clientWidth, h = cv.clientHeight;
+      cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var cols = ['#FF7A62', '#FFC43F', '#4CBA68', '#E8649A', '#5AA9EC', '#9C7CF0'];
+      var parts = [];
+      for (var i = 0; i < 120; i++) parts.push({ x: w / 2 + (Math.random() - 0.5) * w * 0.5, y: h * 0.38, vx: (Math.random() - 0.5) * 15, vy: -Math.random() * 15 - 4, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.3, s: 7 + Math.random() * 7, c: R.pick(cols) });
+      cancelAnimationFrame(raf);
+      var t0 = performance.now();
+      (function step(t) {
+        ctx.clearRect(0, 0, w, h);
+        var alive = false;
+        parts.forEach(function (p) {
+          p.vy += 0.45; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+          if (p.y < h + 20) alive = true;
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 3, p.s, p.s * 0.66); ctx.restore();
+        });
+        if (alive && t - t0 < 4500) raf = requestAnimationFrame(step); else ctx.clearRect(0, 0, w, h);
+      })(t0);
+    }
+    return { burst: burst };
+  })();
+
+  /* ---------------- shared bits ---------------- */
+  document.querySelectorAll('[data-pip]').forEach(function (n) { n.innerHTML = PIP_SVG; });
+  $('#room-back').innerHTML = ICON.home;
+  $('#stk-back').innerHTML = ICON.home;
+  $('#quit-btn').innerHTML = ICON.home;
+  $('#again-btn').innerHTML = ICON.speaker;
+
+  function pipDo(cls) {
+    var p = $('#game-pip'); if (!p) return;
+    p.classList.remove('cheer', 'think'); void p.offsetWidth; p.classList.add(cls);
+    setTimeout(function () { p.classList.remove(cls); }, 800);
+  }
+  function ruled(text, extra) {
+    return el('span', { class: 'ruled' + (extra ? ' ' + extra : '') }, [el('span', { class: 'rule', 'aria-hidden': 'true' }), el('span', { class: 'rt', text: text })]);
+  }
+  function emoji(e) { return el('span', { class: 'emoji', text: e }); }
+
+  var shapeId = 0;
+  function shapeSVG(name, o) {
+    o = o || {};
+    var col = o.color || '#5AA9EC', s = o.scale || 1, rot = o.rot || 0, body;
+    var st = 'fill="' + col + '" stroke="#1D2A44" stroke-width="5" stroke-linejoin="round" vector-effect="non-scaling-stroke"';
+    if (name === 'circle') body = '<circle cx="50" cy="50" r="38" ' + st + '/>';
+    else if (name === 'square') body = '<rect x="14" y="14" width="72" height="72" rx="3" ' + st + '/>';
+    else if (name === 'rectangle') body = '<rect x="5" y="27" width="90" height="46" rx="3" ' + st + '/>';
+    else if (name === 'triangle') body = '<polygon points="50,9 93,85 7,85" ' + st + '/>';
+    else body = '<polygon points="92,50 71,86.4 29,86.4 8,50 29,13.6 71,13.6" ' + st + '/>';
+    return '<svg class="shape" viewBox="0 0 100 100" role="img" aria-label="' + name + '"><g transform="translate(50 50) rotate(' + rot + ') scale(' + s + ') translate(-50 -50)">' + body + '</g></svg>';
+  }
+  function solidSVG(name, col) {
+    var id = 'g' + (++shapeId), ink = '#1D2A44';
+    var defs = '<defs><radialGradient id="' + id + '" cx="35%" cy="32%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></radialGradient></defs>';
+    var s = 'stroke="' + ink + '" stroke-width="3.5" stroke-linejoin="round"', b;
+    if (name === 'sphere') b = '<circle cx="50" cy="52" r="38" fill="' + col + '" ' + s + '/><circle cx="50" cy="52" r="38" fill="url(#' + id + ')"/><ellipse cx="50" cy="52" rx="38" ry="10" fill="none" stroke="' + ink + '" stroke-width="1.6" stroke-dasharray="4 4" opacity=".45"/>';
+    else if (name === 'cube') b = '<polygon points="14,36 34,18 86,18 66,36" fill="' + col + '" ' + s + '/><polygon points="14,36 34,18 86,18 66,36" fill="#fff" opacity=".4"/>' +
+      '<polygon points="66,36 86,18 86,70 66,88" fill="' + col + '" ' + s + '/><polygon points="66,36 86,18 86,70 66,88" fill="#000" opacity=".2"/>' +
+      '<rect x="14" y="36" width="52" height="52" fill="' + col + '" ' + s + '/>';
+    else if (name === 'cone') b = '<path d="M14 80 L50 10 L86 80 A36 10 0 0 1 14 80Z" fill="' + col + '" ' + s + '/><path d="M50 10 L86 80 A36 10 0 0 1 58 89.5Z" fill="#000" opacity=".16"/><path d="M14 80 A36 10 0 0 1 86 80" fill="none" stroke="' + ink + '" stroke-width="1.6" stroke-dasharray="4 4" opacity=".5"/>';
+    else b = '<path d="M18 24 L18 78 A32 10 0 0 0 82 78 L82 24" fill="' + col + '" ' + s + '/><path d="M64 31 L64 86 A32 10 0 0 0 82 78 L82 24Z" fill="#000" opacity=".15"/><ellipse cx="50" cy="24" rx="32" ry="10" fill="' + col + '" ' + s + '/><ellipse cx="50" cy="24" rx="32" ry="10" fill="#fff" opacity=".35"/>';
+    return '<svg class="shape" viewBox="0 0 100 100" role="img" aria-label="' + name + '">' + defs + b + '</svg>';
+  }
+
+  /* ---------------- screens ---------------- */
+  var current = 'splash';
+  function show(name) {
+    ['splash', 'home', 'room', 'game', 'end', 'stickers', 'parents'].forEach(function (n) { $('#s-' + n).hidden = n !== name; });
+    current = name;
+    if (name !== 'game') Voice.stop();
+  }
+
+  function renderHome(speak) {
+    var name = S.name.trim();
+    $('#home-stars').innerHTML = ICON.star() + '<span>' + S.totalStars + '</span>';
+    var greet = name ? 'Hi, ' + name + '! Pick a room.' : 'Hi there! Pick a room.';
+    $('#home-bubble').textContent = greet;
+    var have = stickersEarned();
+    $('#stk-ic').textContent = have ? STICKERS[have - 1].e : '📖';
+    var into = S.totalStars % STARS_PER_STICKER;
+    $('#stk-meter').style.width = (have >= STICKERS.length ? 100 : into / STARS_PER_STICKER * 100) + '%';
+    show('home');
+    if (speak) Voice.say(greet);
+  }
+
+  var roomWorld = 'read';
+  function renderRoom(world, speak) {
+    roomWorld = world;
+    var sec = $('#s-room');
+    sec.setAttribute('data-room', world);
+    $('#room-title').textContent = world === 'read' ? 'Reading Room' : 'Number Nook';
+    var box = $('#tiles'); box.innerHTML = '';
+    GAMES.filter(function (g) { return g.world === world; }).forEach(function (g) {
+      var st = gs(g.id);
+      var dots = el('span', { class: 'lvl', 'aria-label': 'Level ' + st.level + ' of ' + g.levels.length });
+      g.levels.forEach(function (_, i) { dots.append(el('i', { class: i < st.level ? 'on' : '' })); });
+      box.append(el('button', { class: 'chunk tile', 'aria-label': g.name, onclick: function () { startRound(g.id); } }, [
+        el('span', { class: 'thumb', html: g.thumb }),
+        el('span', { class: 'tfoot' }, [el('span', { class: 'tname', text: g.name }), dots])
+      ]));
+    });
+    show('room');
+    if (speak) Voice.say(world === 'read' ? 'Reading Room! Pick a game.' : 'Number Nook! Pick a game.');
+  }
+
+  function renderStickers() {
+    var have = stickersEarned(), grid = $('#stk-grid'); grid.innerHTML = '';
+    STICKERS.forEach(function (s, i) {
+      if (i < have) grid.append(el('button', { class: 'stk-disc', 'aria-label': s.name, onclick: function () { Voice.say(s.name === 'T. rex' ? 'T rex!' : 'A ' + s.name + '!'); } }, emoji(s.e)));
+      else grid.append(el('div', { class: 'stk-disc locked', 'aria-label': 'Locked sticker', text: '?' }));
+    });
+    var need = STARS_PER_STICKER - (S.totalStars % STARS_PER_STICKER);
+    var note = have >= STICKERS.length ? 'You found every sticker!' : have + ' of ' + STICKERS.length + ' stickers. ' + need + ' more ' + (need === 1 ? 'star' : 'stars') + ' for the next one!';
+    $('#stk-note').textContent = note;
+    show('stickers');
+    Voice.say(note);
+  }
+
+  /* ---------------- round engine ---------------- */
+  var round = null;
+  var CHEER = ['Great job!', 'You got it!', 'Awesome!', 'Super!', 'Way to go!', 'Wow!', 'Nice work!', 'Yes!'];
+  var CHEER2 = ['You figured it out!', 'There you go!', 'Good thinking!', 'You did it!'];
+  var OOPS = ['Oops, try again!', 'Not quite. Try again!', 'Almost! Try another one.'];
+
+  function startRound(id) {
+    var mix = id === 'mix';
+    var ids = mix ? R.sample(GAMES.map(function (g) { return g.id; }), ROUND_LEN) : Array(ROUND_LEN).fill(id);
+    round = { id: id, mix: mix, ids: ids, i: 0, res: [], keys: {}, q: null, wrong: 0, locked: false, token: 0, pos: 0 };
+    show('game');
+    nextQuestion();
+  }
+  function makeQ(gid) {
+    var g = G[gid], lv = gs(gid).level, q, t;
+    for (t = 0; t < 15; t++) { q = g.gen(lv); if (!round.keys[gid + '|' + q.key]) break; }
+    round.keys[gid + '|' + q.key] = 1;
+    q.game = gid; q.level = lv;
+    return q;
+  }
+  function nextQuestion() {
+    if (round.i >= ROUND_LEN) { endRound(); return; }
+    var q = makeQ(round.ids[round.i]);
+    round.q = q; round.wrong = 0; round.locked = false; round.token++; round.pos = 0;
+    renderDots();
+    $('#q-text').textContent = q.text;
+    var stage = $('#stage'), choices = $('#choices');
+    stage.innerHTML = ''; choices.innerHTML = '';
+    if (q.type === 'spell') renderSpell(q, stage, choices);
+    else { renderStage(q.stage, stage); q.choices.forEach(function (c) { choices.append(renderChoice(c)); }); }
+    var first = round.i === 0 || round.mix;
+    var intro = first ? G[q.game].name + '! ' : '';
+    setTimeout(function () { if (round && round.q === q) Voice.say(intro + q.say); }, 260);
+  }
+  function renderDots() {
+    var d = $('#dots'); d.innerHTML = '';
+    for (var i = 0; i < ROUND_LEN; i++) {
+      var r = round.res[i];
+      if (r === true) d.append(el('span', { class: 'dot star', html: ICON.star(), 'aria-label': 'Star' }));
+      else if (r === false) d.append(el('span', { class: 'dot ok', html: ICON.check, 'aria-label': 'Done' }));
+      else d.append(el('span', { class: 'dot' + (i === round.i ? ' now' : '') }));
+    }
+  }
+
+  function picButton(e, word, cls) {
+    return el('button', { class: 'chunk stage-pic' + (cls ? ' ' + cls : ''), 'aria-label': 'Hear the word ' + word, onclick: function () { Voice.say(word); } },
+      [emoji(e), el('span', { class: 'hear', html: ICON.speaker })]);
+  }
+
+  function renderStage(st, box) {
+    if (!st || st.type === 'none') return;
+    if (st.type === 'pic') {
+      var b = picButton(st.e, st.word);
+      if (st.label) b.insertBefore(el('span', { class: 'wlabel', text: st.word }), b.lastChild);
+      box.append(b);
+    } else if (st.type === 'letter') {
+      box.append(el('button', { class: 'chunk stage-pic letter', 'aria-label': 'Letter ' + st.ch, onclick: function () { Voice.say(st.word); } }, [el('span', { class: 'glyph', text: st.ch })]));
+    } else if (st.type === 'seq') {
+      box.append(el('div', { class: 'seq' }, st.items.map(function (x) { return x === null ? el('span', { class: 'blank', text: '?' }) : el('span', { text: String(x) }); })));
+    } else if (st.type === 'objects') {
+      renderObjects(st, box);
+    } else if (st.type === 'tens') {
+      var t = el('div', { class: 'tens', 'aria-label': st.tens + ' tens and ' + st.ones + ' ones' });
+      for (var i = 0; i < st.tens; i++) { var s = el('div', { class: 'stick' }); for (var j = 0; j < 10; j++) s.append(el('i')); t.append(s); }
+      if (st.ones) { var o = el('div', { class: 'ones' }); for (j = 0; j < st.ones; j++) o.append(el('span', { class: 'one' })); t.append(o); }
+      box.append(t);
+    } else if (st.type === 'frame10') {
+      var f = el('div', { class: 'frame', 'aria-label': st.n + ' dots in a ten frame' });
+      for (i = 0; i < 10; i++) f.append(el('span', { class: i < st.n ? '' : 'empty' }, i < st.n ? el('span', { class: 'dotfill' }) : null));
+      box.append(f);
+    } else if (st.type === 'math') {
+      if (st.e) {
+        var row = el('div', { class: 'mathrow' });
+        if (st.op === '+') { row.append(group(st.e, st.a, 0), el('span', { class: 'op', text: '+' }), group(st.e, st.b, 0)); }
+        else row.append(group(st.e, st.a, st.b));
+        box.append(row);
+      }
+      box.append(el('div', { class: 'eq', 'aria-label': st.a + (st.op === '+' ? ' plus ' : ' minus ') + st.b }, [String(st.a), el('span', { text: st.op === '+' ? '+' : '−' }), String(st.b), el('span', { text: '=' }), el('span', { class: 'qbox', text: '?' })]));
+    } else if (st.type === 'read') {
+      var line = el('div', { class: 'readline' + (st.words.length > 3 ? ' long' : '') }, st.words.map(function (w) { return ruled(w); }));
+      box.append(line);
+    } else if (st.type === 'shape') {
+      box.append(el('div', { html: shapeSVG(st.shape, { color: st.color }) }));
+    }
+  }
+  function group(e, n, crossed) {
+    var cols = n <= 5 ? n : 5;
+    var g = el('div', { class: 'grp', style: '--cols:' + Math.max(1, cols) });
+    for (var i = 0; i < n; i++) g.append(el('span', { class: i >= n - crossed ? 'x' : '' }, emoji(e)));
+    return g;
+  }
+  function renderObjects(st, box) {
+    var counted = 0;
+    function make() {
+      var b = el('button', { class: 'obj', 'aria-label': 'Count this one' }, emoji(st.e));
+      b.addEventListener('click', function () {
+        if (b.classList.contains('counted')) return;
+        counted++; b.classList.add('counted');
+        b.append(el('span', { class: 'cnt', text: String(counted) }));
+        Voice.say(String(counted));
+      });
+      return b;
+    }
+    if (st.layout === 'frames') {
+      var wrap = el('div', { class: 'frames' });
+      for (var f = 0; f < 2; f++) {
+        var fr = el('div', { class: 'frame' });
+        for (var i = 0; i < 10; i++) { var idx = f * 10 + i; fr.append(idx < st.n ? make() : el('span', { class: 'empty' })); }
+        wrap.append(fr);
+      }
+      box.append(wrap); return;
+    }
+    if (st.layout === 'rows') {
+      var rows = el('div', { class: 'objs rows' });
+      for (i = 0; i < st.n; i++) rows.append(make());
+      box.append(rows); return;
+    }
+    var area = el('div', { class: 'objs' });
+    var cells = R.sample(Array.from({ length: 15 }, function (_, k) { return k; }), st.n);
+    cells.forEach(function (c) {
+      var col = c % 5, row = Math.floor(c / 5);
+      var b = make();
+      b.style.left = ((col + 0.5 + (Math.random() - 0.5) * 0.35) / 5 * 100) + '%';
+      b.style.top = ((row + 0.5 + (Math.random() - 0.5) * 0.3) / 3 * 100) + '%';
+      area.append(b);
+    });
+    box.append(area);
+  }
+
+  function renderChoice(c) {
+    var inner, cls = 'chunk choice', label = String(c.v);
+    if (c.kind === 'letter') inner = el('span', { class: 'glyph', text: c.v });
+    else if (c.kind === 'pair') { inner = el('span', { class: 'glyph pair', text: c.v.toUpperCase() + c.v }); }
+    else if (c.kind === 'num') inner = el('span', { class: 'num', text: String(c.v) });
+    else if (c.kind === 'word') { inner = ruled(c.v); }
+    else if (c.kind === 'text') { cls += ' lbl'; inner = document.createTextNode(c.label); label = c.label; }
+    else if (c.kind === 'shape') { inner = el('span', { html: shapeSVG(c.v, c) }); }
+    else if (c.kind === 'solid') { inner = el('span', { html: solidSVG(c.v, c.color) }); }
+    else if (c.kind === 'group') {
+      cls += ' group';
+      inner = el('span', { class: 'grp-in', style: '--cols:' + Math.min(c.n, 5) });
+      for (var i = 0; i < c.n; i++) inner.append(emoji(c.e));
+      label = c.n + ' in this group';
+    } else {
+      var n = c.n || 1;
+      inner = el('span', { class: 'picset' + (c.size ? ' ' + c.size : ''), 'data-n': String(n) });
+      for (i = 0; i < n; i++) inner.append(emoji(c.e));
+      label = c.word || 'picture';
+    }
+    var kids = [inner];
+    if (c.kind === 'pic' && c.label && c.word) kids.push(el('span', { class: 'wlabel', text: c.word }));
+    var b = el('button', { class: cls, 'aria-label': label }, kids);
+    b._choice = c;
+    b.addEventListener('click', function () { choose(c, b); });
+    return b;
+  }
+
+  function choose(c, btn) {
+    if (!round || round.locked || btn.disabled) return;
+    if (c.correct) { btn.classList.add('correct'); success(); }
+    else {
+      round.wrong++;
+      btn.classList.add('wrong'); btn.disabled = true;
+      SFX.bad(); pipDo('think');
+      if (round.wrong >= 2) {
+        Array.prototype.forEach.call($('#choices').children, function (b) { if (b._choice && b._choice.correct) b.classList.add('hint'); });
+        Voice.say("Here's a hint. Tap the one that's glowing.");
+      } else Voice.say(R.pick(OOPS) + ' ' + (round.q.hint || ''));
+    }
+  }
+
+  function record(q, first) {
+    var g = gs(q.game);
+    g.q++; if (first) g.ft++;
+    g.recent.push(first ? 1 : 0); if (g.recent.length > 20) g.recent.shift();
+    var l = g.lv[q.level] || { q: 0, c: 0 }; l.q++; if (first) l.c++; g.lv[q.level] = l;
+    var d = today(); d.q++; if (first) d.c++;
+    save(false);
+  }
+
+  function success() {
+    var r = round, tok = r.token, first = r.wrong === 0;
+    r.locked = true;
+    SFX.good(); pipDo('cheer');
+    record(r.q, first);
+    r.res.push(first);
+    renderDots();
+    var moved = false;
+    function go() { if (moved || round !== r || tok !== r.token) return; moved = true; r.i++; nextQuestion(); }
+    Voice.say((first ? R.pick(CHEER) : R.pick(CHEER2)) + ' ' + (r.q.praise || ''), function () { setTimeout(go, 380); });
+    setTimeout(go, 7000);
+  }
+
+  /* spelling */
+  function renderSpell(q, stage, choices) {
+    var box = el('div', { class: 'spellbox' });
+    box.append(picButton(q.e, q.word));
+    var row = el('span', { class: 'ruled spellrow', 'aria-label': 'Spelling boxes' }, [el('span', { class: 'rule', 'aria-hidden': 'true' })]);
+    q.word.split('').forEach(function (ch, i) {
+      row.append(el('span', { class: 'slot' + (q.faint ? ' faint' : '') + (i === 0 ? ' next' : ''), 'data-i': String(i), text: q.faint ? ch : ' ' }));
+    });
+    box.append(row);
+    stage.append(box);
+    q.tiles.forEach(function (ch) {
+      var t = el('button', { class: 'chunk ltile', 'aria-label': 'Letter ' + ch }, el('span', { class: 'glyph', text: ch }));
+      t.addEventListener('click', function () { spellTap(q, ch, t, row); });
+      choices.append(t);
+    });
+  }
+  function spellTap(q, ch, tile, row) {
+    var r = round;
+    if (!r || r.locked || tile.disabled) return;
+    var need = q.word[r.pos];
+    if (ch === need) {
+      tile.disabled = true; tile.classList.add('used'); tile.classList.remove('hint');
+      var slots = row.querySelectorAll('.slot');
+      var s = slots[r.pos]; s.textContent = ch; s.classList.remove('faint', 'next'); s.classList.add('in');
+      r.pos++;
+      if (r.pos < q.word.length) { slots[r.pos].classList.add('next'); SFX.tick(); Voice.say(L(ch)); }
+      else success();
+    } else {
+      r.wrong++;
+      tile.classList.remove('nope'); void tile.offsetWidth; tile.classList.add('nope');
+      SFX.bad(); pipDo('think');
+      if (r.wrong >= 2 || q.faint) {
+        var lit = false;
+        Array.prototype.forEach.call($('#choices').children, function (b) {
+          b.classList.remove('hint');
+          if (!lit && !b.disabled && b.textContent === need) { b.classList.add('hint'); lit = true; }
+        });
+        Voice.say('Find the letter ' + L(need) + '.');
+      } else {
+        Voice.say('Listen: ' + q.word + '. What letter comes next?');
+      }
+    }
+  }
+
+  function endRound() {
+    var r = round, first = r.res.filter(Boolean).length, earned = first + 1;
+    var before = stickersEarned();
+    S.totalStars += earned; S.rounds++; today().r++;
+    var levelUp = false, g = null;
+    if (!r.mix) {
+      g = gs(r.id); g.rounds = (g.rounds || 0) + 1;
+      var lv = g.level, max = G[r.id].levels.length;
+      if (first >= 4) {
+        if (g.mastered.indexOf(lv) < 0) g.mastered.push(lv);
+        g.weak = 0;
+        if (lv < max) { g.level = lv + 1; levelUp = true; }
+      } else if (first <= 2) {
+        g.weak = (g.weak || 0) + 1;
+        if (g.weak >= 2 && lv > 1) { g.level = lv - 1; g.weak = 0; }
+      } else g.weak = 0;
+    }
+    pruneDays();
+    var after = stickersEarned(), newSt = after > before ? STICKERS[after - 1] : null;
+    save(true);
+
+    var title = first === 5 ? 'Perfect round!' : first >= 3 ? 'Great job!' : first >= 1 ? 'Good practice!' : 'Good try!';
+    var card = $('#end-card'); card.innerHTML = '';
+    var starsRow = el('div', { class: 'end-stars', 'aria-label': first + ' stars plus 1 bonus star' });
+    for (var i = 0; i < ROUND_LEN; i++) { var sp = el('span', { html: ICON.star(i >= first) }); if (i < first) sp.firstChild.style.animationDelay = (i * 0.12) + 's'; starsRow.append(sp); }
+    starsRow.append(el('span', { class: 'bonus', html: '+' + ICON.star() }));
+    card.append(el('div', { class: 'pip-wrap', html: PIP_SVG, style: 'width:clamp(80px,14vmin,120px)' }), starsRow, el('h2', { text: title }));
+    card.append(el('p', { class: 'sub', text: 'You earned ' + earned + ' ' + (earned === 1 ? 'star' : 'stars') + ' (one bonus for finishing).' }));
+    if (levelUp) card.append(el('div', { class: 'ribbon', text: 'Level up! Now: ' + G[r.id].levels[g.level - 1][0] }));
+    if (newSt) card.append(el('div', { class: 'newstk' }, [el('span', { class: 'disc' }, emoji(newSt.e)), 'New sticker!']));
+    else if (after < STICKERS.length) {
+      var need = STARS_PER_STICKER - (S.totalStars % STARS_PER_STICKER);
+      card.append(el('p', { class: 'sub', text: need + ' more ' + (need === 1 ? 'star' : 'stars') + ' to the next sticker' }));
+    }
+    var btns = el('div', { class: 'end-btns' });
+    btns.append(el('button', { class: 'chunk btn go', text: 'Play again', onclick: function () { startRound(r.id); } }));
+    if (!r.mix) btns.append(el('button', { class: 'chunk btn', text: 'Pick a game', onclick: function () { renderRoom(G[r.id].world, true); } }));
+    if (newSt) btns.append(el('button', { class: 'chunk btn', text: 'See stickers', onclick: renderStickers }));
+    btns.append(el('button', { class: 'chunk btn', 'aria-label': 'Home', html: ICON.home, style: 'padding:8px 16px', onclick: function () { renderHome(true); } }));
+    card.append(btns);
+    show('end');
+    round = null;
+
+    var speech = title + ' You got ' + earned + ' stars!';
+    if (levelUp) speech += ' You moved up a level!';
+    if (newSt) speech += ' And a new sticker: ' + (newSt.name === 'T. rex' ? 'a T rex!' : 'a ' + newSt.name + '!');
+    SFX.fanfare();
+    if (first >= 3 || newSt || levelUp) Confetti.burst();
+    setTimeout(function () { Voice.say(speech); }, 500);
+  }
+
+  /* ---------------- grown-ups gate ---------------- */
+  var gateAns = '', gateTyped = '';
+  function openGate() {
+    var a = R.int(6, 9), b = R.int(6, 9);
+    gateAns = String(a * b); gateTyped = '';
+    $('#gate-q').textContent = a + ' × ' + b + ' = ?';
+    $('#gate-in').textContent = '';
+    $('#gate').hidden = false;
+    Voice.stop();
+  }
+  (function buildKeys() {
+    var k = $('#gate-keys');
+    ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'clear', '0', 'del'].forEach(function (d) {
+      k.append(el('button', { class: 'chunk', text: d === 'del' ? '⌫' : d === 'clear' ? 'C' : d, 'aria-label': d === 'del' ? 'Delete' : d === 'clear' ? 'Clear' : d, onclick: function () {
+        if (d === 'del') gateTyped = gateTyped.slice(0, -1);
+        else if (d === 'clear') gateTyped = '';
+        else if (gateTyped.length < 3) gateTyped += d;
+        var inp = $('#gate-in'); inp.textContent = gateTyped; inp.classList.remove('bad');
+        if (gateTyped.length >= gateAns.length && d !== 'del' && d !== 'clear') {
+          if (gateTyped === gateAns) { $('#gate').hidden = true; Cloud.pull(function () { renderParents(); }); }
+          else { void inp.offsetWidth; inp.classList.add('bad'); gateTyped = ''; setTimeout(function () { inp.textContent = ''; }, 400); }
+        }
+      } }));
+    });
+  })();
+  $('#gate-x').addEventListener('click', function () { $('#gate').hidden = true; });
+
+  /* ---------------- grown-ups page ---------------- */
+  var STATUS = { 'new': ['Not tried yet', 'new'], working: ['Working toward K goal', 'working'], meets: ['Meets K goal', 'meets'], ahead: ['Ahead of K', 'ahead'] };
+  function statusOf(g) {
+    var st = gs(g.id);
+    if (!st.q) return 'new';
+    var top = st.mastered.length ? Math.max.apply(null, st.mastered) : 0;
+    if (top < g.kGoal) return 'working';
+    var beyond = st.mastered.some(function (l) { return g.levels[l - 1] && g.levels[l - 1][1] === 'beyond'; });
+    return beyond ? 'ahead' : 'meets';
+  }
+  function weekKeys() {
+    var out = [];
+    for (var i = 6; i >= 0; i--) { var d = new Date(); d.setDate(d.getDate() - i); out.push(d); }
+    return out;
+  }
+
+  function renderParents() {
+    var w = $('#pwrap'); w.innerHTML = '';
+    var name = S.name.trim();
+    w.append(el('div', { class: 'head' }, [
+      el('button', { class: 'chunk icon-btn', 'aria-label': 'Back to games', html: ICON.home, onclick: function () { renderHome(false); } }),
+      el('h2', { text: 'Grown-ups' })
+    ]));
+
+    /* summary + week */
+    var days = weekKeys(), wq = 0, wc = 0, wd = 0, max = 1;
+    var vals = days.map(function (d) { var x = S.days[dayKey(d)] || { q: 0, c: 0, r: 0 }; wq += x.q; wc += x.c; if (x.q) wd++; max = Math.max(max, x.q); return x; });
+    var sum = el('section', { class: 'panel' });
+    sum.append(el('h3', { text: name ? name + "'s week" : 'This week' }));
+    sum.append(el('div', { class: 'summary' }, [
+      stat(wd + ' / 7', 'days played'), stat(String(wq), 'questions answered'), stat(wq ? Math.round(wc / wq * 100) + '%' : '—', 'right on the first try'),
+      stat(String(S.rounds), 'rounds all time'), stat(String(S.totalStars), 'stars · ' + stickersEarned() + ' stickers')
+    ]));
+    var week = el('div', { class: 'week', role: 'img', 'aria-label': 'Questions answered each day this week' });
+    days.forEach(function (d, i) {
+      var x = vals[i], hpct = x.q ? Math.max(6, Math.round(x.q / max * 100)) : 2;
+      week.append(el('div', { class: 'col' + (i === 6 ? ' today' : '') }, [
+        el('span', { class: 'v', text: x.q ? String(x.q) : '' }),
+        el('span', { class: 'bar' + (x.q ? '' : ' zero'), style: 'height:' + hpct + '%' }),
+        el('span', { class: 'd', text: i === 6 ? 'Today' : d.toLocaleDateString(undefined, { weekday: 'short' }) })
+      ]));
+    });
+    sum.append(week);
+    w.append(sum);
+
+    /* skills */
+    [['read', 'Reading & spelling'], ['math', 'Math']].forEach(function (pair) {
+      var p = el('section', { class: 'panel' });
+      p.append(el('h3', { text: pair[1] }));
+      if (pair[0] === 'read') p.append(el('p', { class: 'lede', text: 'Each game moves up a level after a round with 4 or 5 right on the first try, and steps back after two rough rounds in a row. You can also set the level yourself.' }));
+      GAMES.filter(function (g) { return g.world === pair[0]; }).forEach(function (g) { p.append(skillRow(g)); });
+      w.append(p);
+    });
+
+    /* settings */
+    var set = el('section', { class: 'panel' });
+    set.append(el('h3', { text: 'Settings' }));
+    var nameIn = el('input', { id: 'set-name', type: 'text', maxlength: '24', autocomplete: 'off', placeholder: 'Your child’s first name', value: S.name });
+    var nameTimer = 0;
+    nameIn.addEventListener('input', function () { S.name = nameIn.value; clearTimeout(nameTimer); nameTimer = setTimeout(function () { save(true); }, 700); });
+    set.append(el('div', { class: 'field' }, [el('label', { for: 'set-name', text: 'Name Pip says hello to' }), nameIn]));
+
+    var vs = Voice.list();
+    if (vs.length) {
+      var sel = el('select', { id: 'set-voice' });
+      sel.append(el('option', { value: '', text: 'Automatic (best available)' }));
+      vs.forEach(function (v) { var o = el('option', { value: v.name, text: v.name + ' (' + v.lang + ')' }); if (v.name === S.settings.voice) o.selected = true; sel.append(o); });
+      sel.addEventListener('change', function () { S.settings.voice = sel.value; Voice.choose(); save(true); Voice.say('Hi! I am Pip. Let’s learn together.'); });
+      set.append(el('div', { class: 'field' }, [el('label', { for: 'set-voice', text: 'Pip’s voice' }), sel]));
+    } else if (!Voice.ok) {
+      set.append(el('p', { class: 'fine', text: 'This browser can’t speak out loud, so the questions show as text only. Safari on iPad speaks them.' }));
+    }
+    set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Talking speed' }), seg([['normal', 'Normal'], ['slow', 'Slower']], S.settings.rate, function (v) { S.settings.rate = v; save(true); Voice.say('This is how fast I talk.'); })]));
+    set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Sound effects' }), seg([['on', 'On'], ['off', 'Off']], S.settings.sfx ? 'on' : 'off', function (v) { S.settings.sfx = v === 'on'; save(true); SFX.good(); })]));
+    w.append(set);
+
+    /* about */
+    var about = el('section', { class: 'panel' });
+    about.append(el('h3', { text: 'How the levels line up' }));
+    about.append(el('p', { class: 'lede', text: 'Games follow the Illinois Learning Standards for kindergarten (the Common Core codes shown on each skill). “K goal” means what a kindergartner is expected to do by the end of the school year, so in the fall most children are still working toward it. “Ahead of K” means they passed a level taken from first-grade standards.' }));
+    about.append(el('div', { class: 'legend' }, Object.keys(STATUS).map(function (k) { return el('span', { class: 'chip ' + STATUS[k][1], text: STATUS[k][0] }); })));
+    about.append(el('p', { class: 'fine', id: 'sync-line', style: 'margin:12px 0 0', text: syncText() }));
+    w.append(about);
+
+    /* reset */
+    var rs = el('section', { class: 'panel' });
+    rs.append(el('h3', { text: 'Start over' }));
+    var area = el('div', { class: 'rowbtns' });
+    function idle() {
+      area.innerHTML = '';
+      area.append(el('button', { class: 'chunk sbtn danger', text: 'Reset all progress', onclick: confirmRow }));
+    }
+    function confirmRow() {
+      area.innerHTML = '';
+      area.append(el('span', { text: 'This clears stars, stickers and levels for every game.' }));
+      area.append(el('button', { class: 'chunk sbtn danger', text: 'Yes, reset', onclick: function () {
+        var keep = { name: S.name, settings: S.settings };
+        S = freshState(); S.name = keep.name; S.settings = keep.settings; save(true); renderParents();
+      } }));
+      area.append(el('button', { class: 'chunk sbtn', text: 'Keep progress', onclick: idle }));
+    }
+    idle();
+    rs.append(area);
+    w.append(rs);
+
+    show('parents');
+    $('#s-parents').scrollTop = 0;
+  }
+  function stat(big, small) { return el('div', null, [el('b', { text: big }), el('span', { text: small })]); }
+  function seg(optsList, cur, onPick) {
+    var s = el('div', { class: 'seg', role: 'group' });
+    optsList.forEach(function (o) {
+      var b = el('button', { text: o[1], 'aria-pressed': String(o[0] === cur) });
+      b.addEventListener('click', function () { Array.prototype.forEach.call(s.children, function (x) { x.setAttribute('aria-pressed', 'false'); }); b.setAttribute('aria-pressed', 'true'); onPick(o[0]); });
+      s.append(b);
+    });
+    return s;
+  }
+  function skillRow(g) {
+    var row = el('div', { class: 'skill' });
+    function draw() {
+      row.innerHTML = '';
+      var st = gs(g.id), lvl = g.levels[st.level - 1];
+      var rec = st.recent, pct = rec.length ? Math.round(rec.reduce(function (a, b) { return a + b; }, 0) / rec.length * 100) : null;
+      var stc = STATUS[statusOf(g)];
+      row.append(el('div', null, [
+        el('div', { class: 'sk-name', text: g.name }),
+        el('div', { class: 'sk-std', text: g.std }),
+        el('div', { class: 'sk-lvl', text: 'Level ' + st.level + ' of ' + g.levels.length + ': ' + lvl[0] + (lvl[1] === 'beyond' ? ' (1st grade)' : '') })
+      ]));
+      row.append(el('div', { class: 'sk-acc' }, pct === null ? [el('span', { class: 'fine', text: 'No answers yet' })] : [
+        el('span', { text: pct + '% first try' }), el('span', { class: 'fine', text: ' · last ' + rec.length }),
+        el('div', { class: 'acc' }, el('i', { style: 'width:' + pct + '%' }))
+      ]));
+      var minus = el('button', { class: 'chunk', 'aria-label': 'Lower level', text: '−', onclick: function () { setLevel(-1); } });
+      var plus = el('button', { class: 'chunk', 'aria-label': 'Raise level', text: '+', onclick: function () { setLevel(1); } });
+      if (st.level <= 1) minus.disabled = true;
+      if (st.level >= g.levels.length) plus.disabled = true;
+      row.append(el('div', { class: 'sk-right' }, [el('span', { class: 'chip ' + stc[1], text: stc[0] }), el('div', { class: 'stepper' }, [minus, el('span', { text: 'Level ' + st.level }), plus])]));
+    }
+    function setLevel(d) {
+      var st = gs(g.id);
+      st.level = Math.min(g.levels.length, Math.max(1, st.level + d)); st.weak = 0;
+      save(true); draw();
+    }
+    draw();
+    return row;
+  }
+  function syncText() {
+    return Cloud.on ? 'Progress saves to your Claude account, so it follows you to any device where you’re signed in.' : 'Progress saves in this browser on this device.';
+  }
+
+  /* ---------------- wiring ---------------- */
+  var App = {
+    refresh: function () {
+      if (current === 'home') renderHome(false);
+      else if (current === 'room') renderRoom(roomWorld, false);
+      else if (current === 'parents') renderParents();
+    },
+    refreshSync: function () { var l = $('#sync-line'); if (l) l.textContent = syncText(); }
+  };
+
+  $('#go-btn').addEventListener('click', function () {
+    SFX.unlock();
+    renderHome(false);
+    var name = S.name.trim();
+    Voice.say("Hi" + (name ? ' ' + name : '') + "! I'm Pip. Let's play and learn. Pick a room!");
+  });
+  $('#home-bubble').addEventListener('click', function () { Voice.say($('#home-bubble').textContent); });
+  $('#room-read').addEventListener('click', function () { renderRoom('read', true); });
+  $('#room-math').addEventListener('click', function () { renderRoom('math', true); });
+  $('#mix-btn').addEventListener('click', function () { startRound('mix'); });
+  $('#stk-btn').addEventListener('click', renderStickers);
+  $('#stk-back').addEventListener('click', function () { renderHome(true); });
+  $('#room-back').addEventListener('click', function () { renderHome(true); });
+  $('#grown-btn').addEventListener('click', openGate);
+  $('#quit-btn').addEventListener('click', function () {
+    if (round && round.res.length) save(true);
+    var world = round && !round.mix ? G[round.id].world : null;
+    round = null;
+    if (world) renderRoom(world, false); else renderHome(false);
+  });
+  $('#again-btn').addEventListener('click', function () { if (round && round.q) Voice.say(round.q.say); });
+  $('#q-text').addEventListener('click', function () { if (round && round.q) Voice.say(round.q.say); });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { Voice.stop(); if (dirty) Cloud.push(); }
+  });
+
+  renderHome(false); show('splash');
+  Cloud.init();
+})();
+</script>
+
+<script>
+/* Offline support + installable app (Add to Home Screen) */
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+}
+</script>
+</body>
+</html>
