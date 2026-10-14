@@ -48,7 +48,7 @@ Needs internet (breaks car play), costs money per use, and needs a server to hid
 ## Ideas backlog
 - Record Mom & Dad cheers ("Great job!") from the Grown-ups page, played on right answers.
 - Pip says her name in praise (best after the recorded-voice upgrade).
-- More seasonal rooms: Thanksgiving (November), Winter (December–January).
+- More seasonal rooms: Valentine's Day (February), spring/Easter (March–April).
 - Player profiles so another child can have their own progress and levels.
 - Weekly progress summary to Nick's phone (could use the existing Apps Script setup), and/or
   sync progress across devices.
@@ -75,6 +75,10 @@ Needs internet (breaks car play), costs money per use, and needs a server to hid
   letter, big/small, b-d-p-q, first sounds), Bee & Flowers (numbers to 20, one more / one less).
   Bug Arcade games: Frog Snack, Firefly Night, Butterfly Painter (mirror painting, saves to the
   Art Gallery).
+- v1.9: Winter Wonderland room (shows Nov 8 – end of February; Grown-ups can switch it on or off).
+  Jingle Bell Syllables (clapping syllables), Snowball Toss (letters and sight words), Cocoa Count
+  (ten-frames: make 10, teen numbers), Light the Tree (number order, counting by tens). Winter
+  Arcade games: Snowman Maker, Snowflake Cutter, Tree Lights (memory), Santa's Sleigh.
 
 ## More game ideas (later)
 - More Foxy: Foxy steals pizza toppings or cupcake sprinkles in other Bakery games.

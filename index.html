@@ -19,7 +19,7 @@ body{margin:0;font:14px system-ui,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<!-- Pip's Treehouse v1.8.0 -->
+<!-- Pip's Treehouse v1.9.0 -->
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>Pip's Treehouse</title>
 <style>
@@ -1075,6 +1075,151 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
   .themes.five>.room-card{grid-column:span 2}
   .themes.five>.room-card:nth-child(4){grid-column:2 / span 2}
 }
+
+/* ---------- v1.9 Winter Wonderland ---------- */
+:root{--snow:#7FC4F0;--snow-tint:#E2F2FF;--flakes:radial-gradient(circle 2.6px at 14px 22px,#fff 96%,transparent),radial-gradient(circle 2px at 76px 58px,#fff 96%,transparent),radial-gradient(circle 3px at 112px 12px,#fff 96%,transparent),radial-gradient(circle 1.8px at 44px 104px,#fff 96%,transparent),radial-gradient(circle 2.4px at 98px 126px,#fff 96%,transparent)}
+.themes.six{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.themes.six .room-card.theme{flex-direction:column;justify-content:center;text-align:center;gap:2px;padding:11px 4px 8px}
+.themes.six .room-card.theme .tx{align-items:center}
+.themes.six .room-card.theme .big{font-size:clamp(28px,4.8vmin,44px);line-height:1.05}
+.themes.six .room-card.theme .name{font-size:clamp(14px,2.2vmin,20px);line-height:1.1}
+.themes.six .room-card.theme .sub{display:none}
+.themes.five .room-card.snow .name,.themes.six .room-card.snow .name{letter-spacing:-.02em}
+.room-card.snow{background:var(--flakes),linear-gradient(180deg,#E8F5FF 0%,#A9D6F5 100%);background-size:140px 140px,auto}
+.room[data-room=snow]{--room:var(--snow);--room-tint:var(--snow-tint)}
+.snowy{background:var(--flakes),linear-gradient(180deg,#E3F2FD 0%,#F3F9FF 100%);background-size:140px 140px,auto}
+.snowy .tile .thumb{background:var(--snow-tint)}
+.streak-banner.snow{background:var(--snow)}
+.adv-stop.snow .thumb{background:var(--snow-tint)}
+.arc-sec.snow{--sec:var(--snow)}
+
+/* snowy backdrop shared by the winter scenes, with gently falling snow */
+.winterscene{position:relative;flex:1;min-height:0;width:min(100%,920px);display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vmin,36px);overflow:hidden;
+  border-radius:24px;border:3px solid var(--ink);background:linear-gradient(180deg,#BFE1F7 0%,#E6F4FD 60%,#FFFFFF 60%,#EEF6FD 100%)}
+.winterscene::before{content:"";position:absolute;left:0;right:0;top:-140px;height:calc(100% + 140px);background:var(--flakes);background-size:140px 140px;opacity:.9;pointer-events:none;animation:snowfall 7s linear infinite}
+@keyframes snowfall{to{transform:translateY(140px)}}
+.winterscene>*{position:relative;z-index:1}
+.winterscene .eqsign{position:absolute;z-index:4}
+
+/* Jingle Bell Syllables */
+.bell-card{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--paper);border:3px solid var(--ink);border-radius:24px;padding:10px 26px 12px;box-shadow:0 5px 0 var(--ink)}
+.bell-pic{font-size:clamp(68px,15vmin,140px);line-height:1.05;background:none;border:0;padding:0;cursor:pointer}
+.syl-word{display:flex;align-items:baseline;font-family:var(--f-print);font-weight:700;font-size:clamp(30px,6.2vmin,58px);line-height:1.15}
+.syl{display:inline-block}
+.syl-dot{display:none;color:#E8454A;margin:0 .14em}
+.syl-word.split .syl-dot{display:inline}
+.syl.ring{color:#E8454A;animation:sylpop .42s ease}
+@keyframes sylpop{50%{transform:translateY(-12px) scale(1.15)}}
+.clap-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+.clap-bell{position:relative;width:clamp(86px,15vmin,130px);height:clamp(86px,15vmin,130px);border-radius:50%;background:#FFE9A8;display:grid;place-items:center;font-size:clamp(46px,8vmin,70px);padding:0}
+.clap-bell.ding .emoji{display:inline-block;animation:bellring .45s ease}
+@keyframes bellring{20%{transform:rotate(-16deg)}40%{transform:rotate(13deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}}
+.clap-n{position:absolute;top:-8px;right:-8px;min-width:36px;height:36px;padding:0 6px;border-radius:999px;background:var(--berry);border:3px solid var(--ink);font-family:var(--f-display);font-weight:900;font-size:21px;display:grid;place-items:center}
+.clap-n:empty{display:none}
+.clap-tip{font-family:var(--f-display);font-weight:800;font-size:clamp(14px,2.2vmin,18px);color:var(--ink-soft);text-align:center;max-width:9em}
+.bell-row{display:flex;gap:6px;font-size:clamp(44px,9vmin,84px);line-height:1.1}
+.bell-cap{font-family:var(--f-display);font-weight:900;font-size:clamp(24px,4.4vmin,40px)}
+.syl-slot{min-height:1.2em;font-size:clamp(30px,6vmin,56px)}
+.choice.bellc{gap:4px;padding:8px 12px}
+.bellset{display:flex;gap:2px;font-size:clamp(26px,4.6vmin,42px);line-height:1.1}
+.bellset[data-n="4"]{display:grid;grid-template-columns:repeat(2,auto)}
+.bell-num{font-family:var(--f-print);font-weight:700;font-size:clamp(26px,4.6vmin,40px);line-height:1}
+
+/* Snowball Toss */
+.sb-scene{align-items:flex-end}
+.winterscene .wdeco{position:absolute;z-index:0;bottom:38%;line-height:1;font-size:clamp(40px,9vmin,84px);pointer-events:none}
+.winterscene .wdeco.d1{left:5%}.winterscene .wdeco.d2{left:13%;font-size:clamp(30px,6.5vmin,60px)}.winterscene .wdeco.d3{right:7%}.winterscene .wdeco.d4{right:16%;font-size:clamp(34px,7vmin,64px);bottom:30%}
+.sb-pile{width:clamp(90px,16vmin,150px);margin-bottom:3%}
+.sb-pile svg{display:block;width:100%}
+.choice.snowc{padding:4px 6px 0;background:#EAF6FF;border-radius:22px}
+.choice.snowc .sm-sign{display:block;height:clamp(150px,30vmin,262px);width:auto}
+.sm-splat{opacity:0}
+.sm-hat{transform-box:view-box;transform-origin:80px 40px}
+.choice.snowc.hit .sm-splat{opacity:1}
+.choice.snowc.hit .sm-hat{animation:hatoff .9s ease forwards}
+@keyframes hatoff{40%{transform:translate(12px,-44px) rotate(20deg)}100%{transform:translate(22px,-26px) rotate(34deg)}}
+.sb-ball{display:block;width:100%;height:100%;border-radius:50%;background:#fff;border:3px solid var(--ink);box-shadow:inset -5px -5px 0 #D6E6F5}
+
+/* Cocoa Count */
+.trays{display:flex;gap:clamp(8px,2vmin,20px);flex-wrap:wrap;justify-content:center}
+.trays.two .tray{--c:clamp(34px,7.4vmin,66px)}
+.cafe{align-items:flex-end;padding-bottom:4%}
+.tray{--c:clamp(40px,10vmin,90px);display:grid;grid-template-columns:repeat(5,var(--c));grid-auto-rows:var(--c);gap:4px;padding:8px;background:#C98B55;border:3px solid var(--ink);border-radius:14px;box-shadow:0 5px 0 var(--ink)}
+.tcell{background:#8A5A33;border-radius:8px;display:grid;place-items:center;box-shadow:inset 0 3px 0 rgba(0,0,0,.2)}
+.mallow{width:78%;height:78%;background:#fff;border:3px solid var(--ink);border-radius:30%;display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:calc(var(--c) * .36);color:var(--ink);cursor:pointer;box-shadow:inset -4px -4px 0 #EDE3F4}
+.mallow[data-n]{background:#FFE3EF}
+.mallow.new{animation:mallowin .45s ease both}
+@keyframes mallowin{0%{transform:translateY(-40px) scale(.4);opacity:0}70%{transform:translateY(4px) scale(1.08);opacity:1}100%{transform:none;opacity:1}}
+.mug{width:clamp(86px,19vmin,170px);flex:none}
+.mug svg{display:block;width:100%}
+.mug-steam path{transform-box:fill-box}
+.mug.yum{animation:pop .5s ease}
+.mug.yum .mug-steam path{animation:steam 1.1s ease-in-out infinite}
+@keyframes steam{50%{transform:translateY(-7px)}}
+
+/* Light the Tree */
+.xtree-wrap{flex:none}
+.xtree-wrap svg{display:block;width:100%;height:100%}
+.xtree .bulb{opacity:.5}
+.xtree .tslot{transform-box:fill-box;transform-origin:center}
+.xtree .tslot.on{animation:pop .4s ease}
+.xtree-wrap.lit .bulb{opacity:1;animation:bulbblink .9s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes bulbblink{50%{opacity:.35}}
+.xtree-wrap.lit .tstar{fill:#FFD93D;animation:starshine 1.2s ease-in-out infinite}
+@keyframes starshine{50%{filter:drop-shadow(0 0 10px #FFE27A)}}
+.orn{position:relative;width:clamp(70px,12vmin,104px);height:clamp(70px,12vmin,104px);margin-top:14px;padding:0;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.75) 0 10%,transparent 11%),var(--oc)}
+.orn::before{content:"";position:absolute;top:-14px;left:50%;width:28%;height:16px;transform:translateX(-50%);background:#D9C27A;border:3px solid var(--ink);border-radius:5px}
+.orn-n{font-family:var(--f-print);font-weight:700;font-size:clamp(28px,5.6vmin,48px);line-height:1.15;color:var(--ink);background:rgba(255,255,255,.88);border-radius:999px;padding:0 .2em}
+.orn.used{visibility:hidden}
+.orn.nope{animation:shake .4s ease}
+.orn.hint{animation:glow 1.1s ease-in-out infinite}
+
+/* Snowman Maker */
+.sn-wrap{position:relative;border-radius:24px;padding:6px;background:linear-gradient(180deg,#D8EDFC,#F4FAFF)}
+.sn-holder .sn-svg{display:block;height:100%;width:auto;max-width:100%;max-height:100%}
+.sn-opt .sn-svg{display:block;width:100%;height:auto;max-height:110px}
+.sn-holder{position:relative;border-radius:20px;transition:background-color .4s}
+.sn-holder.snowing{background:#B9DBF5}
+.sn-holder.snowing::after{content:"";position:absolute;inset:0;border-radius:20px;pointer-events:none;background:var(--flakes);background-size:140px 140px;animation:snowdrift 4s linear infinite;filter:drop-shadow(0 0 1px #9FC4E4)}
+@keyframes snowdrift{to{background-position:0 140px}}
+.gal-item.sm-item{background:#D6ECFB}
+.gal-item .sn-svg{display:block;width:100%;height:auto}
+
+/* Snowflake Cutter */
+.sf-holder{min-width:0}
+.sf-pair{display:flex;align-items:center;gap:10px}
+.sf-wedge,.sf-flake{display:block;border:3px solid var(--ink);border-radius:16px;touch-action:none}
+.sf-wedge{cursor:crosshair}
+.sf-arrow{font-size:clamp(20px,4vmin,34px);color:var(--ink-soft)}
+.sf-flake.spin{animation:sfspin 1.2s ease}
+@keyframes sfspin{to{transform:rotate(360deg)}}
+.sf-pal{grid-template-columns:repeat(5,auto)}
+
+/* Tree Lights */
+.tl-box{position:relative;flex:1;min-height:0;width:min(100%,920px);display:flex;align-items:center;justify-content:center;border-radius:24px;border:3px solid var(--ink);background:radial-gradient(circle at 50% 38%,#2D4482,#121C40 78%);overflow:hidden}
+.tl-tree{position:relative;flex:none}
+.tl-tree svg{display:block;width:100%;height:100%}
+.tl-bulb{position:absolute;transform:translate(-50%,-50%);width:21%;height:24%;padding:0;border-radius:50% 50% 46% 46%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.7) 0 9%,transparent 10%),var(--bc);border:4px solid var(--ink);filter:brightness(.5) saturate(.75);transition:filter .1s,box-shadow .1s;cursor:pointer}
+.tl-box.yours .tl-bulb{filter:brightness(.78)}
+.tl-bulb.on{filter:none!important;box-shadow:0 0 0 6px rgba(255,255,255,.35),0 0 44px 16px var(--bc)}
+.tl-cap{position:absolute;top:-17%;left:50%;width:34%;height:20%;transform:translateX(-50%);background:#C9B98A;border:3px solid var(--ink);border-radius:4px}
+.tl-bulb.nope{animation:tlshake .4s ease}
+@keyframes tlshake{25%{transform:translate(-58%,-50%)}75%{transform:translate(-42%,-50%)}}
+.tl-tree.glow .tl-star{fill:#FFD93D;animation:starshine 1s ease}
+.tl-hearts{position:absolute;top:10px;left:14px;font-size:clamp(22px,4vmin,30px);display:flex;gap:4px}
+.tl-hearts .gone{opacity:.25;filter:grayscale(1)}
+.tl-msg{position:absolute;top:10px;right:16px;font-family:var(--f-display);font-weight:900;font-size:clamp(20px,4vmin,34px);color:#fff;text-shadow:0 2px 0 var(--ink)}
+
+@media (max-width:640px){
+  .themes.six{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .themes.six .room-card.theme .name{font-size:15px}
+  .sf-pair{gap:4px}
+  .sf-arrow{display:none}
+}
+@media (orientation:portrait) and (min-width:641px){
+  .themes.six{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 </style>
 </head>
 <body>
@@ -1120,6 +1265,7 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
       <button class="chunk room-card theme art" id="room-art" aria-label="Art Studio"><span class="big emoji">🎨</span><span class="tx"><span class="name">Art Studio</span><span class="sub">paint · color · draw</span></span></button>
       <button class="chunk room-card theme space" id="room-space" aria-label="Space Station"><span class="big emoji">🚀</span><span class="tx"><span class="name">Space Station</span><span class="sub">rockets · aliens · stars</span></span></button>
       <button class="chunk room-card theme bug" id="room-bug" aria-label="Bug Garden"><span class="big emoji">🐞</span><span class="tx"><span class="name">Bug Garden</span><span class="sub">ladybugs · bees · butterflies</span></span></button>
+      <button class="chunk room-card theme snow" id="room-snow" aria-label="Winter Wonderland" hidden><span class="big emoji">⛄</span><span class="tx"><span class="name">Winter Wonderland</span><span class="sub">snowmen · cocoa · Christmas</span></span></button>
       <button class="chunk room-card theme boo" id="room-boo" aria-label="Halloween Hollow" hidden><span class="big emoji">🎃</span><span class="tx"><span class="name">Halloween Hollow</span><span class="sub">ghosts · candy · spells</span></span></button>
     </div>
     <div class="extras">
@@ -1351,6 +1497,8 @@ window.PipContent = (function () {
     }
     return opts(ans, set.slice(1), function (v) { return { kind: 'num', v: v }; });
   }
+  /* shuffled, but never left in the answer order */
+  function mixed(a) { var m; do { m = R.shuffle(a); } while (a.length > 1 && m.join() === a.join()); return m; }
   function range(a, b) { var r = []; for (var i = a; i <= b; i++) r.push(i); return r; }
   function others(list, not, k) { return R.sample(list.filter(function (x) { return not.indexOf(x) < 0; }), k); }
   function letterDistractors(t, pool, k) {
@@ -2236,7 +2384,7 @@ window.PipContent = (function () {
   function genCaterpillar(lv) {
     if (lv === 4) {
       var s = R.int(0, 21), run = UP.slice(s, s + 4 + R.int(0, 1));
-      return { type: 'grow', key: run.join(''), letters: run, tiles: R.shuffle(run), text: 'Put the letters in ABC order',
+      return { type: 'grow', key: run.join(''), letters: run, tiles: mixed(run), text: 'Put the letters in ABC order',
         say: [{ t: 'Grow the caterpillar!', gap: 400 }, { t: 'Tap the letters in ABC order.', gap: 400 }, 'Start with ' + L(run[0]) + '.'],
         praise: cap(run.map(L).join(', ')) + '! What a long caterpillar!' };
     }
@@ -2313,6 +2461,113 @@ window.PipContent = (function () {
     return { type: 'bee', key: JSON.stringify(show) + n, show: show, answer: n, text: text, say: say, choices: ch, praise: praise, hint: hint };
   }
 
+
+  /* ---------- WINTER WONDERLAND ---------- */
+  /* Jingle Bell Syllables: [word, picture, written parts, spoken parts]. Spoken parts are spelled the
+     way a voice should say each part on its own ("Kriss, muss, tree"). */
+  var SYL = [
+    ['tree', '🌲', ['tree']], ['star', '⭐', ['star']], ['sled', '🛷', ['sled']], ['bell', '🔔', ['bell']], ['sock', '🧦', ['sock']], ['scarf', '🧣', ['scarf']],
+    ['boot', '🥾', ['boot']], ['moon', '🌙', ['moon']], ['elf', '🧝', ['elf']], ['ice', '🧊', ['ice']], ['bear', '🐻', ['bear']], ['fox', '🦊', ['fox']],
+    ['owl', '🦉', ['owl']], ['skate', '⛸️', ['skate']], ['gift', '🎁', ['gift']], ['coat', '🧥', ['coat']],
+    ['snowman', '⛄', ['snow', 'man']], ['reindeer', '🦌', ['rein', 'deer'], ['rain', 'deer']], ['penguin', '🐧', ['pen', 'guin'], ['pen', 'gwin']],
+    ['mitten', '🧤', ['mit', 'ten'], ['mitt', 'ten']], ['Santa', '🎅', ['San', 'ta']], ['candle', '🕯️', ['can', 'dle'], ['can', 'dull']],
+    ['cookie', '🍪', ['cook', 'ie'], ['cook', 'key']], ['snowflake', '❄️', ['snow', 'flake']], ['candy', '🍬', ['can', 'dy'], ['can', 'D']],
+    ['rabbit', '🐰', ['rab', 'bit']], ['popcorn', '🍿', ['pop', 'corn']], ['rainbow', '🌈', ['rain', 'bow'], ['rain', 'boe']], ['cupcake', '🧁', ['cup', 'cake']],
+    ['monkey', '🐒', ['mon', 'key']], ['robot', '🤖', ['ro', 'bot'], ['roe', 'bot']], ['rocket', '🚀', ['rock', 'et'], ['rock', 'it']],
+    ['Christmas tree', '🎄', ['Christ', 'mas', 'tree'], ['Kriss', 'muss', 'tree']], ['dinosaur', '🦕', ['di', 'no', 'saur'], ['die', 'no', 'sore']],
+    ['octopus', '🐙', ['oc', 'to', 'pus'], ['ock', 'toe', 'puss']], ['volcano', '🌋', ['vol', 'ca', 'no'], ['vol', 'kay', 'no']],
+    ['strawberry', '🍓', ['straw', 'ber', 'ry'], ['straw', 'bare', 'ree']], ['ladybug', '🐞', ['la', 'dy', 'bug'], ['lay', 'D', 'bug']],
+    ['unicorn', '🦄', ['u', 'ni', 'corn'], ['you', 'knee', 'corn']], ['lollipop', '🍭', ['lol', 'li', 'pop'], ['lol', 'lee', 'pop']],
+    ['hot cocoa', '☕', ['hot', 'co', 'coa'], ['hot', 'koe', 'koe']],
+    ['watermelon', '🍉', ['wa', 'ter', 'mel', 'on'], ['wah', 'ter', 'mel', 'on']], ['avocado', '🥑', ['av', 'o', 'ca', 'do'], ['av', 'oh', 'cah', 'doe']],
+    ['motorcycle', '🏍️', ['mo', 'tor', 'cy', 'cle'], ['moe', 'ter', 'sigh', 'cull']]
+  ].map(function (x) { return { word: x[0], e: x[1], parts: x[2], spoken: x[3] || x[2], n: x[2].length }; });
+  function claps(n) { return n + (n === 1 ? ' clap' : ' claps'); }
+  function sylPraise(s) { return s.spoken.map(function (p, i) { return i ? p : cap(p); }).join(', ') + '! ' + claps(s.n) + '!'; }
+  function genBells(lv) {
+    if (lv === 3) {
+      var k = R.int(1, 3), right = R.pick(SYL.filter(function (s) { return s.n === k; }));
+      var other = [1, 2, 3].filter(function (x) { return x !== k; }).map(function (m) { return R.pick(SYL.filter(function (s) { return s.n === m; })); });
+      var ch = opts(right, other, function (s) { return { kind: 'pic', e: s.e, word: s.word, label: true, syl: s.n }; });
+      return { type: 'bells', mode: 'pick', key: 'p' + k + right.word, claps: k, word: right.word, e: right.e, parts: right.parts, spoken: right.spoken,
+        text: 'Find the one with ' + claps(k), say: listParts('Find the one with ' + claps(k) + '.', ch), choices: ch,
+        praise: sylPraise(right), hint: 'Say each one and clap. Try again.' };
+    }
+    var pool = SYL.filter(function (s) { return lv === 1 ? s.n <= 2 : lv === 2 ? s.n <= 3 : s.n >= 2; });
+    if (lv === 2 && R.chance(0.5)) pool = pool.filter(function (s) { return s.n === 3; });
+    if (lv === 4 && R.chance(0.5)) pool = pool.filter(function (s) { return s.n >= 3; });
+    var s = R.pick(pool), max = lv === 4 ? 4 : 3;
+    var choices = [];
+    for (var i = 1; i <= max; i++) choices.push({ kind: 'bells', v: i, correct: i === s.n });
+    return { type: 'bells', mode: 'count', key: s.word, word: s.word, e: s.e, parts: s.parts, spoken: s.spoken, claps: s.n,
+      text: 'How many claps?', say: [{ t: cap(s.word) + '.', gap: 700 }, 'Clap the parts. How many claps?'], choices: choices,
+      praise: sylPraise(s), hint: 'Clap with me: ' + s.spoken.join(', ') + '.' };
+  }
+
+  /* Snowball Toss: throw a snowball at the snowman holding the letter or word Pip says */
+  var CAP_CONFUSE = [['B', 'D', 'P', 'R'], ['E', 'F', 'L', 'T'], ['M', 'N', 'W'], ['O', 'Q', 'C', 'G'], ['K', 'X', 'Y'], ['U', 'V', 'Y'], ['H', 'A', 'N']];
+  function genSnowball(lv) {
+    var t, ds, g, say, praise, hint, word = lv >= 3;
+    if (lv === 1) {
+      t = R.pick(UP); g = CAP_CONFUSE.filter(function (x) { return x.indexOf(t) >= 0; })[0];
+      ds = g ? R.sample(g.filter(function (c) { return c !== t; }), 1) : [];
+      while (ds.length < 2) { var c = R.pick(UP); if (c !== t && ds.indexOf(c) < 0) ds.push(c); }
+      say = 'Throw a snowball at the letter ' + L(t) + '.'; praise = 'Splat! That is ' + L(t) + '!'; hint = 'Listen. Find ' + L(t) + '.';
+    } else if (lv === 2) {
+      t = R.pick(LOW); g = CONFUSE.filter(function (x) { return x.indexOf(t) >= 0; })[0];
+      ds = g ? R.sample(g.filter(function (c) { return c !== t; }), 2) : [];
+      while (ds.length < 3) { var d = R.pick(LOW); if (d !== t && ds.indexOf(d) < 0) ds.push(d); }
+      say = 'Throw a snowball at small ' + L(t) + '.'; praise = 'Splat! That is small ' + L(t) + '!'; hint = 'Listen. Find small ' + L(t) + '.';
+    } else {
+      if (lv === 3) { t = R.pick(SW1); ds = R.sample(lookalikes(t, SW1, 10), 2); }
+      else { t = R.chance(0.5) ? R.pick(SW2) : R.pick(SW3); ds = lookalikes(t, SW1.concat(SW2, SW3), 3); }
+      say = [{ t: 'Throw a snowball at the word', gap: 450 }, t + '.']; praise = 'Splat! That word is ' + t + '.'; hint = 'Listen: ' + t + '. Look at the first letter.';
+    }
+    return { type: 'snowball', key: t, target: t, isWord: word, text: word ? 'Hit the word you hear' : lv === 1 ? 'Hit the letter you hear' : 'Hit the small letter you hear',
+      say: say, choices: opts(t, ds, function (v) { return { kind: 'snowman', v: v, isWord: word }; }), praise: praise, hint: hint };
+  }
+
+  /* Cocoa Count: marshmallow trays are ten-frames (count, make 10, teen numbers) */
+  function genCocoa(lv) {
+    var n, trays, mode, ans, say, text, praise, hint, ch, eq = null;
+    if (lv === 1) {
+      n = R.int(1, 10); trays = [n]; mode = 'count'; ans = n;
+      say = 'How many marshmallows? Count them!'; text = 'How many marshmallows?';
+      praise = n + (n === 1 ? ' marshmallow' : ' marshmallows') + '! Yum!'; hint = 'Count each marshmallow.';
+      ch = numChoices(n, 4, 1, 10);
+    } else if (lv === 2) {
+      n = R.int(1, 9); trays = [n]; mode = 'fill'; ans = 10 - n; eq = n + ' + ? = 10';
+      say = [{ t: 'A full tray holds 10 marshmallows.', gap: 400 }, 'This tray has ' + n + '. How many more to fill it?'];
+      text = 'How many more make 10?'; praise = n + ' and ' + ans + ' make 10!'; hint = 'Count the empty spots.';
+      ch = numChoices(ans, 4, 0, 10, [n]);
+    } else if (lv === 3) {
+      n = R.int(1, 9); trays = [10, n]; mode = 'teen'; ans = 10 + n; eq = '10 + ' + n + ' = ?';
+      say = [{ t: 'One tray has 10 marshmallows.', gap: 400 }, { t: 'The other tray has ' + n + '.', gap: 400 }, 'How many in all?'];
+      text = 'How many in all?'; praise = '10 and ' + n + ' make ' + ans + '!'; hint = 'Start at 10 and count on.';
+      ch = numChoices(ans, 4, 1, 20, [n]);
+    } else {
+      var T = R.int(11, 19); n = T - 10; trays = [10, 0]; mode = 'need'; ans = n; eq = '10 + ? = ' + T;
+      say = [{ t: 'Pip wants ' + T + ' marshmallows.', gap: 400 }, { t: 'One tray has 10.', gap: 400 }, 'How many more does Pip need?'];
+      text = 'How many more for ' + T + '?'; praise = '10 and ' + n + ' make ' + T + '!'; hint = 'Start at 10 and count up to ' + T + '.';
+      ch = numChoices(ans, 4, 0, 10, [10]);
+    }
+    return { type: 'cocoa', key: mode + n, mode: mode, trays: trays, n: n, answer: ans, total: mode === 'need' ? n + 10 : null, eq: eq, text: text, say: say, choices: ch, praise: praise, hint: hint };
+  }
+
+  /* Light the Tree: tap the number ornaments in order, smallest first */
+  function genTree(lv) {
+    var nums, s, say;
+    if (lv === 1) { s = R.int(1, 7); nums = [s, s + 1, s + 2, s + 3]; }
+    else if (lv === 2) { s = R.int(6, 16); nums = [s, s + 1, s + 2, s + 3, s + 4]; }
+    else if (lv === 4) { nums = R.sample(range(1, 20), 4).sort(function (a, b) { return a - b; }); }
+    else { s = R.int(1, 6) * 10; nums = [s, s + 10, s + 20, s + 30, s + 40]; }
+    if (lv === 3) say = [{ t: 'Light up the tree!', gap: 400 }, 'Count by tens. Start with ' + nums[0] + '.'];
+    else if (lv === 4) say = [{ t: 'Light up the tree!', gap: 400 }, 'Tap the numbers from smallest to biggest.'];
+    else say = [{ t: 'Light up the tree!', gap: 400 }, 'Put the ornaments in order. Start with the smallest number.'];
+    return { type: 'tree', key: nums.join(','), nums: nums, tiles: mixed(nums), byTens: lv === 3, seq: lv <= 2,
+      text: lv === 3 ? 'Count by tens' : 'Smallest to biggest', say: say,
+      praise: nums.join(', ') + '! The tree is all lit up!' };
+  }
 
   /* ---------- game catalog (Illinois Learning Standards = Common Core codes) ---------- */
   var GAMES = [
@@ -2414,7 +2669,19 @@ window.PipContent = (function () {
       levels: [['Same letter', 'start'], ['Big to small', 'k'], ['Small to big (b d p q)', 'k'], ['First sounds', 'k']] },
     { id: 'bee', world: 'bug', subj: 'math', name: 'Bee & Flowers', std: 'K.CC.3 · K.CC.4 · K.NBT.1', gen: genBee,
       thumb: '<span class="emoji">🐝</span><span class="emoji">🌼</span>',
-      levels: [['Numbers 1–5', 'start'], ['Numbers 6–10', 'k'], ['Numbers 11–20', 'k'], ['One more, one less', 'k']] }
+      levels: [['Numbers 1–5', 'start'], ['Numbers 6–10', 'k'], ['Numbers 11–20', 'k'], ['One more, one less', 'k']] },
+    { id: 'bells', world: 'snow', subj: 'read', name: 'Jingle Bell Syllables', std: 'RF.K.2b', gen: genBells,
+      thumb: '<span class="emoji">⛄</span><span class="emoji">🔔🔔</span>',
+      levels: [['Words with 1 or 2 claps', 'start'], ['Words with up to 3 claps', 'k'], ['Find the word with the claps', 'k'], ['Longer words', 'beyond']] },
+    { id: 'snowball', world: 'snow', subj: 'read', name: 'Snowball Toss', std: 'RF.K.1d · RF.K.3c', gen: genSnowball,
+      thumb: '<span class="emoji">⛄</span><span class="t-print t-sm">the</span>',
+      levels: [['Big letters', 'start'], ['Small letters', 'k'], ['Sight words', 'k'], ['More sight words', 'beyond']] },
+    { id: 'cocoa', world: 'snow', subj: 'math', name: 'Cocoa Count', std: 'K.CC.5 · K.OA.4 · K.NBT.1', gen: genCocoa,
+      thumb: '<span class="emoji">☕</span><span class="t-print t-sm">10</span>',
+      levels: [['Count to 10', 'start'], ['Make 10', 'k'], ['Teen numbers', 'k'], ['10 and how many more?', 'k']] },
+    { id: 'ornament', world: 'snow', subj: 'math', name: 'Light the Tree', std: 'K.CC.2 · K.CC.1 · K.CC.7', gen: genTree,
+      thumb: '<span class="emoji">🎄</span><span class="t-print t-sm">1 2 3</span>',
+      levels: [['Number order to 10', 'start'], ['Number order to 20', 'k'], ['Count by tens', 'k'], ['Smallest to biggest', 'beyond']] }
   ];
   GAMES.forEach(function (g) {
     var k = 0; g.levels.forEach(function (l, i) { if (l[1] === 'k') k = i; });
@@ -2425,7 +2692,7 @@ window.PipContent = (function () {
     _lists: { CVC: CVC, BLEND: BLEND, FS_CONS: FS_CONS, FS_VOW: FS_VOW, FAM: FAM, SW1: SW1, SW2: SW2, SW3: SW3, NOUNS: NOUNS, HOMO: HOMO,
       BOO_P: BOO_P, BOO_SHORT: BOO_SHORT, BOO_LONG: BOO_LONG, BOO_FIRST: BOO_FIRST, STORIES: STORIES,
       PIX: PIX, PCOL: PCOL, DOTS: DOTS, TOPS: TOPS, FROST: FROST, TOPPERS: TOPPERS, FOOD_P: FOOD_P, FOOD_SHORT: FOOD_SHORT, FOOD_LONG: FOOD_LONG,
-      SPACE_P: SPACE_P, SPACE_LONG: SPACE_LONG, STAR_SHORT: STAR_SHORT, WING_COLS: WING_COLS } };
+      SPACE_P: SPACE_P, SPACE_LONG: SPACE_LONG, STAR_SHORT: STAR_SHORT, WING_COLS: WING_COLS, SYL: SYL } };
 })();
 </script>
 
@@ -2510,7 +2777,7 @@ window.PipContent = (function () {
 
   /* ---------------- state ---------------- */
   var KEY = 'pips-treehouse-v1';
-  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, spent: 0, owned: ['c-green'], pip: { color: 'green', hat: null, extra: null }, adv: null, advDays: [], tokens: 0, arcade: { balloon: 0, match: 0, art: [], potions: [] }, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', celebrate: 'big', limit: 'none', arcade: 'on' } }; }
+  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, spent: 0, owned: ['c-green'], pip: { color: 'green', hat: null, extra: null }, adv: null, advDays: [], tokens: 0, arcade: { balloon: 0, match: 0, art: [], potions: [] }, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', winter: 'auto', celebrate: 'big', limit: 'none', arcade: 'on' } }; }
   function normalize(s) {
     var d = freshState();
     if (!s || typeof s !== 'object') return d;
@@ -2741,7 +3008,9 @@ window.PipContent = (function () {
       boing: function () { if (!on()) return; sweep(160, 640, 0, 0.18, 'sine', 0.14); sweep(640, 260, 0.18, 0.3, 'sine', 0.1); },
       hic: function () { if (!on()) return; sweep(500, 1150, 0, 0.09, 'square', 0.05); },
       rumble: function () { if (!on()) return; noise(0, 1.6, 0.3, 160, 'lowpass'); sweep(70, 40, 0, 1.6, 'sawtooth', 0.05); },
-      beam: function () { if (!on()) return; sweep(300, 900, 0, 0.35, 'sine', 0.08); sweep(900, 450, 0.3, 0.3, 'sine', 0.06); }
+      beam: function () { if (!on()) return; sweep(300, 900, 0, 0.35, 'sine', 0.08); sweep(900, 450, 0.3, 0.3, 'sine', 0.06); },
+      /* a jingle-bell note: i picks the note (C E G C E) */
+      bell: function (i) { if (!on()) return; var f = [523, 659, 784, 1047, 1319][((i || 0) % 5 + 5) % 5]; tone(f, 0, 0.5, 'triangle', 0.12); tone(f * 2.76, 0, 0.16, 'sine', 0.035); tone(f * 2, 0.02, 0.3, 'sine', 0.04); }
     };
   })();
 
@@ -2756,7 +3025,8 @@ window.PipContent = (function () {
       bake: { cols: ['#F58FC0', '#FFC43F', '#D9A066', '#FF7A62', '#9C7CF0'], emoji: ['🍪', '🧁', '🍩', '🍓', '🍕'] },
       space: { cols: ['#FFD93D', '#7FD0F5', '#B49BF5', '#FFFFFF', '#FF9EC4'], emoji: ['⭐', '🪐', '🚀', '✨', '🌙'] },
       art: { cols: COLS, emoji: ['🎨', '🖌️', '🖍️', '🌈', '⭐'] },
-      bug: { cols: ['#F0453A', '#5CC97A', '#FFD93D', '#F7A1C4', '#7FD0F5'], emoji: ['🐞', '🦋', '🐝', '🌼', '🍃'] }
+      bug: { cols: ['#F0453A', '#5CC97A', '#FFD93D', '#F7A1C4', '#7FD0F5'], emoji: ['🐞', '🦋', '🐝', '🌼', '🍃'] },
+      snow: { cols: ['#FFFFFF', '#9FD3F7', '#E8454A', '#2FA84F', '#FFD93D'], emoji: ['❄️', '⛄', '🎄', '🎁', '⭐'] }
     };
     function theme(t) { return t === true ? THEMES.boo : THEMES[t] || null; }
     function ok() {
@@ -2942,22 +3212,23 @@ window.PipContent = (function () {
     $('#stk-ic').textContent = have ? STICKERS[have - 1].e : '📖';
     var into = S.totalStars % STARS_PER_STICKER;
     $('#stk-meter').style.width = (have >= STICKERS.length ? 100 : into / STARS_PER_STICKER * 100) + '%';
-    var boo = halloweenOn();
-    $('#room-boo').hidden = !boo;
-    $('#themes').classList.toggle('four', !boo); $('#themes').classList.toggle('five', boo);
+    var boo = halloweenOn(), snow = winterOn(), nTheme = 4 + (boo ? 1 : 0) + (snow ? 1 : 0), th = $('#themes');
+    $('#room-boo').hidden = !boo; $('#room-snow').hidden = !snow;
+    th.classList.toggle('four', nTheme === 4); th.classList.toggle('five', nTheme === 5); th.classList.toggle('six', nTheme === 6);
     show('home');
     if (speak) Voice.say(greet);
   }
 
-  var ROOM_NAME = { read: 'Reading Room', math: 'Number Nook', boo: 'Halloween Hollow', bake: 'Pip’s Bakery', art: 'Art Studio', space: 'Space Station', bug: 'Bug Garden' };
+  var ROOM_NAME = { read: 'Reading Room', math: 'Number Nook', boo: 'Halloween Hollow', bake: 'Pip’s Bakery', art: 'Art Studio', space: 'Space Station', bug: 'Bug Garden', snow: 'Winter Wonderland' };
   var ROOM_SAY = { read: 'Reading Room! Pick a game.', math: 'Number Nook! Pick a game.', boo: 'Halloween Hollow! Pick a spooky game.',
-    bake: 'Pip’s Bakery! Pick a yummy game.', art: 'Art Studio! Pick a game.', space: 'Space Station! Pick a game.', bug: 'Bug Garden! Pick a buggy game.' };
+    bake: 'Pip’s Bakery! Pick a yummy game.', art: 'Art Studio! Pick a game.', space: 'Space Station! Pick a game.', bug: 'Bug Garden! Pick a buggy game.', snow: 'Winter Wonderland! Pick a game.' };
   /* each themed room has its own backdrop and celebration confetti */
   function worldClass(node, world) {
     node.classList.toggle('spooky', world === 'boo'); node.classList.toggle('spacey', world === 'space');
     node.classList.toggle('bakey', world === 'bake'); node.classList.toggle('arty', world === 'art'); node.classList.toggle('buggy', world === 'bug');
+    node.classList.toggle('snowy', world === 'snow');
   }
-  function themeOf(world) { return world === 'boo' || world === 'bake' || world === 'art' || world === 'space' || world === 'bug' ? world : null; }
+  function themeOf(world) { return world === 'boo' || world === 'bake' || world === 'art' || world === 'space' || world === 'bug' || world === 'snow' ? world : null; }
   /* Halloween games show automatically from October 1 to November 7; grown-ups can force them on or off. */
   function halloweenOn() {
     var m = S.settings.halloween || 'auto';
@@ -2966,6 +3237,15 @@ window.PipContent = (function () {
     var d = new Date();
     return d.getMonth() === 9 || (d.getMonth() === 10 && d.getDate() <= 7);
   }
+  /* Winter Wonderland shows automatically from November 8 (the day after Halloween Hollow ends) through February. */
+  function winterOn() {
+    var m = S.settings.winter || 'auto';
+    if (m === 'on') return true;
+    if (m === 'off') return false;
+    var d = new Date(), mo = d.getMonth();
+    return mo === 11 || mo === 0 || mo === 1 || (mo === 10 && d.getDate() >= 8);
+  }
+  function worldOn(w) { return w === 'boo' ? halloweenOn() : w === 'snow' ? winterOn() : true; }
   var roomWorld = 'read';
   function renderRoom(world, speak) {
     roomWorld = world;
@@ -3017,7 +3297,7 @@ window.PipContent = (function () {
 
   function startRound(id, advStop) {
     var mix = id === 'mix';
-    var pool = GAMES.filter(function (g) { return (g.world !== 'boo' || halloweenOn()) && !g.noMix; }).map(function (g) { return g.id; });
+    var pool = GAMES.filter(function (g) { return worldOn(g.world) && !g.noMix; }).map(function (g) { return g.id; });
     var ids = mix ? R.sample(pool, ROUND_LEN) : Array(ROUND_LEN).fill(id);
     round = { id: id, mix: mix, ids: ids, i: 0, res: [], keys: {}, q: null, wrong: 0, locked: false, token: 0, pos: 0, adv: advStop == null ? null : advStop, painted: {} };
     if (!mix && G[id].genRound) {
@@ -3063,6 +3343,10 @@ window.PipContent = (function () {
     else if (q.type === 'grow') renderGrow(q, stage, choices);
     else if (q.type === 'butterfly') renderButterfly(q, stage, choices);
     else if (q.type === 'bee') renderBee(q, stage, choices);
+    else if (q.type === 'bells') renderBells(q, stage, choices);
+    else if (q.type === 'snowball') renderSnowball(q, stage, choices);
+    else if (q.type === 'cocoa') renderCocoa(q, stage, choices);
+    else if (q.type === 'tree') renderTree(q, stage, choices);
     else if (q.type === 'bucket') renderBucket(q, stage, choices);
     else if (q.type === 'trace') renderTrace(q, stage, choices);
     else if (q.type === 'doors') { renderStage(q.stage, stage); renderHouse(q, stage); }
@@ -3243,6 +3527,12 @@ window.PipContent = (function () {
     }
     else if (c.kind === 'wing') { cls += ' wingc'; inner = el('span', { html: wingSVG(c.color, c.v, '', false) }); }
     else if (c.kind === 'flower') { cls += ' flowerc'; inner = el('span', { html: flowerSVG(c.color, c.v) }); }
+    else if (c.kind === 'bells') {
+      cls += ' bellc'; label = c.v + (c.v === 1 ? ' clap' : ' claps');
+      inner = el('span', { class: 'bellset', 'data-n': String(c.v) }); for (var bi = 0; bi < c.v; bi++) inner.append(emoji('🔔'));
+      inner = [inner, el('span', { class: 'bell-num', text: String(c.v) })];
+    }
+    else if (c.kind === 'snowman') { cls += ' snowc'; inner = el('span', { html: snowmanSignSVG(c.v, c.isWord, c.k || 0) }); label = String(c.v); }
     else if (c.kind === 'group') {
       cls += ' group';
       inner = el('span', { class: 'grp-in', style: '--cols:' + Math.min(c.n, 5) });
@@ -3254,7 +3544,7 @@ window.PipContent = (function () {
       for (i = 0; i < n; i++) inner.append(emoji(c.e));
       label = c.word || 'picture';
     }
-    var kids = [inner];
+    var kids = Array.isArray(inner) ? inner : [inner];
     if (c.kind === 'pic' && c.label && c.word) kids.push(el('span', { class: 'wlabel', text: c.word }));
     var b = el('button', { class: cls, 'aria-label': label }, kids);
     b._choice = c;
@@ -4384,6 +4674,183 @@ window.PipContent = (function () {
   }
 
 
+  /* ================= WINTER WONDERLAND ================= */
+  /* Jingle Bell Syllables */
+  function sylWord(parts) {
+    var w = el('div', { class: 'syl-word' });
+    parts.forEach(function (p, i) { if (i) w.append(el('span', { class: 'syl-dot', text: '·' })); w.append(el('span', { class: 'syl', text: p })); });
+    return w;
+  }
+  function ringParts(word, spoken) {
+    var syls = word.querySelectorAll('.syl');
+    word.classList.add('split');
+    Array.prototype.forEach.call(syls, function (s, i) {
+      setTimeout(function () { s.classList.add('ring'); SFX.bell(i); }, 250 + i * 420);
+    });
+  }
+  function renderBells(q, stage, choices) {
+    var card, word;
+    if (q.mode === 'count') {
+      q.choices.forEach(function (c) { choices.append(renderChoice(c)); });
+      var pic = el('button', { class: 'bell-pic', 'aria-label': 'Hear the word ' + q.word, onclick: function () { Voice.say(cap(q.word) + '.'); } }, emoji(q.e));
+      word = sylWord(q.parts);
+      var count = 0, timer = 0, badge = el('span', { class: 'clap-n', text: '' });
+      var bell = el('button', { class: 'chunk clap-bell', 'aria-label': 'Ring the bell for each clap' }, [emoji('🔔'), badge]);
+      bell.addEventListener('click', function () {
+        if (!round || round.locked) return;
+        count++; badge.textContent = String(count); bell.classList.remove('ding'); void bell.offsetWidth; bell.classList.add('ding');
+        SFX.bell(count - 1); clearTimeout(timer);
+        timer = setTimeout(function () { count = 0; badge.textContent = ''; }, 2200);
+      });
+      card = el('div', { class: 'bell-card' }, [pic, word]);
+      stage.append(el('div', { class: 'winterscene' }, winterDeco().concat([card, el('div', { class: 'clap-wrap' }, [bell, el('span', { class: 'clap-tip', text: 'Ring for each clap!' })])])));
+    } else {
+      q.choices.forEach(function (c) { choices.append(renderChoice(c)); });
+      var bells = el('div', { class: 'bell-row', 'aria-label': q.claps + ' claps' });
+      for (var i = 0; i < q.claps; i++) bells.append(emoji('🔔'));
+      word = el('div', { class: 'syl-slot' });
+      card = el('div', { class: 'bell-card pick' }, [bells, el('div', { class: 'bell-cap', text: claps(q.claps) }), word]);
+      stage.append(el('div', { class: 'winterscene' }, winterDeco().concat([card])));
+    }
+    round.onWin = function () {
+      if (q.mode === 'pick') { var w = sylWord(q.parts); word.replaceWith(w); word = w; }
+      ringParts(word);
+    };
+  }
+  function claps(n) { return n + (n === 1 ? ' clap' : ' claps'); }
+  /* pine trees on the snowy hills behind a scene */
+  function winterDeco() {
+    return [['d1', '🌲'], ['d2', '🌲'], ['d3', '🌲'], ['d4', '🦌']].map(function (d) { return el('span', { class: 'wdeco emoji ' + d[0], 'aria-hidden': 'true', text: d[1] }); });
+  }
+
+  /* Snowball Toss: the snowmen are the answer buttons */
+  var SM_HATS = ['top', 'beanie', 'santa', 'earmuffs'], SM_SCARF = ['#E8454A', '#3E7BE0', '#2FA84F', '#9C6BE0'];
+  function snowmanSignSVG(v, isWord, k) {
+    var ink = '#1D2A44', hat = SM_HATS[k % 4], sc = SM_SCARF[k % 4], s = '<svg class="sm-sign" viewBox="0 0 160 250" aria-hidden="true">';
+    s += '<g stroke="' + ink + '" stroke-width="4" fill="#fff"><circle cx="80" cy="198" r="46"/><circle cx="80" cy="128" r="35"/></g>';
+    s += '<path d="M48 120 L18 96 M112 120 L142 96" stroke="#7A4A26" stroke-width="5" stroke-linecap="round"/>';
+    s += '<g class="sm-head"><circle cx="80" cy="70" r="27" fill="#fff" stroke="' + ink + '" stroke-width="4"/><circle cx="71" cy="64" r="3.6" fill="' + ink + '"/><circle cx="89" cy="64" r="3.6" fill="' + ink + '"/>' +
+      '<path d="M80 71 L100 76 L80 79 Z" fill="#FF8A1F" stroke="' + ink + '" stroke-width="2" stroke-linejoin="round"/><path d="M69 84 Q80 91 91 84" fill="none" stroke="' + ink + '" stroke-width="3" stroke-linecap="round"/>' +
+      '<path class="sm-splat" d="M60 58 C56 48 66 42 72 50 C74 40 88 40 88 50 C96 42 106 52 98 60 C108 64 102 78 92 74 C92 86 76 86 74 76 C64 82 54 70 62 66 C52 62 54 54 60 58 Z" fill="#fff" stroke="#9FC9EA" stroke-width="2.5"/></g>';
+    s += '<path d="M54 94 Q80 106 106 94 L106 104 Q80 114 54 104 Z M92 104 L100 126 L88 128 L84 106 Z" fill="' + sc + '" stroke="' + ink + '" stroke-width="3" stroke-linejoin="round"/>';
+    var h = '';
+    if (hat === 'top') h = '<rect x="60" y="22" width="40" height="28" rx="3" fill="#2E2A3E" stroke="' + ink + '" stroke-width="3"/><rect x="50" y="46" width="60" height="8" rx="4" fill="#2E2A3E" stroke="' + ink + '" stroke-width="3"/><rect x="60" y="38" width="40" height="6" fill="' + sc + '"/>';
+    else if (hat === 'beanie') h = '<path d="M54 56 C54 30 106 30 106 56 Z" fill="' + sc + '" stroke="' + ink + '" stroke-width="3"/><rect x="52" y="50" width="56" height="10" rx="5" fill="#fff" stroke="' + ink + '" stroke-width="3"/><circle cx="80" cy="30" r="8" fill="#fff" stroke="' + ink + '" stroke-width="3"/>';
+    else if (hat === 'santa') h = '<path d="M54 54 C58 26 92 14 112 40 L104 44 C96 34 86 34 106 54 Z" fill="#E8454A" stroke="' + ink + '" stroke-width="3" stroke-linejoin="round"/><circle cx="112" cy="42" r="7" fill="#fff" stroke="' + ink + '" stroke-width="3"/><rect x="50" y="50" width="60" height="11" rx="5.5" fill="#fff" stroke="' + ink + '" stroke-width="3"/>';
+    else h = '<path d="M56 66 C56 30 104 30 104 66" fill="none" stroke="' + ink + '" stroke-width="4"/><circle cx="54" cy="68" r="10" fill="' + sc + '" stroke="' + ink + '" stroke-width="3"/><circle cx="106" cy="68" r="10" fill="' + sc + '" stroke="' + ink + '" stroke-width="3"/>';
+    s += '<g class="sm-hat">' + h + '</g>';
+    var len = String(v).length, fs = isWord ? (len <= 2 ? 50 : len <= 3 ? 44 : len <= 4 ? 36 : len <= 5 ? 30 : 26) : 58;
+    s += '<rect x="20" y="128" width="120" height="70" rx="12" fill="#F6E2B8" stroke="' + ink + '" stroke-width="4"/>';
+    s += '<text x="80" y="' + (isWord ? 176 : 182) + '" text-anchor="middle" font-family="Andika, Avenir Next, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="' + fs + '" fill="' + ink + '">' + v + '</text>';
+    s += '<circle cx="22" cy="96" r="9" fill="' + sc + '" stroke="' + ink + '" stroke-width="3"/><circle cx="138" cy="96" r="9" fill="' + sc + '" stroke="' + ink + '" stroke-width="3"/>';
+    return s + '</svg>';
+  }
+  function renderSnowball(q, stage, choices) {
+    q.choices.forEach(function (c, i) { c.k = i + R.int(0, 3); choices.append(renderChoice(c)); });
+    var pile = el('div', { class: 'sb-pile', 'aria-hidden': 'true', html: '<svg viewBox="0 0 120 70"><g fill="#fff" stroke="#1D2A44" stroke-width="3.5"><circle cx="34" cy="50" r="17"/><circle cx="86" cy="50" r="17"/><circle cx="60" cy="48" r="18"/><circle cx="48" cy="24" r="16"/><circle cx="74" cy="24" r="16"/></g></svg>' });
+    stage.append(el('div', { class: 'winterscene sb-scene' }, winterDeco().concat([pile])));
+    round.onWin = function (origin) {
+      if (!origin) return;
+      var head = origin.querySelector('.sm-head') || origin, from = centerOf(pile), to = centerOf(head);
+      SFX.whoosh();
+      if (noMotion()) { origin.classList.add('hit'); return; }
+      flyThing('<span class="sb-ball"></span>', 'fly-ck', from, to, 40, 420, function () { origin.classList.add('hit'); SFX.pop(); });
+    };
+  }
+
+  /* Cocoa Count */
+  var MUG = '<svg class="mug-svg" viewBox="0 0 150 150" aria-hidden="true"><g class="mug-steam" fill="none" stroke="#B9C7D8" stroke-width="5" stroke-linecap="round"><path d="M50 30 C40 20 60 14 50 4"/><path d="M75 30 C65 20 85 14 75 4"/><path d="M100 30 C90 20 110 14 100 4"/></g>' +
+    '<path d="M122 66 C150 64 150 112 118 108" fill="none" stroke="#1D2A44" stroke-width="14" stroke-linecap="round"/><path d="M122 66 C150 64 150 112 118 108" fill="none" stroke="#E8454A" stroke-width="7" stroke-linecap="round"/>' +
+    '<path d="M24 44 L126 44 L118 132 C116 142 108 146 98 146 L52 146 C42 146 34 142 32 132 Z" fill="#E8454A" stroke="#1D2A44" stroke-width="4" stroke-linejoin="round"/>' +
+    '<ellipse cx="75" cy="46" rx="51" ry="10" fill="#7A4A26" stroke="#1D2A44" stroke-width="4"/><g class="mug-top"></g>' +
+    '<path d="M40 80 L110 80 M44 100 L106 100" stroke="#fff" stroke-width="6" stroke-dasharray="2 12" stroke-linecap="round"/></svg>';
+  function trayEl(n, cls) {
+    var t = el('div', { class: 'tray' + (cls ? ' ' + cls : '') });
+    for (var i = 0; i < 10; i++) t.append(el('span', { class: 'tcell' }, i < n ? el('span', { class: 'mallow' }) : null));
+    return t;
+  }
+  function renderCocoa(q, stage, choices) {
+    q.choices.forEach(function (c) { choices.append(renderChoice(c)); });
+    var trays = q.trays.map(function (n, i) { return trayEl(n, i ? 'second' : ''); });
+    var mug = el('div', { class: 'mug', html: MUG });
+    var scene = el('div', { class: 'winterscene cafe' }, [el('div', { class: 'trays' + (trays.length > 1 ? ' two' : '') }, trays), mug]);
+    if (q.eq) scene.append(eqSign(q.eq));
+    stage.append(scene);
+    var counted = 0;
+    scene.addEventListener('click', function (e) {
+      var m = e.target.closest && e.target.closest('.mallow');
+      if (!m || m.getAttribute('data-n') || !round || round.locked) return;
+      counted++; m.setAttribute('data-n', counted); m.textContent = counted;
+      SFX.tick(); Voice.say(String(counted));
+    });
+    round.onWin = function () {
+      var k = 0;
+      function add(tray, upto) {
+        Array.prototype.forEach.call(tray.children, function (cell, i) {
+          if (i < upto && !cell.firstChild) { var m = el('span', { class: 'mallow new', style: 'animation-delay:' + (k++ * 90) + 'ms' }); cell.append(m); }
+        });
+      }
+      if (q.mode === 'fill') add(trays[0], 10);
+      if (q.mode === 'need') add(trays[1], q.n);
+      var top = mug.querySelector('.mug-top');
+      if (top) top.innerHTML = '<rect x="46" y="30" width="18" height="16" rx="4" fill="#fff" stroke="#1D2A44" stroke-width="3"/><rect x="68" y="26" width="18" height="16" rx="4" fill="#fff" stroke="#1D2A44" stroke-width="3" transform="rotate(12 77 34)"/><rect x="88" y="31" width="18" height="16" rx="4" fill="#fff" stroke="#1D2A44" stroke-width="3"/>';
+      mug.classList.add('yum');
+    };
+  }
+
+  /* Light the Tree */
+  var TREE_SLOTS = { 4: [[150, 104], [112, 174], [188, 174], [150, 246]], 5: [[150, 104], [114, 170], [186, 170], [104, 248], [196, 248]] };
+  var ORN_COLS = ['#E8454A', '#3E7BE0', '#FFC43F', '#9C6BE0', '#F58FC0', '#FF8A1F'];
+  function xmasTreeSVG(n) {
+    var ink = '#1D2A44', s = '<svg class="xtree" viewBox="0 0 300 340" role="img" aria-label="Christmas tree">';
+    s += '<rect x="128" y="282" width="44" height="40" rx="6" fill="#9A6234" stroke="' + ink + '" stroke-width="4"/>';
+    s += '<path d="M150 150 L42 290 L258 290 Z" fill="#2E9E4F" stroke="' + ink + '" stroke-width="5" stroke-linejoin="round"/>';
+    s += '<path d="M150 86 L64 206 L236 206 Z" fill="#38B05A" stroke="' + ink + '" stroke-width="5" stroke-linejoin="round"/>';
+    s += '<path d="M150 30 L90 128 L210 128 Z" fill="#45C067" stroke="' + ink + '" stroke-width="5" stroke-linejoin="round"/>';
+    var bulbs = [[120, 120], [150, 124], [180, 120], [92, 196], [124, 202], [176, 202], [208, 196], [70, 280], [110, 286], [150, 288], [190, 286], [230, 280]];
+    s += '<path d="M112 116 Q150 134 188 116 M84 192 Q150 218 216 192 M62 276 Q150 302 238 276" fill="none" stroke="#FFE7A0" stroke-width="2.5"/>';
+    bulbs.forEach(function (b, i) { s += '<circle class="bulb" style="--d:' + (i % 4) * 0.25 + 's" cx="' + b[0] + '" cy="' + b[1] + '" r="5.5" fill="' + ORN_COLS[i % 6] + '" stroke="' + ink + '" stroke-width="2"/>'; });
+    TREE_SLOTS[n].forEach(function (p, i) {
+      s += '<g class="tslot" data-i="' + i + '"><path d="M' + p[0] + ' ' + (p[1] - 33) + ' L' + p[0] + ' ' + (p[1] - 25) + '" stroke="' + ink + '" stroke-width="2.5"/>' +
+        '<circle class="tball" cx="' + p[0] + '" cy="' + p[1] + '" r="25" fill="rgba(255,255,255,.35)" stroke="' + ink + '" stroke-width="3" stroke-dasharray="6 5"/>' +
+        '<text class="tnum" x="' + p[0] + '" y="' + (p[1] + 9) + '" text-anchor="middle" font-family="Andika, Avenir Next, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="' + (n === 5 ? 24 : 26) + '" fill="#1D2A44"></text></g>';
+    });
+    s += '<path class="tstar" d="M150 4 L158 22 L178 23 L162 35 L168 54 L150 43 L132 54 L138 35 L122 23 L142 22 Z" fill="#E9E4D0" stroke="' + ink + '" stroke-width="4" stroke-linejoin="round"/>';
+    return s + '</svg>';
+  }
+  function renderTree(q, stage, choices) {
+    var r = round, n = q.nums.length;
+    var tree = el('div', { class: 'xtree-wrap', html: xmasTreeSVG(n) });
+    stage.append(el('div', { class: 'winterscene' }, tree));
+    var h = Math.max(160, Math.min(stage.clientHeight - 16, 440, (stage.clientWidth - 24) * 340 / 300)); tree.style.height = h + 'px'; tree.style.width = (h * 300 / 340) + 'px';
+    var slots = tree.querySelectorAll('.tslot'), cols = R.shuffle(ORN_COLS);
+    q.tiles.forEach(function (v, i) {
+      var col = cols[i % cols.length];
+      var t = el('button', { class: 'chunk orn', style: '--oc:' + col, 'aria-label': 'Ornament ' + v }, el('span', { class: 'orn-n', text: String(v) }));
+      t._v = v;
+      t.addEventListener('click', function () {
+        if (!round || r.locked || t.disabled) return;
+        var need = q.nums[r.pos];
+        if (v === need) {
+          t.disabled = true; t.classList.add('used'); t.classList.remove('hint');
+          var slot = slots[r.pos], ball = slot.querySelector('.tball');
+          slot.classList.add('on'); ball.setAttribute('fill', col); ball.removeAttribute('stroke-dasharray'); slot.querySelector('.tnum').textContent = String(v);
+          var c = centerOf(ball); FX.burst(c.x, c.y, { n: 10, speed: 5, life: 700, kinds: ['star', 'dot'], spooky: 'snow' });
+          r.pos++;
+          if (r.pos < n) { SFX.bell(r.pos - 1); Voice.say(String(v)); }
+          else { tree.classList.add('lit'); SFX.bell(4); success(tree.querySelector('.tstar')); }
+        } else {
+          r.wrong++; t.classList.remove('nope'); void t.offsetWidth; t.classList.add('nope'); SFX.bad(); pipDo('think');
+          if (r.wrong >= 2) {
+            Array.prototype.forEach.call(choices.children, function (x) { x.classList.toggle('hint', !x.disabled && x._v === need); });
+            Voice.say('Find ' + need + '.');
+          } else Voice.say(r.pos === 0 ? (q.byTens ? 'Start with ' + need + '.' : 'Find the smallest number.') : q.byTens ? 'What comes after ' + q.nums[r.pos - 1] + '? Count by tens.' : q.seq ? 'What comes after ' + q.nums[r.pos - 1] + '?' : 'Find the smallest number left.');
+        }
+      });
+      choices.append(t);
+    });
+  }
+
   function endRound() {
     var r = round, first = r.res.filter(Boolean).length, earned = first + 1;
     var before = stickersEarned();
@@ -4448,7 +4915,7 @@ window.PipContent = (function () {
     if (token) btns.append(el('button', { class: 'chunk btn bonus-btn', html: '<span class="emoji">🎟️</span> Bonus game!', onclick: function () { renderArcade(true); } }));
     btns.append(el('button', { class: 'chunk btn', 'aria-label': 'Home', html: ICON.home, style: 'padding:8px 16px', onclick: function () { renderHome(true); } }));
     card.append(btns);
-    worldClass($('#s-end'), spooky === 'boo' || spooky === 'space' ? spooky : null);
+    worldClass($('#s-end'), spooky === 'boo' || spooky === 'space' || spooky === 'snow' ? spooky : null);
     show('end');
     round = null;
 
@@ -4582,7 +5049,7 @@ window.PipContent = (function () {
 
   /* ================= DAILY ADVENTURE ================= */
   var BOO_READ = { ghosts: 1, brew: 1 };
-  function visibleGames() { return GAMES.filter(function (g) { return g.world !== 'boo' || halloweenOn(); }); }
+  function visibleGames() { return GAMES.filter(function (g) { return worldOn(g.world); }); }
   function isReading(g) { return g.subj ? g.subj === 'read' : g.world === 'read' || !!BOO_READ[g.id]; }
   function accOf(g) { var r = gs(g.id).recent; return r.length ? r.reduce(function (a, b) { return a + b; }, 0) / r.length : 0.5; }
   function pickAdventure() {
@@ -4691,16 +5158,20 @@ window.PipContent = (function () {
     { id: 'balloon', group: 'party', name: 'Balloon Pop', icon: '🎈', blurb: 'Pop as many as you can!', best: function () { return S.arcade.balloon ? 'Best: ' + S.arcade.balloon : 'No score yet'; } },
     { id: 'match', group: 'party', name: 'Sticker Match', icon: '🃏', blurb: 'Find the matching stickers', best: function () { return S.arcade.match ? 'Best: ' + S.arcade.match + ' tries' : 'No score yet'; } },
     { id: 'color', group: 'art', name: 'Color Pip’s World', icon: '🖍️', blurb: 'Color a picture', best: function () { var n = S.arcade.art.filter(function (a) { return a.page; }).length; return n + (n === 1 ? ' picture' : ' pictures') + ' saved'; } },
-    { id: 'paint', group: 'art', name: 'Paint Studio', icon: '🖌️', blurb: 'Paint anything you like', best: savedOf(function (a) { return a.img && !a.spin && !a.bf; }, 'painting', 'paintings') },
+    { id: 'paint', group: 'art', name: 'Paint Studio', icon: '🖌️', blurb: 'Paint anything you like', best: savedOf(function (a) { return a.img && !a.spin && !a.bf && !a.sf; }, 'painting', 'paintings') },
+    { id: 'snowman', group: 'snow', name: 'Snowman Maker', icon: '⛄', blurb: 'Dress up a silly snowman', best: savedOf(function (a) { return a.sm; }, 'snowman', 'snowmen') },
+    { id: 'snowflake', group: 'snow', name: 'Snowflake Cutter', icon: '❄️', blurb: 'Fold, cut and open a snowflake', best: savedOf(function (a) { return a.sf; }, 'snowflake', 'snowflakes') },
+    { id: 'lights', group: 'snow', name: 'Tree Lights', icon: '🎄', blurb: 'Copy the blinking lights', best: bestOf('lights', ' in a row') },
+    { id: 'sleigh', group: 'snow', name: 'Santa’s Sleigh', icon: '🎅', blurb: 'Drop presents down chimneys', best: bestOf('sleigh') },
     { id: 'frog', group: 'bug', name: 'Frog Snack', icon: '🐸', blurb: 'Zap the flies, skip the bees', best: bestOf('frog') },
     { id: 'firefly', group: 'bug', name: 'Firefly Night', icon: '✨', blurb: 'Catch fireflies while they glow', best: bestOf('firefly') },
     { id: 'bpaint', group: 'bug', name: 'Butterfly Painter', icon: '🦋', blurb: 'Paint a mirror butterfly', best: savedOf(function (a) { return a.bf; }, 'butterfly', 'butterflies') }
   ];
   var ARC_BY = {}; ARCADE.forEach(function (g) { ARC_BY[g.id] = g; });
-  var ARC_GROUPS = [['party', 'Party games'], ['bug', 'Bugs'], ['space', 'Space'], ['bake', 'Bakery'], ['art', 'Art'], ['boo', 'Halloween']];
+  var ARC_GROUPS = [['party', 'Party games'], ['boo', 'Halloween'], ['snow', 'Winter'], ['bug', 'Bugs'], ['space', 'Space'], ['bake', 'Bakery'], ['art', 'Art']];
   /* each themed room has a door to its own bonus games */
-  var ROOM_ARCADE = { art: ['paint', 'spin'], bake: ['cake'], space: ['rocket', 'alienpop'], boo: ['broom', 'pumpkin', 'potion'], bug: ['frog', 'firefly', 'bpaint'] };
-  function arcVisible(gm) { return gm.group !== 'boo' || halloweenOn(); }
+  var ROOM_ARCADE = { art: ['paint', 'spin'], bake: ['cake'], space: ['rocket', 'alienpop'], boo: ['broom', 'pumpkin', 'potion'], bug: ['frog', 'firefly', 'bpaint'], snow: ['snowman', 'snowflake', 'lights', 'sleigh'] };
+  function arcVisible(gm) { return worldOn(gm.group); }
   function tokenPill(node) { node.innerHTML = '<span class="emoji">🎟️</span><span>' + (S.tokens || 0) + '</span>'; }
   function renderArcade(speak) {
     tokenPill($('#arc-tokens'));
@@ -4725,6 +5196,7 @@ window.PipContent = (function () {
         if (a.img) row.append(el('div', { class: 'gal-item' }, el('img', { src: a.img, alt: 'Painting' })));
         else if (a.px && PIXD[a.px]) row.append(el('div', { class: 'gal-item', html: pixelSVG(a.px) }));
         else if (a.pk) row.append(el('div', { class: 'gal-item pk-item', html: pumpkinSVG(a.pk, true) }));
+        else if (a.sm) row.append(el('div', { class: 'gal-item sm-item', html: snowmanSVG(a.sm, true) }));
         else if (PAGES[a.page]) row.append(el('div', { class: 'gal-item', html: colorPageSVG(a.page, a.fills, true) }));
       });
       gal.append(row);
@@ -4739,7 +5211,7 @@ window.PipContent = (function () {
     S.tokens--; save(true);
     miniFrom = from || null;
     var gm = ARC_BY[id];
-    worldClass($('#s-mini'), gm.group === 'boo' || gm.group === 'space' ? gm.group : null);
+    worldClass($('#s-mini'), gm.group === 'boo' || gm.group === 'space' || gm.group === 'snow' ? gm.group : null);
     $('#mini-title').textContent = gm.name;
     $('#mini-score').textContent = '';
     $('#mini-result').hidden = true;
@@ -4752,12 +5224,13 @@ window.PipContent = (function () {
     };
     api.time(null);
     miniStop = ({ balloon: gameBalloon, match: gameMatch, color: gameColor, paint: gamePaint, rocket: gameRocket, alienpop: gameAlienPop,
-      cake: gameCake, spin: gameSpin, broom: gameBroom, pumpkin: gamePumpkin, potion: gamePotion, frog: gameFrog, firefly: gameFirefly, bpaint: gameButterflyPaint }[id])(area, api);
+      cake: gameCake, spin: gameSpin, broom: gameBroom, pumpkin: gamePumpkin, potion: gamePotion, frog: gameFrog, firefly: gameFirefly, bpaint: gameButterflyPaint,
+      snowman: gameSnowman, snowflake: gameSnowflake, lights: gameLights, sleigh: gameSleigh }[id])(area, api);
   }
   function finishMini(id, res) {
     miniStop = null;
     var best = '';
-    var HIGH = { balloon: 'New best score!', rocket: 'New best score!', alienpop: 'New best score!', broom: 'New best score!', cake: 'Tallest cake yet!', frog: 'New best score!', firefly: 'Most fireflies yet!' };
+    var HIGH = { balloon: 'New best score!', rocket: 'New best score!', alienpop: 'New best score!', broom: 'New best score!', cake: 'Tallest cake yet!', frog: 'New best score!', firefly: 'Most fireflies yet!', lights: 'Longest pattern yet!', sleigh: 'Most presents yet!' };
     if (HIGH[id] && res.score > (S.arcade[id] || 0)) { S.arcade[id] = res.score; best = HIGH[id]; }
     if (id === 'match') { if (!S.arcade.match || res.score < S.arcade.match) { S.arcade.match = res.score; best = 'New best!'; } }
     save(true);
@@ -5875,6 +6348,358 @@ window.PipContent = (function () {
   }
 
 
+  /* ---- Snowman Maker: dress up a snowman (hat, face, nose, scarf, arms, buttons); saves to the gallery ---- */
+  var SN_OPTS = { hat: ['top', 'beanie', 'santa', 'crown', 'earmuffs', 'none'], face: ['coal', 'happy', 'googly', 'wink', 'sleepy', 'silly'],
+    nose: ['carrot', 'long', 'button', 'cherry'], scarf: ['red', 'blue', 'green', 'rainbow', 'striped', 'none'],
+    arms: ['sticks', 'wave', 'mittens', 'none'], buttons: ['coal', 'candy', 'hearts', 'stars', 'none'] };
+  /* the option buttons zoom in on the part they change */
+  var SN_VIEW = { hat: '60 -48 180 190', face: '80 10 140 120', nose: '80 10 150 120', scarf: '70 40 160 170', arms: '0 40 300 220', buttons: '70 96 160 160' };
+  function snowmanSVG(c, thumb, view) {
+    var ink = '#1D2A44', k = ' stroke="' + ink + '" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"';
+    var s = '<svg class="sn-svg' + (thumb ? ' color-svg' : '') + '" viewBox="' + (view || '0 -44 300 430') + '" role="img" aria-label="Snowman">';
+    s += '<ellipse cx="150" cy="372" rx="140" ry="16" fill="#E6F3FF"' + k + '/>';
+    var stick = ' fill="none" stroke="#7A4A26" stroke-width="7" stroke-linecap="round"';
+    var lArm = '<path d="M98 168 L30 120 M54 137 L40 112 M54 137 L26 140"' + stick + '/>';
+    var rArm = c.arms === 'wave' ? '<path d="M202 160 L262 90 M240 116 L266 116 M240 116 L236 92"' + stick + '/>' : '<path d="M202 168 L270 120 M246 137 L260 112 M246 137 L274 140"' + stick + '/>';
+    if (c.arms !== 'none') s += lArm + rArm;
+    if (c.arms === 'mittens') s += '<circle cx="28" cy="118" r="15" fill="#E8454A"' + k + '/><circle cx="272" cy="118" r="15" fill="#E8454A"' + k + '/><circle cx="20" cy="106" r="7" fill="#E8454A"' + k + '/><circle cx="280" cy="106" r="7" fill="#E8454A"' + k + '/>';
+    s += '<circle cx="150" cy="292" r="84" fill="#FFFFFF"' + k + '/><circle cx="150" cy="172" r="62" fill="#FFFFFF"' + k + '/>';
+    s += '<path d="M96 300 Q104 240 140 222" fill="none" stroke="#DCEBF7" stroke-width="10" stroke-linecap="round"/><path d="M106 176 Q110 140 136 128" fill="none" stroke="#DCEBF7" stroke-width="8" stroke-linecap="round"/>';
+    function btn(y, i) {
+      var x = 150;
+      if (c.buttons === 'coal') return '<circle cx="' + x + '" cy="' + y + '" r="8" fill="#2E2A3E"/>';
+      if (c.buttons === 'candy') return '<circle cx="' + x + '" cy="' + y + '" r="10" fill="' + ['#E8454A', '#3DB85C', '#3E7BE0'][i] + '"' + k + ' stroke-width="3"/>';
+      if (c.buttons === 'hearts') return '<path d="M' + x + ' ' + (y + 9) + ' C' + (x - 14) + ' ' + (y - 1) + ' ' + (x - 7) + ' ' + (y - 11) + ' ' + x + ' ' + (y - 4) + ' C' + (x + 7) + ' ' + (y - 11) + ' ' + (x + 14) + ' ' + (y - 1) + ' ' + x + ' ' + (y + 9) + ' Z" fill="#F58FC0"' + k + ' stroke-width="3"/>';
+      if (c.buttons === 'stars') { var p = []; for (var j = 0; j < 10; j++) { var a = -Math.PI / 2 + j * Math.PI / 5, rr = j % 2 ? 5 : 12; p.push((x + Math.cos(a) * rr).toFixed(1) + ',' + (y + Math.sin(a) * rr).toFixed(1)); } return '<polygon points="' + p.join(' ') + '" fill="#FFD93D"' + k + ' stroke-width="3"/>'; }
+      return '';
+    }
+    s += btn(150, 0) + btn(184, 1) + btn(218, 2);
+    s += '<circle cx="150" cy="76" r="50" fill="#FFFFFF"' + k + '/>';
+    if (c.scarf !== 'none') {
+      var col = { red: '#E8454A', blue: '#3E7BE0', green: '#2FA84F', rainbow: 'url(#snr)', striped: '#E8454A' }[c.scarf];
+      s += '<defs><linearGradient id="snr" x1="0" x2="1"><stop offset="0" stop-color="#FF5A4E"/><stop offset=".25" stop-color="#FFD93D"/><stop offset=".5" stop-color="#4CBA68"/><stop offset=".75" stop-color="#5AA9EC"/><stop offset="1" stop-color="#9C6BE0"/></linearGradient></defs>';
+      s += '<path d="M182 124 L196 186 L172 190 L166 132 Z" fill="' + col + '"' + k + ' stroke-width="3.5"/>';
+      s += '<path d="M100 112 Q150 136 200 112 L202 130 Q150 156 98 130 Z" fill="' + col + '"' + k + ' stroke-width="3.5"/>';
+      if (c.scarf === 'striped') s += '<path d="M120 124 L118 140 M150 132 L150 148 M180 124 L182 140 M170 152 L190 150 M172 168 L194 166" stroke="#fff" stroke-width="6"/>';
+    }
+    var face = '';
+    switch (c.face) {
+      case 'happy': face = '<path d="M124 68 Q132 58 140 68 M160 68 Q168 58 176 68" fill="none"' + k + '/>'; break;
+      case 'googly': face = '<circle cx="132" cy="64" r="13" fill="#fff"' + k + ' stroke-width="3"/><circle cx="168" cy="64" r="13" fill="#fff"' + k + ' stroke-width="3"/><circle cx="135" cy="68" r="6" fill="' + ink + '"/><circle cx="165" cy="60" r="6" fill="' + ink + '"/>'; break;
+      case 'wink': face = '<circle cx="133" cy="64" r="6" fill="' + ink + '"/><path d="M160 66 Q168 58 176 66"' + k + ' fill="none"/>'; break;
+      case 'sleepy': face = '<path d="M124 64 Q132 72 140 64 M160 64 Q168 72 176 64" fill="none"' + k + '/><text x="196" y="40" font-family="Grandstander, sans-serif" font-weight="900" font-size="22" fill="#5AA9EC">z</text><text x="210" y="22" font-family="Grandstander, sans-serif" font-weight="900" font-size="16" fill="#5AA9EC">z</text>'; break;
+      case 'silly': face = '<circle cx="133" cy="62" r="7" fill="' + ink + '"/><circle cx="168" cy="66" r="10" fill="#fff"' + k + ' stroke-width="3"/><circle cx="168" cy="66" r="4" fill="' + ink + '"/>'; break;
+      default: face = '<circle cx="133" cy="64" r="6.5" fill="' + ink + '"/><circle cx="167" cy="64" r="6.5" fill="' + ink + '"/>';
+    }
+    var mouth = c.face === 'silly' ? '<path d="M128 98 Q150 116 172 98" fill="none"' + k + '/><path d="M150 106 Q152 124 162 118 Q166 110 160 104" fill="#FF8FAB"' + k + ' stroke-width="3"/>'
+      : c.face === 'happy' || c.face === 'wink' ? '<path d="M126 96 Q150 122 174 96 Z" fill="#5A1E2E"' + k + ' stroke-width="3.5"/>'
+      : c.face === 'sleepy' ? '<ellipse cx="150" cy="104" rx="7" ry="5" fill="' + ink + '"/>'
+      : '<circle cx="128" cy="96" r="4" fill="' + ink + '"/><circle cx="138" cy="103" r="4" fill="' + ink + '"/><circle cx="150" cy="106" r="4" fill="' + ink + '"/><circle cx="162" cy="103" r="4" fill="' + ink + '"/><circle cx="172" cy="96" r="4" fill="' + ink + '"/>';
+    var nose = c.nose === 'long' ? '<path d="M150 76 L222 90 L150 90 Z" fill="#FF8A1F"' + k + ' stroke-width="3"/>'
+      : c.nose === 'button' ? '<circle cx="150" cy="82" r="9" fill="#2E2A3E"/>'
+      : c.nose === 'cherry' ? '<circle cx="150" cy="82" r="11" fill="#E8454A"' + k + ' stroke-width="3"/><circle cx="146" cy="78" r="3" fill="#fff"/>'
+      : '<path d="M150 76 L186 86 L150 90 Z" fill="#FF8A1F"' + k + ' stroke-width="3"/>';
+    var cheeks = '<circle cx="120" cy="86" r="7" fill="#FF8FAB" opacity=".6"/><circle cx="180" cy="86" r="7" fill="#FF8FAB" opacity=".6"/>';
+    var hat = '';
+    switch (c.hat) {
+      case 'top': hat = '<rect x="112" y="-18" width="76" height="56" rx="5" fill="#2E2A3E"' + k + '/><rect x="94" y="32" width="112" height="13" rx="6" fill="#2E2A3E"' + k + '/><rect x="112" y="18" width="76" height="11" fill="#E8454A"/>'; break;
+      case 'beanie': hat = '<path d="M104 52 C100 0 200 0 196 52 Z" fill="#3E7BE0"' + k + '/><path d="M118 20 L118 46 M138 10 L138 46 M162 10 L162 46 M182 20 L182 46" stroke="#5AA9EC" stroke-width="6"/><rect x="98" y="42" width="104" height="18" rx="9" fill="#fff"' + k + '/><circle cx="150" cy="2" r="14" fill="#fff"' + k + '/>'; break;
+      case 'santa': hat = '<path d="M102 50 C106 4 168 -18 214 26 L200 34 C186 18 166 20 196 50 Z" fill="#E8454A"' + k + '/><circle cx="214" cy="30" r="13" fill="#fff"' + k + '/><rect x="96" y="40" width="108" height="20" rx="10" fill="#fff"' + k + '/>'; break;
+      case 'crown': hat = '<path d="M112 42 L112 0 L131 20 L150 -10 L169 20 L188 0 L188 42 Z" fill="#FFC43F"' + k + '/><circle cx="131" cy="34" r="5" fill="#E8649A"/><circle cx="150" cy="30" r="6" fill="#5AA9EC"/><circle cx="169" cy="34" r="5" fill="#4CBA68"/>'; break;
+      case 'earmuffs': hat = '<path d="M104 70 C100 14 200 14 196 70" fill="none" stroke="' + ink + '" stroke-width="7"/><path d="M104 70 C100 14 200 14 196 70" fill="none" stroke="#9C6BE0" stroke-width="3"/><circle cx="102" cy="74" r="18" fill="#F58FC0"' + k + '/><circle cx="198" cy="74" r="18" fill="#F58FC0"' + k + '/>'; break;
+    }
+    return s + face + cheeks + mouth + nose + hat + '</svg>';
+  }
+  function gameSnowman(area, api) {
+    var cfg = { hat: 'top', face: 'coal', nose: 'carrot', scarf: 'red', arms: 'sticks', buttons: 'coal' }, tab = 'hat', over = false, snowing = false;
+    var holder = el('div', { class: 'cholder sn-holder' }), side = el('div', { class: 'cside pk-side' });
+    var wrap = el('div', { class: 'cwrap sn-wrap' }, [holder, side]); area.append(wrap);
+    var tabs = el('div', { class: 'shop-tabs', role: 'group', 'aria-label': 'Parts' }), grid = el('div', { class: 'pk-grid' });
+    var TABS = [['hat', 'Hat', '🎩'], ['face', 'Face', '😊'], ['nose', 'Nose', '🥕'], ['scarf', 'Scarf', '🧣'], ['arms', 'Arms', '🧤'], ['buttons', 'Buttons', '🔘']];
+    var FUN = ['So cute!', 'Brrr!', 'Ha ha!', 'I love it!', 'Snow cool!', 'Looking good!'];
+    function draw() { holder.innerHTML = snowmanSVG(cfg); }
+    function drawSide() {
+      tabs.innerHTML = '';
+      TABS.forEach(function (t) { tabs.append(el('button', { class: 'shop-tab' + (tab === t[0] ? ' on' : ''), 'aria-pressed': String(tab === t[0]), onclick: function () { tab = t[0]; drawSide(); SFX.tick(); } }, [el('span', { class: 'emoji', text: t[2] }), t[1]])); });
+      grid.innerHTML = '';
+      SN_OPTS[tab].forEach(function (o) {
+        var look = Object.assign({}, cfg); look[tab] = o;
+        grid.append(el('button', { class: 'chunk pk-opt sn-opt' + (cfg[tab] === o ? ' on' : ''), 'aria-label': tab + ' ' + o, html: snowmanSVG(look, false, SN_VIEW[tab]), onclick: function () { cfg[tab] = o; draw(); drawSide(); SFX.pop(); Voice.say(R.pick(FUN)); } }));
+      });
+    }
+    var snowBtn = el('button', { class: 'chunk btn', html: '<span class="emoji">❄️</span> Let it snow!' });
+    snowBtn.addEventListener('click', function () {
+      snowing = !snowing; holder.classList.toggle('snowing', snowing);
+      snowBtn.innerHTML = snowing ? '<span class="emoji">☀️</span> Stop snow' : '<span class="emoji">❄️</span> Let it snow!';
+      if (snowing) { SFX.streak(); Voice.say('Let it snow!'); } else SFX.tick();
+    });
+    side.append(tabs, grid, el('div', { class: 'end-btns' }, [
+      el('button', { class: 'chunk btn', html: '<span class="emoji">🎲</span> Surprise!', onclick: function () { Object.keys(SN_OPTS).forEach(function (k) { cfg[k] = R.pick(SN_OPTS[k]); }); draw(); drawSide(); SFX.pop(); Voice.say(R.pick(FUN)); } }),
+      snowBtn,
+      el('button', { class: 'chunk btn go', text: 'All done!', onclick: function () {
+        if (over) return; over = true;
+        addArt({ sm: Object.assign({}, cfg), date: dayKey() });
+        api.end({ title: 'What a snowman!', text: 'Your snowman is in the Art Gallery.' });
+      } })]));
+    draw(); drawSide();
+    Voice.say('Snowman Maker! Pick a hat, a face, a nose, a scarf, arms and buttons.');
+    return function () { over = true; };
+  }
+
+  /* ---- Snowflake Cutter: cut the folded paper and the whole snowflake appears (12-way mirror) ---- */
+  function gameSnowflake(area, api) {
+    var PAPERS = ['#FFFFFF', '#CDEBFF', '#FFD6E8', '#E3D9FF', '#FFF3B0'], paper = PAPERS[0], size = 1, tool = 'cut', over = false;
+    var holder = el('div', { class: 'cholder sf-holder' }), side = el('div', { class: 'cside' });
+    var wrap = el('div', { class: 'cwrap' }, [holder, side]); area.append(wrap);
+    var tools = el('div', { class: 'ptools', role: 'group', 'aria-label': 'Cutters' });
+    [['cut', '✂️', 'Scissors'], ['circle', '⚪', 'Circle punch'], ['heart', '🤍', 'Heart punch'], ['star', '⭐', 'Star punch']].forEach(function (t, i) {
+      var b = el('button', { class: 'chunk ptool' + (i === 0 ? ' on' : ''), 'aria-label': t[2] }, el('span', { class: 'emoji', text: t[1] }));
+      b.addEventListener('click', function () { tool = t[0]; Array.prototype.forEach.call(tools.children, function (x) { x.classList.remove('on'); }); b.classList.add('on'); SFX.tick(); });
+      tools.append(b);
+    });
+    var sizes = el('div', { class: 'psizes', role: 'group', 'aria-label': 'Cutter size' });
+    [0, 1, 2].forEach(function (i) {
+      var b = el('button', { class: 'chunk psize' + (i === size ? ' on' : ''), 'aria-label': ['Small', 'Medium', 'Big'][i] + ' cutter' }, el('i', { style: 'width:' + (6 + i * 7) + 'px;height:' + (6 + i * 7) + 'px' }));
+      b.addEventListener('click', function () { size = i; Array.prototype.forEach.call(sizes.children, function (x) { x.classList.remove('on'); }); b.classList.add('on'); SFX.tick(); });
+      sizes.append(b);
+    });
+    var pal = el('div', { class: 'cpal sf-pal', role: 'group', 'aria-label': 'Paper colors' });
+    PAPERS.forEach(function (c, i) {
+      var b = el('button', { class: 'crayon' + (i === 0 ? ' on' : ''), style: 'background:' + c, 'aria-label': 'Paper color' });
+      b.addEventListener('click', function () { paper = c; Array.prototype.forEach.call(pal.children, function (x) { x.classList.remove('on'); }); b.classList.add('on'); recolor(); SFX.tick(); });
+      pal.append(b);
+    });
+    side.append(tools, sizes, pal, el('div', { class: 'end-btns' }, [
+      el('button', { class: 'chunk btn', text: 'New paper', onclick: function () { blank(); paint(); SFX.tick(); } }),
+      el('button', { class: 'chunk btn go', text: 'All done!', onclick: done })]));
+    /* the paper lives on a square mask; the wedge is the folded part (30 degrees, pointing up) */
+    var M = 800, C = M / 2, RAD = M * 0.47, A0 = -105 * Math.PI / 180, A1 = -75 * Math.PI / 180, SIN = Math.sin(15 * Math.PI / 180);
+    var bx = C - RAD * SIN - 6, by = C - RAD - 6, bw = RAD * SIN * 2 + 12, bh = RAD + 12;
+    var mask = document.createElement('canvas'); mask.width = M; mask.height = M; var mc = mask.getContext('2d');
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    var HW = Math.max(240, holder.clientWidth - 6), HH = Math.max(200, holder.clientHeight - 6);
+    var unitH = Math.min(HH, HW / (bw / bh + 1 + 0.08)), wW = Math.round(unitH * bw / bh), fS = Math.round(unitH);
+    var wcv = el('canvas', { class: 'sf-wedge', 'aria-label': 'Folded paper to cut' }), fcv = el('canvas', { class: 'sf-flake', 'aria-label': 'Your snowflake' });
+    holder.append(el('div', { class: 'sf-pair' }, [wcv, el('span', { class: 'sf-arrow', 'aria-hidden': 'true', text: '➜' }), fcv]));
+    wcv.width = Math.round(wW * dpr); wcv.height = Math.round(unitH * dpr); wcv.style.width = wW + 'px'; wcv.style.height = Math.round(unitH) + 'px';
+    fcv.width = Math.round(fS * dpr); fcv.height = Math.round(fS * dpr); fcv.style.width = fS + 'px'; fcv.style.height = fS + 'px';
+    var wc = wcv.getContext('2d'), fc = fcv.getContext('2d');
+    function wedge(c2, ext) { var e = ext ? 0.02 : 0; c2.beginPath(); c2.moveTo(C, C); c2.arc(C, C, RAD, A0 - e, A1 + e); c2.closePath(); }
+    /* the paper reaches a hair past the folds so the copies overlap and no seams show */
+    function blank() { mc.globalCompositeOperation = 'source-over'; mc.clearRect(0, 0, M, M); mc.fillStyle = paper; wedge(mc, true); mc.fill(); }
+    function recolor() { mc.globalCompositeOperation = 'source-in'; mc.fillStyle = paper; mc.fillRect(0, 0, M, M); mc.globalCompositeOperation = 'source-over'; paint(); }
+    var queued = false;
+    function paint() { if (queued) return; queued = true; requestAnimationFrame(function () { queued = false; drawWedge(); drawFlake(fc, fS * dpr); }); }
+    function drawWedge() {
+      var s = wcv.width / bw;
+      wc.setTransform(1, 0, 0, 1, 0, 0); wc.fillStyle = '#2B4C7E'; wc.fillRect(0, 0, wcv.width, wcv.height);
+      wc.setTransform(s, 0, 0, s, -bx * s, -by * s);
+      wc.drawImage(mask, 0, 0);
+      wc.setLineDash([10, 10]); wc.lineWidth = 3 / s * dpr; wc.strokeStyle = 'rgba(255,255,255,.55)'; wedge(wc); wc.stroke(); wc.setLineDash([]);
+    }
+    function drawFlake(c2, px, bg) {
+      var s = px / M;
+      c2.setTransform(1, 0, 0, 1, 0, 0); c2.fillStyle = bg || '#1E3A66'; c2.fillRect(0, 0, px, px);
+      for (var k = 0; k < 6; k++) for (var m = 0; m < 2; m++) {
+        c2.save(); c2.setTransform(s, 0, 0, s, 0, 0);
+        c2.translate(C, C); c2.rotate(k * Math.PI / 3);
+        if (m) { c2.rotate(A1); c2.scale(1, -1); c2.rotate(-A1); }
+        c2.translate(-C, -C); c2.drawImage(mask, 0, 0); c2.restore();
+      }
+    }
+    function toMask(e) { var b = wcv.getBoundingClientRect(); return { x: bx + (e.clientX - b.left) / b.width * bw, y: by + (e.clientY - b.top) / b.height * bh }; }
+    function rad() { return [RAD * 0.03, RAD * 0.055, RAD * 0.09][size]; }
+    function punch(p) {
+      var r = rad() * 1.5;
+      mc.globalCompositeOperation = 'destination-out'; mc.fillStyle = '#000'; mc.beginPath();
+      if (tool === 'circle') mc.arc(p.x, p.y, r, 0, 6.283);
+      else if (tool === 'heart') { mc.moveTo(p.x, p.y + r * 0.9); mc.bezierCurveTo(p.x - r * 1.4, p.y - r * 0.1, p.x - r * 0.7, p.y - r * 1.1, p.x, p.y - r * 0.35); mc.bezierCurveTo(p.x + r * 0.7, p.y - r * 1.1, p.x + r * 1.4, p.y - r * 0.1, p.x, p.y + r * 0.9); }
+      else { for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; mc.lineTo(p.x + Math.cos(a) * rr, p.y + Math.sin(a) * rr); } mc.closePath(); }
+      mc.fill(); mc.globalCompositeOperation = 'source-over'; paint(); SFX.pop();
+    }
+    function cut(a, b) {
+      mc.globalCompositeOperation = 'destination-out'; mc.strokeStyle = '#000'; mc.lineWidth = rad() * 2; mc.lineCap = 'round';
+      mc.beginPath(); mc.moveTo(a.x, a.y); mc.lineTo(b.x + 0.01, b.y); mc.stroke(); mc.globalCompositeOperation = 'source-over'; paint();
+    }
+    var down = false, last = null, snips = 0;
+    wcv.addEventListener('pointerdown', function (e) {
+      if (over) return; e.preventDefault(); try { wcv.setPointerCapture(e.pointerId); } catch (x) {}
+      var p = toMask(e); if (tool !== 'cut') { punch(p); return; }
+      down = true; last = p; cut(p, p);
+    });
+    wcv.addEventListener('pointermove', function (e) {
+      if (!down) return; e.preventDefault(); var p = toMask(e); cut(last, p); last = p;
+      if (++snips % 14 === 0) SFX.tick();
+    });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (ev) { wcv.addEventListener(ev, function () { down = false; }); });
+    function done() {
+      if (over) return; over = true;
+      fcv.classList.add('spin'); SFX.streak(); Voice.say('Wow! What a beautiful snowflake!');
+      setTimeout(function () {
+        var out = document.createElement('canvas'); out.width = 320; out.height = 320;
+        drawFlake(out.getContext('2d'), 320, '#1E3A66');
+        var img = ''; try { img = out.toDataURL('image/jpeg', 0.8); } catch (e) {}
+        if (img) addArt({ img: img, sf: true, date: dayKey() });
+        api.end({ title: 'Snowflake magic!', text: 'Your snowflake is in the Art Gallery.' });
+      }, 1300);
+    }
+    blank(); paint();
+    Voice.say('Snowflake Cutter! Cut the folded paper with your finger, and watch your snowflake appear!');
+    return function () { over = true; };
+  }
+
+  /* ---- Tree Lights: watch the lights blink, then tap them in the same order (3 tries) ---- */
+  var TL_COLS = ['#FF4D5E', '#FFD23F', '#4DA3FF', '#B57BFF'];
+  function lightsTreeSVG() {
+    var ink = '#1D2A44', s = '<svg class="tl-svg" viewBox="0 0 300 330" aria-hidden="true">';
+    s += '<rect x="130" y="286" width="40" height="38" rx="6" fill="#9A6234" stroke="' + ink + '" stroke-width="4"/>';
+    s += '<path d="M150 146 L40 292 L260 292 Z" fill="#2E9E4F" stroke="' + ink + '" stroke-width="5" stroke-linejoin="round"/>';
+    s += '<path d="M150 84 L62 206 L238 206 Z" fill="#38B05A" stroke="' + ink + '" stroke-width="5" stroke-linejoin="round"/>';
+    s += '<path d="M150 30 L88 128 L212 128 Z" fill="#45C067" stroke="' + ink + '" stroke-width="5" stroke-linejoin="round"/>';
+    s += '<path class="tl-star" d="M150 2 L158 20 L178 21 L162 33 L168 52 L150 41 L132 52 L138 33 L122 21 L142 20 Z" fill="#E9E4D0" stroke="' + ink + '" stroke-width="4" stroke-linejoin="round"/>';
+    return s + '</svg>';
+  }
+  function gameLights(area, api) {
+    var POS = [[50, 36], [33, 60], [67, 60], [50, 82]];
+    var box = el('div', { class: 'tl-box' }), tree = el('div', { class: 'tl-tree', html: lightsTreeSVG() });
+    var hearts = el('div', { class: 'tl-hearts', 'aria-label': '3 tries' }), msg = el('div', { class: 'tl-msg', text: 'Watch!' });
+    box.append(tree, hearts, msg); area.append(box);
+    var h = Math.max(220, Math.min(area.clientHeight - 20, 620)); tree.style.height = h + 'px'; tree.style.width = (h * 300 / 330) + 'px';
+    var bulbs = POS.map(function (p, i) {
+      var b = el('button', { class: 'tl-bulb', style: 'left:' + p[0] + '%;top:' + p[1] + '%;--bc:' + TL_COLS[i], 'aria-label': ['Red', 'Yellow', 'Blue', 'Purple'][i] + ' light' }, el('span', { class: 'tl-cap' }));
+      b.addEventListener('pointerdown', function (e) { e.preventDefault(); tap(i); });
+      tree.append(b); return b;
+    });
+    var seq = [], step = 0, phase = 'wait', score = 0, tries = 3, over = false, timers = [];
+    function later(fn, ms) { timers.push(setTimeout(function () { if (!over) fn(); }, ms)); }
+    function drawHearts() { hearts.innerHTML = ''; for (var i = 0; i < 3; i++) hearts.append(el('span', { class: 'emoji' + (i < tries ? '' : ' gone'), text: '❤️' })); }
+    function flash(i, ms) { var b = bulbs[i]; b.classList.add('on'); SFX.bell(i); later(function () { b.classList.remove('on'); }, ms || 380); }
+    function playSeq() {
+      phase = 'watch'; step = 0; msg.textContent = 'Watch!'; box.classList.remove('yours');
+      var gap = Math.max(430, 760 - seq.length * 30);
+      seq.forEach(function (x, k) { later(function () { flash(x, gap * 0.62); }, 500 + k * gap); });
+      later(function () { phase = 'play'; msg.textContent = 'Your turn!'; box.classList.add('yours'); if (seq.length <= 3) Voice.say('Your turn!'); }, 500 + seq.length * gap);
+    }
+    function grow() { seq.push(R.int(0, 3)); playSeq(); }
+    function tap(i) {
+      if (over || phase !== 'play') return;
+      flash(i, 260);
+      if (i === seq[step]) {
+        step++;
+        if (step === seq.length) {
+          phase = 'wait'; score = seq.length; api.score(score); box.classList.remove('yours');
+          tree.classList.remove('glow'); void tree.offsetWidth; tree.classList.add('glow');
+          var c = centerOf(tree.querySelector('.tl-star')); FX.burst(c.x, c.y, { n: 18, speed: 6, life: 800, spooky: 'snow' });
+          msg.textContent = R.pick(['Yes!', 'Great memory!', 'You got it!', 'Super!']);
+          if (score % 3 === 0) Voice.say(score + ' in a row!');
+          later(grow, 1000);
+        }
+      } else {
+        phase = 'wait'; tries--; drawHearts(); SFX.bad(); box.classList.remove('yours');
+        bulbs[i].classList.remove('nope'); void bulbs[i].offsetWidth; bulbs[i].classList.add('nope');
+        if (tries <= 0) {
+          msg.textContent = 'Great try!';
+          later(function () { over = true; api.end({ title: 'What a memory!', score: score, text: 'You remembered ' + score + (score === 1 ? ' light' : ' lights') + ' in a row!' }); }, 900);
+        } else { msg.textContent = 'Oops! Watch again.'; Voice.say('Oops! Watch again.'); later(playSeq, 1300); }
+      }
+    }
+    drawHearts(); api.score(0);
+    Voice.say('Tree Lights! Watch the lights blink. Then tap them in the same order!');
+    later(grow, 2600);
+    return function () { over = true; timers.forEach(clearTimeout); };
+  }
+
+  /* ---- Santa's Sleigh: tap to drop a present down each chimney ---- */
+  function gameSleigh(area, api) {
+    var g = miniCanvas(area), ctx = g.ctx, W = g.W, H = g.H, cv = g.cv;
+    var sc = Math.max(0.75, Math.min(W, H) / 640), groundY = H - 18 * sc, sx = W * 0.3, sy = H * 0.17;
+    var houses = [], gifts = [], pops = [], flakes = [], score = 0, nextSay = 5, lastDrop = -1e9, clock = 0;
+    var HCOLS = ['#E86A5C', '#5AA9EC', '#F3B643', '#8E7CF0', '#5CC97A', '#F58FC0'];
+    for (var i = 0; i < 60; i++) flakes.push({ x: Math.random() * W, y: Math.random() * H, r: 1 + Math.random() * 2.2, v: 0.4 + Math.random() * 0.8 });
+    var stars = []; for (i = 0; i < 30; i++) stars.push({ x: Math.random() * W, y: Math.random() * H * 0.5, r: 0.6 + Math.random() * 1.2 });
+    function addHouse(x) {
+      var w = (110 + Math.random() * 60) * sc, h = (70 + Math.random() * 70) * sc, roof = (40 + Math.random() * 18) * sc;
+      houses.push({ x: x, w: w, h: h, roof: roof, cx: w * (0.25 + Math.random() * 0.5), col: R.pick(HCOLS), done: false, glow: 0 });
+      return x + w + (40 + Math.random() * 120) * sc;
+    }
+    var nx = W * 0.55; while (nx < W * 2) nx = addHouse(nx);
+    function chimney(hs) { var top = groundY - hs.h - hs.roof * 0.55 - 26 * sc; return { x: hs.x + hs.cx, top: top, w: 36 * sc }; }
+    api.score(0);
+    cv.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
+      if (clock - lastDrop < 330) return; lastDrop = clock;
+      gifts.push({ x: sx, y: sy + 30 * sc, vy: 0.5, rot: 0 }); SFX.tick();
+    });
+    var sky = ctx.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, '#101A44'); sky.addColorStop(1, '#3B5A8C');
+    function drawHouse(hs) {
+      var x = hs.x, base = groundY, top = base - hs.h, c = chimney(hs);
+      ctx.lineWidth = 3; ctx.strokeStyle = '#1D2A44';
+      ctx.fillStyle = '#B5523F'; ctx.fillRect(c.x - c.w / 2, c.top, c.w, top - c.top + 4); ctx.strokeRect(c.x - c.w / 2, c.top, c.w, top - c.top + 4);
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.ellipse(c.x, c.top, c.w * 0.62, 7 * sc, 0, 0, 6.283); ctx.fill(); ctx.stroke();
+      if (hs.glow > 0) { ctx.globalAlpha = Math.min(1, hs.glow / 400); ctx.fillStyle = '#FFE7A0'; ctx.beginPath(); ctx.arc(c.x, c.top - 6, 16 * sc, 0, 6.283); ctx.fill(); ctx.globalAlpha = 1; }
+      ctx.fillStyle = hs.col; ctx.fillRect(x, top, hs.w, hs.h); ctx.strokeRect(x, top, hs.w, hs.h);
+      ctx.fillStyle = '#7A3B32'; ctx.beginPath(); ctx.moveTo(x - 12 * sc, top + 2); ctx.lineTo(x + hs.w / 2, top - hs.roof); ctx.lineTo(x + hs.w + 12 * sc, top + 2); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(x - 12 * sc, top + 2); ctx.lineTo(x + hs.w / 2, top - hs.roof); ctx.lineTo(x + hs.w + 12 * sc, top + 2); ctx.lineTo(x + hs.w * 0.8, top - hs.roof * 0.3); ctx.lineTo(x + hs.w / 2, top - hs.roof * 0.62); ctx.lineTo(x + hs.w * 0.2, top - hs.roof * 0.3); ctx.closePath(); ctx.fill(); ctx.stroke();
+      var win = hs.done ? '#FFE27A' : '#2B3B66', wy = top + hs.h * 0.22, ws = Math.min(26 * sc, hs.h * 0.3);
+      ctx.fillStyle = win; [0.22, 0.62].forEach(function (f) { ctx.fillRect(x + hs.w * f, wy, ws, ws); ctx.strokeRect(x + hs.w * f, wy, ws, ws); });
+      ctx.fillStyle = '#5A3418'; ctx.fillRect(x + hs.w * 0.42, base - hs.h * 0.42, hs.w * 0.16, hs.h * 0.42); ctx.strokeRect(x + hs.w * 0.42, base - hs.h * 0.42, hs.w * 0.16, hs.h * 0.42);
+      if (hs.done) { ctx.font = emojiFont(22 * sc); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('🎄', x + hs.w * 0.22 + ws / 2, wy + ws / 2 + 1); }
+    }
+    function sleigh(now) {
+      var y = sy + Math.sin(now / 420) * 7 * sc;
+      ctx.save(); ctx.translate(sx, y);
+      ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(30 * sc, -4 * sc); ctx.lineTo(96 * sc, -10 * sc); ctx.stroke();
+      ctx.font = emojiFont(40 * sc); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      [[118, -18], [170, -24]].forEach(function (p, k) { ctx.save(); ctx.translate(p[0] * sc, (p[1] + Math.sin(now / 200 + k) * 3) * sc); ctx.scale(-1, 1); ctx.fillText('🦌', 0, 0); ctx.restore(); });
+      ctx.font = emojiFont(44 * sc); ctx.fillText('🎅', -6 * sc, -26 * sc);
+      ctx.fillStyle = '#D93A3A'; ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(-46 * sc, -16 * sc); ctx.lineTo(28 * sc, -16 * sc); ctx.quadraticCurveTo(44 * sc, -16 * sc, 40 * sc, 2 * sc); ctx.lineTo(34 * sc, 16 * sc); ctx.lineTo(-38 * sc, 16 * sc); ctx.quadraticCurveTo(-56 * sc, 6 * sc, -46 * sc, -16 * sc); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = '#F3B643'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(-44 * sc, 26 * sc); ctx.lineTo(40 * sc, 26 * sc); ctx.quadraticCurveTo(56 * sc, 26 * sc, 54 * sc, 12 * sc); ctx.stroke();
+      ctx.font = emojiFont(20 * sc); ctx.fillText('🎁', -30 * sc, -24 * sc);
+      ctx.restore();
+    }
+    var stop = playLoop(api, 60000, function (dt, now, prog) {
+      clock = now;
+      var speed = (1.5 + prog * 1.1) * sc;
+      ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#fff'; stars.forEach(function (s) { ctx.globalAlpha = 0.55 + Math.sin(now / 500 + s.x) * 0.3; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill(); }); ctx.globalAlpha = 1;
+      ctx.fillStyle = '#FFF4C8'; ctx.beginPath(); ctx.arc(W * 0.86, H * 0.14, Math.min(W, H) * 0.06, 0, 6.283); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.setLineDash([4, 9]); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(sx, sy + 40 * sc); ctx.lineTo(sx, groundY); ctx.stroke(); ctx.setLineDash([]);
+      houses.forEach(function (hs) { hs.x -= speed * dt; if (hs.glow > 0) hs.glow -= 16.7 * dt; });
+      houses = houses.filter(function (hs) { return hs.x + hs.w > -60; });
+      var last = houses[houses.length - 1]; if (!last || last.x + last.w < W * 1.6) addHouse((last ? last.x + last.w : W) + (40 + Math.random() * 120) * sc);
+      houses.forEach(drawHouse);
+      ctx.fillStyle = '#EAF4FF'; ctx.fillRect(0, groundY, W, H - groundY); ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(0, groundY); ctx.lineTo(W, groundY); ctx.stroke();
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      gifts.forEach(function (gf) {
+        gf.py = gf.y; gf.vy = Math.min(9 * sc, gf.vy + 0.24 * dt); gf.y += gf.vy * dt; gf.rot += 0.04 * dt;
+        /* a little help: presents drift toward a chimney that is close */
+        var best = null, bd = 95 * sc;
+        houses.forEach(function (hs) { if (hs.done) return; var c = chimney(hs); var d = Math.abs(c.x - gf.x); if (d < bd && c.top > gf.y) { bd = d; best = c; } });
+        if (best) gf.x += Math.max(-2.4, Math.min(2.4, (best.x - gf.x) * 0.12)) * dt * sc;
+        houses.forEach(function (hs) {
+          if (gf.dead || hs.done) return; var c = chimney(hs);
+          if (gf.y >= c.top - 4 && gf.py <= c.top + 22 * sc && Math.abs(gf.x - c.x) < c.w / 2 + 12 * sc) {
+            gf.dead = true; hs.done = true; hs.glow = 900; score++; api.score(score);
+            SFX.bell(score % 5); SFX.pop();
+            var sp = onScreen(cv, c.x, c.top); FX.burst(sp.x, sp.y, { n: 16, speed: 6, life: 700, spooky: 'snow' });
+            if (score >= nextSay) { Voice.say(score + ' presents!'); nextSay += 5; } else popText(pops, R.pick(['Ho ho ho!', '+1', 'Merry Christmas!', '+1']), c.x, c.top - 28 * sc, '#FFE27A');
+          } else if (!gf.dead && gf.x > hs.x - 10 && gf.x < hs.x + hs.w + 10 && gf.y > groundY - hs.h - (hs.roof * (1 - Math.abs(gf.x - hs.x - hs.w / 2) / (hs.w / 2 + 12))) + 4) {
+            gf.dead = true; popText(pops, 'Oops!', gf.x, gf.y - 20, '#FFFFFF');
+          }
+        });
+        if (gf.y > groundY - 8) { gf.dead = true; popText(pops, 'Plop!', gf.x, groundY - 26, '#FFFFFF'); }
+        if (!gf.dead) { ctx.save(); ctx.translate(gf.x, gf.y); ctx.rotate(Math.sin(gf.rot) * 0.3); ctx.font = emojiFont(30 * sc); ctx.fillText('🎁', 0, 0); ctx.restore(); }
+      });
+      gifts = gifts.filter(function (gf) { return !gf.dead; });
+      sleigh(now);
+      ctx.fillStyle = '#fff'; flakes.forEach(function (f) { f.y += f.v * dt; f.x -= speed * 0.25 * dt; if (f.y > H) { f.y = -4; f.x = Math.random() * W; } if (f.x < 0) f.x += W; ctx.globalAlpha = 0.8; ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill(); }); ctx.globalAlpha = 1;
+      drawPops(ctx, pops, dt);
+    }, function () { api.end({ title: 'Merry Christmas!', score: score, text: 'Santa delivered ' + score + (score === 1 ? ' present' : ' presents') + '!' }); });
+    Voice.say('Santa’s Sleigh! Tap to drop a present down the chimney!');
+    return stop;
+  }
+
   /* ---------------- grown-ups gate ---------------- */
   var gateAns = '', gateTyped = '';
   function openGate() {
@@ -5949,9 +6774,11 @@ window.PipContent = (function () {
     w.append(sum);
 
     /* skills */
-    var booPlayed = GAMES.some(function (g) { return g.world === 'boo' && gs(g.id).q; });
-    [['read', 'Reading & spelling'], ['math', 'Math'], ['bake', 'Pip’s Bakery'], ['art', 'Art Studio'], ['space', 'Space Station'], ['bug', 'Bug Garden'], ['boo', 'Halloween games']].forEach(function (pair) {
+    var booPlayed = GAMES.some(function (g) { return g.world === 'boo' && gs(g.id).q; }), snowPlayed = GAMES.some(function (g) { return g.world === 'snow' && gs(g.id).q; });
+    [['read', 'Reading & spelling'], ['math', 'Math'], ['bake', 'Pip’s Bakery'], ['art', 'Art Studio'], ['space', 'Space Station'], ['bug', 'Bug Garden'], ['boo', 'Halloween games'], ['snow', 'Winter Wonderland']].forEach(function (pair) {
       if (pair[0] === 'boo' && !halloweenOn() && !booPlayed) return;
+      if (pair[0] === 'snow' && !winterOn() && !snowPlayed) return;
+      if (pair[0] === 'snow') p.append(el('p', { class: 'lede', text: 'Winter games: clapping syllables with jingle bells, finding letters and sight words in Snowball Toss, ten-frames with Cocoa Count (making 10 and teen numbers like 10 and 4 more), and putting numbers in order on the Christmas tree (also counting by tens). These show up from November 8 through February unless you change it in Settings.' }));
       var p = el('section', { class: 'panel' });
       p.append(el('h3', { text: pair[1] }));
       if (pair[0] === 'read') p.append(el('p', { class: 'lede', text: 'Each game moves up a level after a round with 4 or 5 right on the first try, and steps back after two rough rounds in a row. You can also set the level yourself.' }));
@@ -5990,6 +6817,7 @@ window.PipContent = (function () {
       el('span', { class: 'fine', text: 'She earns a game token each time a game moves up a level and when she opens the daily treasure chest. Each bonus game lasts about a minute and gives no stars.' })]));
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Celebrations' }), seg([['big', 'Big (confetti & stars)'], ['calm', 'Calm']], S.settings.celebrate || 'big', function (v) { S.settings.celebrate = v; save(true); })]));
     set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Halloween Hollow' }), seg([['auto', 'Oct 1 – Nov 7'], ['on', 'Always'], ['off', 'Hide']], S.settings.halloween || 'auto', function (v) { S.settings.halloween = v; save(true); })]));
+    set.append(el('div', { class: 'field' }, [el('span', { class: 'lab', text: 'Winter Wonderland' }), seg([['auto', 'Nov 8 – Feb'], ['on', 'Always'], ['off', 'Hide']], S.settings.winter || 'auto', function (v) { S.settings.winter = v; save(true); })]));
     w.append(set);
 
     /* about */
@@ -6096,6 +6924,7 @@ window.PipContent = (function () {
   $('#room-art').addEventListener('click', function () { renderRoom('art', true); });
   $('#room-space').addEventListener('click', function () { renderRoom('space', true); });
   $('#room-bug').addEventListener('click', function () { renderRoom('bug', true); });
+  $('#room-snow').addEventListener('click', function () { renderRoom('snow', true); });
   $('#mix-btn').addEventListener('click', function () { startRound('mix'); });
   $('#stk-btn').addEventListener('click', renderStickers);
   $('#adv-btn').addEventListener('click', function () { renderAdventure(true); });
