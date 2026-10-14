@@ -19,7 +19,7 @@ body{margin:0;font:14px system-ui,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<!-- Pip's Treehouse v1.6.0 -->
+<!-- Pip's Treehouse v1.7.0 -->
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>Pip's Treehouse</title>
 <style>
@@ -851,6 +851,96 @@ button:disabled{cursor:default}
 @media (orientation:portrait) and (min-width:641px){
   .arc-games{grid-template-columns:repeat(2,minmax(0,1fr))}
   .themes,.themes.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+
+/* ---------- v1.7 Arcade: sections and themed bonus games ---------- */
+.arc-games{display:flex;flex-direction:column;gap:6px;max-width:980px;width:100%;margin:0 auto}
+.arc-sec h3{margin:6px 2px 8px;font-family:var(--f-display);font-weight:900;font-size:22px;display:flex;align-items:center;gap:8px}
+.arc-sec h3::before{content:"";width:14px;height:14px;border-radius:50%;border:3px solid var(--ink);background:var(--sec,var(--math))}
+.arc-sec.space{--sec:#8E7CF0}.arc-sec.bake{--sec:var(--bake)}.arc-sec.art{--sec:var(--art)}.arc-sec.boo{--sec:var(--pumpkin)}
+.arc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.arc-grid .arc-ic{font-size:clamp(44px,8vmin,70px)}
+.spooky .mini-title,.spacey .mini-title{color:var(--paper)}
+/* Alien Pop-Up */
+.popfield{flex:1;min-height:0;width:min(100%,920px);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:2vmin 4vmin;padding:6vmin 5vmin 3vmin;border-radius:24px;border:3px solid var(--ink);
+  background:radial-gradient(circle 1.4px at 12% 6%,#fff 98%,transparent),radial-gradient(circle 1.2px at 48% 4%,#fff 98%,transparent),radial-gradient(circle 1.5px at 82% 8%,#fff 98%,transparent),radial-gradient(ellipse 6% 4% at 30% 52%,#B5BDCB 60%,transparent 62%),radial-gradient(ellipse 5% 3% at 70% 92%,#B5BDCB 60%,transparent 62%),linear-gradient(180deg,#17143D 0 12%,#CDD4E0 12%)}
+.crater{position:relative;min-height:0}
+.c-hole{position:absolute;left:6%;right:6%;bottom:6%;height:26%;border-radius:50%;background:radial-gradient(ellipse at 50% 35%,#3C4357 0 55%,#5E6678 57%);border:3px solid var(--ink)}
+.c-clip{position:absolute;left:6%;right:6%;top:0;bottom:19%;overflow:hidden}
+.popper{position:absolute;left:50%;bottom:0;width:min(70%,124px);padding:0;transform:translate(-50%,112%);transition:transform .17s ease-out}
+.popper.up{transform:translate(-50%,4%)}
+.popper.bonk{transform:translate(-50%,16%) scale(1.15,.75)}
+.popper.fox{width:min(92%,160px)}
+.popper svg{display:block;width:100%;height:auto}
+.pop-crown{position:absolute;left:50%;top:-14%;transform:translateX(-50%);font-size:clamp(22px,4vmin,40px)}
+/* Spin Art */
+.spin-cv{display:block;border-radius:50%;touch-action:none;cursor:crosshair}
+/* Pumpkin Carver */
+.pk-wrap{border-radius:24px;transition:background-color .4s;padding:6px}
+.pk-wrap.lit{background:radial-gradient(circle at 35% 50%,#3B2A5E,#17143D 70%)}
+.pk-holder .pk-svg{display:block;height:100%;width:auto;max-width:100%;max-height:100%}
+.pk-svg .pk-halo{animation:flicker 1.6s ease-in-out infinite}
+@keyframes flicker{0%,100%{opacity:.9}40%{opacity:.55}70%{opacity:1}}
+.pk-side{min-width:0;max-width:440px}
+.pk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
+.pk-opt{padding:4px;border-radius:16px;box-shadow:0 4px 0 var(--ink)}
+.pk-opt .pk-svg{display:block;width:100%;height:auto;max-height:110px}
+.pk-opt.on{background:var(--math-tint);outline:4px solid var(--math);outline-offset:1px}
+.gal-item.pk-item{background:#2B2252}
+/* Potion Lab */
+.pt-lab{flex:1;min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:10px}
+.pt-stage{position:relative;flex:1;min-height:0;width:min(100%,640px);display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.caul{width:min(78%,420px);position:relative}
+.caul-svg{display:block;width:100%;height:auto;max-height:46vh}
+.caul-bubs circle{animation:bub 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 50%}
+.caul-bubs circle:nth-child(2){animation-delay:-.5s}.caul-bubs circle:nth-child(3){animation-delay:-1s}.caul-bubs circle:nth-child(4){animation-delay:-1.3s}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-9px) scale(1.3)}}
+.caul.boil .caul-bubs circle{animation-duration:.45s}
+.caul.boil{animation:wiggle .7s ease-in-out infinite}
+.caul.splash .caul-liq{animation:slosh .45s ease;transform-box:fill-box;transform-origin:50% 50%}
+@keyframes slosh{0%,100%{transform:scale(1)}40%{transform:scale(1.08,1.4)}}
+.caul-fire{transform-box:fill-box;transform-origin:50% 100%;animation:flame .25s ease-in-out infinite alternate}
+.pt-meter{display:flex;gap:10px;margin-top:6px}
+.pt-dot{width:46px;height:46px;border-radius:50%;border:3px dashed var(--ink-soft);display:grid;place-items:center;font-size:26px;font-family:var(--f-emoji);line-height:1}
+.pt-dot.on{border-style:solid;border-color:var(--ink);background:var(--paper)}
+.pt-shelf{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.pt-ing{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;min-width:clamp(70px,10vmin,96px);border-radius:18px;background:var(--potion)}
+.pt-ing .emoji{font-size:clamp(32px,5.6vmin,50px)}
+.pt-surprise{position:absolute;left:50%;top:0;transform:translateX(-50%);display:none;flex-direction:column;align-items:center;gap:6px;z-index:3;text-align:center;pointer-events:none}
+.pt-surprise.show{display:flex;animation:spin-in .7s ease both}
+.pt-thing{position:relative;line-height:1;white-space:nowrap}
+.pt-big{font-size:clamp(70px,14vmin,130px);display:inline-block}
+.pt-huge{font-size:clamp(90px,18vmin,170px);display:inline-block}
+.pt-hat{position:absolute;left:50%;top:-34%;transform:translateX(-50%);font-size:clamp(36px,7vmin,64px)}
+.pt-note{font-size:clamp(34px,6vmin,56px);vertical-align:top;display:inline-block}
+.pt-stack{font-size:clamp(30px,5.6vmin,52px);line-height:1.05;display:block}
+.pt-dance{animation:dance 1s ease-in-out infinite}
+.pt-float{animation:floaty 1.4s ease-in-out infinite}
+.pt-fox{position:relative;display:inline-block;width:clamp(110px,20vmin,180px)}
+.pt-fox svg{display:block;width:100%;height:auto}
+.pt-tophat{position:absolute;left:52%;top:-24%;font-size:clamp(40px,8vmin,72px);transform:rotate(12deg)}
+.pt-pip{display:inline-block;width:clamp(100px,18vmin,160px)}
+.pt-pip .pip{width:100%;height:auto}
+.pt-name{font-family:var(--f-display);font-weight:900;font-size:clamp(22px,4.2vmin,38px);background:var(--paper);border:3px solid var(--ink);border-radius:999px;padding:2px 18px}
+.pt-found{margin:0}
+.spooky .pt-found{color:var(--paper)}
+@media (max-width:640px){
+  .arc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .arc-grid .arc-blurb{display:none}
+  .pk-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .pt-ing{min-width:60px;padding:4px 6px}
+}
+@media (orientation:portrait) and (min-width:641px){
+  .pk-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .pk-side{max-width:none}
+}
+@media (min-width:900px) and (orientation:landscape){
+  .arc-games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 26px;align-items:start}
+  .arc-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+}
+@media (orientation:portrait){
+  .popfield{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
 }
 
 canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
@@ -2196,7 +2286,7 @@ window.PipContent = (function () {
 
   /* ---------------- state ---------------- */
   var KEY = 'pips-treehouse-v1';
-  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, spent: 0, owned: ['c-green'], pip: { color: 'green', hat: null, extra: null }, adv: null, advDays: [], tokens: 0, arcade: { balloon: 0, match: 0, art: [] }, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', celebrate: 'big', limit: 'none', arcade: 'on' } }; }
+  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, spent: 0, owned: ['c-green'], pip: { color: 'green', hat: null, extra: null }, adv: null, advDays: [], tokens: 0, arcade: { balloon: 0, match: 0, art: [], potions: [] }, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', celebrate: 'big', limit: 'none', arcade: 'on' } }; }
   function normalize(s) {
     var d = freshState();
     if (!s || typeof s !== 'object') return d;
@@ -2209,8 +2299,9 @@ window.PipContent = (function () {
     out.advDays = Array.isArray(s.advDays) ? s.advDays : [];
     out.spent = s.spent | 0;
     out.tokens = s.tokens | 0;
-    out.arcade = Object.assign({ balloon: 0, match: 0, art: [] }, s.arcade || {});
+    out.arcade = Object.assign({ balloon: 0, match: 0, art: [], potions: [] }, s.arcade || {});
     if (!Array.isArray(out.arcade.art)) out.arcade.art = [];
+    if (!Array.isArray(out.arcade.potions)) out.arcade.potions = [];
     Object.keys(out.games).forEach(function (id) {
       var g = out.games[id], meta = G[id];
       if (!meta) return;
@@ -2658,8 +2749,8 @@ window.PipContent = (function () {
     worldClass(sec, world);
     $('#room-title').textContent = ROOM_NAME[world];
     var box = $('#tiles'); box.innerHTML = '';
-    var paintTile = world === 'art' && arcadeOn();
-    box.setAttribute('data-n', String(GAMES.filter(function (g) { return g.world === world; }).length + (paintTile ? 1 : 0)));
+    var extras = arcadeOn() ? (ROOM_ARCADE[world] || []).map(function (id) { return ARC_BY[id]; }) : [];
+    box.setAttribute('data-n', String(GAMES.filter(function (g) { return g.world === world; }).length + extras.length));
     GAMES.filter(function (g) { return g.world === world; }).forEach(function (g) {
       var st = gs(g.id);
       var dots = el('span', { class: 'lvl', 'aria-label': 'Level ' + st.level + ' of ' + g.levels.length });
@@ -2669,11 +2760,13 @@ window.PipContent = (function () {
         el('span', { class: 'tfoot' }, [el('span', { class: 'tname', text: g.name }), dots])
       ]));
     });
-    /* free painting lives in the Arcade; the Art Studio has a door to it too */
-    if (paintTile) box.append(el('button', { class: 'chunk tile', 'aria-label': 'Paint Studio, costs one game token', onclick: function () { startMini('paint'); } }, [
-      el('span', { class: 'thumb', html: '<span class="emoji">🖌️</span><span class="emoji">🖼️</span>' }),
-      el('span', { class: 'tfoot' }, [el('span', { class: 'tname', text: 'Paint Studio' }), el('span', { class: 'tcost', html: '1 <span class="emoji">🎟️</span>' })])
-    ]));
+    /* the room's bonus games live in the Arcade (one game token each); each themed room has a door to its own */
+    extras.forEach(function (gm) {
+      box.append(el('button', { class: 'chunk tile', 'aria-label': gm.name + ', costs one game token', onclick: function () { startMini(gm.id, world); } }, [
+        el('span', { class: 'thumb', html: '<span class="emoji">' + gm.icon + '</span>' }),
+        el('span', { class: 'tfoot' }, [el('span', { class: 'tname', text: gm.name }), el('span', { class: 'tcost', html: '1 <span class="emoji">🎟️</span>' })])
+      ]));
+    });
     show('room');
     if (speak) Voice.say(ROOM_SAY[world]);
   }
@@ -4206,20 +4299,40 @@ window.PipContent = (function () {
 
   /* ================= PIP'S ARCADE: bonus mini-games paid for with game tokens ================= */
   function arcadeOn() { return S.settings.arcade !== 'off'; }
+  function bestOf(id, unit) { return function () { return S.arcade[id] ? 'Best: ' + S.arcade[id] + (unit || '') : 'No score yet'; }; }
+  function savedOf(test, one, more) { return function () { var n = S.arcade.art.filter(test).length; return n + ' ' + (n === 1 ? one : more) + ' saved'; }; }
   var ARCADE = [
-    { id: 'balloon', name: 'Balloon Pop', icon: '🎈', blurb: 'Pop as many as you can!', best: function () { return S.arcade.balloon ? 'Best: ' + S.arcade.balloon : 'No score yet'; } },
-    { id: 'match', name: 'Sticker Match', icon: '🃏', blurb: 'Find the matching stickers', best: function () { return S.arcade.match ? 'Best: ' + S.arcade.match + ' tries' : 'No score yet'; } },
-    { id: 'color', name: 'Color Pip’s World', icon: '🖍️', blurb: 'Color a picture', best: function () { var n = S.arcade.art.filter(function (a) { return a.page; }).length; return n + (n === 1 ? ' picture' : ' pictures') + ' saved'; } },
-    { id: 'paint', name: 'Paint Studio', icon: '🖌️', blurb: 'Paint anything you like', best: function () { var n = S.arcade.art.filter(function (a) { return a.img; }).length; return n + (n === 1 ? ' painting' : ' paintings') + ' saved'; } }
+    { id: 'rocket', group: 'space', name: 'Rocket Ride', icon: '🚀', blurb: 'Catch the falling stars', best: bestOf('rocket') },
+    { id: 'alienpop', group: 'space', name: 'Alien Pop-Up', icon: '👽', blurb: 'Tap the silly aliens', best: bestOf('alienpop') },
+    { id: 'cake', group: 'bake', name: 'Cake Stacker', icon: '🎂', blurb: 'Stack the tallest cake', best: bestOf('cake', ' layers') },
+    { id: 'spin', group: 'art', name: 'Spin Art', icon: '🌀', blurb: 'Paint on a spinning wheel', best: savedOf(function (a) { return a.img && a.spin; }, 'spin painting', 'spin paintings') },
+    { id: 'broom', group: 'boo', name: 'Broom Ride', icon: '🧹', blurb: 'Fly and grab the candy', best: bestOf('broom') },
+    { id: 'pumpkin', group: 'boo', name: 'Pumpkin Carver', icon: '🎃', blurb: 'Make a jack-o’-lantern', best: savedOf(function (a) { return a.pk; }, 'pumpkin', 'pumpkins') },
+    { id: 'potion', group: 'boo', name: 'Potion Lab', icon: '🧪', blurb: 'Mix a silly potion', best: function () { return S.arcade.potions.length + ' of 12 potions found'; } },
+    { id: 'balloon', group: 'party', name: 'Balloon Pop', icon: '🎈', blurb: 'Pop as many as you can!', best: function () { return S.arcade.balloon ? 'Best: ' + S.arcade.balloon : 'No score yet'; } },
+    { id: 'match', group: 'party', name: 'Sticker Match', icon: '🃏', blurb: 'Find the matching stickers', best: function () { return S.arcade.match ? 'Best: ' + S.arcade.match + ' tries' : 'No score yet'; } },
+    { id: 'color', group: 'art', name: 'Color Pip’s World', icon: '🖍️', blurb: 'Color a picture', best: function () { var n = S.arcade.art.filter(function (a) { return a.page; }).length; return n + (n === 1 ? ' picture' : ' pictures') + ' saved'; } },
+    { id: 'paint', group: 'art', name: 'Paint Studio', icon: '🖌️', blurb: 'Paint anything you like', best: savedOf(function (a) { return a.img && !a.spin; }, 'painting', 'paintings') }
   ];
+  var ARC_BY = {}; ARCADE.forEach(function (g) { ARC_BY[g.id] = g; });
+  var ARC_GROUPS = [['party', 'Party games'], ['space', 'Space'], ['bake', 'Bakery'], ['art', 'Art'], ['boo', 'Halloween']];
+  /* each themed room has a door to its own bonus games */
+  var ROOM_ARCADE = { art: ['paint', 'spin'], bake: ['cake'], space: ['rocket', 'alienpop'], boo: ['broom', 'pumpkin', 'potion'] };
+  function arcVisible(gm) { return gm.group !== 'boo' || halloweenOn(); }
   function tokenPill(node) { node.innerHTML = '<span class="emoji">🎟️</span><span>' + (S.tokens || 0) + '</span>'; }
   function renderArcade(speak) {
     tokenPill($('#arc-tokens'));
     var list = $('#arc-games'); list.innerHTML = '';
-    ARCADE.forEach(function (gm) {
-      list.append(el('button', { class: 'chunk arc-card' + (S.tokens ? '' : ' broke'), 'aria-label': gm.name, onclick: function () { startMini(gm.id); } }, [
-        el('span', { class: 'arc-ic emoji', text: gm.icon }), el('span', { class: 'arc-name', text: gm.name }), el('span', { class: 'arc-blurb', text: gm.blurb }),
-        el('span', { class: 'arc-best', text: gm.best() }), el('span', { class: 'arc-cost', html: 'Play · 1 <span class="emoji">🎟️</span>' })]));
+    ARC_GROUPS.forEach(function (gp) {
+      var games = ARCADE.filter(function (gm) { return gm.group === gp[0] && arcVisible(gm); });
+      if (!games.length) return;
+      var grid = el('div', { class: 'arc-grid' });
+      games.forEach(function (gm) {
+        grid.append(el('button', { class: 'chunk arc-card' + (S.tokens ? '' : ' broke'), 'aria-label': gm.name, onclick: function () { startMini(gm.id); } }, [
+          el('span', { class: 'arc-ic emoji', text: gm.icon }), el('span', { class: 'arc-name', text: gm.name }), el('span', { class: 'arc-blurb', text: gm.blurb }),
+          el('span', { class: 'arc-best', text: gm.best() }), el('span', { class: 'arc-cost', html: 'Play · 1 <span class="emoji">🎟️</span>' })]));
+      });
+      list.append(el('section', { class: 'arc-sec ' + gp[0] }, [el('h3', { text: gp[1] }), grid]));
     });
     $('#arc-note').textContent = S.tokens ? 'You have ' + S.tokens + ' game ' + (S.tokens === 1 ? 'token' : 'tokens') + '. Pick a game!' : 'Earn game tokens when you move up a level or open the daily treasure chest.';
     var gal = $('#arc-gallery'); gal.innerHTML = '';
@@ -4229,6 +4342,7 @@ window.PipContent = (function () {
       S.arcade.art.forEach(function (a) {
         if (a.img) row.append(el('div', { class: 'gal-item' }, el('img', { src: a.img, alt: 'Painting' })));
         else if (a.px && PIXD[a.px]) row.append(el('div', { class: 'gal-item', html: pixelSVG(a.px) }));
+        else if (a.pk) row.append(el('div', { class: 'gal-item pk-item', html: pumpkinSVG(a.pk, true) }));
         else if (PAGES[a.page]) row.append(el('div', { class: 'gal-item', html: colorPageSVG(a.page, a.fills, true) }));
       });
       gal.append(row);
@@ -4237,11 +4351,13 @@ window.PipContent = (function () {
     if (speak) Voice.say(S.tokens ? 'Welcome to Pip’s Arcade! You have ' + S.tokens + ' game ' + (S.tokens === 1 ? 'token' : 'tokens') + '. Pick a game!' : 'Welcome to Pip’s Arcade! Move up a level or open the treasure chest to earn a game token.');
   }
 
-  var miniStop = null;
-  function startMini(id) {
+  var miniStop = null, miniFrom = null;
+  function startMini(id, from) {
     if (!(S.tokens > 0)) { Voice.say('You need a game token. Move up a level or open the daily treasure chest to earn one!'); return; }
     S.tokens--; save(true);
-    var gm = ARCADE.filter(function (g) { return g.id === id; })[0];
+    miniFrom = from || null;
+    var gm = ARC_BY[id];
+    worldClass($('#s-mini'), gm.group === 'boo' || gm.group === 'space' ? gm.group : null);
     $('#mini-title').textContent = gm.name;
     $('#mini-score').textContent = '';
     $('#mini-result').hidden = true;
@@ -4253,19 +4369,22 @@ window.PipContent = (function () {
       end: function (res) { finishMini(id, res); }
     };
     api.time(null);
-    miniStop = ({ balloon: gameBalloon, match: gameMatch, color: gameColor, paint: gamePaint }[id])(area, api);
+    miniStop = ({ balloon: gameBalloon, match: gameMatch, color: gameColor, paint: gamePaint, rocket: gameRocket, alienpop: gameAlienPop,
+      cake: gameCake, spin: gameSpin, broom: gameBroom, pumpkin: gamePumpkin, potion: gamePotion }[id])(area, api);
   }
   function finishMini(id, res) {
     miniStop = null;
     var best = '';
-    if (id === 'balloon') { if (res.score > (S.arcade.balloon || 0)) { S.arcade.balloon = res.score; best = 'New best score!'; } }
+    var HIGH = { balloon: 'New best score!', rocket: 'New best score!', alienpop: 'New best score!', broom: 'New best score!', cake: 'Tallest cake yet!' };
+    if (HIGH[id] && res.score > (S.arcade[id] || 0)) { S.arcade[id] = res.score; best = HIGH[id]; }
     if (id === 'match') { if (!S.arcade.match || res.score < S.arcade.match) { S.arcade.match = res.score; best = 'New best!'; } }
     save(true);
     var card = $('#mini-result'); card.innerHTML = '';
     card.append(el('div', { class: 'pip-wrap dance', html: pipSVG(), style: 'width:clamp(80px,13vmin,110px)' }), el('h2', { text: res.title || 'Great playing!' }), el('p', { class: 'sub', text: res.text }));
     if (best) card.append(el('div', { class: 'ribbon', text: best }));
     card.append(el('div', { class: 'end-btns' }, [
-      el('button', { class: 'chunk btn go', text: 'Arcade', onclick: function () { renderArcade(false); } }),
+      miniFrom ? el('button', { class: 'chunk btn go', text: 'Back', onclick: function () { renderRoom(miniFrom, false); } })
+        : el('button', { class: 'chunk btn go', text: 'Arcade', onclick: function () { renderArcade(false); } }),
       el('button', { class: 'chunk btn', 'aria-label': 'Home', html: ICON.home, style: 'padding:8px 16px', onclick: function () { renderHome(true); } })]));
     card.hidden = false;
     SFX.fanfare(); FX.rain({ n: 90 });
@@ -4443,7 +4562,7 @@ window.PipContent = (function () {
     var art = S.arcade.art;
     art.unshift(item);
     var imgs = 0;
-    S.arcade.art = art.filter(function (a) { if (!a.img) return true; imgs++; return imgs <= 6; }).slice(0, 14);
+    S.arcade.art = art.filter(function (a) { if (!a.img) return true; imgs++; return imgs <= 8; }).slice(0, 16);
   }
   function gamePaint(area, api) {
     var color = CRAYONS[0], size = 1, tool = 'brush', stamp = STAMPS[0], hue = 0, undo = [], over = false;
@@ -4547,6 +4666,577 @@ window.PipContent = (function () {
     }
     Voice.say('Paint anything you like! Pick a color and a brush. Tap All done when you finish.');
     return function () { over = true; };
+  }
+
+  /* ================= THEMED ARCADE GAMES (v1.7) ================= */
+  function miniCanvas(area) {
+    var cv = el('canvas', { class: 'mini-cv' }); area.append(cv);
+    var W = Math.max(220, area.clientWidth - 6), H = Math.max(220, area.clientHeight - 6), dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { cv: cv, ctx: ctx, W: W, H: H, dpr: dpr };
+  }
+  function svgImage(svg) {
+    if (svg.indexOf('xmlns=') < 0) svg = svg.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+    var im = new Image(); im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); return im;
+  }
+  function emojiFont(px) { return Math.round(px) + 'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; }
+  /* Pip drawn into a canvas: the page's CSS doesn't reach inside an image, so colors go on the shapes */
+  var PIP_ATTR = { 'p-body': 'fill="#5CC97A" stroke="#1D2A44" stroke-width="4"', 'p-belly': 'fill="#FFFDF6"', 'p-eye': 'fill="#fff" stroke="#1D2A44" stroke-width="3"',
+    'p-pupil': 'fill="#1D2A44"', 'p-shine': 'fill="#fff"', 'p-beak': 'fill="#FF9F43" stroke="#1D2A44" stroke-width="3" stroke-linejoin="round"', 'p-cheek': 'fill="#FF8FAB" opacity=".75"',
+    'p-wing': 'fill="#46B064" stroke="#1D2A44" stroke-width="3.5" stroke-linejoin="round"', 'p-stem': 'fill="none" stroke="#1D2A44" stroke-width="3.5" stroke-linecap="round"',
+    'p-leaf': 'fill="#8EDC8A" stroke="#1D2A44" stroke-width="3"', 'p-foot': 'fill="none" stroke="#E8862A" stroke-width="4" stroke-linecap="round"', 'p-lid': 'display="none"' };
+  function pipImageSVG(o) {
+    return pipSVG(o).replace(/class="(p-[a-z]+)"/g, function (m, c) { return PIP_ATTR[c] || ''; })
+      .replace('class="pip"', 'xmlns="http://www.w3.org/2000/svg" width="120" height="124"');
+  }
+  /* a timed action game: step(dt, now, progress) runs every frame for `dur` ms, then done() */
+  function playLoop(api, dur, step, done) {
+    var t0 = 0, last = 0, raf = 0, over = false;
+    function frame(now) {
+      if (over) return;
+      if (!t0) { t0 = now; last = now; }
+      var dt = Math.min(3, (now - last) / 16.7); last = now;
+      var used = now - t0, left = Math.max(0, dur - used);
+      api.time(left / dur);
+      step(dt, now, Math.min(1, used / dur));
+      if (left <= 0) { over = true; done(); return; }
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    return function () { over = true; cancelAnimationFrame(raf); };
+  }
+  function popText(list, txt, x, y, col) { list.push({ t: txt, x: x, y: y, life: 900, c: col || '#FFD93D' }); }
+  function drawPops(ctx, list, dt) {
+    for (var i = list.length - 1; i >= 0; i--) {
+      var p = list[i]; p.life -= 16.7 * dt; p.y -= 0.9 * dt;
+      if (p.life <= 0) { list.splice(i, 1); continue; }
+      ctx.save(); ctx.globalAlpha = Math.min(1, p.life / 300);
+      ctx.font = '900 28px Grandstander, "Chalkboard SE", "Trebuchet MS", sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 6; ctx.lineJoin = 'round'; ctx.strokeStyle = '#1D2A44'; ctx.strokeText(p.t, p.x, p.y); ctx.fillStyle = p.c; ctx.fillText(p.t, p.x, p.y);
+      ctx.restore();
+    }
+  }
+  function onScreen(cv, x, y) { var b = cv.getBoundingClientRect(); return { x: b.left + x * b.width / parseFloat(cv.style.width), y: b.top + y * b.height / parseFloat(cv.style.height) }; }
+  function pickW(list) { var tot = 0, i; for (i = 0; i < list.length; i++) tot += list[i].w; var r = Math.random() * tot; for (i = 0; i < list.length; i++) { r -= list[i].w; if (r <= 0) return list[i]; } return list[0]; }
+
+  /* ---- Rocket Ride: drag the rocket to catch stars; comets just give it a bump ---- */
+  function gameRocket(area, api) {
+    var g = miniCanvas(area), ctx = g.ctx, W = g.W, H = g.H, cv = g.cv;
+    var rk = svgImage(rocketSVG(R.pick(RK_COLS)));
+    var rw = Math.max(46, Math.min(W * 0.085, 78)), rh = rw * 1.9, x = W / 2, tx = W / 2, y = H - rh * 0.62;
+    var items = [], pops = [], sky = [], score = 0, bump = 0, nextSay = 10, spawnT = 300, sc = Math.max(0.8, H / 700);
+    for (var i = 0; i < 70; i++) sky.push({ x: Math.random() * W, y: Math.random() * H, r: 0.5 + Math.random() * 1.6, s: 0.4 + Math.random() * 1.2 });
+    var KINDS = [{ e: '⭐', p: 1, w: 58 }, { e: '🪐', p: 2, w: 12 }, { e: '🌙', p: 2, w: 8 }, { e: '🌟', p: 5, w: 5 }, { e: '☄️', p: 0, w: 17 }];
+    api.score(0);
+    function aim(e) { var b = cv.getBoundingClientRect(); tx = Math.max(rw / 2, Math.min(W - rw / 2, (e.clientX - b.left) * W / b.width)); }
+    cv.addEventListener('pointerdown', function (e) { e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch (x) {} aim(e); });
+    cv.addEventListener('pointermove', function (e) { e.preventDefault(); aim(e); });
+    var grd = ctx.createLinearGradient(0, 0, 0, H); grd.addColorStop(0, '#17143D'); grd.addColorStop(1, '#3A2F7A');
+    var stop = playLoop(api, 60000, function (dt, now, prog) {
+      ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#fff';
+      sky.forEach(function (s) { s.y += s.s * dt * (1 + prog * 1.5); if (s.y > H) { s.y = -2; s.x = Math.random() * W; } ctx.globalAlpha = 0.45 + s.r / 4; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill(); });
+      ctx.globalAlpha = 1;
+      spawnT -= 16.7 * dt;
+      if (spawnT <= 0) { var k = pickW(KINDS); items.push({ e: k.e, p: k.p, x: 30 + Math.random() * (W - 60), y: -40, vy: (2 + Math.random() * 1.3 + prog * 2.2) * sc, s: (k.p ? 40 : 46) * Math.min(1.25, sc), rot: Math.random() * 6 }); spawnT = Math.max(260, 700 - prog * 380); }
+      x += (tx - x) * Math.min(1, 0.22 * dt);
+      var shake = bump > 0 ? Math.sin(now / 25) * 7 : 0; if (bump > 0) bump -= 16.7 * dt;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      for (var i = items.length - 1; i >= 0; i--) {
+        var it = items[i]; it.y += it.vy * dt; it.rot += 0.03 * dt;
+        if (Math.abs(it.x - x) < rw * 0.5 + it.s * 0.3 && Math.abs(it.y - y) < rh * 0.42 + it.s * 0.3) {
+          items.splice(i, 1);
+          var sp = onScreen(cv, it.x, it.y);
+          if (it.p) {
+            score += it.p; api.score(score); popText(pops, '+' + it.p, it.x, it.y);
+            FX.burst(sp.x, sp.y, { n: it.p > 2 ? 30 : 12, speed: 6, life: 700, spooky: 'space' }); SFX.ding(Math.min(9, it.p * 2));
+            if (score >= nextSay) { Voice.say(nextSay + '!'); nextSay += 10; }
+          } else if (bump <= 0) { bump = 650; SFX.boing(); popText(pops, 'Bump!', it.x, it.y - 20, '#FF9EC4'); }
+          continue;
+        }
+        if (it.y > H + 50) { items.splice(i, 1); continue; }
+        ctx.save(); ctx.translate(it.x, it.y); if (it.p === 1 || it.p === 5) ctx.rotate(Math.sin(it.rot) * 0.3); ctx.font = emojiFont(it.s); ctx.fillText(it.e, 0, 0); ctx.restore();
+      }
+      if (rk.complete) ctx.drawImage(rk, x - rw / 2 + shake, y - rh / 2, rw, rh);
+      drawPops(ctx, pops, dt);
+    }, function () { api.end({ title: 'Great flying!', score: score, text: 'You scored ' + score + '!' }); });
+    Voice.say('Rocket Ride! Drag the rocket to catch the stars. Golden stars are worth five!');
+    return stop;
+  }
+
+  /* ---- Alien Pop-Up: tap the silly aliens before they duck back into their craters ---- */
+  function gameAlienPop(area, api) {
+    var field = el('div', { class: 'popfield' }); area.append(field);
+    var holes = [], score = 0, nextSay = 10, over = false, nextPop = 400;
+    for (var i = 0; i < 6; i++) {
+      var pop = el('button', { class: 'popper', 'aria-label': 'Alien' });
+      field.append(el('div', { class: 'crater' }, [el('span', { class: 'c-hole' }), el('div', { class: 'c-clip' }, pop)]));
+      holes.push({ pop: pop, up: false, kind: null, t: 0 });
+    }
+    api.score(0);
+    holes.forEach(function (h) {
+      h.pop.addEventListener('pointerdown', function (e) {
+        e.preventDefault();
+        if (!h.up || over) return;
+        h.up = false; clearTimeout(h.t);
+        var pts = h.kind === 'gold' ? 5 : h.kind === 'fox' ? 3 : 1;
+        score += pts; api.score(score);
+        h.pop.classList.add('bonk'); SFX.pop(); if (pts > 1) SFX.streak();
+        var c = centerOf(h.pop); FX.burst(c.x, c.y, { n: pts > 1 ? 30 : 14, speed: 7, life: 700, spooky: 'space' });
+        praisePop('+' + pts, h.pop);
+        if (score >= nextSay) { Voice.say(nextSay + '!'); nextSay += 10; } else if (h.kind === 'fox') Voice.say('Hee hee!');
+        setTimeout(function () { h.pop.classList.remove('up', 'bonk'); }, 230);
+      });
+    });
+    function popUp(prog) {
+      var free = holes.filter(function (h) { return !h.up && !h.pop.classList.contains('up'); });
+      if (!free.length) return;
+      var h = R.pick(free), r = Math.random();
+      h.kind = r < 0.07 ? 'gold' : r < 0.15 ? 'fox' : 'alien';
+      h.pop.innerHTML = h.kind === 'fox' ? foxSVG() : alienSVG(h.kind === 'gold' ? '#FFD54F' : R.pick(AL_COLS), R.pick([1, 2, 3]));
+      if (h.kind === 'gold') h.pop.insertAdjacentHTML('beforeend', '<span class="pop-crown emoji">👑</span>');
+      h.pop.classList.toggle('fox', h.kind === 'fox');
+      void h.pop.offsetWidth; h.pop.classList.add('up'); h.up = true;
+      h.t = setTimeout(function () { h.up = false; h.pop.classList.remove('up'); }, Math.max(700, 1700 - prog * 900));
+    }
+    var stop = playLoop(api, 45000, function (dt, now, prog) {
+      nextPop -= 16.7 * dt;
+      if (nextPop <= 0) { popUp(prog); if (prog > 0.45 && Math.random() < 0.35) popUp(prog); nextPop = Math.max(430, 1050 - prog * 550); }
+    }, function () { over = true; holes.forEach(function (h) { clearTimeout(h.t); }); api.end({ title: 'Time’s up!', score: score, text: 'You scored ' + score + '!' }); });
+    Voice.say('Alien Pop-Up! Tap the aliens before they hide. Golden aliens are worth five!');
+    return function () { over = true; stop(); holes.forEach(function (h) { clearTimeout(h.t); }); };
+  }
+
+  /* ---- Cake Stacker: tap to drop the sliding layer; build the tallest cake ---- */
+  var CAKE_COLS = [['#F7A1C4', '#E06E9B'], ['#9A6234', '#6E4120'], ['#FFE7A8', '#E3C06A'], ['#8FB8F5', '#5F8FDB'], ['#B8E39A', '#82BF62'], ['#FFB86B', '#E58A33']];
+  var SPRINKLE = ['#FF5A4E', '#FFD93D', '#5AA9EC', '#4CBA68', '#9C6BE0', '#FFFFFF'];
+  function gameCake(area, api) {
+    var g = miniCanvas(area), ctx = g.ctx, W = g.W, H = g.H, cv = g.cv;
+    var lh = Math.max(26, Math.min(H * 0.075, 46)), lw = Math.max(110, Math.min(W * 0.36, 280));
+    var plateY = H - 24, stack = [], falling = null, tumbling = [], pops = [], cam = 0, sway = 0, over = false, ending = 0;
+    var mover = { x: W / 2, dir: 1 }, score = 0;
+    function newLayer(x) {
+      var dots = []; for (var i = 0; i < 7; i++) dots.push({ dx: (Math.random() - 0.5) * 0.8, dy: Math.random(), c: R.pick(SPRINKLE) });
+      return { x: x, c: CAKE_COLS[stack.length % CAKE_COLS.length], dots: dots, rot: 0 };
+    }
+    stack.push(newLayer(W / 2));
+    api.score(1);
+    function topWorld() { return plateY - stack.length * lh; }
+    function drawLayer(L, x, top, w) {
+      var h = lh, l = x - w / 2;
+      ctx.lineJoin = 'round'; ctx.lineWidth = 3; ctx.strokeStyle = '#1D2A44';
+      ctx.fillStyle = L.c[0]; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(l, top, w, h, 8) : ctx.rect(l, top, w, h); ctx.fill();
+      ctx.fillStyle = L.c[1]; ctx.fillRect(l + 2, top + h * 0.68, w - 4, h * 0.3);
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(l, top, w, h, 8) : ctx.rect(l, top, w, h); ctx.stroke();
+      /* frosting with drips */
+      ctx.fillStyle = '#FFFDF6'; ctx.beginPath(); ctx.moveTo(l + 4, top + 2);
+      var n = 7; for (var i = 0; i <= n; i++) { var px = l + 4 + (w - 8) * i / n; ctx.lineTo(px, top + h * (i % 2 ? 0.55 : 0.32)); }
+      ctx.lineTo(l + w - 4, top + 2); ctx.closePath(); ctx.fill(); ctx.lineWidth = 2; ctx.stroke();
+      L.dots.forEach(function (d) { ctx.fillStyle = d.c; ctx.fillRect(x + d.dx * w - 3, top + 3 + d.dy * h * 0.16, 6, 3); });
+    }
+    function drawCandles(x, top, now) {
+      for (var i = -1; i <= 1; i++) {
+        var cx = x + i * lw * 0.22;
+        ctx.fillStyle = ['#5AA9EC', '#F58FC0', '#FFD93D'][i + 1]; ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.rect(cx - 5, top - lh * 0.9, 10, lh * 0.9); ctx.fill(); ctx.stroke();
+        var f = 1 + Math.sin(now / 70 + i) * 0.15;
+        ctx.fillStyle = '#FF9A2E'; ctx.beginPath(); ctx.ellipse(cx, top - lh * 0.9 - 9 * f, 6, 10 * f, 0, 0, 6.283); ctx.fill();
+        ctx.fillStyle = '#FFE27A'; ctx.beginPath(); ctx.ellipse(cx, top - lh * 0.9 - 7 * f, 3, 6 * f, 0, 0, 6.283); ctx.fill();
+      }
+    }
+    cv.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
+      if (falling || over) return;
+      var L = newLayer(mover.x); L.y = Math.max(lh * 1.3, H * 0.15) - cam; L.vy = 0;
+      falling = L; SFX.tick();
+    });
+    function land() {
+      var top = stack[stack.length - 1], off = falling.x - top.x, sp = onScreen(cv, falling.x, falling.y + cam);
+      if (Math.abs(off) < lw * 0.08) {
+        falling.x = top.x; stack.push(falling); score++; popText(pops, 'Perfect!', falling.x, falling.y + cam - 10, '#FFD93D');
+        SFX.streak(); FX.burst(sp.x, sp.y, { n: 24, speed: 7, life: 700, spooky: 'bake' });
+      } else if (Math.abs(off) <= lw * 0.62) {
+        stack.push(falling); score++; sway = 1; SFX.pop(); popText(pops, R.pick(['Yum!', 'Nice!', 'Wobble!', 'Ooh!']), falling.x, falling.y + cam - 10, '#FF9EC4');
+      } else {
+        falling.vx = off > 0 ? 3 : -3; falling.spin = off > 0 ? 0.08 : -0.08; tumbling.push(falling);
+        SFX.boing(); popText(pops, 'Whoops!', falling.x, falling.y + cam - 10, '#FFFFFF');
+      }
+      if (stack.length > 1 && falling.x !== undefined && stack[stack.length - 1] === falling) { api.score(stack.length); if (stack.length % 5 === 0) Voice.say(stack.length + ' layers!'); }
+      falling = null;
+    }
+    var bg = ctx.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#FFF3F8'); bg.addColorStop(1, '#FFD6E7');
+    function draw(dt, now) {
+      var camT = Math.max(0, H * 0.58 - topWorld());
+      cam += (camT - cam) * Math.min(1, 0.08 * dt);
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+      /* plate */
+      ctx.fillStyle = '#E3E8F2'; ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.ellipse(W / 2, plateY + cam + 8, lw * 0.75, 14, 0, 0, 6.283); ctx.fill(); ctx.stroke();
+      sway *= Math.pow(0.97, dt);
+      stack.forEach(function (L, i) { var wob = Math.sin(now / 160) * sway * Math.min(i, 12) * 1.1; drawLayer(L, L.x + wob, plateY - (i + 1) * lh + cam, lw); });
+      if (ending) drawCandles(stack[stack.length - 1].x, plateY - stack.length * lh + cam, now);
+      tumbling.forEach(function (L) {
+        L.vy += 0.9 * dt; L.y += L.vy * dt; L.x += L.vx * dt; L.rot += L.spin * dt;
+        ctx.save(); ctx.translate(L.x, L.y + cam + lh / 2); ctx.rotate(L.rot); drawLayer(L, 0, -lh / 2, lw); ctx.restore();
+      });
+      tumbling = tumbling.filter(function (L) { return L.y + cam < H + 200; });
+      if (!over) {
+        var spd = (3 + Math.min(stack.length, 20) * 0.22) * Math.max(0.8, W / 900);
+        mover.x += mover.dir * spd * dt;
+        if (mover.x > W - lw / 2 - 8) { mover.x = W - lw / 2 - 8; mover.dir = -1; }
+        if (mover.x < lw / 2 + 8) { mover.x = lw / 2 + 8; mover.dir = 1; }
+        if (falling) {
+          falling.vy += 1.1 * dt * Math.max(0.8, H / 700); falling.y += falling.vy * dt;
+          if (falling.y >= topWorld() - lh) { falling.y = topWorld() - lh; land(); }
+          else drawLayer(falling, falling.x, falling.y + cam, lw);
+        } else {
+          var my = Math.max(lh * 1.3, H * 0.15);
+          ctx.save(); ctx.setLineDash([6, 8]); ctx.strokeStyle = 'rgba(29,42,68,.25)'; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(mover.x, my + lh + 4); ctx.lineTo(mover.x, Math.min(H, topWorld() + cam)); ctx.stroke(); ctx.restore();
+          drawLayer({ c: CAKE_COLS[stack.length % CAKE_COLS.length], dots: [] }, mover.x, my, lw);
+        }
+      }
+      drawPops(ctx, pops, dt);
+    }
+    var endRaf = 0;
+    var stop = playLoop(api, 60000, function (dt, now) { draw(dt, now); }, function () {
+      over = true; falling = null; ending = 1; SFX.fanfare(); Voice.say('Happy cake day! Look how tall it is!');
+      var t0 = 0, last = 0;
+      (function end(now) {
+        if (!t0) { t0 = now; last = now; }
+        var dt = Math.min(3, (now - last) / 16.7); last = now;
+        draw(dt, now);
+        if (now - t0 < 1800) endRaf = requestAnimationFrame(end);
+        else api.end({ title: 'Yummy!', score: stack.length, text: 'Your cake is ' + stack.length + ' layers tall!' });
+      })(performance.now());
+    });
+    Voice.say('Cake Stacker! Tap to drop each layer on the cake. Build it as tall as you can!');
+    return function () { stop(); over = true; cancelAnimationFrame(endRaf); };
+  }
+
+  /* ---- Spin Art: paint on a spinning wheel; saves to the Art Gallery ---- */
+  function gameSpin(area, api) {
+    var holder = el('div', { class: 'cholder spin-holder' }), side = el('div', { class: 'cside' });
+    area.append(el('div', { class: 'cwrap' }, [holder, side]));
+    var color = CRAYONS[0], rainbow = false, hue = 0, SPEEDS = [0.025, 0.06, 0.12], sp = 1, angle = 0, over = false, down = false, pt = null, raf = 0, last = 0;
+    var pal = el('div', { class: 'cpal', role: 'group', 'aria-label': 'Paint colors' });
+    CRAYONS.concat(['rainbow']).forEach(function (c) {
+      var b = el('button', { class: 'crayon' + (c === 'rainbow' ? ' rainbow' : '') + (c === color ? ' on' : ''), style: c === 'rainbow' ? '' : 'background:' + c, 'aria-label': c === 'rainbow' ? 'Rainbow paint' : 'Paint color' });
+      b.addEventListener('click', function () { rainbow = c === 'rainbow'; if (!rainbow) color = c; Array.prototype.forEach.call(pal.children, function (x) { x.classList.remove('on'); }); b.classList.add('on'); SFX.tick(); });
+      pal.append(b);
+    });
+    var speeds = el('div', { class: 'ptools', role: 'group', 'aria-label': 'Spin speed' });
+    [['🐢', 'Slow'], ['🐇', 'Fast'], ['🚀', 'Super fast']].forEach(function (s, i) {
+      var b = el('button', { class: 'chunk ptool' + (i === sp ? ' on' : ''), 'aria-label': s[1] }, el('span', { class: 'emoji', text: s[0] }));
+      b.addEventListener('click', function () { sp = i; Array.prototype.forEach.call(speeds.children, function (x) { x.classList.remove('on'); }); b.classList.add('on'); SFX.tick(); Voice.say(s[1] + '!'); });
+      speeds.append(b);
+    });
+    var btns = el('div', { class: 'end-btns' }, [
+      el('button', { class: 'chunk btn', html: '<span class="emoji">💥</span> Splat!', onclick: function () { splat(); } }),
+      el('button', { class: 'chunk btn', text: 'Start over', onclick: function () { clearArt(); SFX.tick(); } }),
+      el('button', { class: 'chunk btn go', text: 'All done!', onclick: saveIt })]);
+    side.append(speeds, pal, btns);
+    var D = Math.max(220, Math.min(holder.clientWidth - 8, holder.clientHeight - 8, 720)), R0 = D / 2 - 8, dpr = Math.min(2, window.devicePixelRatio || 1);
+    var cv = el('canvas', { class: 'spin-cv', 'aria-label': 'Spinning paper' }); holder.append(cv);
+    cv.width = cv.height = Math.round(D * dpr); cv.style.width = cv.style.height = D + 'px';
+    var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var art = document.createElement('canvas'); art.width = art.height = Math.round(D * dpr);
+    var ac = art.getContext('2d'); ac.setTransform(dpr, 0, 0, dpr, D * dpr / 2, D * dpr / 2);
+    function clearArt() { ac.save(); ac.setTransform(1, 0, 0, 1, 0, 0); ac.clearRect(0, 0, art.width, art.height); ac.restore(); ac.fillStyle = '#FFFFFF'; ac.beginPath(); ac.arc(0, 0, R0, 0, 6.283); ac.fill(); }
+    clearArt();
+    function paintColor() { if (rainbow) { hue = (hue + 3) % 360; return 'hsl(' + hue + ',90%,55%)'; } return color; }
+    function dab(x, y, r, c) {
+      if (x * x + y * y > R0 * R0) return;
+      ac.save(); ac.beginPath(); ac.arc(0, 0, R0, 0, 6.283); ac.clip();
+      ac.fillStyle = c; ac.beginPath(); ac.arc(x, y, r, 0, 6.283); ac.fill();
+      /* paint flings outward as the wheel spins */
+      var d = Math.sqrt(x * x + y * y) || 1, ux = x / d, uy = y / d, n = 2 + sp;
+      for (var k = 1; k <= n; k++) { ac.beginPath(); ac.arc(x + ux * k * (4 + sp * 3), y + uy * k * (4 + sp * 3), Math.max(1.2, r * (1 - k / (n + 1.5))), 0, 6.283); ac.fill(); }
+      ac.restore();
+    }
+    function splat() {
+      var a = Math.random() * 6.283, d = Math.random() * R0 * 0.75, x = Math.cos(a) * d, y = Math.sin(a) * d, c = rainbow ? 'hsl(' + Math.floor(Math.random() * 360) + ',90%,55%)' : color;
+      dab(x, y, 14 + Math.random() * 10, c);
+      for (var i = 0; i < 8; i++) { var b = Math.random() * 6.283, s = 16 + Math.random() * 26; dab(x + Math.cos(b) * s, y + Math.sin(b) * s, 2 + Math.random() * 5, c); }
+      SFX.pop();
+    }
+    function toLocal(p) { var dx = p.x - D / 2, dy = p.y - D / 2, ca = Math.cos(-angle), sa = Math.sin(-angle); return { x: dx * ca - dy * sa, y: dx * sa + dy * ca }; }
+    function at(e) { var b = cv.getBoundingClientRect(); return { x: (e.clientX - b.left) * D / b.width, y: (e.clientY - b.top) * D / b.height }; }
+    cv.addEventListener('pointerdown', function (e) { e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch (x) {} down = true; pt = at(e); });
+    cv.addEventListener('pointermove', function (e) { if (down) { e.preventDefault(); pt = at(e); } });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (ev) { cv.addEventListener(ev, function () { down = false; }); });
+    function frame(now) {
+      if (over) return;
+      var dt = last ? Math.min(3, (now - last) / 16.7) : 1; last = now;
+      angle += SPEEDS[sp] * dt;
+      if (down && pt) { var l = toLocal(pt); dab(l.x, l.y, 5 + Math.random() * 3, paintColor()); }
+      ctx.clearRect(0, 0, D, D);
+      ctx.fillStyle = '#5CCFC0'; ctx.beginPath(); ctx.arc(D / 2, D / 2, D / 2 - 1, 0, 6.283); ctx.fill();
+      ctx.save(); ctx.translate(D / 2, D / 2); ctx.rotate(angle); ctx.drawImage(art, -D / 2, -D / 2, D, D); ctx.restore();
+      ctx.lineWidth = 4; ctx.strokeStyle = '#1D2A44'; ctx.beginPath(); ctx.arc(D / 2, D / 2, R0, 0, 6.283); ctx.stroke();
+      ctx.fillStyle = '#A9B2C3'; ctx.beginPath(); ctx.arc(D / 2, D / 2, 9, 0, 6.283); ctx.fill(); ctx.stroke();
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    function saveIt() {
+      if (over) return;
+      over = true; cancelAnimationFrame(raf);
+      var out = document.createElement('canvas'); out.width = out.height = 300;
+      var o = out.getContext('2d'); o.fillStyle = '#5CCFC0'; o.fillRect(0, 0, 300, 300);
+      o.save(); o.translate(150, 150); o.rotate(angle); o.drawImage(art, -150 * D / (2 * R0), -150 * D / (2 * R0), 300 * D / (2 * R0), 300 * D / (2 * R0)); o.restore();
+      var img = ''; try { img = out.toDataURL('image/jpeg', 0.72); } catch (e) {}
+      if (img) addArt({ img: img, spin: true, date: dayKey() });
+      api.end({ title: 'Swirly!', text: 'Your spin art is in the Art Gallery.' });
+    }
+    Voice.say('Spin Art! Pick a color, then touch the spinning paper to paint. Try the splat button!');
+    return function () { over = true; cancelAnimationFrame(raf); };
+  }
+
+  /* ---- Broom Ride: tap to fly Pip on a broom through the night and grab candy ---- */
+  function gameBroom(area, api) {
+    var g = miniCanvas(area), ctx = g.ctx, W = g.W, H = g.H, cv = g.cv;
+    var pip = svgImage(pipImageSVG({ color: S.pip.color, hat: 'witch', extra: S.pip.extra }));
+    var sc = Math.max(0.75, H / 700), ps = Math.max(58, Math.min(H * 0.17, 104)), px = W * 0.24, py = H * 0.42, vy = 0;
+    var groundH = H * 0.11, items = [], pops = [], stars = [], houses = [], score = 0, spin = 0, nextSay = 10, spawnT = 500, hx = 0;
+    for (var i = 0; i < 55; i++) stars.push({ x: Math.random() * W, y: Math.random() * (H - groundH) * 0.85, r: 0.6 + Math.random() * 1.5, p: Math.random() * 6 });
+    for (var x0 = 0; x0 < W * 2 + 200; x0 += 70 + Math.random() * 90) houses.push({ x: x0, w: 50 + Math.random() * 60, h: 40 + Math.random() * 70, roof: Math.random() < 0.6 });
+    var KINDS = [{ e: '🍬', p: 1, w: 40 }, { e: '🍭', p: 1, w: 25 }, { e: '🎃', p: 3, w: 12 }, { e: '⭐', p: 5, w: 4 }, { e: '🦇', p: 0, w: 19 }];
+    api.score(0);
+    cv.addEventListener('pointerdown', function (e) { e.preventDefault(); vy = -7.4 * Math.sqrt(sc); SFX.tick(); });
+    var sky = ctx.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, '#17143D'); sky.addColorStop(1, '#4B3B82');
+    var stop = playLoop(api, 60000, function (dt, now, prog) {
+      vy = Math.min(vy + 0.36 * sc * dt, 8 * sc); py += vy * dt;
+      if (py < ps * 0.55) { py = ps * 0.55; vy = 0; }
+      var floor = H - groundH - ps * 0.42; if (py > floor) { py = floor; vy = -Math.abs(vy) * 0.25; }
+      var speed = (3 + prog * 2.6) * Math.max(0.8, W / 900);
+      ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+      stars.forEach(function (s) { ctx.globalAlpha = 0.5 + Math.sin(now / 400 + s.p) * 0.4; ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill(); });
+      ctx.globalAlpha = 1;
+      var mr = Math.min(W, H) * 0.08; ctx.fillStyle = '#FFF0B3'; ctx.beginPath(); ctx.arc(W - mr * 2, mr * 1.8, mr, 0, 6.283); ctx.fill();
+      ctx.fillStyle = 'rgba(255,240,179,.15)'; ctx.beginPath(); ctx.arc(W - mr * 2, mr * 1.8, mr * 1.6, 0, 6.283); ctx.fill();
+      hx += speed * 0.35 * dt;
+      ctx.fillStyle = '#2B2252';
+      houses.forEach(function (h) {
+        var x = ((h.x - hx) % (W * 2 + 200) + W * 2 + 200) % (W * 2 + 200) - 100, base = H - groundH;
+        ctx.fillRect(x, base - h.h, h.w, h.h);
+        if (h.roof) { ctx.beginPath(); ctx.moveTo(x - 6, base - h.h); ctx.lineTo(x + h.w / 2, base - h.h - h.w * 0.55); ctx.lineTo(x + h.w + 6, base - h.h); ctx.fill(); }
+        ctx.fillStyle = '#FFD25A'; ctx.fillRect(x + h.w * 0.3, base - h.h * 0.6, 8, 8); ctx.fillStyle = '#2B2252';
+      });
+      ctx.fillStyle = '#1F3A2E'; ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, H - groundH);
+      for (var k = 0; k <= 8; k++) ctx.lineTo(W * k / 8, H - groundH + Math.sin(k * 1.7 + hx / 60) * 8);
+      ctx.lineTo(W, H); ctx.fill();
+      spawnT -= 16.7 * dt;
+      if (spawnT <= 0) { var it = pickW(KINDS); items.push({ e: it.e, p: it.p, x: W + 40, y: ps * 0.7 + Math.random() * (H - groundH - ps * 1.4), s: (it.p ? 38 : 44) * Math.min(1.25, sc), ph: Math.random() * 6 }); spawnT = Math.max(380, 900 - prog * 420); }
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      for (var j = items.length - 1; j >= 0; j--) {
+        var o = items[j]; o.x -= speed * dt * (o.p ? 1 : 1.25);
+        var oy = o.y + (o.p ? 0 : Math.sin(now / 200 + o.ph) * 14);
+        if (Math.abs(o.x - px) < ps * 0.45 + o.s * 0.3 && Math.abs(oy - py) < ps * 0.45 + o.s * 0.3) {
+          items.splice(j, 1);
+          var sp = onScreen(cv, o.x, oy);
+          if (o.p) {
+            score += o.p; api.score(score); popText(pops, '+' + o.p, o.x, oy);
+            FX.burst(sp.x, sp.y, { n: o.p > 2 ? 28 : 12, speed: 6, life: 700, spooky: 'boo' }); SFX.ding(Math.min(9, o.p * 2));
+            if (score >= nextSay) { Voice.say(nextSay + '!'); nextSay += 10; }
+          } else if (spin <= 0) { spin = 1; SFX.boing(); popText(pops, 'Boo!', o.x, oy - 20, '#E6DCFF'); }
+          continue;
+        }
+        if (o.x < -60) { items.splice(j, 1); continue; }
+        ctx.font = emojiFont(o.s); ctx.fillText(o.e, o.x, oy);
+      }
+      if (spin > 0) spin -= 0.035 * dt;
+      ctx.save(); ctx.translate(px, py);
+      ctx.rotate(Math.max(-0.35, Math.min(0.45, vy * 0.05)) + (spin > 0 ? (1 - spin) * 6.283 : 0));
+      ctx.lineCap = 'round'; ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 9; ctx.beginPath(); ctx.moveTo(-ps * 0.75, ps * 0.32); ctx.lineTo(ps * 0.65, ps * 0.2); ctx.stroke();
+      ctx.strokeStyle = '#9A6234'; ctx.lineWidth = 5; ctx.stroke();
+      ctx.fillStyle = '#E8B860'; ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(-ps * 0.62, ps * 0.24); ctx.lineTo(-ps * 1.05, ps * 0.08); ctx.lineTo(-ps * 1.1, ps * 0.5); ctx.lineTo(-ps * 0.62, ps * 0.42); ctx.closePath(); ctx.fill(); ctx.stroke();
+      if (pip.complete) ctx.drawImage(pip, -ps * 0.5, -ps * 0.72, ps, ps * 124 / 120);
+      ctx.restore();
+      drawPops(ctx, pops, dt);
+    }, function () { api.end({ title: 'What a ride!', score: score, text: 'You grabbed ' + score + ' points of candy!' }); });
+    Voice.say('Broom Ride! Tap to fly up. Grab the candy and watch out for bats!');
+    return stop;
+  }
+
+  /* ---- Pumpkin Carver: pick a face and a hat, then light it up ---- */
+  var PK_OPTS = { eyes: ['tri', 'round', 'star', 'heart', 'sleepy', 'angry'], nose: ['tri', 'round', 'heart', 'none'], mouth: ['smile', 'teeth', 'o', 'zigzag', 'fangs', 'tongue'], hat: ['none', 'witch', 'bow', 'crown', 'party'] };
+  var pkN = 0;
+  function pumpkinSVG(c, thumb) {
+    var id = 'pkg' + (++pkN), ink = '#1D2A44', k = ' stroke="' + ink + '" stroke-linejoin="round"';
+    var hole = c.lit ? 'url(#' + id + ')' : '#5A2E0E', hk = ' fill="' + hole + '" stroke="' + ink + '" stroke-width="3.5" stroke-linejoin="round"', flesh = '#FF9A2E';
+    function star(x, y, r) { var p = []; for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; p.push((x + Math.cos(a) * rr).toFixed(1) + ',' + (y + Math.sin(a) * rr).toFixed(1)); } return '<polygon points="' + p.join(' ') + '"' + hk + '/>'; }
+    function heart(x, y, s) { return '<path d="M' + x + ' ' + (y + s * 0.9) + ' C' + (x - s * 1.4) + ' ' + (y - s * 0.1) + ' ' + (x - s * 0.7) + ' ' + (y - s * 1.1) + ' ' + x + ' ' + (y - s * 0.35) + ' C' + (x + s * 0.7) + ' ' + (y - s * 1.1) + ' ' + (x + s * 1.4) + ' ' + (y - s * 0.1) + ' ' + x + ' ' + (y + s * 0.9) + ' Z"' + hk + '/>'; }
+    function eye(x, y, side) {
+      switch (c.eyes) {
+        case 'round': return '<circle cx="' + x + '" cy="' + y + '" r="19"' + hk + '/>';
+        case 'star': return star(x, y, 25);
+        case 'heart': return heart(x, y, 20);
+        case 'sleepy': return '<path d="M' + (x - 24) + ' ' + (y - 4) + ' Q' + x + ' ' + (y + 24) + ' ' + (x + 24) + ' ' + (y - 4) + ' Z"' + hk + '/>';
+        case 'angry': return side < 0 ? '<polygon points="' + (x - 26) + ',' + (y - 14) + ' ' + (x + 24) + ',' + (y + 4) + ' ' + (x - 20) + ',' + (y + 18) + '"' + hk + '/>' : '<polygon points="' + (x + 26) + ',' + (y - 14) + ' ' + (x - 24) + ',' + (y + 4) + ' ' + (x + 20) + ',' + (y + 18) + '"' + hk + '/>';
+        default: return '<polygon points="' + (x - 26) + ',' + (y + 16) + ' ' + x + ',' + (y - 22) + ' ' + (x + 26) + ',' + (y + 16) + '"' + hk + '/>';
+      }
+    }
+    var nose = c.nose === 'round' ? '<circle cx="150" cy="182" r="11"' + hk + '/>' : c.nose === 'heart' ? heart(150, 182, 11) : c.nose === 'none' ? '' : '<polygon points="137,192 150,168 163,192"' + hk + '/>';
+    var smile = '<path d="M90 208 Q150 270 210 208 Q150 238 90 208 Z"' + hk + '/>', mouth;
+    switch (c.mouth) {
+      case 'teeth': mouth = '<path d="M86 204 Q150 276 214 204 Q150 236 86 204 Z"' + hk + '/><rect x="124" y="216" width="17" height="15" fill="' + flesh + '" stroke="' + ink + '" stroke-width="3"/><rect x="160" y="216" width="17" height="15" fill="' + flesh + '" stroke="' + ink + '" stroke-width="3"/><rect x="142" y="248" width="17" height="12" fill="' + flesh + '" stroke="' + ink + '" stroke-width="3"/>'; break;
+      case 'o': mouth = '<ellipse cx="150" cy="228" rx="22" ry="27"' + hk + '/>'; break;
+      case 'zigzag': mouth = '<polygon points="88,212 108,232 129,212 150,232 171,212 192,232 212,212 202,248 98,248"' + hk + '/>'; break;
+      case 'fangs': mouth = smile + '<polygon points="118,216 126,236 134,219" fill="' + flesh + '" stroke="' + ink + '" stroke-width="3" stroke-linejoin="round"/><polygon points="166,219 174,236 182,216" fill="' + flesh + '" stroke="' + ink + '" stroke-width="3" stroke-linejoin="round"/>'; break;
+      case 'tongue': mouth = smile + '<ellipse cx="166" cy="242" rx="15" ry="13" fill="#FF8FAB" stroke="' + ink + '" stroke-width="3"/><path d="M166 234 L166 248" stroke="#E06E9B" stroke-width="2.5"/>'; break;
+      default: mouth = smile;
+    }
+    var hat = '';
+    if (c.hat === 'witch') hat = '<path d="M108 62 C120 32 140 6 186 -26 C178 0 182 30 196 62 Z" fill="#4B3B82"' + k + ' stroke-width="4"/><path d="M110 52 L194 52" stroke="#FF8A1F" stroke-width="7"/><ellipse cx="150" cy="64" rx="94" ry="15" fill="#36275F"' + k + ' stroke-width="4"/>';
+    else if (c.hat === 'bow') hat = '<g transform="translate(205 58)"' + k + ' stroke-width="4" fill="#E8649A"><path d="M0 0 L-30 -20 L-30 20 Z"/><path d="M0 0 L30 -20 L30 20 Z"/><circle r="9"/></g>';
+    else if (c.hat === 'crown') hat = '<path d="M104 66 L104 18 L126 40 L150 6 L174 40 L196 18 L196 66 Z" fill="#FFC43F"' + k + ' stroke-width="4"/><circle cx="126" cy="54" r="6" fill="#E8649A"/><circle cx="150" cy="50" r="7" fill="#5AA9EC"/><circle cx="174" cy="54" r="6" fill="#4CBA68"/>';
+    else if (c.hat === 'party') hat = '<path d="M122 64 L150 -6 L178 64 Z" fill="#5AA9EC"' + k + ' stroke-width="4"/><path d="M134 34 L166 34 M128 50 L172 50" stroke="#FFD93D" stroke-width="6"/><circle cx="150" cy="-8" r="10" fill="#FF5A4E"' + k + ' stroke-width="3"/>';
+    var body = '<ellipse cx="96" cy="162" rx="72" ry="104" fill="#F07F1C"' + k + ' stroke-width="4"/><ellipse cx="204" cy="162" rx="72" ry="104" fill="#F07F1C"' + k + ' stroke-width="4"/>' +
+      '<ellipse cx="126" cy="164" rx="62" ry="110" fill="#FF8E26"' + k + ' stroke-width="4"/><ellipse cx="174" cy="164" rx="62" ry="110" fill="#FF8E26"' + k + ' stroke-width="4"/>' +
+      '<ellipse cx="150" cy="166" rx="64" ry="112" fill="' + flesh + '"' + k + ' stroke-width="4"/><path d="M86 100 Q78 140 88 180" stroke="#FFC37A" stroke-width="7" fill="none" stroke-linecap="round" opacity=".7"/>';
+    var stem = '<path d="M140 60 C136 40 144 24 160 16 L170 26 C160 32 158 44 160 62 Z" fill="#6B8E3A"' + k + ' stroke-width="4"/>';
+    var glow = c.lit ? '<circle cx="150" cy="166" r="150" fill="url(#' + id + 'h)" class="pk-halo"/>' : '';
+    return '<svg class="pk-svg' + (thumb ? ' color-svg' : '') + '" viewBox="-10 -40 320 330" role="img" aria-label="Jack-o’-lantern">' +
+      '<defs><radialGradient id="' + id + '"><stop offset="0" stop-color="#FFF7B0"/><stop offset=".5" stop-color="#FFD25A"/><stop offset="1" stop-color="#FF9A1F"/></radialGradient>' +
+      '<radialGradient id="' + id + 'h"><stop offset=".55" stop-color="rgba(255,190,80,.55)"/><stop offset="1" stop-color="rgba(255,190,80,0)"/></radialGradient></defs>' +
+      glow + stem + body + eye(110, 140, -1) + eye(190, 140, 1) + nose + mouth + hat + '</svg>';
+  }
+  function gamePumpkin(area, api) {
+    var cfg = { eyes: 'tri', nose: 'tri', mouth: 'teeth', hat: 'none', lit: false }, tab = 'eyes', over = false;
+    var holder = el('div', { class: 'cholder pk-holder' }), side = el('div', { class: 'cside pk-side' });
+    var wrap = el('div', { class: 'cwrap pk-wrap' }, [holder, side]);
+    area.append(wrap);
+    var tabs = el('div', { class: 'shop-tabs', role: 'group', 'aria-label': 'Parts' }), grid = el('div', { class: 'pk-grid' });
+    var lightBtn = el('button', { class: 'chunk btn', html: '<span class="emoji">💡</span> Light it up!' });
+    var TABS = [['eyes', 'Eyes', '👀'], ['nose', 'Nose', '👃'], ['mouth', 'Mouth', '👄'], ['hat', 'Hat', '🎩']];
+    var SILLY = ['Spooky!', 'So silly!', 'Ha ha!', 'I love it!', 'Boo!', 'Too cute!'];
+    function drawPumpkin() { holder.innerHTML = pumpkinSVG(cfg); wrap.classList.toggle('lit', cfg.lit); }
+    function drawSide() {
+      tabs.innerHTML = '';
+      TABS.forEach(function (t) {
+        tabs.append(el('button', { class: 'shop-tab' + (tab === t[0] ? ' on' : ''), 'aria-pressed': String(tab === t[0]), onclick: function () { tab = t[0]; drawSide(); SFX.tick(); } }, [el('span', { class: 'emoji', text: t[2] }), t[1]]));
+      });
+      grid.innerHTML = '';
+      PK_OPTS[tab].forEach(function (o) {
+        var look = Object.assign({}, cfg, { lit: false }); look[tab] = o;
+        grid.append(el('button', { class: 'chunk pk-opt' + (cfg[tab] === o ? ' on' : ''), 'aria-label': tab + ' ' + o, html: pumpkinSVG(look), onclick: function () {
+          cfg[tab] = o; drawPumpkin(); drawSide(); SFX.pop(); Voice.say(R.pick(SILLY));
+        } }));
+      });
+    }
+    lightBtn.addEventListener('click', function () {
+      cfg.lit = !cfg.lit; drawPumpkin();
+      lightBtn.innerHTML = cfg.lit ? '<span class="emoji">☀️</span> Lights on' : '<span class="emoji">💡</span> Light it up!';
+      if (cfg.lit) { SFX.streak(); Voice.say('Ooh, spooky! Your jack-o’-lantern is glowing!'); } else SFX.tick();
+    });
+    side.append(tabs, grid, el('div', { class: 'end-btns' }, [
+      el('button', { class: 'chunk btn', html: '<span class="emoji">🎲</span> Surprise!', onclick: function () {
+        Object.keys(PK_OPTS).forEach(function (k) { cfg[k] = R.pick(PK_OPTS[k]); }); drawPumpkin(); drawSide(); SFX.pop(); Voice.say(R.pick(SILLY));
+      } }), lightBtn,
+      el('button', { class: 'chunk btn go', text: 'All done!', onclick: function () {
+        if (over) return; over = true;
+        addArt({ pk: { eyes: cfg.eyes, nose: cfg.nose, mouth: cfg.mouth, hat: cfg.hat, lit: true }, date: dayKey() });
+        api.end({ title: 'Happy Halloween!', text: 'Your jack-o’-lantern is in the Art Gallery.' });
+      } })]));
+    drawPumpkin(); drawSide();
+    Voice.say('Pumpkin Carver! Pick the eyes, nose, mouth and a hat. Then light it up!');
+    return function () { over = true; };
+  }
+
+  /* ---- Potion Lab: three ingredients into the cauldron make a silly surprise (12 to find) ---- */
+  var POT_ING = [['frog', '🐸', '#6FCF5A', 'A frog!'], ['bat', '🦇', '#7E63D8', 'A bat!'], ['star', '⭐', '#FFD93D', 'A star!'], ['mushroom', '🍄', '#FF5A4E', 'A mushroom!'],
+    ['spider', '🕷️', '#3B3B4F', 'A spider!'], ['rainbow', '🌈', null, 'A rainbow!'], ['candy', '🍬', '#F58FC0', 'Candy!'], ['ghost', '👻', '#E8EEFF', 'A ghost!']];
+  var POTIONS = [
+    { id: 'prince', name: 'A frog prince!', html: '<span class="emoji pt-big">🐸</span><span class="emoji pt-hat">👑</span>' },
+    { id: 'ghost', name: 'A dancing ghost!', html: '<span class="emoji pt-big pt-dance">👻</span><span class="emoji pt-note">🎵</span>' },
+    { id: 'lolly', name: 'A giant lollipop!', html: '<span class="emoji pt-huge">🍭</span>' },
+    { id: 'unicorn', name: 'A rainbow unicorn!', html: '<span class="emoji pt-big pt-dance">🦄</span><span class="emoji pt-note">🌈</span>' },
+    { id: 'dragon', name: 'A friendly dragon!', html: '<span class="emoji pt-big">🐉</span>' },
+    { id: 'foxy', name: 'Foxy in a magic hat!', html: 'FOXY' },
+    { id: 'purple', name: 'Pip turned purple!', html: 'PIP' },
+    { id: 'cupcakes', name: 'A cupcake mountain!', html: '<span class="emoji pt-stack">🧁<br>🧁🧁<br>🧁🧁🧁</span>' },
+    { id: 'bubbles', name: 'Bubbles everywhere!', html: '<span class="emoji pt-big pt-float">🫧</span><span class="emoji pt-note pt-float">🫧</span>' },
+    { id: 'shooting', name: 'Shooting stars!', html: '<span class="emoji pt-big pt-dance">🌠</span><span class="emoji pt-note">✨</span>' },
+    { id: 'pumpkin', name: 'A singing pumpkin!', html: '<span class="emoji pt-big pt-dance">🎃</span><span class="emoji pt-note">🎶</span>' },
+    { id: 'bats', name: 'A bat party!', html: '<span class="emoji pt-big pt-dance">🦇</span><span class="emoji pt-note">🎉</span>' }
+  ];
+  function potionFor(ids) {
+    if (ids.indexOf('rainbow') >= 0) return POTIONS[3];
+    var key = ids.slice().sort().join('+'), h = 7;
+    for (var i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) % 100003;
+    var rest = POTIONS.filter(function (p) { return p.id !== 'unicorn'; });
+    return rest[h % rest.length];
+  }
+  var CAULDRON = '<svg class="caul-svg" viewBox="0 0 300 260" aria-hidden="true">' +
+    '<g class="caul-fire"><path d="M100 250 Q110 214 126 236 Q132 200 150 230 Q166 198 174 236 Q190 214 200 250 Z" fill="#FF8A1F" stroke="#1D2A44" stroke-width="3" stroke-linejoin="round"/><path d="M126 250 Q136 228 150 244 Q164 228 174 250 Z" fill="#FFD93D"/></g>' +
+    '<path d="M70 226 L60 252 M230 226 L240 252" stroke="#1D2A44" stroke-width="9" stroke-linecap="round"/>' +
+    '<path d="M36 92 C30 160 70 232 150 232 C230 232 270 160 264 92 Z" fill="#2E2A3E" stroke="#1D2A44" stroke-width="5" stroke-linejoin="round"/>' +
+    '<path d="M60 120 C64 160 86 196 120 210" fill="none" stroke="#5A5470" stroke-width="8" stroke-linecap="round"/>' +
+    '<ellipse cx="150" cy="92" rx="122" ry="26" fill="#3E3854" stroke="#1D2A44" stroke-width="5"/>' +
+    '<ellipse class="caul-liq" cx="150" cy="94" rx="104" ry="17" fill="#7FD0F5"/>' +
+    '<g class="caul-bubs"><circle cx="110" cy="92" r="9" fill="#fff" opacity=".55"/><circle cx="168" cy="96" r="12" fill="#fff" opacity=".45"/><circle cx="196" cy="88" r="7" fill="#fff" opacity=".55"/><circle cx="138" cy="86" r="6" fill="#fff" opacity=".6"/></g></svg>';
+  function hexRgb(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+  function gamePotion(area, api) {
+    var put = [], landed = 0, busy = false, over = false, rainbowT = 0;
+    var pot = el('div', { class: 'caul', html: CAULDRON }), surprise = el('div', { class: 'pt-surprise', 'aria-live': 'polite' });
+    var meter = el('div', { class: 'pt-meter', 'aria-label': 'Ingredients in the pot' });
+    var shelf = el('div', { class: 'pt-shelf', role: 'group', 'aria-label': 'Ingredients' });
+    var found = el('p', { class: 'adv-note pt-found' });
+    var after = el('div', { class: 'end-btns', hidden: true }, [
+      el('button', { class: 'chunk btn', text: 'Make another!', onclick: reset }),
+      el('button', { class: 'chunk btn go', text: 'All done!', onclick: function () { if (over) return; over = true; api.end({ title: 'Magic!', text: 'You found ' + S.arcade.potions.length + ' of ' + POTIONS.length + ' potions.' }); } })]);
+    area.append(el('div', { class: 'pt-lab' }, [el('div', { class: 'pt-stage' }, [surprise, pot, meter]), shelf, after, found]));
+    var liq = pot.querySelector('.caul-liq');
+    function showFound() { found.textContent = 'Potions found: ' + S.arcade.potions.length + ' of ' + POTIONS.length; }
+    function drawMeter() { meter.innerHTML = ''; for (var i = 0; i < 3; i++) meter.append(el('span', { class: 'pt-dot' + (i < put.length ? ' on' : ''), text: i < put.length ? POT_ING.filter(function (x) { return x[0] === put[i]; })[0][1] : '' })); }
+    function mix() {
+      clearInterval(rainbowT);
+      if (put.indexOf('rainbow') >= 0) { var hue = 0; rainbowT = setInterval(function () { hue = (hue + 12) % 360; liq.setAttribute('fill', 'hsl(' + hue + ',85%,60%)'); }, 90); return; }
+      var cols = put.map(function (id) { return hexRgb(POT_ING.filter(function (x) { return x[0] === id; })[0][2]); });
+      var m = [0, 1, 2].map(function (k) { return Math.round(cols.reduce(function (a, c) { return a + c[k]; }, 0) / cols.length); });
+      liq.setAttribute('fill', 'rgb(' + m.join(',') + ')');
+    }
+    function reset() {
+      put = []; landed = 0; busy = false; clearInterval(rainbowT); liq.setAttribute('fill', '#7FD0F5'); surprise.innerHTML = ''; surprise.className = 'pt-surprise';
+      pot.classList.remove('boil'); after.hidden = true; shelf.hidden = false; drawMeter();
+      Voice.say('Pick three things for the potion!');
+    }
+    POT_ING.forEach(function (ing) {
+      var b = el('button', { class: 'chunk pt-ing', 'aria-label': ing[0] }, [el('span', { class: 'emoji', text: ing[1] }), el('span', { class: 'bin-name', text: ing[0] })]);
+      b.addEventListener('click', function () {
+        if (busy || put.length >= 3) return;
+        put.push(ing[0]); drawMeter();
+        var from = centerOf(b), pr = pot.getBoundingClientRect(), to = { x: pr.left + pr.width / 2, y: pr.top + pr.height * 0.36 };
+        Voice.say(ing[3]);
+        flyThing('<span class="emoji" style="font-size:44px;line-height:1;display:block;text-align:center">' + ing[1] + '</span>', 'fly-ck', from, to, 48, 480, function () {
+          mix(); pot.classList.remove('splash'); void pot.offsetWidth; pot.classList.add('splash');
+          SFX.beam(); FX.burst(to.x, to.y, { n: 14, speed: 6, life: 700, kinds: ['dot'], cols: ing[2] ? [ing[2], '#FFFFFF'] : ['#FF5A4E', '#FFD93D', '#4CBA68', '#5AA9EC'] });
+          if (++landed === 3) brew();
+        });
+        if (put.length === 3) busy = true;
+      });
+      shelf.append(b);
+    });
+    function brew() {
+      busy = true; pot.classList.add('boil'); shelf.hidden = true;
+      Voice.say('Bubble, bubble! Here it comes!');
+      setTimeout(function () {
+        if (over) return;
+        var p = potionFor(put), isNew = S.arcade.potions.indexOf(p.id) < 0;
+        if (isNew) { S.arcade.potions.push(p.id); save(true); }
+        var html = p.html === 'FOXY' ? '<span class="pt-fox">' + foxSVG() + '<span class="emoji pt-tophat">🎩</span></span>' : p.html === 'PIP' ? '<span class="pt-pip">' + pipSVG({ color: 'purple', hat: 'witch' }) + '</span>' : p.html;
+        surprise.innerHTML = '<span class="pt-poof"></span><div class="pt-thing">' + html + '</div><div class="pt-name">' + p.name + '</div>' + (isNew ? '<div class="ribbon">New potion!</div>' : '');
+        surprise.className = 'pt-surprise show';
+        var c = centerOf(pot); FX.burst(c.x, c.y - 60, { n: 50, speed: 11, spread: 6.3, spooky: 'boo' }); SFX.fanfare();
+        Voice.say('Poof! ' + p.name + (isNew ? ' You found a new potion!' : ''));
+        after.hidden = false; showFound();
+      }, 1400);
+    }
+    drawMeter(); showFound();
+    Voice.say('Potion Lab! Pick three things to drop in the cauldron, and see what pops out!');
+    return function () { over = true; clearInterval(rainbowT); };
   }
 
   /* ---------------- grown-ups gate ---------------- */
@@ -4773,7 +5463,7 @@ window.PipContent = (function () {
   $('#adv-btn').addEventListener('click', function () { renderAdventure(true); });
   $('#arc-btn').addEventListener('click', function () { renderArcade(true); });
   $('#arc-back').addEventListener('click', function () { renderHome(false); });
-  $('#mini-quit').addEventListener('click', function () { if (miniStop) { miniStop(); miniStop = null; } renderArcade(false); });
+  $('#mini-quit').addEventListener('click', function () { if (miniStop) { miniStop(); miniStop = null; } if (miniFrom) renderRoom(miniFrom, false); else renderArcade(false); });
   $('#shop-btn').addEventListener('click', function () { shopPick = null; renderShop(true); });
   $('#adv-back').addEventListener('click', function () { renderHome(false); });
   $('#shop-back').addEventListener('click', function () { renderHome(false); });
