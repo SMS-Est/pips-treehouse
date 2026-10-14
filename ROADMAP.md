@@ -59,3 +59,9 @@ Needs internet (breaks car play), costs money per use, and needs a server to hid
 - v1.2: Halloween Hollow (4 games), pauses between spoken choices with highlighting.
 - v1.3: Celebrations (sparkles, flying stars, streaks, confetti, sticker presents).
 - v1.4: Daily Adventure, Pip's Shop, Trace Letters / Trace Numbers, Story Time.
+- v1.5: Pip's Arcade — game tokens from level-ups and the daily chest; Balloon Pop,
+  Sticker Match, Color Pip's World (with Art Gallery). Second-grade levels labeled accurately.
+
+## More Arcade ideas (later)
+- Pip's Flight: tap to fly Pip through the sky collecting stars (no "game over").
+- Catch the Apples: slide a basket to catch fruit while Pip counts out loud.
