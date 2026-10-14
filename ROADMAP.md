@@ -61,6 +61,17 @@ Needs internet (breaks car play), costs money per use, and needs a server to hid
 - v1.4: Daily Adventure, Pip's Shop, Trace Letters / Trace Numbers, Story Time.
 - v1.5: Pip's Arcade — game tokens from level-ups and the daily chest; Balloon Pop,
   Sticker Match, Color Pip's World (with Art Gallery). Second-grade levels labeled accurately.
+- v1.5.1: Fixed how Pip says letter names (cat/bat/leg), full speech audit.
+- v1.6: Three new rooms (10 games). Pip's Bakery: Cookie Jar with Foxy the cookie thief
+  (silly walks, robber sack, take-away / give-back / "how many did Foxy eat?"), Pizza Shop,
+  Cupcake Shop, Mixing Bowl. Art Studio: Color by Number, Color by Letter, Dot-to-Dot, plus
+  Paint Studio in the Arcade (brushes, rainbow, glitter, stamps; saves to the Art Gallery).
+  Space Station: Rocket Launch, Alien Beam-Up, Star Spell.
+
+## More game ideas (later)
+- More Foxy: Foxy steals pizza toppings or cupcake sprinkles in other Bakery games.
+- Space: Moon Shapes (find shapes on the moon), Planet Sight Words.
+- Art: Mirror Painting (symmetry), Pattern Painter.
 
 ## More Arcade ideas (later)
 - Pip's Flight: tap to fly Pip through the sky collecting stars (no "game over").

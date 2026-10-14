@@ -1,4 +1,4 @@
-# Pip's Treehouse (v1.5.1)
+# Pip's Treehouse (v1.6.0)
 
 Kindergarten reading, spelling and math games. Pip reads every question out loud.
 
