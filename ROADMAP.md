@@ -30,6 +30,10 @@ and let the app cache them on the device like the rest of the app.
 3. Click **Run workflow** on the GitHub Action Claude writes. It records all clips, commits them,
    and Netlify redeploys.
 
+**Clip list (done Oct 14):** `voice/lines.csv` — 7,989 clips, ~174,000 characters (inside Google's
+free 1 million characters a month for Chirp 3: HD, so $0), about 4 hours of audio, ~45 MB on the
+iPad. Every line the games can say is covered. Rebuild with `python3 voice/voice_plan.py index.html voice`.
+
 **Claude's build:**
 - Rework spoken text into reusable pieces; list every clip the games can need.
 - Generation script + GitHub Action (re-run with one click when games or words change).
