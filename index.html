@@ -19,7 +19,7 @@ body{margin:0;font:14px system-ui,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<!-- Pip's Treehouse v1.5.0 -->
+<!-- Pip's Treehouse v1.5.1 -->
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>Pip's Treehouse</title>
 <style>
@@ -785,8 +785,13 @@ window.PipContent = (function () {
   };
   var UP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   var LOW = UP.map(function (c) { return c.toLowerCase(); });
-  /* Letter names spelled so speech engines say the name, not a sound. */
-  var LN = { a: 'ay', b: 'bee', c: 'see', d: 'dee', e: 'ee', f: 'eff', g: 'jee', h: 'aitch', i: 'eye', j: 'jay', k: 'kay', l: 'ell', m: 'em', n: 'en', o: 'oh', p: 'pee', q: 'cue', r: 'are', s: 'ess', t: 'tee', u: 'you', v: 'vee', w: 'double you', x: 'ex', y: 'why', z: 'zee' };
+  /* How Pip says each letter's NAME. Made-up spellings like "ay" or "ee" get misread by the
+     iPad voice ("ay" came out as "eye", "ee" got spelled "E, E"), so each letter is either a
+     real word that sounds exactly like the letter name, or the capital letter itself, which
+     voices read as the letter name. Every sentence keeps a letter right before punctuation
+     so a capital A is never read as the word "a". */
+  var LN = { a: 'A', b: 'bee', c: 'see', d: 'D', e: 'E', f: 'F', g: 'gee', h: 'H', i: 'eye', j: 'jay', k: 'kay', l: 'L', m: 'M',
+    n: 'N', o: 'oh', p: 'pea', q: 'cue', r: 'R', s: 'S', t: 'tea', u: 'you', v: 'V', w: 'double you', x: 'ex', y: 'why', z: 'Z' };
   function L(c) { return LN[String(c).toLowerCase()]; }
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   var NUM = ['zero', 'one', 'two', 'three', 'four', 'five'];
@@ -938,15 +943,15 @@ window.PipContent = (function () {
         say: up ? 'Find the small letter that goes with this big letter.' : 'Find the big letter that goes with this small letter.',
         stage: { type: 'letter', ch: shown, word: L(t) },
         choices: opts(want, ds, function (v) { return { kind: 'letter', v: v }; }),
-        praise: 'Big ' + L(t) + ' and small ' + L(t) + ' go together!', hint: 'Look at the shape. Try again.' };
+        praise: 'Big ' + L(t) + ', small ' + L(t) + '. They go together!', hint: 'Look at the shape. Try again.' };
     }
     var i = R.int(2, 24);
     var seq = [UP[i - 2], UP[i - 1], UP[i]], ans = UP[i + 1];
     var near = [UP[i - 1], UP[i], UP[i + 2], UP[i + 3], UP[i - 2]].filter(function (x, n, a) { return x && x !== ans && a.indexOf(x) === n; });
-    return { key: ans, text: 'What letter comes next?', say: seqParts(seq.map(L).concat([null]), 'What letter comes next?'),
+    return { key: ans, text: 'What letter comes next?', say: seqParts(seq.map(function (c) { return L(c) + '.'; }).concat([null]), 'What letter comes next?'),
       stage: { type: 'seq', items: seq.concat([null]) },
       choices: opts(ans, R.sample(near, 3), function (v) { return { kind: 'letter', v: v }; }),
-      praise: seq.map(L).join(', ') + ', ' + L(ans) + '!', hint: 'Sing the A B Cs in your head. Try again.' };
+      praise: seq.map(L).join(', ') + ', ' + L(ans) + '!', hint: 'Sing the alphabet song in your head. Try again.' };
   }
 
   function genSounds(lv) {
@@ -974,7 +979,7 @@ window.PipContent = (function () {
     return { key: w, text: 'What letter is in the middle?', say: [{ t: w, gap: 600 }, 'What letter is in the middle of ' + w + '?'],
       stage: { type: 'pic', e: P[w], word: w },
       choices: opts(t, ds, function (v) { return { kind: 'letter', v: v }; }),
-      praise: cap(w) + ' has ' + L(t) + ' in the middle!', hint: 'Say it slowly: ' + w + '. Try again.' };
+      praise: 'The middle letter of ' + w + ' is ' + L(t) + '!', hint: 'Say it slowly: ' + w + '. Try again.' };
   }
 
   function otherFams(fi, k) {
@@ -1311,15 +1316,15 @@ window.PipContent = (function () {
   function genTrace(lv) {
     if (lv === 3) {
       var w = R.pick(CVC.filter(function (x) { return x !== 'six' && x !== 'ten'; }));
-      return { type: 'trace', key: w, glyph: w, text: 'Trace the word', say: 'Trace the word ' + w + ' with your finger.', praise: 'You wrote ' + w + '!' };
+      return { type: 'trace', key: w, glyph: w, text: 'Trace the word', say: [{ t: 'Trace the word ' + w + '.', gap: 400 }, 'Use your finger!'], praise: 'You wrote ' + w + '!' };
     }
     var t = lv === 1 ? R.pick(UP) : R.pick(LOW);
     return { type: 'trace', key: t, glyph: t, text: lv === 1 ? 'Trace the big letter' : 'Trace the small letter',
-      say: 'Trace the ' + (lv === 1 ? 'big' : 'small') + ' letter ' + L(t) + ' with your finger.', praise: 'You wrote ' + L(t) + '!' };
+      say: [{ t: 'Trace the ' + (lv === 1 ? 'big' : 'small') + ' letter ' + L(t) + '.', gap: 400 }, 'Use your finger!'], praise: 'You wrote ' + L(t) + '!' };
   }
   function genTraceNum(lv) {
     var n = lv === 1 ? R.int(0, 5) : lv === 2 ? R.int(6, 10) : R.int(11, 20);
-    return { type: 'trace', key: String(n), glyph: String(n), text: 'Trace the number', say: 'Trace the number ' + n + ' with your finger.', praise: 'You wrote ' + n + '!' };
+    return { type: 'trace', key: String(n), glyph: String(n), text: 'Trace the number', say: [{ t: 'Trace the number ' + n + '.', gap: 400 }, 'Use your finger!'], praise: 'You wrote ' + n + '!' };
   }
 
   /* ---------- STORY TIME ----------
@@ -1394,7 +1399,7 @@ window.PipContent = (function () {
       quiz: ['What did the cat give the fish?', 'The cat gave the fish a star!', [['star', '⭐'], ['hat', '🎩'], ['ship', '🚢']]] },
     { lv: 3, title: 'Rainy Day', hero: '🏠', pages: [
       ['It was a wet day with lots of rain.', [['rain', '🌧️'], ['train', '🚆'], ['chain', '⛓️']]],
-      ['We stayed in and read a book.', [['book', '📖'], ['hook', '🪝'], ['boat', '⛵']]],
+      ['We stayed in and looked at a book.', [['book', '📖'], ['hook', '🪝'], ['boat', '⛵']]],
       ['After lunch the sun came out from a cloud.', [['cloud', '☁️'], ['clock', '🕐'], ['crab', '🦀']]],
       ['Then we ran out to fly my kite.', [['kite', '🪁'], ['bike', '🚲'], ['light', '💡']]]],
       quiz: ['What did we fly?', 'We flew a kite!', [['kite', '🪁'], ['book', '📖'], ['cloud', '☁️']]] }
@@ -2139,7 +2144,7 @@ window.PipContent = (function () {
       if (st.label) b.insertBefore(el('span', { class: 'wlabel', text: st.word }), b.lastChild);
       box.append(b);
     } else if (st.type === 'letter') {
-      box.append(el('button', { class: 'chunk stage-pic letter', 'aria-label': 'Letter ' + st.ch, onclick: function () { Voice.say(st.word); } }, [el('span', { class: 'glyph', text: st.ch })]));
+      box.append(el('button', { class: 'chunk stage-pic letter', 'aria-label': 'Letter ' + st.ch, onclick: function () { Voice.say(st.word + '.'); } }, [el('span', { class: 'glyph', text: st.ch })]));
     } else if (st.type === 'seq') {
       box.append(el('div', { class: 'seq' }, st.items.map(function (x) { return x === null ? el('span', { class: 'blank', text: '?' }) : el('span', { text: String(x) }); })));
     } else if (st.type === 'objects') {
@@ -2329,7 +2334,7 @@ window.PipContent = (function () {
       var s = slots[r.pos]; s.textContent = ch; s.classList.remove('faint', 'next'); s.classList.add('in');
       var sc = centerOf(s); FX.burst(sc.x, sc.y, { n: 9, speed: 5, life: 700, kinds: ['star', 'dot'], spooky: q.theme === 'brew' });
       r.pos++;
-      if (r.pos < q.word.length) { slots[r.pos].classList.add('next'); SFX.tick(); Voice.say(L(ch)); }
+      if (r.pos < q.word.length) { slots[r.pos].classList.add('next'); SFX.tick(); Voice.say(L(ch) + '.'); }
       else success(row);
     } else {
       r.wrong++;
