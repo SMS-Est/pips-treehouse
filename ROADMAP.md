@@ -70,11 +70,17 @@ Needs internet (breaks car play), costs money per use, and needs a server to hid
 - v1.7: Seven themed Arcade games: Rocket Ride, Alien Pop-Up (space), Cake Stacker (bakery),
   Spin Art (art), Broom Ride, Pumpkin Carver, Potion Lab (Halloween, seasonal). Arcade sorted
   into sections; each themed room has doors to its bonus games.
+- v1.8: Bug Garden room. Ladybug Spots (count spots, add both wings, how many more), Caterpillar
+  ABCs (next letter, missing small letter, put letters in ABC order), Butterfly Match (same
+  letter, big/small, b-d-p-q, first sounds), Bee & Flowers (numbers to 20, one more / one less).
+  Bug Arcade games: Frog Snack, Firefly Night, Butterfly Painter (mirror painting, saves to the
+  Art Gallery).
 
 ## More game ideas (later)
 - More Foxy: Foxy steals pizza toppings or cupcake sprinkles in other Bakery games.
 - Space: Moon Shapes (find shapes on the moon), Planet Sight Words.
-- Art: Mirror Painting (symmetry), Pattern Painter.
+- Art: Pattern Painter.
+- Bugs: Ant Line (skip counting by 2s, 5s, 10s), Spider Web Sight Words, Bug Hotel sorting.
 
 ## More Arcade ideas (later)
 - Catch the Apples: slide a basket to catch fruit while Pip counts out loud.

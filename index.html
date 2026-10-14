@@ -19,7 +19,7 @@ body{margin:0;font:14px system-ui,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<!-- Pip's Treehouse v1.7.0 -->
+<!-- Pip's Treehouse v1.8.0 -->
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>Pip's Treehouse</title>
 <style>
@@ -974,6 +974,107 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* ---------- v1.8 Bug Garden ---------- */
+:root{--bug:#8DD46A;--bug-tint:#E4F6D4}
+.themes.five{grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.themes.five .room-card.theme{flex-direction:column;justify-content:center;text-align:center;gap:2px;padding:11px 6px 8px}
+.themes.five .room-card.theme .big{line-height:1.05}
+.themes.five .room-card.theme .tx{align-items:center}
+.themes.five .room-card.theme .big{font-size:clamp(30px,5.2vmin,48px)}
+.themes.five .room-card.theme .name{font-size:clamp(16px,2.5vmin,23px);white-space:nowrap}
+.themes.five .room-card.theme .sub{font-size:clamp(11px,1.6vmin,14px)}
+@media (max-height:860px) and (orientation:landscape){.themes.five .room-card.theme .sub{display:none}}
+.room-card.bug{background:linear-gradient(180deg,#C9EFA0 0%,#8DD46A 100%)}
+.room[data-room=bug]{--room:var(--bug);--room-tint:var(--bug-tint)}
+.buggy{background:linear-gradient(180deg,#F3FBEA 0%,#E2F5D0 82%,#CDEDB2 100%)}
+.streak-banner.bug{background:var(--bug)}
+.adv-stop.bug .thumb{background:var(--bug-tint)}
+.arc-sec.bug{--sec:var(--bug)}
+
+/* garden backdrop shared by the bug scenes */
+.bugscene{position:relative;flex:1;min-height:0;width:min(100%,920px);display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vmin,30px);overflow:hidden;
+  border-radius:24px;border:3px solid var(--ink);background:linear-gradient(180deg,#DDF3FB 0%,#EEF9FD 58%,#A6DE82 58%,#8DD46A 100%)}
+.bugscene::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14%;pointer-events:none;
+  background:radial-gradient(circle 6px at 10% 40%,#FFD93D 96%,transparent),radial-gradient(circle 5px at 36% 70%,#F7A1C4 96%,transparent),radial-gradient(circle 6px at 64% 35%,#fff 96%,transparent),radial-gradient(circle 5px at 90% 60%,#B49BF5 96%,transparent)}
+.bugscene>*{position:relative;z-index:1}
+.bugscene .eqsign{position:absolute;z-index:4}
+
+/* Ladybug Spots */
+.lb{flex:none;display:block}
+.lb svg{display:block;width:100%;height:100%;overflow:visible}
+.lb-spot{cursor:pointer}
+.lb-w{transform-box:view-box;transform-origin:120px 90px;transition:transform .3s ease}
+.lb-new{animation:pop .4s ease}
+.lb.fly{animation:lbhop 1.2s ease}
+.lb.fly .lb-wl{animation:lbwl .22s ease-in-out 5 alternate}
+.lb.fly .lb-wr{animation:lbwr .22s ease-in-out 5 alternate}
+@keyframes lbwl{to{transform:rotate(-16deg)}}
+@keyframes lbwr{to{transform:rotate(16deg)}}
+@keyframes lbhop{0%,100%{transform:translateY(0)}45%{transform:translateY(-34px) rotate(-4deg)}70%{transform:translateY(-20px) rotate(3deg)}}
+
+/* Caterpillar ABCs */
+.bugscene.grass{align-items:flex-end;padding-bottom:5%}
+.cater{display:flex;align-items:flex-end}
+.cater .seq.caterpillar{gap:0;flex-wrap:nowrap;align-items:flex-end}
+.seq.caterpillar>span{position:relative;display:grid;place-items:center;width:1.45em;height:1.45em;min-width:0;padding:0;margin-left:-.16em;border-radius:50%;
+  background:#8EDC6A;font-size:clamp(38px,9.6vmin,92px);line-height:1;animation:catbob 1.8s ease-in-out infinite;animation-delay:calc(var(--i) * -.22s)}
+.seq.caterpillar>span:nth-child(even){background:#6FCF5A}
+.seq.caterpillar>span::after{content:"";position:absolute;bottom:-.2em;left:28%;width:44%;height:.2em;border-left:5px solid var(--ink);border-right:5px solid var(--ink);z-index:-1}
+.seq.caterpillar>span.blank{background:rgba(255,255,255,.7);border-style:dashed}
+.seq.caterpillar>span.grown{animation:pop .4s ease,catbob 1.8s ease-in-out infinite}
+.seq.caterpillar.growing>span.blank{color:transparent}
+.cat-tail{width:clamp(18px,3.6vmin,34px);height:clamp(18px,3.6vmin,34px);border-radius:50%;background:#6FCF5A;border:3px solid var(--ink);align-self:flex-end;margin-bottom:.3em;margin-right:-4px}
+.cat-head{display:block;width:clamp(70px,15.5vmin,150px);margin-left:-.4em;align-self:flex-end;margin-bottom:.25em;animation:catbob 1.8s ease-in-out infinite;animation-delay:-1.2s}
+.cat-head svg{display:block;width:100%;height:auto}
+@keyframes catbob{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.cater.wiggle{animation:catgo 1.6s ease-in-out}
+@keyframes catgo{0%{transform:translateX(0)}40%{transform:translateX(5%) rotate(-1deg)}70%{transform:translateX(-2%) rotate(1deg)}100%{transform:translateX(0)}}
+.ltile.leafy{background:var(--bug-tint);border-radius:28px 8px 28px 8px}
+
+/* Butterfly Match */
+.bfly{display:flex;align-items:center;justify-content:center}
+.bf-wing,.bf-body{display:block;height:100%}
+.bf-wing svg,.bf-body svg{display:block;height:100%;width:auto}
+.bf-left{transform-origin:right center}
+.bf-wing:last-child{transform-origin:left center}
+.bf-body{margin:0 -3px;position:relative;z-index:2}
+.bf-slot path:first-of-type{stroke-dasharray:10 9;stroke:rgba(29,42,68,.55)}
+.bfly.flap{animation:bfup 1.6s ease}
+.bfly.flap .bf-left,.bfly.flap .bf-wing:last-child{animation:bfflap .2s ease-in-out 6 alternate}
+.bfly.flap .bf-wing:last-child{animation-name:bfflap,pop;animation-duration:.2s,.4s;animation-iteration-count:6,1}
+@keyframes bfflap{to{transform:scaleX(.55)}}
+@keyframes bfup{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+.choice.wingc{padding:6px 8px;background:var(--paper)}
+.choice.wingc svg{display:block;height:clamp(86px,16vmin,150px);width:auto}
+
+/* Bee & Flowers */
+.bee-wrap{display:flex;align-items:center;gap:clamp(8px,2.4vmin,24px)}
+.bee{display:block;font-size:clamp(56px,11vmin,104px);line-height:1;animation:buzz 1.4s ease-in-out infinite}
+@keyframes buzz{0%,100%{transform:translate(0,0) rotate(-6deg)}25%{transform:translate(3px,-8px) rotate(4deg)}50%{transform:translate(-2px,-3px) rotate(-3deg)}75%{transform:translate(2px,-10px) rotate(5deg)}}
+.frames.pollen .frame{background:#9A6234;border-color:#9A6234}
+.frames.pollen .dotfill{background:#FFD93D}
+.bee-flower svg{display:block;width:clamp(120px,24vmin,220px);height:auto}
+.choice.flowerc{padding:6px;background:var(--bug-tint);border-radius:50%}
+.choice.flowerc svg{display:block;width:clamp(86px,15vmin,140px);height:auto}
+
+/* Butterfly Painter */
+.bfp-cv{display:block;background:#E8F7FC;border:3px solid var(--ink);border-radius:20px;touch-action:none;cursor:crosshair}
+.bfp-holder.flutter .bfp-cv{animation:bfpfly 1.3s ease-in-out}
+@keyframes bfpfly{0%,100%{transform:translateY(0) scaleX(1)}20%{transform:translateY(-14px) scaleX(.8)}40%{transform:translateY(-24px) scaleX(1)}60%{transform:translateY(-30px) scaleX(.8)}80%{transform:translateY(-16px) scaleX(1)}}
+
+@media (max-width:640px){
+  .themes.five{grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+  .themes.five>.room-card{grid-column:span 2}
+  .themes.five>.room-card:nth-child(4){grid-column:2 / span 2}
+  .themes.five .room-card.theme .sub{display:none}
+  .themes.five .room-card.theme .name{white-space:normal;font-size:15px;line-height:1.1}
+}
+@media (orientation:portrait) and (min-width:641px){
+  .themes.five{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .themes.five>.room-card{grid-column:span 2}
+  .themes.five>.room-card:nth-child(4){grid-column:2 / span 2}
+}
 </style>
 </head>
 <body>
@@ -1018,6 +1119,7 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
       <button class="chunk room-card theme bake" id="room-bake" aria-label="Pip's Bakery"><span class="big emoji">🧁</span><span class="tx"><span class="name">Pip&rsquo;s Bakery</span><span class="sub">cookies · pizza · cupcakes</span></span></button>
       <button class="chunk room-card theme art" id="room-art" aria-label="Art Studio"><span class="big emoji">🎨</span><span class="tx"><span class="name">Art Studio</span><span class="sub">paint · color · draw</span></span></button>
       <button class="chunk room-card theme space" id="room-space" aria-label="Space Station"><span class="big emoji">🚀</span><span class="tx"><span class="name">Space Station</span><span class="sub">rockets · aliens · stars</span></span></button>
+      <button class="chunk room-card theme bug" id="room-bug" aria-label="Bug Garden"><span class="big emoji">🐞</span><span class="tx"><span class="name">Bug Garden</span><span class="sub">ladybugs · bees · butterflies</span></span></button>
       <button class="chunk room-card theme boo" id="room-boo" aria-label="Halloween Hollow" hidden><span class="big emoji">🎃</span><span class="tx"><span class="name">Halloween Hollow</span><span class="sub">ghosts · candy · spells</span></span></button>
     </div>
     <div class="extras">
@@ -2102,6 +2204,116 @@ window.PipContent = (function () {
       praise: w.split('').map(L).join(', ') + '. ' + w + '! You made a star picture!' };
   }
 
+  /* ---------- BUG GARDEN ---------- */
+  /* Ladybug Spots: spots sit on each wing like dots on a die, so she can "see" small numbers */
+  function splitSpots(n) { var a = R.int(Math.max(0, n - 5), Math.min(5, n)); return [a, n - a]; }
+  function genLadybug(lv) {
+    var a, b, n, mode, say, text, praise, hint, ch;
+    if (lv <= 2) {
+      mode = 'count'; n = lv === 1 ? R.int(1, 5) : R.int(6, 10);
+      var sp = splitSpots(n); a = sp[0]; b = sp[1];
+      say = 'How many spots does the ladybug have? Tap each spot to count.';
+      text = 'How many spots?'; praise = 'The ladybug has ' + n + ' ' + (n === 1 ? 'spot' : 'spots') + '!';
+      hint = 'Tap each spot and count out loud.';
+      ch = lv === 1 ? numChoices(n, 3, 1, 7) : numChoices(n, 4, 3, 12);
+    } else if (lv === 3) {
+      mode = 'add'; a = R.int(1, 5); b = R.int(1, Math.min(5, 10 - a)); n = a + b;
+      say = [{ t: a + (a === 1 ? ' spot' : ' spots') + ' on this wing.', gap: 400 }, { t: b + (b === 1 ? ' spot' : ' spots') + ' on that wing.', gap: 400 }, 'How many spots in all?'];
+      text = 'How many spots in all?'; praise = a + ' plus ' + b + ' is ' + n + '!';
+      hint = 'Count the spots on both wings.';
+      ch = numChoices(n, 4, 1, 10, [a, b]);
+    } else {
+      mode = 'missing'; n = R.int(4, 10); a = R.int(Math.max(1, n - 5), Math.min(5, n - 1)); b = n - a;
+      say = [{ t: 'This ladybug wants ' + n + ' spots.', gap: 400 }, { t: 'It has ' + a + (a === 1 ? ' spot' : ' spots') + '.', gap: 400 }, 'How many more spots does it need?'];
+      text = 'How many more spots?'; praise = a + ' and ' + b + ' make ' + n + '!';
+      hint = 'Start at ' + a + ' and count up to ' + n + '.';
+      ch = numChoices(b, 4, 0, 10, [n, a]);
+    }
+    return { type: 'ladybug', key: mode + a + '-' + b, mode: mode, left: a, right: b, total: n, text: text, say: say, choices: ch, praise: praise, hint: hint };
+  }
+
+  /* Caterpillar ABCs: the caterpillar's body spells the alphabet in order */
+  function genCaterpillar(lv) {
+    if (lv === 4) {
+      var s = R.int(0, 21), run = UP.slice(s, s + 4 + R.int(0, 1));
+      return { type: 'grow', key: run.join(''), letters: run, tiles: R.shuffle(run), text: 'Put the letters in ABC order',
+        say: [{ t: 'Grow the caterpillar!', gap: 400 }, { t: 'Tap the letters in ABC order.', gap: 400 }, 'Start with ' + L(run[0]) + '.'],
+        praise: cap(run.map(L).join(', ')) + '! What a long caterpillar!' };
+    }
+    var small = lv === 3, src = small ? LOW : UP, len = 4;
+    var start = lv === 1 ? R.int(0, 6) : R.int(0, 26 - len), seq = src.slice(start, start + len);
+    var bi = lv === 3 ? R.int(1, len - 2) : len - 1, ans = seq[bi];
+    var items = seq.map(function (c, i) { return i === bi ? null : c; });
+    var near = [src[start + bi - 1], src[start + bi + 1], src[start + bi + 2], src[start + bi - 2], src[start + bi + 3]].filter(function (x, i, a) { return x && x !== ans && a.indexOf(x) === i; });
+    var ds = R.sample(near, lv === 1 ? 2 : 3);
+    while (ds.length < (lv === 1 ? 2 : 3)) { var r = R.pick(src); if (r !== ans && ds.indexOf(r) < 0) ds.push(r); }
+    return { type: 'caterpillar', key: items.join(','), stage: { type: 'seq', items: items },
+      text: bi === len - 1 ? 'What letter comes next?' : 'What letter is missing?',
+      say: seqParts(items.map(function (c) { return c === null ? null : L(c) + '.'; }), bi === len - 1 ? 'What letter comes next?' : 'What letter is missing?'),
+      choices: opts(ans, ds, function (v) { return { kind: 'letter', v: v }; }),
+      praise: cap(seq.map(L).join(', ')) + '!', hint: 'Sing the ABC song in your head. Try again.' };
+  }
+
+  /* Butterfly Match: one wing has a letter (or a picture); find the wing that goes with it */
+  var WING_COLS = ['#F7A1C4', '#7FD0F5', '#FFD93D', '#B49BF5', '#8EDC6A', '#FFB86B'];
+  function genButterfly(lv) {
+    var t, show, want, ds, say, praise, g, pic = null;
+    if (lv === 1) {
+      t = R.pick(UP); show = t; want = t; ds = others(UP, [t], 2);
+      say = [{ t: 'This wing has the letter ' + L(t) + '.', gap: 400 }, 'Find the wing with the same letter!'];
+      praise = 'They match! ' + L(t) + ', and ' + L(t) + '!';
+    } else if (lv === 2) {
+      t = R.pick(UP.filter(function (c) { return c !== 'I'; })); show = t; want = t.toLowerCase();
+      g = CONFUSE.filter(function (x) { return x.indexOf(want) >= 0; })[0];
+      ds = g ? R.sample(g.filter(function (c) { return c !== want; }), 2) : [];
+      while (ds.length < 3) { var c = R.pick(LOW); if (c !== want && c !== 'l' && ds.indexOf(c) < 0) ds.push(c); }
+      say = [{ t: 'This wing has big ' + L(t) + '.', gap: 400 }, 'Find small ' + L(t) + '!'];
+      praise = 'Big ' + L(t) + ', small ' + L(t) + '. A butterfly!';
+    } else if (lv === 3) {
+      g = R.chance(0.6) ? ['b', 'd', 'p', 'q'] : R.pick(CONFUSE.filter(function (x) { return x.indexOf('l') < 0; }));
+      want = R.pick(g); show = want; t = want;
+      var big = want.toUpperCase(); show = want; want = big;
+      ds = g.filter(function (c) { return c !== t; }).map(function (c) { return c.toUpperCase(); });
+      ds = R.sample(ds, Math.min(3, ds.length));
+      while (ds.length < 3) { var d = R.pick(UP); if (d !== want && d !== 'I' && ds.indexOf(d) < 0) ds.push(d); }
+      say = [{ t: 'This wing has small ' + L(t) + '.', gap: 400 }, 'Find big ' + L(t) + '!'];
+      praise = 'Small ' + L(t) + ', big ' + L(t) + '. A butterfly!';
+    } else {
+      var w = R.pick(FS_CONS); t = w[0]; pic = { e: P[w], word: w }; show = null; want = t;
+      ds = letterDistractors(t, 'abcdefghijklmnoprstuvwyz'.split(''), 3);
+      say = [{ t: w, gap: 600 }, 'What letter does ' + w + ' start with? Find that wing!'];
+      praise = cap(w) + ' starts with ' + L(t) + '. A butterfly!';
+    }
+    var cols = R.shuffle(WING_COLS);
+    var ch = opts(want, ds, function (v) { return { kind: 'wing', v: v }; });
+    ch.forEach(function (c, i) { c.color = cols[i % cols.length]; });
+    return { type: 'butterfly', key: (show || pic.word) + '>' + want, show: show, pic: pic, color: cols[cols.length - 1], text: pic ? 'Find the first letter' : lv === 1 ? 'Find the same letter' : lv === 2 ? 'Find the small letter' : 'Find the big letter',
+      say: say, choices: ch, praise: praise, hint: pic ? 'Say it slowly: ' + pic.word + '. Try again.' : 'Look at the shape of the letter. Try again.' };
+  }
+
+  /* Bee & Flowers: the bee carries dots; fly it to the flower with that number */
+  function genBee(lv) {
+    var n, show, say, text, praise, ch, hint;
+    if (lv === 4) {
+      var more = R.chance(0.5), base = more ? R.int(1, 19) : R.int(2, 20);
+      n = more ? base + 1 : base - 1; show = { num: base };
+      say = [{ t: 'The bee is on flower ' + base + '.', gap: 400 }, 'Fly to the number that is one ' + (more ? 'more' : 'less') + ' than ' + base + '.'];
+      text = 'One ' + (more ? 'more' : 'less') + ' than ' + base; praise = 'One ' + (more ? 'more' : 'less') + ' than ' + base + ' is ' + n + '!';
+      hint = 'Count ' + (more ? 'up' : 'down') + ' from ' + base + '.';
+      ch = numChoices(n, 4, 0, 20, [base, more ? base + 2 : base - 2]);
+    } else {
+      n = lv === 1 ? R.int(1, 5) : lv === 2 ? R.int(6, 10) : R.int(11, 20);
+      show = { dots: n };
+      say = 'How many dots does the bee have? Fly to that flower!';
+      text = 'Find the flower with that number'; praise = n + ' dots! Buzz buzz!';
+      hint = 'Count the dots. Then find that number.';
+      ch = lv === 1 ? numChoices(n, 3, 1, 7) : lv === 2 ? numChoices(n, 4, 3, 12) : numChoices(n, 4, 10, 20);
+    }
+    ch = ch.map(function (c) { return { kind: 'flower', v: c.v, correct: c.correct }; });
+    return { type: 'bee', key: JSON.stringify(show) + n, show: show, answer: n, text: text, say: say, choices: ch, praise: praise, hint: hint };
+  }
+
+
   /* ---------- game catalog (Illinois Learning Standards = Common Core codes) ---------- */
   var GAMES = [
     { id: 'letters', world: 'read', name: 'Letter Hunt', std: 'RF.K.1d', gen: genLetters,
@@ -2190,7 +2402,19 @@ window.PipContent = (function () {
       levels: [['Add within 5', 'start'], ['Add within 10', 'k'], ['Add & take away to 10', 'k'], ['Add within 20', 'beyond']] },
     { id: 'stars', world: 'space', subj: 'read', name: 'Star Spell', std: 'L.K.2d · RF.K.1b', gen: genStars,
       thumb: '<span class="emoji">⭐</span><span class="t-tiles"><i>s</i><i>u</i><i>n</i></span>',
-      levels: [['Copy words', 'start'], ['Spell 3-letter words', 'k'], ['Space words', 'beyond']] }
+      levels: [['Copy words', 'start'], ['Spell 3-letter words', 'k'], ['Space words', 'beyond']] },
+    { id: 'ladybug', world: 'bug', subj: 'math', name: 'Ladybug Spots', std: 'K.CC.5 · K.OA.2 · 1.OA.8', gen: genLadybug,
+      thumb: '<span class="emoji">🐞</span><span class="t-print t-sm">5</span>',
+      levels: [['Count spots to 5', 'start'], ['Count spots to 10', 'k'], ['Add both wings', 'k'], ['How many more spots?', 'beyond']] },
+    { id: 'caterpillar', world: 'bug', subj: 'read', name: 'Caterpillar ABCs', std: 'RF.K.1d', gen: genCaterpillar,
+      thumb: '<span class="emoji">🐛</span><span class="t-print t-sm">ABC</span>',
+      levels: [['Next letter (A to J)', 'start'], ['Next letter (A to Z)', 'k'], ['Missing small letter', 'k'], ['Put letters in order', 'beyond']] },
+    { id: 'butterfly', world: 'bug', subj: 'read', name: 'Butterfly Match', std: 'RF.K.1d · RF.K.3a', gen: genButterfly,
+      thumb: '<span class="emoji">🦋</span><span class="t-print t-sm">Aa</span>',
+      levels: [['Same letter', 'start'], ['Big to small', 'k'], ['Small to big (b d p q)', 'k'], ['First sounds', 'k']] },
+    { id: 'bee', world: 'bug', subj: 'math', name: 'Bee & Flowers', std: 'K.CC.3 · K.CC.4 · K.NBT.1', gen: genBee,
+      thumb: '<span class="emoji">🐝</span><span class="emoji">🌼</span>',
+      levels: [['Numbers 1–5', 'start'], ['Numbers 6–10', 'k'], ['Numbers 11–20', 'k'], ['One more, one less', 'k']] }
   ];
   GAMES.forEach(function (g) {
     var k = 0; g.levels.forEach(function (l, i) { if (l[1] === 'k') k = i; });
@@ -2201,7 +2425,7 @@ window.PipContent = (function () {
     _lists: { CVC: CVC, BLEND: BLEND, FS_CONS: FS_CONS, FS_VOW: FS_VOW, FAM: FAM, SW1: SW1, SW2: SW2, SW3: SW3, NOUNS: NOUNS, HOMO: HOMO,
       BOO_P: BOO_P, BOO_SHORT: BOO_SHORT, BOO_LONG: BOO_LONG, BOO_FIRST: BOO_FIRST, STORIES: STORIES,
       PIX: PIX, PCOL: PCOL, DOTS: DOTS, TOPS: TOPS, FROST: FROST, TOPPERS: TOPPERS, FOOD_P: FOOD_P, FOOD_SHORT: FOOD_SHORT, FOOD_LONG: FOOD_LONG,
-      SPACE_P: SPACE_P, SPACE_LONG: SPACE_LONG, STAR_SHORT: STAR_SHORT } };
+      SPACE_P: SPACE_P, SPACE_LONG: SPACE_LONG, STAR_SHORT: STAR_SHORT, WING_COLS: WING_COLS } };
 })();
 </script>
 
@@ -2531,7 +2755,8 @@ window.PipContent = (function () {
       boo: { cols: BOO_COLS, emoji: BOO_EMOJI },
       bake: { cols: ['#F58FC0', '#FFC43F', '#D9A066', '#FF7A62', '#9C7CF0'], emoji: ['🍪', '🧁', '🍩', '🍓', '🍕'] },
       space: { cols: ['#FFD93D', '#7FD0F5', '#B49BF5', '#FFFFFF', '#FF9EC4'], emoji: ['⭐', '🪐', '🚀', '✨', '🌙'] },
-      art: { cols: COLS, emoji: ['🎨', '🖌️', '🖍️', '🌈', '⭐'] }
+      art: { cols: COLS, emoji: ['🎨', '🖌️', '🖍️', '🌈', '⭐'] },
+      bug: { cols: ['#F0453A', '#5CC97A', '#FFD93D', '#F7A1C4', '#7FD0F5'], emoji: ['🐞', '🦋', '🐝', '🌼', '🍃'] }
     };
     function theme(t) { return t === true ? THEMES.boo : THEMES[t] || null; }
     function ok() {
@@ -2719,20 +2944,20 @@ window.PipContent = (function () {
     $('#stk-meter').style.width = (have >= STICKERS.length ? 100 : into / STARS_PER_STICKER * 100) + '%';
     var boo = halloweenOn();
     $('#room-boo').hidden = !boo;
-    $('#themes').classList.toggle('four', boo);
+    $('#themes').classList.toggle('four', !boo); $('#themes').classList.toggle('five', boo);
     show('home');
     if (speak) Voice.say(greet);
   }
 
-  var ROOM_NAME = { read: 'Reading Room', math: 'Number Nook', boo: 'Halloween Hollow', bake: 'Pip’s Bakery', art: 'Art Studio', space: 'Space Station' };
+  var ROOM_NAME = { read: 'Reading Room', math: 'Number Nook', boo: 'Halloween Hollow', bake: 'Pip’s Bakery', art: 'Art Studio', space: 'Space Station', bug: 'Bug Garden' };
   var ROOM_SAY = { read: 'Reading Room! Pick a game.', math: 'Number Nook! Pick a game.', boo: 'Halloween Hollow! Pick a spooky game.',
-    bake: 'Pip’s Bakery! Pick a yummy game.', art: 'Art Studio! Pick a game.', space: 'Space Station! Pick a game.' };
+    bake: 'Pip’s Bakery! Pick a yummy game.', art: 'Art Studio! Pick a game.', space: 'Space Station! Pick a game.', bug: 'Bug Garden! Pick a buggy game.' };
   /* each themed room has its own backdrop and celebration confetti */
   function worldClass(node, world) {
     node.classList.toggle('spooky', world === 'boo'); node.classList.toggle('spacey', world === 'space');
-    node.classList.toggle('bakey', world === 'bake'); node.classList.toggle('arty', world === 'art');
+    node.classList.toggle('bakey', world === 'bake'); node.classList.toggle('arty', world === 'art'); node.classList.toggle('buggy', world === 'bug');
   }
-  function themeOf(world) { return world === 'boo' || world === 'bake' || world === 'art' || world === 'space' ? world : null; }
+  function themeOf(world) { return world === 'boo' || world === 'bake' || world === 'art' || world === 'space' || world === 'bug' ? world : null; }
   /* Halloween games show automatically from October 1 to November 7; grown-ups can force them on or off. */
   function halloweenOn() {
     var m = S.settings.halloween || 'auto';
@@ -2833,6 +3058,11 @@ window.PipContent = (function () {
     else if (q.type === 'rocket') renderRocket(q, stage, choices);
     else if (q.type === 'alien') renderAliens(q, stage, choices);
     else if (q.type === 'stars') renderStars(q, stage, choices);
+    else if (q.type === 'ladybug') renderLadybug(q, stage, choices);
+    else if (q.type === 'caterpillar') renderCaterpillar(q, stage, choices);
+    else if (q.type === 'grow') renderGrow(q, stage, choices);
+    else if (q.type === 'butterfly') renderButterfly(q, stage, choices);
+    else if (q.type === 'bee') renderBee(q, stage, choices);
     else if (q.type === 'bucket') renderBucket(q, stage, choices);
     else if (q.type === 'trace') renderTrace(q, stage, choices);
     else if (q.type === 'doors') { renderStage(q.stage, stage); renderHouse(q, stage); }
@@ -3011,6 +3241,8 @@ window.PipContent = (function () {
         el('span', { class: 'peek boo emoji', text: '👻' }), el('span', { class: 'peek nope emoji', text: '🦇' })]);
       label = 'Door ' + c.v;
     }
+    else if (c.kind === 'wing') { cls += ' wingc'; inner = el('span', { html: wingSVG(c.color, c.v, '', false) }); }
+    else if (c.kind === 'flower') { cls += ' flowerc'; inner = el('span', { html: flowerSVG(c.color, c.v) }); }
     else if (c.kind === 'group') {
       cls += ' group';
       inner = el('span', { class: 'grp-in', style: '--cols:' + Math.min(c.n, 5) });
@@ -4005,6 +4237,153 @@ window.PipContent = (function () {
     }
   }
 
+  /* ================= BUG GARDEN ================= */
+  /* Ladybug Spots */
+  var LB_SPOT = { 0: [], 1: ['c'], 2: ['tl', 'br'], 3: ['tl', 'c', 'br'], 4: ['tl', 'tr', 'bl', 'br'], 5: ['tl', 'tr', 'c', 'bl', 'br'] };
+  var LB_POS = { tl: [64, 126], tr: [100, 116], c: [80, 168], bl: [64, 210], br: [100, 218] };
+  function ladybugSVG(left, right) {
+    var ink = '#1D2A44', s = '<svg class="lb-svg" viewBox="0 -6 240 262" role="img" aria-label="Ladybug">';
+    s += '<g stroke="' + ink + '" stroke-width="6" stroke-linecap="round"><path d="M44 120 L14 108 M40 170 L8 176 M54 216 L26 240 M196 120 L226 108 M200 170 L232 176 M186 216 L214 240"/></g>';
+    s += '<path d="M108 34 C102 18 94 8 82 4 M132 34 C138 18 146 8 158 4" fill="none" stroke="' + ink + '" stroke-width="5" stroke-linecap="round"/><circle cx="80" cy="4" r="7" fill="' + ink + '"/><circle cx="160" cy="4" r="7" fill="' + ink + '"/>';
+    s += '<circle cx="120" cy="60" r="36" fill="' + ink + '"/><circle cx="105" cy="52" r="10" fill="#fff"/><circle cx="135" cy="52" r="10" fill="#fff"/><circle cx="107" cy="54" r="5" fill="' + ink + '"/><circle cx="137" cy="54" r="5" fill="' + ink + '"/><path d="M108 74 Q120 84 132 74" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>';
+    function wing(side, n) {
+      var d = side < 0 ? 'M120 84 C60 80 28 122 32 168 C36 216 78 248 120 246 Z' : 'M120 84 C180 80 212 122 208 168 C204 216 162 248 120 246 Z';
+      var g = '<g class="lb-w ' + (side < 0 ? 'lb-wl' : 'lb-wr') + '"><path d="' + d + '" fill="#F0453A" stroke="' + ink + '" stroke-width="5" stroke-linejoin="round"/>';
+      g += '<path d="' + (side < 0 ? 'M56 120 C62 104 76 96 90 94' : 'M184 120 C178 104 164 96 150 94') + '" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".45"/>';
+      LB_SPOT[n].forEach(function (k, i) { var p = LB_POS[k], x = side < 0 ? p[0] : 240 - p[0]; g += '<circle class="lb-spot" data-x="' + x + '" data-y="' + p[1] + '" cx="' + x + '" cy="' + p[1] + '" r="14" fill="' + ink + '"/>'; });
+      return g + '</g>';
+    }
+    return s + wing(-1, left) + wing(1, right) + '<g class="lb-badges"></g></svg>';
+  }
+  function renderLadybug(q, stage, choices) {
+    q.choices.forEach(function (c) { choices.append(renderChoice(c)); });
+    var scene = el('div', { class: 'bugscene' });
+    var lb = el('div', { class: 'lb', html: ladybugSVG(q.left, q.mode === 'missing' ? 0 : q.right) });
+    scene.append(lb);
+    if (q.mode === 'add') scene.append(eqSign(q.left + ' + ' + q.right + ' = ?'));
+    if (q.mode === 'missing') scene.append(eqSign(q.left + ' + ? = ' + q.total));
+    stage.append(scene);
+    var h = Math.max(150, Math.min(stage.clientHeight - 16, 520, (stage.clientWidth - 24) * 262 / 240)); lb.style.height = h + 'px'; lb.style.width = (h * 240 / 262) + 'px';
+    var counted = 0, badges = lb.querySelector('.lb-badges');
+    lb.addEventListener('click', function (e) {
+      var s = e.target.closest && e.target.closest('.lb-spot');
+      if (!s || s.getAttribute('data-n') || !round || round.locked) return;
+      counted++; s.setAttribute('data-n', counted);
+      badges.insertAdjacentHTML('beforeend', '<g transform="translate(' + (+s.getAttribute('data-x') + 12) + ' ' + (+s.getAttribute('data-y') - 12) + ')"><circle r="11" fill="#E8649A" stroke="#1D2A44" stroke-width="2.5"/><text y="5" text-anchor="middle" font-family="Grandstander, sans-serif" font-weight="900" font-size="14" fill="#1D2A44">' + counted + '</text></g>');
+      SFX.tick(); Voice.say(String(counted));
+    });
+    round.onWin = function () {
+      if (q.mode === 'missing') { var r = lb.querySelector('.lb-wr'); LB_SPOT[q.right].forEach(function (k) { var p = LB_POS[k]; r.insertAdjacentHTML('beforeend', '<circle cx="' + (240 - p[0]) + '" cy="' + p[1] + '" r="14" fill="#1D2A44" class="lb-new"/>'); }); }
+      lb.classList.add('fly');
+    };
+  }
+
+  /* Caterpillar ABCs */
+  var CAT_HEAD = '<svg viewBox="0 0 80 84" aria-hidden="true"><path d="M30 14 C26 6 20 2 14 2 M50 14 C54 6 60 2 66 2" fill="none" stroke="#1D2A44" stroke-width="4" stroke-linecap="round"/><circle cx="14" cy="3" r="5" fill="#FF7A62" stroke="#1D2A44" stroke-width="2"/><circle cx="66" cy="3" r="5" fill="#FF7A62" stroke="#1D2A44" stroke-width="2"/>' +
+    '<circle cx="40" cy="46" r="34" fill="#5CC97A" stroke="#1D2A44" stroke-width="4"/><circle cx="29" cy="40" r="8" fill="#fff" stroke="#1D2A44" stroke-width="2.5"/><circle cx="53" cy="40" r="8" fill="#fff" stroke="#1D2A44" stroke-width="2.5"/><circle cx="31" cy="42" r="4" fill="#1D2A44"/><circle cx="55" cy="42" r="4" fill="#1D2A44"/>' +
+    '<path d="M28 58 Q40 70 52 58" fill="none" stroke="#1D2A44" stroke-width="3.5" stroke-linecap="round"/><circle cx="20" cy="56" r="5" fill="#FF8FAB" opacity=".75"/><circle cx="60" cy="56" r="5" fill="#FF8FAB" opacity=".75"/></svg>';
+  function caterBody(items, cls) {
+    var wrap = el('div', { class: 'cater' });
+    var seq = el('div', { class: 'seq caterpillar' + (cls ? ' ' + cls : '') }, items.map(function (x, i) { return el('span', { class: x === null ? 'blank' : '', text: x === null ? '?' : x, style: '--i:' + i }); }));
+    wrap.append(el('span', { class: 'cat-tail', 'aria-hidden': 'true' }), seq, el('span', { class: 'cat-head', html: CAT_HEAD }));
+    return { wrap: wrap, seq: seq };
+  }
+  function renderCaterpillar(q, stage, choices) {
+    q.choices.forEach(function (c) { choices.append(renderChoice(c)); });
+    var b = caterBody(q.stage.items); stage.append(el('div', { class: 'bugscene grass' }, b.wrap));
+    round.onWin = function () {
+      var blank = b.seq.querySelector('.blank'), ans = q.choices.filter(function (c) { return c.correct; })[0].v;
+      if (blank) { blank.classList.remove('blank'); blank.textContent = ans; }
+      b.wrap.classList.add('wiggle');
+    };
+  }
+  function renderGrow(q, stage, choices) {
+    var r = round, n = q.letters.length;
+    var b = caterBody(q.letters.map(function () { return null; }), 'growing'); stage.append(el('div', { class: 'bugscene grass' }, b.wrap));
+    var segs = b.seq.children;
+    Array.prototype.forEach.call(segs, function (s) { s.textContent = ''; });
+    q.tiles.forEach(function (ch) {
+      var t = el('button', { class: 'chunk ltile leafy', 'aria-label': 'Letter ' + ch }, el('span', { class: 'glyph', text: ch }));
+      t.addEventListener('click', function () {
+        if (!round || r.locked || t.disabled) return;
+        var need = q.letters[r.pos];
+        if (ch === need) {
+          t.disabled = true; t.classList.add('used'); t.classList.remove('hint');
+          var s = segs[r.pos]; s.classList.remove('blank'); s.textContent = ch; s.classList.add('grown');
+          var c = centerOf(s); FX.burst(c.x, c.y, { n: 10, speed: 5, life: 700, kinds: ['star', 'dot'], spooky: 'bug' });
+          r.pos++;
+          if (r.pos < n) { SFX.ding(r.pos); Voice.say(L(ch) + '.'); } else { b.wrap.classList.add('wiggle'); success(b.wrap); }
+        } else {
+          r.wrong++; t.classList.remove('nope'); void t.offsetWidth; t.classList.add('nope'); SFX.bad(); pipDo('think');
+          if (r.wrong >= 2) {
+            Array.prototype.forEach.call(choices.children, function (x) { x.classList.toggle('hint', !x.disabled && x.textContent === need); });
+            Voice.say('Find the letter ' + L(need) + '.');
+          } else Voice.say(r.pos ? 'What comes after ' + L(q.letters[r.pos - 1]) + '?' : 'Start with ' + L(need) + '.');
+        }
+      });
+      choices.append(t);
+    });
+  }
+
+  /* Butterfly Match */
+  var WING_D = 'M8 76 C10 26 56 0 100 14 C122 24 114 70 72 84 Z M8 86 C40 88 90 104 84 140 C78 164 32 160 8 106 Z';
+  function wingSVG(col, label, emoji, mirror) {
+    var shape = '<path d="' + WING_D + '" fill="' + col + '" stroke="#1D2A44" stroke-width="4" stroke-linejoin="round"/><circle cx="94" cy="32" r="7" fill="#fff" opacity=".55"/><circle cx="58" cy="126" r="8" fill="#fff" opacity=".45"/>';
+    if (mirror) shape = '<g transform="translate(124 0) scale(-1 1)">' + shape + '</g>';
+    var x = mirror ? 64 : 60;
+    var mark = emoji ? '<text x="' + x + '" y="64" text-anchor="middle" font-size="40" font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif">' + emoji + '</text>'
+      : label ? '<text x="' + x + '" y="64" text-anchor="middle" font-family="Andika, Avenir Next, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="52" fill="#1D2A44">' + label + '</text>' : '';
+    return '<svg class="wing-svg" viewBox="0 0 124 164" aria-hidden="true">' + shape + mark + '</svg>';
+  }
+  var BF_BODY = '<svg class="bf-body-svg" viewBox="0 0 30 164" aria-hidden="true"><path d="M12 22 C8 10 4 4 0 2 M18 22 C22 10 26 4 30 2" fill="none" stroke="#1D2A44" stroke-width="3" stroke-linecap="round"/><ellipse cx="15" cy="32" rx="10" ry="11" fill="#2E2A3E"/><circle cx="11" cy="30" r="2.5" fill="#fff"/><circle cx="19" cy="30" r="2.5" fill="#fff"/><rect x="8" y="42" width="14" height="104" rx="7" fill="#2E2A3E"/></svg>';
+  function renderButterfly(q, stage, choices) {
+    q.choices.forEach(function (c) { choices.append(renderChoice(c)); });
+    var slot = el('span', { class: 'bf-wing bf-slot', html: wingSVG('rgba(255,255,255,.35)', '', '', false) });
+    var left = el('span', { class: 'bf-wing bf-left', html: wingSVG(q.color, q.show, q.pic && q.pic.e, true) });
+    var bf = el('div', { class: 'bfly' }, [left, el('span', { class: 'bf-body', html: BF_BODY }), slot]);
+    if (q.pic) left.addEventListener('click', function () { Voice.say(q.pic.word); });
+    stage.append(el('div', { class: 'bugscene flowers' }, bf));
+    var h = Math.max(120, Math.min(stage.clientHeight - 20, 420, (stage.clientWidth - 30) * 164 / 282)); bf.style.height = h + 'px';
+    round.onWin = function (origin) {
+      var c = origin && origin._choice; if (!c) return;
+      slot.innerHTML = wingSVG(c.color, c.v, '', false); slot.classList.remove('bf-slot');
+      bf.classList.add('flap');
+    };
+  }
+
+  /* Bee & Flowers */
+  var FLOWER_COLS = ['#F7A1C4', '#B49BF5', '#7FD0F5', '#FF9A6B', '#FFFFFF', '#FF7A9C'];
+  function flowerSVG(col, v) {
+    var s = '<svg class="flower-svg" viewBox="0 0 100 100" aria-hidden="true">';
+    for (var i = 0; i < 6; i++) { var a = i * Math.PI / 3, x = 50 + Math.cos(a) * 28, y = 50 + Math.sin(a) * 28; s += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="21" fill="' + col + '" stroke="#1D2A44" stroke-width="3.5"/>'; }
+    s += '<circle cx="50" cy="50" r="27" fill="#FFD93D" stroke="#1D2A44" stroke-width="3.5"/>';
+    s += '<text x="50" y="' + (String(v).length > 1 ? 61 : 63) + '" text-anchor="middle" font-family="Andika, Avenir Next, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="' + (String(v).length > 1 ? 30 : 36) + '" fill="#1D2A44">' + v + '</text>';
+    return s + '</svg>';
+  }
+  function renderBee(q, stage, choices) {
+    var cols = R.shuffle(FLOWER_COLS);
+    q.choices.forEach(function (c, i) { c.color = cols[i % cols.length]; choices.append(renderChoice(c)); });
+    var card;
+    if (q.show.dots != null) {
+      var n = q.show.dots, frames = n > 10 ? 2 : 1, cells = n <= 5 ? 5 : 10;
+      card = el('div', { class: 'frames pollen', 'aria-label': n + ' dots' });
+      for (var f = 0; f < frames; f++) {
+        var fr = el('div', { class: 'frame' });
+        for (var i = 0; i < cells; i++) { var k = f * 10 + i; fr.append(el('span', { class: k < n ? '' : 'empty' }, k < n ? el('span', { class: 'dotfill' }) : null)); }
+        card.append(fr);
+      }
+    } else card = el('div', { class: 'bee-flower', html: flowerSVG('#FFFFFF', q.show.num) });
+    var bee = el('span', { class: 'bee emoji', text: '🐝', 'aria-hidden': 'true' });
+    stage.append(el('div', { class: 'bugscene bee-scene' }, [el('div', { class: 'bee-wrap' }, [bee, card])]));
+    round.onWin = function (origin) {
+      if (!origin || noMotion()) return;
+      var from = centerOf(bee), to = centerOf(origin);
+      bee.style.visibility = 'hidden'; SFX.beam();
+      flyThing('<span class="emoji" style="font-size:56px;line-height:1;display:block">🐝</span>', 'fly-ck', from, { x: to.x, y: to.y - 30 }, 60, 700, function () {});
+    };
+  }
+
+
   function endRound() {
     var r = round, first = r.res.filter(Boolean).length, earned = first + 1;
     var before = stickersEarned();
@@ -4312,12 +4691,15 @@ window.PipContent = (function () {
     { id: 'balloon', group: 'party', name: 'Balloon Pop', icon: '🎈', blurb: 'Pop as many as you can!', best: function () { return S.arcade.balloon ? 'Best: ' + S.arcade.balloon : 'No score yet'; } },
     { id: 'match', group: 'party', name: 'Sticker Match', icon: '🃏', blurb: 'Find the matching stickers', best: function () { return S.arcade.match ? 'Best: ' + S.arcade.match + ' tries' : 'No score yet'; } },
     { id: 'color', group: 'art', name: 'Color Pip’s World', icon: '🖍️', blurb: 'Color a picture', best: function () { var n = S.arcade.art.filter(function (a) { return a.page; }).length; return n + (n === 1 ? ' picture' : ' pictures') + ' saved'; } },
-    { id: 'paint', group: 'art', name: 'Paint Studio', icon: '🖌️', blurb: 'Paint anything you like', best: savedOf(function (a) { return a.img && !a.spin; }, 'painting', 'paintings') }
+    { id: 'paint', group: 'art', name: 'Paint Studio', icon: '🖌️', blurb: 'Paint anything you like', best: savedOf(function (a) { return a.img && !a.spin && !a.bf; }, 'painting', 'paintings') },
+    { id: 'frog', group: 'bug', name: 'Frog Snack', icon: '🐸', blurb: 'Zap the flies, skip the bees', best: bestOf('frog') },
+    { id: 'firefly', group: 'bug', name: 'Firefly Night', icon: '✨', blurb: 'Catch fireflies while they glow', best: bestOf('firefly') },
+    { id: 'bpaint', group: 'bug', name: 'Butterfly Painter', icon: '🦋', blurb: 'Paint a mirror butterfly', best: savedOf(function (a) { return a.bf; }, 'butterfly', 'butterflies') }
   ];
   var ARC_BY = {}; ARCADE.forEach(function (g) { ARC_BY[g.id] = g; });
-  var ARC_GROUPS = [['party', 'Party games'], ['space', 'Space'], ['bake', 'Bakery'], ['art', 'Art'], ['boo', 'Halloween']];
+  var ARC_GROUPS = [['party', 'Party games'], ['bug', 'Bugs'], ['space', 'Space'], ['bake', 'Bakery'], ['art', 'Art'], ['boo', 'Halloween']];
   /* each themed room has a door to its own bonus games */
-  var ROOM_ARCADE = { art: ['paint', 'spin'], bake: ['cake'], space: ['rocket', 'alienpop'], boo: ['broom', 'pumpkin', 'potion'] };
+  var ROOM_ARCADE = { art: ['paint', 'spin'], bake: ['cake'], space: ['rocket', 'alienpop'], boo: ['broom', 'pumpkin', 'potion'], bug: ['frog', 'firefly', 'bpaint'] };
   function arcVisible(gm) { return gm.group !== 'boo' || halloweenOn(); }
   function tokenPill(node) { node.innerHTML = '<span class="emoji">🎟️</span><span>' + (S.tokens || 0) + '</span>'; }
   function renderArcade(speak) {
@@ -4370,12 +4752,12 @@ window.PipContent = (function () {
     };
     api.time(null);
     miniStop = ({ balloon: gameBalloon, match: gameMatch, color: gameColor, paint: gamePaint, rocket: gameRocket, alienpop: gameAlienPop,
-      cake: gameCake, spin: gameSpin, broom: gameBroom, pumpkin: gamePumpkin, potion: gamePotion }[id])(area, api);
+      cake: gameCake, spin: gameSpin, broom: gameBroom, pumpkin: gamePumpkin, potion: gamePotion, frog: gameFrog, firefly: gameFirefly, bpaint: gameButterflyPaint }[id])(area, api);
   }
   function finishMini(id, res) {
     miniStop = null;
     var best = '';
-    var HIGH = { balloon: 'New best score!', rocket: 'New best score!', alienpop: 'New best score!', broom: 'New best score!', cake: 'Tallest cake yet!' };
+    var HIGH = { balloon: 'New best score!', rocket: 'New best score!', alienpop: 'New best score!', broom: 'New best score!', cake: 'Tallest cake yet!', frog: 'New best score!', firefly: 'Most fireflies yet!' };
     if (HIGH[id] && res.score > (S.arcade[id] || 0)) { S.arcade[id] = res.score; best = HIGH[id]; }
     if (id === 'match') { if (!S.arcade.match || res.score < S.arcade.match) { S.arcade.match = res.score; best = 'New best!'; } }
     save(true);
@@ -4562,7 +4944,7 @@ window.PipContent = (function () {
     var art = S.arcade.art;
     art.unshift(item);
     var imgs = 0;
-    S.arcade.art = art.filter(function (a) { if (!a.img) return true; imgs++; return imgs <= 8; }).slice(0, 16);
+    S.arcade.art = art.filter(function (a) { if (!a.img) return true; imgs++; return imgs <= 10; }).slice(0, 18);
   }
   function gamePaint(area, api) {
     var color = CRAYONS[0], size = 1, tool = 'brush', stamp = STAMPS[0], hue = 0, undo = [], over = false;
@@ -5239,6 +5621,260 @@ window.PipContent = (function () {
     return function () { over = true; clearInterval(rainbowT); };
   }
 
+  /* ---- Frog Snack: tap the flies and the frog's tongue zaps them (bees make it yelp) ---- */
+  function gameFrog(area, api) {
+    var g = miniCanvas(area), ctx = g.ctx, W = g.W, H = g.H, cv = g.cv;
+    var fw = Math.max(150, Math.min(W * 0.3, 260)), fh = fw * 0.72, fx = W / 2, fy = H - fh * 0.5 - 8;
+    var mouth = { x: fx, y: fy + fh * 0.02 };
+    var bugs = [], pops = [], score = 0, nextSay = 10, spawnT = 200, tongue = null, ouch = 0, look = { x: fx, y: fy - 100 };
+    var KINDS = [{ e: '🪰', p: 1, w: 56 }, { e: '🦟', p: 2, w: 16 }, { e: '🪲', p: 3, w: 9 }, { e: '🐝', p: 0, w: 14 }];
+    var sc = Math.max(0.8, Math.min(W, H) / 650);
+    api.score(0);
+    cv.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
+      if (tongue) return;
+      var b = cv.getBoundingClientRect(), x = (e.clientX - b.left) * W / b.width, y = (e.clientY - b.top) * H / b.height, best = null, bd = 1e9;
+      bugs.forEach(function (o) { var d = Math.hypot(o.x - x, o.y - y); if (d < o.s * 0.9 && d < bd) { bd = d; best = o; } });
+      tongue = { tx: best ? best.x : x, ty: best ? best.y : Math.min(y, fy - fh * 0.3), t: 0, bug: best };
+      look = { x: tongue.tx, y: tongue.ty }; SFX.tick();
+    });
+    function frog(now) {
+      var open = tongue || ouch > 0;
+      ctx.save(); ctx.lineWidth = 4; ctx.strokeStyle = '#1D2A44';
+      ctx.fillStyle = '#4CBA68'; [-1, 1].forEach(function (s) { ctx.beginPath(); ctx.ellipse(fx + s * fw * 0.42, fy + fh * 0.4, fw * 0.16, fh * 0.12, 0, 0, 6.283); ctx.fill(); ctx.stroke(); });
+      ctx.fillStyle = '#6FCF5A'; ctx.beginPath(); ctx.ellipse(fx, fy + fh * 0.08, fw * 0.5, fh * 0.42, 0, 0, 6.283); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#C9F0A8'; ctx.beginPath(); ctx.ellipse(fx, fy + fh * 0.24, fw * 0.3, fh * 0.22, 0, 0, 6.283); ctx.fill();
+      [-1, 1].forEach(function (s) {
+        var ex = fx + s * fw * 0.24, ey = fy - fh * 0.28, er = fw * 0.13;
+        ctx.fillStyle = '#6FCF5A'; ctx.beginPath(); ctx.arc(ex, ey, er, 0, 6.283); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(ex, ey, er * 0.72, 0, 6.283); ctx.fill(); ctx.lineWidth = 2.5; ctx.stroke(); ctx.lineWidth = 4;
+        if (ouch > 0) { ctx.beginPath(); ctx.moveTo(ex + s * er * 0.4, ey - er * 0.3); ctx.lineTo(ex - s * er * 0.4, ey); ctx.lineTo(ex + s * er * 0.4, ey + er * 0.3); ctx.stroke(); }
+        else { var a = Math.atan2(look.y - ey, look.x - ex); ctx.fillStyle = '#1D2A44'; ctx.beginPath(); ctx.arc(ex + Math.cos(a) * er * 0.3, ey + Math.sin(a) * er * 0.3, er * 0.34, 0, 6.283); ctx.fill(); }
+      });
+      ctx.fillStyle = '#FF8FAB'; ctx.globalAlpha = 0.6; [-1, 1].forEach(function (s) { ctx.beginPath(); ctx.arc(fx + s * fw * 0.33, fy + fh * 0.02, fw * 0.05, 0, 6.283); ctx.fill(); }); ctx.globalAlpha = 1;
+      if (open) { ctx.fillStyle = '#5A1E2E'; ctx.beginPath(); ctx.ellipse(mouth.x, mouth.y, fw * 0.14, fh * 0.1, 0, 0, 6.283); ctx.fill(); ctx.stroke(); }
+      else { ctx.beginPath(); ctx.moveTo(fx - fw * 0.24, fy - fh * 0.02); ctx.quadraticCurveTo(fx, fy + fh * 0.14, fx + fw * 0.24, fy - fh * 0.02); ctx.stroke(); }
+      ctx.restore();
+    }
+    var bg = ctx.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#BDE5F2'); bg.addColorStop(0.7, '#E8F7FC'); bg.addColorStop(0.7, '#7FD18C'); bg.addColorStop(1, '#5DB86B');
+    var stop = playLoop(api, 60000, function (dt, now, prog) {
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#4CBA68'; ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 3; ctx.beginPath(); ctx.ellipse(fx, fy + fh * 0.48, fw * 0.75, fh * 0.16, 0, 0, 6.283); ctx.fill(); ctx.stroke();
+      spawnT -= 16.7 * dt;
+      if (spawnT <= 0 && bugs.length < 7) {
+        var k = pickW(KINDS), left = Math.random() < 0.5;
+        bugs.push({ e: k.e, p: k.p, x: left ? -30 : W + 30, y: H * (0.12 + Math.random() * 0.5), vx: (left ? 1 : -1) * (1.4 + Math.random() * 1.2 + prog * 1.6) * sc, ph: Math.random() * 6, s: 46 * sc, amp: 18 + Math.random() * 30 });
+        spawnT = Math.max(320, 900 - prog * 450);
+      }
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      bugs.forEach(function (o) {
+        if (tongue && tongue.bug === o && tongue.t > 0.5) return;
+        o.x += o.vx * dt; o.ph += 0.08 * dt; o.dy = Math.sin(o.ph) * o.amp;
+        o.y += Math.cos(o.ph * 0.7) * 0.6 * dt;
+      });
+      bugs = bugs.filter(function (o) { return o.x > -60 && o.x < W + 60 || (tongue && tongue.bug === o); });
+      if (tongue) {
+        tongue.t += 0.09 * dt;
+        var reach = tongue.t <= 0.5 ? tongue.t * 2 : Math.max(0, 2 - tongue.t * 2);
+        var tx = mouth.x + (tongue.tx - mouth.x) * reach, ty = mouth.y + (tongue.ty + (tongue.bug ? tongue.bug.dy || 0 : 0) - mouth.y) * reach;
+        if (tongue.bug && tongue.t > 0.5) { tongue.bug.x = tx; tongue.bug.y = ty - (tongue.bug.dy || 0); }
+        tongue.x = tx; tongue.y = ty;
+        if (tongue.t >= 0.5 && !tongue.hit && tongue.bug) {
+          tongue.hit = true;
+          if (tongue.bug.p === 0) { ouch = 700; SFX.boing(); popText(pops, 'Ouch!', tongue.tx, tongue.ty - 30, '#FFD93D'); bugs.splice(bugs.indexOf(tongue.bug), 1); tongue.bug = null; }
+        }
+        if (tongue.t >= 1) {
+          var o = tongue.bug;
+          if (o) {
+            bugs.splice(bugs.indexOf(o), 1); score += o.p; api.score(score);
+            popText(pops, '+' + o.p, mouth.x, mouth.y - fh * 0.5, '#FFD93D'); SFX.pop(); SFX.ding(Math.min(9, o.p * 2));
+            var sp = onScreen(cv, mouth.x, mouth.y); FX.burst(sp.x, sp.y - 20, { n: o.p > 1 ? 24 : 12, speed: 6, life: 700, spooky: 'bug' });
+            if (score >= nextSay) { Voice.say(nextSay + '!'); nextSay += 10; } else if (Math.random() < 0.25) popText(pops, R.pick(['Yum!', 'Slurp!', 'Gulp!']), fx, fy - fh * 0.75, '#FFFFFF');
+          }
+          tongue = null;
+        }
+      }
+      if (ouch > 0) ouch -= 16.7 * dt;
+      function drawBug(o) { ctx.font = emojiFont(o.s); ctx.save(); ctx.translate(o.x, o.y + (o.dy || 0)); if (o.vx < 0) ctx.scale(-1, 1); ctx.fillText(o.e, 0, 0); ctx.restore(); }
+      bugs.forEach(function (o) { if (!tongue || tongue.bug !== o) drawBug(o); });
+      frog(now);
+      /* the tongue comes out of the mouth, in front of the frog */
+      if (tongue && tongue.x != null) {
+        ctx.strokeStyle = '#1D2A44'; ctx.lineCap = 'round'; ctx.lineWidth = fw * 0.075 + 4; ctx.beginPath(); ctx.moveTo(mouth.x, mouth.y); ctx.lineTo(tongue.x, tongue.y); ctx.stroke();
+        ctx.strokeStyle = '#FF7A9C'; ctx.lineWidth = fw * 0.075; ctx.stroke();
+        ctx.fillStyle = '#FF7A9C'; ctx.beginPath(); ctx.arc(tongue.x, tongue.y, fw * 0.06, 0, 6.283); ctx.fill();
+      }
+      if (tongue && tongue.bug) drawBug(tongue.bug);
+      drawPops(ctx, pops, dt);
+    }, function () { api.end({ title: 'Burp! So full!', score: score, text: 'The frog ate ' + score + ' points of bugs!' }); });
+    Voice.say('Frog Snack! Tap the flies and the frog will catch them. Watch out for bees!');
+    return stop;
+  }
+
+  /* ---- Firefly Night: catch fireflies while they glow, then let them go ---- */
+  function gameFirefly(area, api) {
+    var g = miniCanvas(area), ctx = g.ctx, W = g.W, H = g.H, cv = g.cv;
+    var flies = [], flying = [], pops = [], caught = 0, over = false, endRaf = 0;
+    var jw = Math.max(70, Math.min(W * 0.12, 120)), jh = jw * 1.3, jx = W - jw - 18, jy = H - jh - 16;
+    var stars = []; for (var i = 0; i < 40; i++) stars.push({ x: Math.random() * W, y: Math.random() * H * 0.55, r: 0.5 + Math.random() * 1.3 });
+    function addFly() { flies.push({ x: 40 + Math.random() * (W - 80 - jw), y: H * 0.12 + Math.random() * H * 0.6, a: Math.random() * 6.283, sp: 0.5 + Math.random() * 0.8, ph: Math.random() * 2400, on: 1300 + Math.random() * 600, off: 900 + Math.random() * 700 }); }
+    for (i = 0; i < 9; i++) addFly();
+    api.score(0);
+    function lit(f, now) { return ((now + f.ph) % (f.on + f.off)) < f.on; }
+    var lastNow = 0;
+    cv.addEventListener('pointerdown', function (e) {
+      e.preventDefault(); if (over) return;
+      var b = cv.getBoundingClientRect(), x = (e.clientX - b.left) * W / b.width, y = (e.clientY - b.top) * H / b.height, best = -1, bd = 1e9;
+      flies.forEach(function (f, k) { var d = Math.hypot(f.x - x, f.y - y); if (d < 48 && d < bd && lit(f, lastNow)) { bd = d; best = k; } });
+      if (best < 0) return;
+      var f = flies.splice(best, 1)[0]; flying.push({ x: f.x, y: f.y, t: 0, sx: f.x, sy: f.y });
+      caught++; api.score(caught); SFX.ding(caught % 10); Voice.say(String(caught));
+      var sp = onScreen(cv, f.x, f.y); FX.burst(sp.x, sp.y, { n: 10, speed: 4, life: 600, kinds: ['star', 'dot'], cols: ['#FFF59A', '#D7FF7A', '#FFFFFF'] });
+      setTimeout(addFly, 600);
+    });
+    var sky = ctx.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, '#17143D'); sky.addColorStop(1, '#2F4B5E');
+    function glow(x, y, r, a) {
+      var gr = ctx.createRadialGradient(x, y, 0, x, y, r);
+      gr.addColorStop(0, 'rgba(255,255,170,' + a + ')'); gr.addColorStop(0.35, 'rgba(215,255,120,' + (a * 0.6) + ')'); gr.addColorStop(1, 'rgba(215,255,120,0)');
+      ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
+    }
+    function scene(dt, now, release) {
+      lastNow = now;
+      ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#fff'; stars.forEach(function (s) { ctx.globalAlpha = 0.6; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill(); }); ctx.globalAlpha = 1;
+      ctx.fillStyle = '#FFF0B3'; ctx.beginPath(); ctx.arc(W * 0.12, H * 0.14, Math.min(W, H) * 0.06, 0, 6.283); ctx.fill();
+      ctx.fillStyle = '#1F3A2E'; ctx.beginPath(); ctx.moveTo(0, H);
+      for (var k = 0; k <= 24; k++) ctx.lineTo(W * k / 24, H - 30 - (k % 2 ? 26 : 6) - Math.sin(k) * 8);
+      ctx.lineTo(W, H); ctx.fill();
+      flies.forEach(function (f) {
+        f.a += (Math.random() - 0.5) * 0.25 * dt; f.x += Math.cos(f.a) * f.sp * dt; f.y += Math.sin(f.a) * f.sp * dt;
+        if (f.x < 30 || f.x > W - jw - 40) f.a = Math.PI - f.a; if (f.y < H * 0.08 || f.y > H * 0.78) f.a = -f.a;
+        f.x = Math.max(30, Math.min(W - jw - 40, f.x)); f.y = Math.max(H * 0.08, Math.min(H * 0.78, f.y));
+        if (lit(f, now)) glow(f.x, f.y, 34, 0.95);
+        ctx.fillStyle = lit(f, now) ? '#FFFDE0' : '#55606B'; ctx.beginPath(); ctx.arc(f.x, f.y, 4.5, 0, 6.283); ctx.fill();
+      });
+      /* the jar glows brighter as it fills */
+      var fill = Math.min(1, caught / 25);
+      if (caught) glow(jx + jw / 2, jy + jh * 0.6, jw * (0.7 + fill), 0.35 + fill * 0.6);
+      ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 4; ctx.fillStyle = 'rgba(214,238,252,.25)';
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(jx, jy + jh * 0.12, jw, jh * 0.88, 14) : ctx.rect(jx, jy + jh * 0.12, jw, jh * 0.88); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#9A6234'; ctx.fillRect(jx + jw * 0.12, jy, jw * 0.76, jh * 0.14); ctx.strokeRect(jx + jw * 0.12, jy, jw * 0.76, jh * 0.14);
+      for (k = 0; k < Math.min(caught, 18); k++) { var px = jx + jw * (0.2 + ((k * 37) % 60) / 100), py = jy + jh * (0.35 + ((k * 53) % 55) / 100); ctx.fillStyle = '#FFFDE0'; ctx.beginPath(); ctx.arc(px + Math.sin(now / 300 + k) * 3, py, 3.5, 0, 6.283); ctx.fill(); }
+      flying.forEach(function (o) {
+        o.t += 0.045 * dt; var t = Math.min(1, o.t), tx = release ? o.ex : jx + jw / 2, ty = release ? o.ey : jy + jh * 0.5;
+        o.x = o.sx + (tx - o.sx) * t; o.y = o.sy + (ty - o.sy) * t - Math.sin(t * Math.PI) * 60;
+        glow(o.x, o.y, 30, 0.9); ctx.fillStyle = '#FFFDE0'; ctx.beginPath(); ctx.arc(o.x, o.y, 4.5, 0, 6.283); ctx.fill();
+      });
+      if (!release) flying = flying.filter(function (o) { return o.t < 1; });
+      drawPops(ctx, pops, dt);
+    }
+    var stop = playLoop(api, 45000, function (dt, now) { scene(dt, now, false); }, function () {
+      over = true; flying = [];
+      for (var k = 0; k < Math.max(caught, 3); k++) flying.push({ sx: jx + jw / 2, sy: jy + jh * 0.4, t: -k * 0.04, ex: 40 + Math.random() * (W - 80), ey: H * 0.08 + Math.random() * H * 0.55 });
+      if (caught) { Voice.say('Let them go! Goodnight, fireflies!'); SFX.fanfare(); }
+      var t0 = 0, last = 0;
+      (function end(now) {
+        if (!t0) { t0 = now; last = now; }
+        var dt = Math.min(3, (now - last) / 16.7); last = now;
+        scene(dt, now, true);
+        if (now - t0 < 2300) endRaf = requestAnimationFrame(end);
+        else api.end({ title: 'Goodnight, fireflies!', score: caught, text: 'You caught ' + caught + ' ' + (caught === 1 ? 'firefly' : 'fireflies') + '!' });
+      })(performance.now());
+    });
+    Voice.say('Firefly Night! Tap the fireflies while they glow to catch them.');
+    return function () { over = true; stop(); cancelAnimationFrame(endRaf); };
+  }
+
+  /* ---- Butterfly Painter: paint one wing and the other wing copies it like a mirror ---- */
+  var BF_RIGHT = ['M206 148 C226 70 318 18 368 54 C396 82 366 146 300 162 C262 170 232 166 206 158 Z', 'M206 168 C252 170 322 188 332 238 C340 282 282 304 242 274 C220 256 210 214 206 180 Z'];
+  /* flip a path drawn on the right side over to the left (x -> 400 - x) */
+  function mirrorPath(d) {
+    var out = [], nums = [];
+    d.match(/[A-Za-z]|-?[\d.]+/g).forEach(function (x) {
+      if (/^[A-Za-z]$/.test(x)) { out.push(x); return; }
+      nums.push(+x); if (nums.length === 2) { out.push((400 - nums[0]) + ' ' + nums[1]); nums = []; }
+    });
+    return out.join(' ');
+  }
+  function gameButterflyPaint(area, api) {
+    var color = CRAYONS[4], rainbow = false, hue = 0, size = 1, tool = 'brush', over = false, SIZES = [6, 13, 24];
+    var holder = el('div', { class: 'cholder bfp-holder' }), side = el('div', { class: 'cside' });
+    var wrap = el('div', { class: 'cwrap' }, [holder, side]); area.append(wrap);
+    var pal = el('div', { class: 'cpal', role: 'group', 'aria-label': 'Paint colors' });
+    CRAYONS.concat(['rainbow']).forEach(function (c) {
+      var b = el('button', { class: 'crayon' + (c === 'rainbow' ? ' rainbow' : '') + (c === color ? ' on' : ''), style: c === 'rainbow' ? '' : 'background:' + c, 'aria-label': c === 'rainbow' ? 'Rainbow paint' : 'Paint color' });
+      b.addEventListener('click', function () { rainbow = c === 'rainbow'; if (!rainbow) color = c; Array.prototype.forEach.call(pal.children, function (x) { x.classList.remove('on'); }); b.classList.add('on'); SFX.tick(); });
+      pal.append(b);
+    });
+    var tools = el('div', { class: 'ptools', role: 'group', 'aria-label': 'Tools' });
+    [['brush', '🖌️', 'Paint brush'], ['dots', '🔵', 'Polka dots'], ['hearts', '💖', 'Heart stamps']].forEach(function (t, i) {
+      var b = el('button', { class: 'chunk ptool' + (i === 0 ? ' on' : ''), 'aria-label': t[2] }, el('span', { class: 'emoji', text: t[1] }));
+      b.addEventListener('click', function () { tool = t[0]; Array.prototype.forEach.call(tools.children, function (x) { x.classList.remove('on'); }); b.classList.add('on'); SFX.tick(); });
+      tools.append(b);
+    });
+    var sizes = el('div', { class: 'psizes', role: 'group', 'aria-label': 'Brush size' });
+    SIZES.forEach(function (px, i) {
+      var b = el('button', { class: 'chunk psize' + (i === size ? ' on' : ''), 'aria-label': ['Thin', 'Medium', 'Thick'][i] + ' brush' }, el('i', { style: 'width:' + (6 + i * 7) + 'px;height:' + (6 + i * 7) + 'px' }));
+      b.addEventListener('click', function () { size = i; Array.prototype.forEach.call(sizes.children, function (x) { x.classList.remove('on'); }); b.classList.add('on'); SFX.tick(); });
+      sizes.append(b);
+    });
+    side.append(tools, pal, sizes, el('div', { class: 'end-btns' }, [
+      el('button', { class: 'chunk btn', text: 'Start over', onclick: function () { blank(); render(); SFX.tick(); } }),
+      el('button', { class: 'chunk btn go', text: 'All done!', onclick: done })]));
+    var cw = Math.max(240, Math.min(holder.clientWidth - 6, 900)), ch = Math.max(200, Math.min(holder.clientHeight - 6, 720));
+    var s = Math.min(cw / 400, ch / 320), CW = Math.round(400 * s), CH = Math.round(320 * s), dpr = Math.min(2, window.devicePixelRatio || 1);
+    var cv = el('canvas', { class: 'bfp-cv', 'aria-label': 'Butterfly to paint' }); holder.append(cv);
+    cv.width = Math.round(CW * dpr); cv.height = Math.round(CH * dpr); cv.style.width = CW + 'px'; cv.style.height = CH + 'px';
+    var ctx = cv.getContext('2d');
+    var layer = document.createElement('canvas'); layer.width = cv.width; layer.height = cv.height; var lc = layer.getContext('2d');
+    var paths = BF_RIGHT.concat(BF_RIGHT.map(mirrorPath)), wings = new Path2D(paths.join(' '));
+    function design(c2) { c2.setTransform(dpr * s, 0, 0, dpr * s, 0, 0); }
+    function blank() { design(lc); lc.clearRect(0, 0, 400, 320); lc.fillStyle = '#FFFFFF'; lc.fill(wings); }
+    function render() {
+      design(ctx); ctx.clearRect(0, 0, 400, 320);
+      ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(layer, 0, 0); ctx.restore();
+      design(ctx); ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.strokeStyle = '#1D2A44'; ctx.lineWidth = 4; ctx.stroke(wings);
+      ctx.beginPath(); ctx.moveTo(200, 38); ctx.quadraticCurveTo(186, 14, 170, 10); ctx.moveTo(200, 38); ctx.quadraticCurveTo(214, 14, 230, 10); ctx.stroke();
+      ctx.fillStyle = '#1D2A44'; ctx.beginPath(); ctx.arc(170, 10, 5, 0, 6.283); ctx.arc(230, 10, 5, 0, 6.283); ctx.fill();
+      ctx.fillStyle = '#2E2A3E'; ctx.beginPath(); ctx.ellipse(200, 52, 13, 14, 0, 0, 6.283); ctx.fill(); ctx.beginPath(); ctx.ellipse(200, 168, 11, 106, 0, 0, 6.283); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(195, 49, 3, 0, 6.283); ctx.arc(205, 49, 3, 0, 6.283); ctx.fill();
+      ctx.strokeStyle = 'rgba(29,42,68,.25)'; ctx.lineWidth = 2; ctx.setLineDash([6, 6]); ctx.beginPath(); ctx.moveTo(200, 70); ctx.lineTo(200, 266); ctx.stroke(); ctx.setLineDash([]);
+    }
+    blank(); render();
+    function col() { if (rainbow) { hue = (hue + 4) % 360; return 'hsl(' + hue + ',90%,55%)'; } return color; }
+    function both(fn) { design(lc); lc.save(); lc.clip(wings); fn(1); lc.setTransform(-dpr * s, 0, 0, dpr * s, cv.width, 0); fn(-1); lc.restore(); }
+    function heart(c2, x, y, r) { c2.beginPath(); c2.moveTo(x, y + r * 0.9); c2.bezierCurveTo(x - r * 1.4, y - r * 0.1, x - r * 0.7, y - r * 1.1, x, y - r * 0.35); c2.bezierCurveTo(x + r * 0.7, y - r * 1.1, x + r * 1.4, y - r * 0.1, x, y + r * 0.9); c2.fill(); }
+    var down = false, last = null;
+    function pt(e) { var b = cv.getBoundingClientRect(); return { x: (e.clientX - b.left) / b.width * 400, y: (e.clientY - b.top) / b.height * 320 }; }
+    function stroke(a, b) { var c = col(); both(function () { lc.strokeStyle = c; lc.lineWidth = SIZES[size]; lc.lineCap = 'round'; lc.beginPath(); lc.moveTo(a.x, a.y); lc.lineTo(b.x + 0.01, b.y); lc.stroke(); }); render(); }
+    function stamp(p) {
+      var c = col(), r = 6 + SIZES[size] * 0.7;
+      both(function () { lc.fillStyle = c; if (tool === 'hearts') heart(lc, p.x, p.y, r); else { lc.beginPath(); lc.arc(p.x, p.y, r, 0, 6.283); lc.fill(); } });
+      render(); SFX.pop();
+    }
+    cv.addEventListener('pointerdown', function (e) {
+      if (over) return; e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch (x) {}
+      var p = pt(e); if (tool !== 'brush') { stamp(p); return; }
+      down = true; last = p; stroke(p, p);
+    });
+    cv.addEventListener('pointermove', function (e) { if (!down) return; e.preventDefault(); var p = pt(e); stroke(last, p); last = p; });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (ev) { cv.addEventListener(ev, function () { down = false; }); });
+    function done() {
+      if (over) return; over = true;
+      holder.classList.add('flutter'); SFX.streak(); Voice.say('Look, it’s flying!');
+      setTimeout(function () {
+        var out = document.createElement('canvas'); out.width = 320; out.height = 256;
+        var o = out.getContext('2d'); o.fillStyle = '#E8F7FC'; o.fillRect(0, 0, 320, 256); o.drawImage(cv, 0, 0, 320, 256);
+        var img = ''; try { img = out.toDataURL('image/jpeg', 0.75); } catch (e) {}
+        if (img) addArt({ img: img, bf: true, date: dayKey() });
+        api.end({ title: 'A beautiful butterfly!', text: 'Your butterfly is in the Art Gallery.' });
+      }, 1300);
+    }
+    Voice.say('Butterfly Painter! Paint one wing, and the other wing copies it like a mirror!');
+    return function () { over = true; };
+  }
+
+
   /* ---------------- grown-ups gate ---------------- */
   var gateAns = '', gateTyped = '';
   function openGate() {
@@ -5314,7 +5950,7 @@ window.PipContent = (function () {
 
     /* skills */
     var booPlayed = GAMES.some(function (g) { return g.world === 'boo' && gs(g.id).q; });
-    [['read', 'Reading & spelling'], ['math', 'Math'], ['bake', 'Pip’s Bakery'], ['art', 'Art Studio'], ['space', 'Space Station'], ['boo', 'Halloween games']].forEach(function (pair) {
+    [['read', 'Reading & spelling'], ['math', 'Math'], ['bake', 'Pip’s Bakery'], ['art', 'Art Studio'], ['space', 'Space Station'], ['bug', 'Bug Garden'], ['boo', 'Halloween games']].forEach(function (pair) {
       if (pair[0] === 'boo' && !halloweenOn() && !booPlayed) return;
       var p = el('section', { class: 'panel' });
       p.append(el('h3', { text: pair[1] }));
@@ -5322,6 +5958,7 @@ window.PipContent = (function () {
       if (pair[0] === 'bake') p.append(el('p', { class: 'lede', text: 'Baking games: take-away and adding stories with Foxy the cookie thief, counting out pizza toppings and making 10, reading color words and short orders, and spelling food words.' }));
       if (pair[0] === 'art') p.append(el('p', { class: 'lede', text: 'Painting and drawing games: color by number (numbers to 20, then adding), color by letter (big and small letters, sight words), and dot-to-dot counting. Finished pictures go to the Art Gallery in the Arcade.' }));
       if (pair[0] === 'space') p.append(el('p', { class: 'lede', text: 'Space games: rocket countdowns (counting back), adding and taking away with aliens, and spelling words by connecting stars.' }));
+      if (pair[0] === 'bug') p.append(el('p', { class: 'lede', text: 'Bug games: counting and adding ladybug spots (and how many more make the total), saying the alphabet in order with the caterpillar, matching big and small letters and first sounds with butterfly wings, and reading numbers to 20 and one more or one less with the bee.' }));
       if (pair[0] === 'boo') p.append(el('p', { class: 'lede', text: 'Seasonal practice for counting out objects, reading numbers to 20, letters and spelling. These show up from October 1 to November 7 unless you change it in Settings.' }));
       GAMES.filter(function (g) { return g.world === pair[0]; }).forEach(function (g) { p.append(skillRow(g)); });
       w.append(p);
@@ -5458,6 +6095,7 @@ window.PipContent = (function () {
   $('#room-bake').addEventListener('click', function () { renderRoom('bake', true); });
   $('#room-art').addEventListener('click', function () { renderRoom('art', true); });
   $('#room-space').addEventListener('click', function () { renderRoom('space', true); });
+  $('#room-bug').addEventListener('click', function () { renderRoom('bug', true); });
   $('#mix-btn').addEventListener('click', function () { startRound('mix'); });
   $('#stk-btn').addEventListener('click', renderStickers);
   $('#adv-btn').addEventListener('click', function () { renderAdventure(true); });
