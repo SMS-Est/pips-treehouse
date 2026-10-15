@@ -1,19 +1,19 @@
 {
- "clips": 7989,
- "characters": 173729,
- "audio_minutes": 256.0,
- "download_mb_24kbps_mp3": 46.1,
+ "clips": 8503,
+ "characters": 180671,
+ "audio_minutes": 267.1,
+ "download_mb_24kbps_mp3": 48.1,
  "google_cost_usd": 0.0,
- "groups_whole": 127,
- "groups_in_pieces": 30,
- "lines_checked": 42131,
- "lines_fully_covered": 42131,
+ "groups_whole": 129,
+ "groups_in_pieces": 32,
+ "lines_checked": 44322,
+ "lines_fully_covered": 44322,
  "pieces_per_line": {
-  "1": 13857,
-  "2": 5438,
-  "3": 13145,
-  "4": 829,
-  "5": 8828,
+  "1": 14208,
+  "2": 5389,
+  "3": 15025,
+  "4": 827,
+  "5": 8839,
   "6": 34
  },
  "missing_examples": [],
@@ -25,23 +25,27 @@
   ],
   [
    "pizza:prompt",
-   2954
+   2953
   ],
   [
    "ornament:praise",
-   2750
+   2751
   ],
   [
    "rhyme:praise",
-   2695
+   2730
   ],
   [
    "compare:praise",
-   2013
+   2041
+  ],
+  [
+   "app:sticker-book",
+   1681
   ],
   [
    "sub:prompt",
-   637
+   636
   ],
   [
    "pizza:praise",
@@ -50,6 +54,10 @@
   [
    "app:bucket-2",
    500
+  ],
+  [
+   "app:stickers",
+   420
   ],
   [
    "app:pizza-fix-3",
@@ -64,20 +72,12 @@
    301
   ],
   [
-   "app:sticker-book",
-   301
-  ],
-  [
    "count:praise",
    280
   ],
   [
    "doors:prompt",
    239
-  ],
-  [
-   "rhyme:prompt",
-   225
   ]
  ]
 }

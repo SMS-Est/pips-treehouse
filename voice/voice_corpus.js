@@ -27,6 +27,8 @@ for (const g of C.GAMES) for (let lv = 1; lv <= g.levels.length; lv++) {
 const lists = {
   letters: 'abcdefghijklmnopqrstuvwxyz'.split('').map(c => C.L(c)),
   stickers: C.STICKERS.map(s => s.name),
+  stickerSays: C.STICKERS.map(s => s.say),
+  stickerPages: C.STICKER_PAGES.map(p => p[0]),
   spellWords: [...new Set([...L.CVC, ...L.BLEND, ...L.FOOD_SHORT, ...L.FOOD_LONG, ...L.STAR_SHORT, ...L.SPACE_LONG])],
   tops: L.TOPS.map(t => [t.one, t.more]),
   colors: Object.keys(L.PCOL)

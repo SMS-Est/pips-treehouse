@@ -60,12 +60,17 @@ L = lists['letters']
 nums = lambda a, b: [str(i) for i in range(a, b + 1)]
 many = lambda n, one, more: one if n == '1' or n == 1 else more
 stickers = lists['stickers']
-st_say = ['A T rex!' if s == 'T. rex' else 'A ' + s + '!' for s in stickers]
+st_say = lists['stickerSays']
+st_mid = [x if re.match(r'[A-Z]', n) else x[0].lower() + x[1:] for x, n in zip(st_say, stickers)]
 appgroup('counting', nums(0, 100))
 appgroup('count-cheer', [str(i) + '!' for i in range(5, 101, 5)] + [str(i) + ' layers!' for i in range(5, 61, 5)] + [str(i) + ' in a row!' for i in range(3, 31, 3)] + [str(i) + ' presents!' for i in range(5, 61, 5)])
 appgroup('greet', ['Hi there! Pick a room.'] + ['Hi, %s! Pick a room.' % n for n in NAMES] + ["Hi! I'm Pip. Let's play and learn. Pick a room!"] + ["Hi %s! I'm Pip. Let's play and learn. Pick a room!" % n for n in NAMES])
-appgroup('stickers', st_say + ['T rex!'] + [s + ' It’s in your sticker book.' for s in st_say] + ['T rex' if s == 'T. rex' else s for s in stickers])
-appgroup('sticker-book', ['You found every sticker!'] + ['%d of %d stickers. %d more %s for the next one!' % (h, len(stickers), nd, 'star' if nd == 1 else 'stars') for h in range(0, len(stickers)) for nd in range(1, 11)])
+appgroup('stickers', st_say + ['T rex' if s == 'T. rex' else s for s in stickers])
+appgroup('sticker-new', [s + ' It’s in your sticker book.' for s in st_say] + ['You filled a whole page!'])
+appgroup('sticker-book', ['You found every sticker!'] + ['%d of %d stickers. %d more %s for the next one!' % (h, len(stickers), nd, 'star' if nd == 1 else 'stars') for h in range(0, len(stickers)) for nd in range(1, 9)])
+appgroup('sticker-pages', [t + '!' for t in lists['stickerPages']] + ['You filled this page!', 'Keep earning stars to find this one!', 'Wow! Your sticker book has %d new pages!' % (len(lists['stickerPages']) - 2)])
+appgroup('sticker-page-count', ['%d of 15 stickers.' % n for n in range(0, 15)])
+appgroup('sticker-next', ['%d more %s to find this one!' % (n, 'star' if n == 1 else 'stars') for n in range(1, 9)])
 appgroup('letter-taps', [l + '.' for l in L]); appgroup('find-letter', ['Find the letter ' + l + '.' for l in L]); appgroup('after-letter', ['What comes after ' + l + '?' for l in L]); appgroup('start-letter', ['Start with ' + l + '.' for l in L])
 appgroup('spell-hint', ['Listen: ' + w + '. What letter comes next?' for w in lists['spellWords']])
 appgroup('colors', [c.capitalize() + '.' for c in lists['colors']])
@@ -90,7 +95,7 @@ appgroup('shop-welcome', ['Welcome to Pip’s Shop! You have %d stars to spend.'
 appgroup('shop-have', ['%s! You have this one.' % nm for nm, p in shop]); appgroup('shop-cost', ['%s! It costs %s stars.' % (nm, p) for nm, p in shop]); appgroup('shop-got', ['You got the %s!' % nm.lower() for nm, p in shop])
 adv = ['You finished today’s adventure! Come back tomorrow for a new one.', 'You did all three stops! Tap the treasure chest!', 'Today’s adventure has three stops and a treasure chest. Tap the first stop!', 'On to stop 2!', 'On to stop 3!']
 adv += ['Treasure! You found 5 bonus stars, a game token, and a stamp for today!', 'Treasure! You found 5 bonus stars and a stamp for today!', 'Great job today. Pip is getting sleepy!']
-adv += ['And a new sticker: ' + ('a T rex!' if s == 'T. rex' else 'a ' + s + '!') for s in stickers]
+adv += ['And a new sticker: ' + m for m in st_mid]
 appgroup('adventure', adv)
 arc = ['Welcome to Pip’s Arcade! You have %d game %s. Pick a game!' % (n, 'token' if n == 1 else 'tokens') for n in range(1, 31)] + ['Welcome to Pip’s Arcade! Move up a level or open the treasure chest to earn a game token.']
 appgroup('arcade', arc)

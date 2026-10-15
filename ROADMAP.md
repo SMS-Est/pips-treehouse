@@ -30,7 +30,7 @@ and let the app cache them on the device like the rest of the app.
 3. Click **Run workflow** on the GitHub Action Claude writes. It records all clips, commits them,
    and Netlify redeploys.
 
-**Clip list (done Oct 14):** `voice/lines.csv` — 7,989 clips, ~174,000 characters (inside Google's
+**Clip list (done Oct 14):** `voice/lines.csv` — about 8,500 clips, ~181,000 characters (inside Google's
 free 1 million characters a month for Chirp 3: HD, so $0), about 4 hours of audio, ~45 MB on the
 iPad. Every line the games can say is covered. Rebuild with `python3 voice/voice_plan.py index.html voice`.
 
@@ -83,6 +83,11 @@ Needs internet (breaks car play), costs money per use, and needs a server to hid
   Jingle Bell Syllables (clapping syllables), Snowball Toss (letters and sight words), Cocoa Count
   (ten-frames: make 10, teen numbers), Light the Tree (number order, counting by tens). Winter
   Arcade games: Snowman Maker, Snowflake Cutter, Tree Lights (memory), Santa's Sleigh.
+- v1.10: Sticker book grew from 30 to 210 stickers on 14 themed pages (Pets and Farm, Under the
+  Sea, In the Garden, Wild Animals, Outer Space, Yummy Food, Things That Go, Magic and Fairy Tales,
+  Toys and Games, Music Time, Halloween, Winter Wonderland). Page arrows, dots and swipe; locked
+  stickers show as shadows. Stars earned after the first 30 were full don't count, so each new
+  sticker still comes in a present.
 
 ## More game ideas (later)
 - More Foxy: Foxy steals pizza toppings or cupcake sprinkles in other Bakery games.

@@ -19,7 +19,7 @@ body{margin:0;font:14px system-ui,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<!-- Pip's Treehouse v1.9.0 -->
+<!-- Pip's Treehouse v1.10.0 -->
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>Pip's Treehouse</title>
 <style>
@@ -1220,6 +1220,38 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
 @media (orientation:portrait) and (min-width:641px){
   .themes.six{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+
+/* ---------- v1.10 sticker book pages ---------- */
+.stk-wrap{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:1000px;margin:0 auto}
+.stk-top{display:flex;align-items:center;gap:12px;width:100%}
+.stk-arrow{flex:none;width:clamp(54px,9vmin,72px);height:clamp(54px,9vmin,72px);border-radius:50%;display:grid;place-items:center;padding:0;background:var(--math)}
+.stk-arrow .ico{width:58%;height:58%;stroke-width:3.6}
+#stk-next .ico{transform:scaleX(-1)}
+.stk-arrow:disabled{opacity:.3;box-shadow:none;transform:translateY(4px)}
+.stk-head{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.stk-title{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(22px,4.4vmin,36px);line-height:1.1}
+.stk-count{font-family:var(--f-display);font-weight:800;font-size:clamp(15px,2.5vmin,19px);color:var(--ink-soft)}
+.stk-page{flex:1;min-height:0;width:100%;display:grid;justify-content:center;align-content:center;gap:14px;padding:16px;background:var(--pg,#FFF3D6);border:3px solid var(--ink);border-radius:28px;box-shadow:0 6px 0 var(--ink);touch-action:pan-y;overflow:hidden}
+.stk-page.full{background:radial-gradient(circle 3px at 20px 20px,rgba(255,196,63,.5) 96%,transparent) 0 0/40px 40px,var(--pg,#FFF3D6)}
+.stk-page.turn-r{animation:pgturn-r .35s ease}
+.stk-page.turn-l{animation:pgturn-l .35s ease}
+@keyframes pgturn-r{0%{transform:translateX(40px);opacity:.3}100%{transform:none;opacity:1}}
+@keyframes pgturn-l{0%{transform:translateX(-40px);opacity:.3}100%{transform:none;opacity:1}}
+.stk-page .stk-disc{position:relative;width:var(--d,96px);height:var(--d,96px);aspect-ratio:auto;font-size:calc(var(--d,96px) * .56);padding:0}
+.stk-page .stk-disc .emoji{line-height:1}
+.stk-page .stk-disc.boing{animation:pop .4s ease}
+.stk-page .stk-disc.locked{background:rgba(255,255,255,.55);border-style:dashed;box-shadow:none;color:inherit}
+.stk-page .stk-disc.locked .emoji{filter:brightness(0);opacity:.13}
+.stk-page .stk-disc.next{border-style:solid;background:rgba(255,255,255,.85);animation:glow 1.8s ease-in-out infinite}
+.stk-need{position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:2px;padding:0 8px;border-radius:999px;background:var(--paper);border:2.5px solid var(--ink);font-family:var(--f-display);font-weight:900;font-size:clamp(14px,2.4vmin,18px);white-space:nowrap}
+.stk-need .star-ico{width:1.1em;height:1.1em}
+.stk-dots{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:100%;padding-bottom:2px}
+.stk-dot{width:20px;height:20px;padding:0;border-radius:50%;border:2.5px solid var(--ink);background:var(--paper);transition:transform .15s}
+.stk-dot.done{background:#FFC43F}
+.stk-dot.on{transform:scale(1.35);background:var(--berry)}
+.stickers .note{font-size:clamp(16px,2.6vmin,20px)}
+.extra.stk{position:relative}
+.extra.stk.has-new::after{content:"New!";position:absolute;top:-12px;right:-8px;padding:1px 10px;border-radius:999px;background:#FFD93D;border:3px solid var(--ink);font-family:var(--f-display);font-weight:900;font-size:16px;transform:rotate(8deg);animation:pop 1.6s ease-in-out infinite}
 </style>
 </head>
 <body>
@@ -1308,8 +1340,16 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
       <button class="chunk icon-btn" id="stk-back" aria-label="Back home"></button>
       <h2>Sticker Book</h2>
     </div>
+    <div class="stk-wrap">
+      <div class="stk-top">
+        <button class="chunk stk-arrow" id="stk-prev" aria-label="Previous page"></button>
+        <div class="stk-head"><h3 class="stk-title" id="stk-title"></h3><span class="stk-count" id="stk-count"></span></div>
+        <button class="chunk stk-arrow" id="stk-next" aria-label="Next page"></button>
+      </div>
+      <div class="stk-page" id="stk-grid"></div>
+      <div class="stk-dots" id="stk-dots" role="group" aria-label="Sticker pages"></div>
+    </div>
     <p class="note" id="stk-note"></p>
-    <div class="grid" id="stk-grid"></div>
   </section>
 
   <section class="screen adv" id="s-adv" hidden>
@@ -1475,11 +1515,43 @@ window.PipContent = (function () {
   var SOLID_FACT = { cube: 'A block is shaped like a cube.', sphere: 'A ball is shaped like a sphere.', cone: 'An ice cream cone is shaped like a cone.', cylinder: 'A can is shaped like a cylinder.' };
   var SHAPE_COLORS = ['#FF7A62', '#FFC43F', '#4CBA68', '#5AA9EC', '#E8649A', '#9C7CF0'];
 
-  var STICKERS = [
-    ['🦊', 'fox'], ['🐼', 'panda'], ['🦁', 'lion'], ['🐯', 'tiger'], ['🐨', 'koala'], ['🐸', 'frog'], ['🐙', 'octopus'], ['🦄', 'unicorn'], ['🐳', 'whale'], ['🦋', 'butterfly'],
-    ['🐢', 'turtle'], ['🦉', 'owl'], ['🐧', 'penguin'], ['🦒', 'giraffe'], ['🐘', 'elephant'], ['🦜', 'parrot'], ['🐬', 'dolphin'], ['🦔', 'hedgehog'], ['🐿️', 'chipmunk'], ['🦩', 'flamingo'],
-    ['🐞', 'ladybug'], ['🐝', 'bee'], ['🦀', 'crab'], ['🐠', 'fish'], ['🦕', 'dinosaur'], ['🦖', 'T. rex'], ['🐲', 'dragon'], ['🌈', 'rainbow'], ['🚀', 'rocket'], ['🌻', 'sunflower']
-  ].map(function (s) { return { e: s[0], name: s[1] }; });
+  /* Sticker book: pages of 15, earned in order one page at a time. A third item is what Pip
+     says when the sticker isn't a plain "a ___" (names, plurals). */
+  var STICKER_PAGES = [
+    ['Pip’s Friends', '#FFF3D6', [['🦊', 'fox'], ['🐼', 'panda'], ['🦁', 'lion'], ['🐯', 'tiger'], ['🐨', 'koala'], ['🐸', 'frog'], ['🐙', 'octopus'], ['🦄', 'unicorn'], ['🐳', 'whale'], ['🦋', 'butterfly'],
+      ['🐢', 'turtle'], ['🦉', 'owl'], ['🐧', 'penguin'], ['🦒', 'giraffe'], ['🐘', 'elephant']]],
+    ['More Friends', '#E4F6D4', [['🦜', 'parrot'], ['🐬', 'dolphin'], ['🦔', 'hedgehog'], ['🐿️', 'chipmunk'], ['🦩', 'flamingo'], ['🐞', 'ladybug'], ['🐝', 'bee'], ['🦀', 'crab'], ['🐠', 'fish'], ['🦕', 'dinosaur'],
+      ['🦖', 'T. rex', 'A T rex!'], ['🐲', 'dragon'], ['🌈', 'rainbow'], ['🚀', 'rocket'], ['🌻', 'sunflower']]],
+    ['Pets and Farm', '#FFE9D6', [['🐶', 'puppy'], ['🐱', 'kitten'], ['🐰', 'bunny'], ['🐹', 'hamster'], ['🐴', 'horse'], ['🐮', 'cow'], ['🐷', 'pig'], ['🐑', 'sheep'], ['🐐', 'goat'], ['🐔', 'chicken'],
+      ['🐤', 'chick'], ['🦆', 'duck'], ['🐭', 'mouse'], ['🦙', 'llama'], ['🦃', 'turkey']]],
+    ['Under the Sea', '#D9F1FB', [['🦈', 'shark'], ['🦭', 'seal'], ['🐡', 'puffer fish'], ['🦞', 'lobster'], ['🦐', 'shrimp'], ['🦑', 'squid'], ['🐚', 'seashell'], ['🦦', 'otter'], ['🧜‍♀️', 'mermaid'], ['🐋', 'humpback whale'],
+      ['🌊', 'wave'], ['⚓', 'anchor'], ['🏝️', 'island'], ['🤿', 'diving mask'], ['⛵', 'sailboat']]],
+    ['In the Garden', '#EAF8DC', [['🐛', 'caterpillar'], ['🐜', 'ant'], ['🦗', 'cricket'], ['🐌', 'snail'], ['🪲', 'beetle'], ['🪱', 'worm'], ['🕷️', 'spider'], ['🌷', 'tulip'], ['🌹', 'rose'], ['🌸', 'cherry blossom'],
+      ['🌼', 'daisy'], ['🍄', 'mushroom'], ['🍀', 'lucky clover'], ['🌵', 'cactus'], ['🌳', 'tree']]],
+    ['Wild Animals', '#F6EDD8', [['🐒', 'monkey'], ['🦍', 'gorilla'], ['🦧', 'orangutan'], ['🐆', 'leopard'], ['🦓', 'zebra'], ['🦏', 'rhino'], ['🦛', 'hippo'], ['🐪', 'camel'], ['🦘', 'kangaroo'], ['🐊', 'crocodile'],
+      ['🐍', 'snake'], ['🦥', 'sloth'], ['🦚', 'peacock'], ['🐻', 'bear'], ['🦝', 'raccoon']]],
+    ['Outer Space', '#E3DEFF', [['🌙', 'moon'], ['🌟', 'sparkly star'], ['🪐', 'planet'], ['☄️', 'comet'], ['🌍', 'earth', 'Planet Earth!'], ['☀️', 'sun', 'The sun!'], ['🛸', 'flying saucer'], ['👽', 'alien'], ['👩‍🚀', 'astronaut'], ['🛰️', 'satellite'],
+      ['🔭', 'telescope'], ['🌠', 'shooting star'], ['🌌', 'galaxy'], ['🤖', 'robot'], ['👾', 'space monster']]],
+    ['Yummy Food', '#FFE3EF', [['🍕', 'pizza', 'Pizza!'], ['🧁', 'cupcake'], ['🍩', 'donut'], ['🍪', 'cookie'], ['🍦', 'ice cream cone'], ['🍓', 'strawberry'], ['🍉', 'watermelon'], ['🍌', 'banana'], ['🍎', 'apple'], ['🥨', 'pretzel'],
+      ['🧇', 'waffle'], ['🍔', 'burger'], ['🌮', 'taco'], ['🍭', 'lollipop'], ['🎂', 'birthday cake']]],
+    ['Things That Go', '#E2EEFB', [['🚗', 'car'], ['🚌', 'bus'], ['🚒', 'fire truck'], ['🚓', 'police car'], ['🚑', 'ambulance'], ['🚜', 'tractor'], ['🚂', 'train'], ['✈️', 'airplane'], ['🚁', 'helicopter'], ['🚲', 'bike'],
+      ['🛴', 'scooter'], ['🚤', 'speedboat'], ['🏎️', 'race car'], ['🚚', 'truck'], ['🛶', 'canoe']]],
+    ['Magic and Fairy Tales', '#F3E6FF', [['👑', 'crown'], ['🏰', 'castle'], ['🧚‍♀️', 'fairy'], ['🪄', 'magic wand'], ['🔮', 'crystal ball'], ['🧙', 'wizard'], ['💎', 'jewel'], ['⭐', 'wishing star'], ['🧞', 'genie'], ['👸', 'princess'],
+      ['🤴', 'prince'], ['🦢', 'swan'], ['💖', 'sparkly heart'], ['🎀', 'bow'], ['🐉', 'flying dragon']]],
+    ['Toys and Games', '#FFF0D0', [['🧸', 'teddy bear'], ['🪀', 'yo-yo'], ['🪁', 'kite'], ['🎈', 'balloon'], ['🎁', 'present'], ['🎉', 'party popper'], ['🎨', 'paint palette'], ['🖍️', 'crayon'], ['🧩', 'puzzle piece'], ['🪅', 'piñata'],
+      ['🎠', 'carousel'], ['🎡', 'Ferris wheel'], ['🎢', 'roller coaster'], ['⚽', 'soccer ball'], ['🛹', 'skateboard']]],
+    ['Music Time', '#DDF5F0', [['🥁', 'drum'], ['🎸', 'guitar'], ['🎹', 'piano'], ['🎺', 'trumpet'], ['🎻', 'violin'], ['🪕', 'banjo'], ['🎷', 'saxophone'], ['🎤', 'microphone'], ['🎧', 'headphones', 'Headphones!'], ['🪗', 'accordion'],
+      ['🎵', 'music note'], ['📯', 'horn'], ['🪘', 'bongo drum'], ['💃', 'dancer'], ['🎶', 'song', 'La la la!']]],
+    ['Halloween', '#FFE6CC', [['🎃', 'pumpkin'], ['👻', 'ghost'], ['🦇', 'bat'], ['🕸️', 'spider web'], ['🍬', 'candy', 'Candy!'], ['🧙‍♀️', 'witch'], ['🧛', 'vampire'], ['🕯️', 'candle'], ['🌕', 'full moon'], ['🐈‍⬛', 'black cat'],
+      ['🍫', 'chocolate bar'], ['🧹', 'broom'], ['🎩', 'magic hat'], ['🍁', 'fall leaf'], ['🐺', 'wolf']]],
+    ['Winter Wonderland', '#E3F2FD', [['⛄', 'snowman'], ['❄️', 'snowflake'], ['🎄', 'Christmas tree'], ['🎅', 'Santa', 'Santa!'], ['🤶', 'Mrs. Claus', 'Mrs. Claus!'], ['🦌', 'reindeer'], ['🛷', 'sled'], ['🧣', 'scarf'], ['🧤', 'mittens', 'Mittens!'], ['⛸️', 'ice skate'],
+      ['🔔', 'jingle bell'], ['☕', 'hot cocoa', 'Hot cocoa!'], ['🐻‍❄️', 'polar bear'], ['🎿', 'skis', 'Skis!'], ['🧦', 'cozy socks', 'Cozy socks!']]]
+  ];
+  function aName(n) { return (/^[aeio]/i.test(n) || /^u(?!ni)/i.test(n) ? 'An ' : 'A ') + n + '!'; }
+  var STICKERS = [];
+  STICKER_PAGES.forEach(function (p, pi) {
+    p[2].forEach(function (s) { STICKERS.push({ e: s[0], name: s[1], say: s[2] || aName(s[1]), page: pi }); });
+  });
 
   /* ---------- helpers ---------- */
   function opts(right, wrongs, make) {
@@ -2688,7 +2760,7 @@ window.PipContent = (function () {
     g.kGoal = k + 1;
   });
 
-  return { R: R, L: L, P: P, GAMES: GAMES, STICKERS: STICKERS, SIDES: SIDES, cap: cap,
+  return { R: R, L: L, P: P, GAMES: GAMES, STICKERS: STICKERS, STICKER_PAGES: STICKER_PAGES, SIDES: SIDES, cap: cap,
     _lists: { CVC: CVC, BLEND: BLEND, FS_CONS: FS_CONS, FS_VOW: FS_VOW, FAM: FAM, SW1: SW1, SW2: SW2, SW3: SW3, NOUNS: NOUNS, HOMO: HOMO,
       BOO_P: BOO_P, BOO_SHORT: BOO_SHORT, BOO_LONG: BOO_LONG, BOO_FIRST: BOO_FIRST, STORIES: STORIES,
       PIX: PIX, PCOL: PCOL, DOTS: DOTS, TOPS: TOPS, FROST: FROST, TOPPERS: TOPPERS, FOOD_P: FOOD_P, FOOD_SHORT: FOOD_SHORT, FOOD_LONG: FOOD_LONG,
@@ -2702,7 +2774,7 @@ window.PipContent = (function () {
    ===================================================================== */
 (function () {
   'use strict';
-  var C = window.PipContent, R = C.R, L = C.L, GAMES = C.GAMES, STICKERS = C.STICKERS;
+  var C = window.PipContent, R = C.R, L = C.L, GAMES = C.GAMES, STICKERS = C.STICKERS, STICKER_PAGES = C.STICKER_PAGES;
   var G = {}; GAMES.forEach(function (g) { G[g.id] = g; });
   var STARS_PER_STICKER = 8, ROUND_LEN = 5;
   var $ = function (s, root) { return (root || document).querySelector(s); };
@@ -2777,12 +2849,16 @@ window.PipContent = (function () {
 
   /* ---------------- state ---------------- */
   var KEY = 'pips-treehouse-v1';
-  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, spent: 0, owned: ['c-green'], pip: { color: 'green', hat: null, extra: null }, adv: null, advDays: [], tokens: 0, arcade: { balloon: 0, match: 0, art: [], potions: [] }, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', winter: 'auto', celebrate: 'big', limit: 'none', arcade: 'on' } }; }
+  function freshState() { return { v: 1, updatedAt: 0, name: '', totalStars: 0, spent: 0, owned: ['c-green'], pip: { color: 'green', hat: null, extra: null }, adv: null, advDays: [], tokens: 0, stkShift: 0, stkSeen: 0, arcade: { balloon: 0, match: 0, art: [], potions: [] }, rounds: 0, games: {}, days: {}, settings: { rate: 'normal', sfx: true, voice: '', halloween: 'auto', winter: 'auto', celebrate: 'big', limit: 'none', arcade: 'on' } }; }
   function normalize(s) {
     var d = freshState();
     if (!s || typeof s !== 'object') return d;
     var out = Object.assign(d, s);
     out.settings = Object.assign(freshState().settings, s.settings || {});
+    /* v1.10 added sticker pages. Stars earned after the first 30 stickers were full don't count
+       toward the new ones, so she gets to earn every new sticker (and open it) one at a time. */
+    if (typeof s.stkShift !== 'number') { var over = (out.totalStars | 0) - 30 * STARS_PER_STICKER; out.stkShift = over > 0 ? Math.floor(over / STARS_PER_STICKER) * STARS_PER_STICKER : 0; }
+    if (typeof s.stkSeen !== 'number') out.stkSeen = (out.totalStars | 0) >= STARS_PER_STICKER ? 30 : 0;
     out.games = s.games && typeof s.games === 'object' ? s.games : {};
     out.days = s.days && typeof s.days === 'object' ? s.days : {};
     out.owned = Array.isArray(s.owned) ? s.owned : ['c-green'];
@@ -2826,7 +2902,9 @@ window.PipContent = (function () {
     var keys = Object.keys(S.days).sort();
     while (keys.length > 60) delete S.days[keys.shift()];
   }
-  function stickersEarned() { return Math.min(STICKERS.length, Math.floor(S.totalStars / STARS_PER_STICKER)); }
+  function stickersEarned() { return Math.min(STICKERS.length, Math.floor(Math.max(0, S.totalStars - (S.stkShift || 0)) / STARS_PER_STICKER)); }
+  /* "an owl!" in the middle of a sentence; names like Santa keep their capital */
+  function stickerSayMid(st) { return /^[A-Z]/.test(st.name) ? st.say : st.say.charAt(0).toLowerCase() + st.say.slice(1); }
 
   /* ---------------- cloud sync (signed-in viewers) ---------------- */
   var Cloud = {
@@ -3210,6 +3288,7 @@ window.PipContent = (function () {
     $('#home-bubble').textContent = greet;
     var have = stickersEarned();
     $('#stk-ic').textContent = have ? STICKERS[have - 1].e : '📖';
+    $('#stk-btn').classList.toggle('has-new', (S.stkSeen | 0) > 0 && S.stkSeen < STICKERS.length);
     var into = S.totalStars % STARS_PER_STICKER;
     $('#stk-meter').style.width = (have >= STICKERS.length ? 100 : into / STARS_PER_STICKER * 100) + '%';
     var boo = halloweenOn(), snow = winterOn(), nTheme = 4 + (boo ? 1 : 0) + (snow ? 1 : 0), th = $('#themes');
@@ -3276,17 +3355,62 @@ window.PipContent = (function () {
     if (speak) Voice.say(ROOM_SAY[world]);
   }
 
-  function renderStickers() {
-    var have = stickersEarned(), grid = $('#stk-grid'); grid.innerHTML = '';
-    STICKERS.forEach(function (s, i) {
-      if (i < have) grid.append(el('button', { class: 'stk-disc', 'aria-label': s.name, onclick: function () { Voice.say(s.name === 'T. rex' ? 'T rex!' : 'A ' + s.name + '!'); } }, emoji(s.e)));
-      else grid.append(el('div', { class: 'stk-disc locked', 'aria-label': 'Locked sticker', text: '?' }));
-    });
-    var need = STARS_PER_STICKER - (S.totalStars % STARS_PER_STICKER);
-    var note = have >= STICKERS.length ? 'You found every sticker!' : have + ' of ' + STICKERS.length + ' stickers. ' + need + ' more ' + (need === 1 ? 'star' : 'stars') + ' for the next one!';
-    $('#stk-note').textContent = note;
+  /* Sticker book: one page of 15 at a time, with arrows, page dots and swipes */
+  var stkPage = 0;
+  function stickerNote() {
+    var have = stickersEarned(), need = STARS_PER_STICKER - (S.totalStars % STARS_PER_STICKER);
+    return have >= STICKERS.length ? 'You found every sticker!' : have + ' of ' + STICKERS.length + ' stickers. ' + need + ' more ' + (need === 1 ? 'star' : 'stars') + ' for the next one!';
+  }
+  function pageOf(i) { return STICKERS[Math.max(0, Math.min(STICKERS.length - 1, i))].page; }
+  function renderStickers(opts) {
+    var have = stickersEarned(), fresh = (S.stkSeen | 0) > 0 && S.stkSeen < STICKERS.length;
+    stkPage = pageOf(opts && opts.newest && have ? have - 1 : have);
+    if (S.stkSeen !== STICKERS.length) { S.stkSeen = STICKERS.length; save(false); }
     show('stickers');
-    Voice.say(note);
+    drawStickerPage();
+    var p = STICKER_PAGES[stkPage];
+    Voice.say(fresh ? 'Wow! Your sticker book has ' + (STICKER_PAGES.length - 2) + ' new pages! ' + stickerNote() : p[0] + '! ' + stickerNote());
+  }
+  function drawStickerPage(speak) {
+    var have = stickersEarned(), p = STICKER_PAGES[stkPage], book = $('#stk-grid');
+    var items = STICKERS.filter(function (x) { return x.page === stkPage; }), first = STICKERS.indexOf(items[0]);
+    var got = Math.max(0, Math.min(items.length, have - first)), need = STARS_PER_STICKER - (S.totalStars % STARS_PER_STICKER);
+    $('#stk-title').textContent = p[0];
+    $('#stk-count').textContent = got === items.length ? 'Page full!' : got + ' of ' + items.length;
+    book.style.setProperty('--pg', p[1]);
+    book.classList.toggle('full', got === items.length);
+    book.innerHTML = '';
+    items.forEach(function (st, j) {
+      var i = first + j;
+      if (i < have) book.append(el('button', { class: 'stk-disc', 'aria-label': st.name, onclick: function (e) { var b = e.currentTarget; b.classList.remove('boing'); void b.offsetWidth; b.classList.add('boing'); SFX.pop(); Voice.say(st.say); } }, emoji(st.e)));
+      else if (i === have) book.append(el('button', { class: 'stk-disc locked next', 'aria-label': 'Next sticker, ' + need + ' more stars', onclick: function () { SFX.tick(); Voice.say(need + ' more ' + (need === 1 ? 'star' : 'stars') + ' to find this one!'); } },
+        [emoji(st.e), el('span', { class: 'stk-need', html: need + ICON.star() })]));
+      else book.append(el('button', { class: 'stk-disc locked', 'aria-label': 'Locked sticker', onclick: function () { SFX.tick(); Voice.say('Keep earning stars to find this one!'); } }, emoji(st.e)));
+    });
+    var dots = $('#stk-dots'); dots.innerHTML = '';
+    STICKER_PAGES.forEach(function (pg, k) {
+      var pi = STICKERS.filter(function (x) { return x.page === k; }), done = have >= STICKERS.indexOf(pi[pi.length - 1]) + 1;
+      dots.append(el('button', { class: 'stk-dot' + (done ? ' done' : '') + (k === stkPage ? ' on' : ''), 'aria-label': 'Page ' + (k + 1) + ': ' + pg[0], onclick: function () { turnStickerPage(k - stkPage); } }));
+    });
+    $('#stk-prev').disabled = stkPage === 0; $('#stk-next').disabled = stkPage === STICKER_PAGES.length - 1;
+    $('#stk-note').textContent = stickerNote();
+    fitStickers();
+    if (speak) Voice.say(p[0] + '! ' + (got === items.length ? 'You filled this page!' : got + ' of ' + items.length + ' stickers.'));
+  }
+  /* 15 round stickers as big as the page allows: 5 across on a wide page, 3 across on a tall one */
+  function fitStickers() {
+    var book = $('#stk-grid'); if (!book || current !== 'stickers') return;
+    var cs = getComputedStyle(book), pad = parseFloat(cs.paddingLeft) || 16, gap = 14;
+    var W = book.clientWidth - pad * 2, H = book.clientHeight - pad * 2, cols = W > H * 1.05 ? 5 : 3, rows = Math.ceil(15 / cols);
+    var d = Math.max(44, Math.floor(Math.min((W - gap * (cols - 1)) / cols, (H - gap * (rows - 1)) / rows)));
+    book.style.setProperty('--d', d + 'px'); book.style.gridTemplateColumns = 'repeat(' + cols + ',' + d + 'px)';
+  }
+  function turnStickerPage(step) {
+    var n = Math.max(0, Math.min(STICKER_PAGES.length - 1, stkPage + step));
+    if (n === stkPage) return;
+    stkPage = n; SFX.tick();
+    var book = $('#stk-grid'); book.classList.remove('turn-l', 'turn-r'); void book.offsetWidth; book.classList.add(step > 0 ? 'turn-r' : 'turn-l');
+    drawStickerPage(true);
   }
 
   /* ---------------- round engine ---------------- */
@@ -4895,7 +5019,8 @@ window.PipContent = (function () {
         var gc = centerOf(gift);
         gift.replaceWith(el('div', { class: 'newstk' }, [el('span', { class: 'disc' }, emoji(newSt.e)), 'New sticker!']));
         SFX.fanfare(); FX.burst(gc.x, gc.y, { n: 70, speed: 13, spread: 6.3, spooky: spooky });
-        Voice.say((newSt.name === 'T. rex' ? 'A T rex!' : 'A ' + newSt.name + '!') + ' It’s in your sticker book.');
+        var pageDone = after >= STICKERS.length || STICKERS[after].page !== newSt.page;
+        Voice.say(newSt.say + ' It’s in your sticker book.' + (pageDone ? ' You filled a whole page!' : ''));
       });
       card.append(gift);
     }
@@ -4911,7 +5036,7 @@ window.PipContent = (function () {
       btns.append(el('button', { class: 'chunk btn go', text: 'Play again', onclick: function () { startRound(r.id); } }));
       if (!r.mix) btns.append(el('button', { class: 'chunk btn', text: 'Pick a game', onclick: function () { renderRoom(G[r.id].world, true); } }));
     }
-    if (newSt) btns.append(el('button', { class: 'chunk btn', text: 'See stickers', onclick: renderStickers }));
+    if (newSt) btns.append(el('button', { class: 'chunk btn', text: 'See stickers', onclick: function () { renderStickers({ newest: true }); } }));
     if (token) btns.append(el('button', { class: 'chunk btn bonus-btn', html: '<span class="emoji">🎟️</span> Bonus game!', onclick: function () { renderArcade(true); } }));
     btns.append(el('button', { class: 'chunk btn', 'aria-label': 'Home', html: ICON.home, style: 'padding:8px 16px', onclick: function () { renderHome(true); } }));
     card.append(btns);
@@ -5117,7 +5242,7 @@ window.PipContent = (function () {
     var newSt = stickersEarned() > before ? STICKERS[stickersEarned() - 1] : null;
     renderAdventure(false);
     var msg = 'Treasure! You found 5 bonus stars' + (gotToken ? ', a game token,' : '') + ' and a stamp for today!';
-    if (newSt) msg += ' And a new sticker: ' + (newSt.name === 'T. rex' ? 'a T rex!' : 'a ' + newSt.name + '!');
+    if (newSt) msg += ' And a new sticker: ' + stickerSayMid(newSt);
     if (S.settings.limit === 'after') msg += ' Great job today. Pip is getting sleepy!';
     Voice.say(msg);
   }
@@ -6926,7 +7051,19 @@ window.PipContent = (function () {
   $('#room-bug').addEventListener('click', function () { renderRoom('bug', true); });
   $('#room-snow').addEventListener('click', function () { renderRoom('snow', true); });
   $('#mix-btn').addEventListener('click', function () { startRound('mix'); });
-  $('#stk-btn').addEventListener('click', renderStickers);
+  $('#stk-btn').addEventListener('click', function () { renderStickers(); });
+  $('#stk-prev').innerHTML = ICON.back; $('#stk-next').innerHTML = ICON.back;
+  $('#stk-prev').addEventListener('click', function () { turnStickerPage(-1); });
+  $('#stk-next').addEventListener('click', function () { turnStickerPage(1); });
+  (function () {
+    var book = $('#stk-grid'), x0 = null, y0 = 0;
+    book.addEventListener('pointerdown', function (e) { x0 = e.clientX; y0 = e.clientY; });
+    book.addEventListener('pointerup', function (e) {
+      if (x0 == null) return; var dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4) turnStickerPage(dx < 0 ? 1 : -1);
+    });
+    window.addEventListener('resize', fitStickers);
+  })();
   $('#adv-btn').addEventListener('click', function () { renderAdventure(true); });
   $('#arc-btn').addEventListener('click', function () { renderArcade(true); });
   $('#arc-back').addEventListener('click', function () { renderHome(false); });
@@ -6934,7 +7071,7 @@ window.PipContent = (function () {
   $('#shop-btn').addEventListener('click', function () { shopPick = null; renderShop(true); });
   $('#adv-back').addEventListener('click', function () { renderHome(false); });
   $('#shop-back').addEventListener('click', function () { renderHome(false); });
-  $('#sleep-stk').addEventListener('click', renderStickers);
+  $('#sleep-stk').addEventListener('click', function () { renderStickers(); });
   $('#sleep-shop').addEventListener('click', function () { shopPick = null; renderShop(true); });
   $('#sleep-grown').addEventListener('click', openGate);
   $('#stk-back').addEventListener('click', function () { renderHome(true); });
