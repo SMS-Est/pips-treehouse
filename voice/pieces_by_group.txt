@@ -1,161 +1,161 @@
-5.01  ornament:praise         2751 lines   e.g. 16, | 17, | 18, | 19, | 20! | The tree is all lit up!  ||  11, | 12, | 13, | 14, | 15! | The tree is all lit up!
-5.00  app:pizza-fix-4         4800 lines   e.g. You have 10 | olives. | Bunny wants | 8. | Take off 2.  ||  You have 7 | pineapples. | Froggy wants | 5. | Take off 2.
-3.55  next:praise              218 lines   e.g. 10, | 20, | 30, | 40!  ||  15, | 16, | 17, | 18!
-3.55  next:hint                218 lines   e.g. Count it out loud: | 30, | 40, | 50.  ||  Count it out loud: | 80, | 81, | 82.
-3.06  sub:prompt               636 lines   e.g. There are 4 | cookies. | 2 get eaten. | How many are left?  ||  There are 4 | strawberries. | 2 get eaten. | How many are left?
-3.00  app:shop-welcome         301 lines   e.g. Welcome to Pip’s Shop! You have | 6 | stars to spend.  ||  Welcome to Pip’s Shop! You have | 104 | stars to spend.
-3.00  app:mini-end-2           151 lines   e.g. The frog ate | 21 | points of bugs!  ||  The frog ate | 89 | points of bugs!
-3.00  app:mini-end-1           151 lines   e.g. You grabbed | 117 | points of candy!  ||  You grabbed | 68 | points of candy!
-3.00  app:bucket-2             500 lines   e.g. You have 10. | We need 17. | Put in 7 more.  ||  You have 12. | We need 1. | Take out 11.
-3.00  app:sticker-book        1681 lines   e.g. 184 | of 210 stickers. | 4 more stars for the next one!  ||  6 | of 210 stickers. | 6 more stars for the next one!
-2.99  app:mini-end-4           151 lines   e.g. You remembered | 122 | lights in a row!  ||  You remembered | 17 | lights in a row!
-2.99  app:mini-end-3           151 lines   e.g. You caught | 20 | fireflies!  ||  You caught | 69 | fireflies!
-2.96  rhyme:praise            2730 lines   e.g. House and | mouse rhyme. | Kite does not!  ||  Pear and | bear rhyme. | Ring does not!
-2.95  compare:praise          2041 lines   e.g. 34 | is smaller than | 84!  ||  92 | is bigger than | 45!
-2.91  app:mini-end-5           151 lines   e.g. Santa delivered | 78 | presents!  ||  Santa delivered | 141 | presents!
-2.85  pizza:prompt            2953 lines   e.g. Koala wants | 5 pineapples | and 4 olives!  ||  Froggy wants | 5 olives | and 3 pineapples!
-2.74  app:sticker-new          211 lines   e.g. A | dinosaur! | It’s in your sticker book.  ||  A | turkey! | It’s in your sticker book.
-2.00  cookie:praise            223 lines   e.g. Foxy ate 4! | 6 take away 4 is 2.  ||  9 take away 4 is 5! | Oh, Foxy!
-2.00  app:pizza-fix-3          400 lines   e.g. Hmm, let’s count again. Puppy wants | 10 mushrooms.  ||  Hmm, let’s count again. Bear wants | 8 pepperoni.
-2.00  app:mini-end-0           151 lines   e.g. You scored | 69!  ||  You scored | 15!
-1.91  pizza:praise             557 lines   e.g. Yum! 4 mushrooms | and 4 tomatoes!  ||  Yum! 4 mushrooms | and 2 tomatoes!
-1.84  doors:prompt             239 lines   e.g. Find door | 4!  ||  Find door | 86!
-1.81  count:praise             280 lines   e.g. There are 5 | ducks!  ||  There are 16 | balloons!
-1.71  snowball:praise          182 lines   e.g. Splat! That word is | please.  ||  Splat! That word is | for.
-1.50  rhyme:prompt             225 lines   e.g. Which one rhymes with | chair?  ||  Which word rhymes with | tree?
-1.48  next:prompt              202 lines   e.g. What number comes before | 83?  ||  What number comes before | 85?
-1.47  app:stickers             420 lines   e.g. ice | cream | cone  ||  A | whale!
-1.38  sounds:prompt            207 lines   e.g. What letter does | ant | start with?  ||  What letter does | ten | end with?
-1.24  butterfly:prompt         219 lines   e.g. What letter does fish start with? | Find that wing!  ||  What letter does juice start with? | Find that wing!
-1.00  treat:prompt              36 lines   e.g. Put in more to make 17.  ||  Put 2 candies in the bucket.
-1.00  treat:praise              20 lines   e.g. 11 candies! Yum!  ||  7 candies! Yum!
-1.00  tracenum:prompt           22 lines   e.g. Trace the number 9.  ||  Trace the number 20.
-1.00  tracenum:praise           21 lines   e.g. You wrote 2!  ||  You wrote 20!
-1.00  trace:prompt              84 lines   e.g. Trace the word bat.  ||  Trace the word web.
-1.00  trace:praise              57 lines   e.g. You wrote H!  ||  You wrote gee!
-1.00  tap-word                 327 lines   e.g. zebra  ||  rocket
-1.00  sub:praise               143 lines   e.g. 7 take away 7 is 0!  ||  13 take away 9 is 4!
-1.00  sub:hint                 143 lines   e.g. Start at 7 and count back 3.  ||  Start at 6 and count back 3.
-1.00  story:read                47 lines   e.g. My pig has a  ||  The fish had a
-1.00  story:prompt              14 lines   e.g. What did we fly?  ||  Where does the pig nap?
-1.00  story:praise              60 lines   e.g. That says sock! It was a red sock.  ||  The man had a flag!
+5.01  ornament:praise         2767 lines   e.g. 30, | 40, | 50, | 60, | 70! | The tree is all lit up!  ||  20, | 30, | 40, | 50, | 60! | The tree is all lit up!
+5.00  app:pizza-fix-4         4800 lines   e.g. You have 10 | mushrooms. | Panda wants | 3. | Take off 7.  ||  You have 10 | pineapples. | Panda wants | 1. | Take off 9.
+3.55  next:praise              218 lines   e.g. 11, | 12, | 13, | 14!  ||  77, | 78, | 79, | 80!
+3.55  next:hint                218 lines   e.g. Count it out loud: | 69, | 70, | 71.  ||  Count it out loud: | 14, | 16, | 18.
+3.06  sub:prompt               637 lines   e.g. There are 7 | flowers. | 4 get picked. | How many are left?  ||  There are 7 | apples. | 5 get eaten. | How many are left?
+3.00  app:shop-welcome         301 lines   e.g. Welcome to Pip’s Shop! You have | 241 | stars to spend.  ||  Welcome to Pip’s Shop! You have | 218 | stars to spend.
+3.00  app:mini-end-2           151 lines   e.g. The frog ate | 83 | points of bugs!  ||  The frog ate | 58 | points of bugs!
+3.00  app:mini-end-1           151 lines   e.g. You grabbed | 21 | points of candy!  ||  You grabbed | 7 | points of candy!
+3.00  app:bucket-2             500 lines   e.g. You have 0. | We need 20. | Put in 20 more.  ||  You have 20. | We need 3. | Take out 17.
+3.00  app:sticker-book        1681 lines   e.g. 13 | of 210 stickers. | 8 more stars for the next one!  ||  126 | of 210 stickers. | 7 more stars for the next one!
+2.99  app:mini-end-4           151 lines   e.g. You remembered | 54 | lights in a row!  ||  You remembered | 5 | lights in a row!
+2.99  app:mini-end-3           151 lines   e.g. You caught | 102 | fireflies!  ||  You caught | 33 | fireflies!
+2.96  rhyme:praise            2675 lines   e.g. Log and | frog rhyme. | Wing does not!  ||  Ship and | lip rhyme. | Ring does not!
+2.95  compare:praise          1969 lines   e.g. 49 | is bigger than | 43!  ||  86 | is bigger than | 37!
+2.91  app:mini-end-5           151 lines   e.g. Santa delivered | 0 | presents!  ||  Santa delivered | 14 | presents!
+2.85  pizza:prompt            2964 lines   e.g. Bunny wants | 1 pepperoni | and 1 mushroom!  ||  Bear wants | 2 pepperoni | and 4 tomatoes!
+2.74  app:sticker-new          211 lines   e.g. A | watermelon! | It’s in your sticker book.  ||  A | yo-yo! | It’s in your sticker book.
+2.00  cookie:praise            223 lines   e.g. 6 take away 2 is 4! | Silly Foxy!  ||  10 take away 5 is 5! | Oh, Foxy!
+2.00  app:pizza-fix-3          400 lines   e.g. Hmm, let’s count again. Piggy wants | 6 mushrooms.  ||  Hmm, let’s count again. Froggy wants | 1 tomato.
+2.00  app:mini-end-0           151 lines   e.g. You scored | 78!  ||  You scored | 138!
+1.91  pizza:praise             557 lines   e.g. Yum! 5 pepperoni | and 1 tomato!  ||  Yum! 2 olives | and 4 tomatoes!
+1.84  doors:prompt             239 lines   e.g. Find door | 71!  ||  The ghost is hiding behind door | 15.
+1.81  count:praise             280 lines   e.g. There are 13 | ducks!  ||  There are 17 | turtles!
+1.71  snowball:praise          182 lines   e.g. Splat! That word is | look.  ||  Splat! That word is | two.
+1.50  rhyme:prompt             225 lines   e.g. Which word rhymes with | chair?  ||  Which word rhymes with | spoon?
+1.48  next:prompt              202 lines   e.g. What number comes before | 72?  ||  What number comes before | 45?
+1.47  app:stickers             420 lines   e.g. ice | cream | cone  ||  A | rocket!
+1.38  sounds:prompt            207 lines   e.g. What letter does | pig | end with?  ||  What letter does | bat | end with?
+1.24  butterfly:prompt         219 lines   e.g. What letter does mouse start with? | Find that wing!  ||  What letter does snake start with? | Find that wing!
+1.00  treat:prompt              36 lines   e.g. Put 7 candies in the bucket.  ||  Put 1 candy in the bucket.
+1.00  treat:praise              20 lines   e.g. 7 candies! Yum!  ||  2 candies! Yum!
+1.00  tracenum:prompt           22 lines   e.g. Trace the number 15.  ||  Trace the number 10.
+1.00  tracenum:praise           21 lines   e.g. You wrote 0!  ||  You wrote 5!
+1.00  trace:prompt              84 lines   e.g. Trace the small letter R.  ||  Trace the word sun.
+1.00  trace:praise              57 lines   e.g. You wrote cue!  ||  You wrote bed!
+1.00  tap-word                 327 lines   e.g. ten.  ||  gift.
+1.00  sub:praise               143 lines   e.g. 4 take away 4 is 0!  ||  19 take away 3 is 16!
+1.00  sub:hint                 143 lines   e.g. Start at 15 and count back 7.  ||  Start at 5 and count back 1.
+1.00  story:read                47 lines   e.g. Then a big wave came over the  ||  Look at the
+1.00  story:prompt              14 lines   e.g. Who had a big clock?  ||  Who ran up on the log?
+1.00  story:praise              60 lines   e.g. That says hat! The hen has a hat.  ||  That says rock! Then a big wave came over the rock.
 1.00  story:hint                 2 lines   e.g. Look at the first letter of the last word.  ||  Think about the story. Try again.
-1.00  stars:prompt              20 lines   e.g. Spell web.  ||  Spell pig.
-1.00  stars:praise              19 lines   e.g. H, A, tea. hat! You made a star picture!  ||  R, oh, see, kay, E, tea. rocket! You made a star picture!
-1.00  spell:prompt              55 lines   e.g. Spell fish.  ||  Spell log.
-1.00  spell:praise              55 lines   e.g. R, A, tea. rat!  ||  H, A, N, D. hand!
-1.00  sounds:praise            126 lines   e.g. The middle letter of bag is A!  ||  Goat starts with gee!
-1.00  sounds:hint              126 lines   e.g. Listen to the end: tub. Try again.  ||  Listen: ball. Try again.
-1.00  snowball:prompt          183 lines   e.g. Throw a snowball at small S.  ||  old.
-1.00  snowball:hint            182 lines   e.g. Listen: this. Look at the first letter.  ||  Listen: big. Look at the first letter.
-1.00  sight:prompt             131 lines   e.g. old.  ||  her.
-1.00  sight:praise             130 lines   e.g. That word is stop.  ||  That word is big.
-1.00  sight:hint               130 lines   e.g. Listen: this. Look at the first letter.  ||  Listen: big. Look at the first letter.
-1.00  shapes:prompt             21 lines   e.g. Find the square.  ||  Which shape has 6 sides?
-1.00  shapes:praise             22 lines   e.g. A triangle has 3 sides!  ||  A triangle has 3 corners!
-1.00  shapes:hint               12 lines   e.g. It has 3 sides. Try again.  ||  A block is shaped like a cube. Try again.
-1.00  rocket:prompt             32 lines   e.g. 15  ||  13
-1.00  rocket:praise             21 lines   e.g. 15, 14, 13, 12, 11. Blast off!  ||  5, 4, 3, 2, 1. Blast off!
-1.00  rocket:hint               63 lines   e.g. Count down out loud: 16, 15.  ||  Count down out loud: 90, 80.
-1.00  rhyme:hint                57 lines   e.g. Listen: car. Which one sounds the same at the end?  ||  Listen: van. Which one sounds the same at the end?
+1.00  stars:prompt              20 lines   e.g. Spell cup.  ||  Spell hat.
+1.00  stars:praise              19 lines   e.g. M, oh, oh, N. moon! You made a star picture!  ||  bee, you, S. bus! You made a star picture!
+1.00  spell:prompt              55 lines   e.g. Spell pin.  ||  Spell cup.
+1.00  spell:praise              55 lines   e.g. see, L, oh, see, kay. clock!  ||  S, oh, see, kay. sock!
+1.00  sounds:praise            126 lines   e.g. Umbrella starts with you!  ||  Cake starts with see!
+1.00  sounds:hint              126 lines   e.g. Listen: duck. Try again.  ||  Listen: monkey. Try again.
+1.00  snowball:prompt          183 lines   e.g. Throw a snowball at small tea.  ||  walk.
+1.00  snowball:hint            182 lines   e.g. Listen. Find cue.  ||  Listen: ran. Look at the first letter.
+1.00  sight:prompt             131 lines   e.g. walk.  ||  too.
+1.00  sight:praise             130 lines   e.g. That word is may.  ||  That word is all.
+1.00  sight:hint               130 lines   e.g. Listen: ran. Look at the first letter.  ||  Listen: after. Look at the first letter.
+1.00  shapes:prompt             21 lines   e.g. How many sides does a hexagon have?  ||  Find the square.
+1.00  shapes:praise             22 lines   e.g. A square has 4 sides!  ||  Yes, the rectangle. It has 4 sides. Two are long and two are short.
+1.00  shapes:hint               12 lines   e.g. It is round, with no corners. Try again.  ||  Touch each corner and count.
+1.00  rocket:prompt             32 lines   e.g. something  ||  6
+1.00  rocket:praise             21 lines   e.g. 18, 17, 16, 15, 14. Blast off!  ||  8, 7, 6, 5, 4, 3, 2, 1. Blast off!
+1.00  rocket:hint               63 lines   e.g. Count down out loud: 20, 19, 18, 17.  ||  Count down out loud: 18, 17.
+1.00  rhyme:hint                57 lines   e.g. Listen: hen. Which one sounds the same at the end?  ||  Listen: house. Which one sounds the same at the end?
 1.00  read:prompt                3 lines   e.g. Read the sentence. Tap the picture that matches.  ||  Read the words. Tap the picture that matches.
-1.00  read:praise              352 lines   e.g. That says: a green heart  ||  That says: Can you see two cups?
+1.00  read:praise              352 lines   e.g. That says: The bee is little.  ||  That says tub!
 1.00  read:hint                  2 lines   e.g. Read each word. Try again.  ||  Look at each letter. Try again.
-1.00  ornament:prompt            9 lines   e.g. Tap the numbers from smallest to biggest.  ||  Count by tens. Start with 60.
-1.00  letters:prompt            80 lines   e.g. Find the letter L.  ||  Find the small letter cue.
-1.00  letters:praise           101 lines   e.g. Big H, small H. They go together!  ||  E, F, gee, H!
-1.00  letters:hint              54 lines   e.g. Listen. Find H.  ||  Look at the shape. Try again.
-1.00  ladybug:prompt            25 lines   e.g. 4 spots on this wing.  ||  It has 5 spots.
-1.00  ladybug:praise            57 lines   e.g. 5 plus 2 is 7!  ||  4 plus 3 is 7!
-1.00  ladybug:hint              24 lines   e.g. Start at 4 and count up to 6.  ||  Start at 4 and count up to 9.
-1.00  ghosts:prompt             89 lines   e.g. candy  ||  Find the ghost with the letter see.
-1.00  ghosts:praise             70 lines   e.g. Boo! That is small see!  ||  Boo! You found S!
-1.00  ghosts:hint               70 lines   e.g. Listen: spider. Try another ghost.  ||  Find small double you.
-1.00  dots:prompt                8 lines   e.g. Start at 5.  ||  Connect the dots in order.
-1.00  dots:praise               31 lines   e.g. You drew a crown! 2, 4, 6, 8, 10, 12, 14!  ||  You drew a cupcake!
-1.00  dots:hint                  4 lines   e.g. Find 10 first.  ||  Find 1 first.
-1.00  doors:praise             100 lines   e.g. Boo! You found the ghost behind door 66!  ||  Boo! You found the ghost behind door 72!
-1.00  doors:hint               120 lines   e.g. Look for 29. Try another door.  ||  Look for 17. Try another door.
-1.00  cupcake:step               3 lines   e.g. Which frosting?  ||  Now read it again. Pick the topper!
-1.00  cupcake:prompt             5 lines   e.g. Pick the frosting first!  ||  Read the order.
-1.00  cupcake:praise            81 lines   e.g. A green cupcake with a sun! Yum!  ||  A yellow cupcake! Yum!
+1.00  ornament:prompt            9 lines   e.g. Count by tens. Start with 30.  ||  Light up the tree!
+1.00  letters:prompt            80 lines   e.g. Find the small letter kay.  ||  jay.
+1.00  letters:praise           101 lines   e.g. Big L, small L. They go together!  ||  you, V, double you, ex!
+1.00  letters:hint              54 lines   e.g. Listen. Find cue.  ||  Listen. Find see.
+1.00  ladybug:prompt            25 lines   e.g. This ladybug wants 4 spots.  ||  1 spot on this wing.
+1.00  ladybug:praise            57 lines   e.g. 4 and 4 make 8!  ||  The ladybug has 8 spots!
+1.00  ladybug:hint              24 lines   e.g. Start at 2 and count up to 6.  ||  Start at 5 and count up to 7.
+1.00  ghosts:prompt             89 lines   e.g. Find the ghost with the small letter L.  ||  What letter does candy start with?
+1.00  ghosts:praise             70 lines   e.g. Boo! That is small M!  ||  Boo! You found bee!
+1.00  ghosts:hint               70 lines   e.g. Find small F.  ||  Find cue.
+1.00  dots:prompt                8 lines   e.g. Start at 10.  ||  Count by twos!
+1.00  dots:praise               31 lines   e.g. You drew a crown! 10, 20, 30, 40, 50, 60, 70!  ||  You drew Foxy! 10, 20, 30, 40, 50, 60, 70, 80, 90!
+1.00  dots:hint                  4 lines   e.g. Find 2 first.  ||  Find 5 first.
+1.00  doors:praise             100 lines   e.g. Boo! You found the ghost behind door 55!  ||  Boo! You found the ghost behind door 70!
+1.00  doors:hint               120 lines   e.g. Look for 84. Try another door.  ||  Look for 27. Try another door.
+1.00  cupcake:step               3 lines   e.g. Now read it again. Pick the topper!  ||  Now read the next word. Pick the topper!
+1.00  cupcake:prompt             5 lines   e.g. Pick the frosting first!  ||  Read the order card.
+1.00  cupcake:praise            81 lines   e.g. A red cupcake! Yum!  ||  A blue cupcake with a bug! Yum!
 1.00  cupcake:hint               2 lines   e.g. Read the word again. Look at the first letter.  ||  Read the color word again. Look at the first letter.
-1.00  count:prompt              13 lines   e.g. How many fish? Tap each one to count.  ||  How many balloons? Tap each one to count.
-1.00  count:hint                 2 lines   e.g. Count the sticks by tens. Then count the ones.  ||  Tap each one and count out loud.
-1.00  cookie:recap             148 lines   e.g. There was 1 cookie. Foxy gave back 4.  ||  There were 9 cookies. Foxy took 2.
-1.00  cookie:prompt             45 lines   e.g. How many cookies are in the jar now?  ||  Now there are 6 cookies left.
-1.00  cookie:hint               35 lines   e.g. Start at 4 and count up to 6.  ||  Start at 3 and count up to 9.
-1.00  compare:prompt            38 lines   e.g. Which group has more ducks?  ||  Which group has more ducks? If they are the same, tap Same.
-1.00  compare:hint               3 lines   e.g. Look at the tens first. Try again.  ||  Count up from 1. Which comes later?
-1.00  cocoa:prompt              33 lines   e.g. Pip wants 11 marshmallows.  ||  How many marshmallows? Count them!
-1.00  cocoa:praise              28 lines   e.g. 1 and 9 make 10!  ||  5 marshmallows! Yum!
-1.00  cocoa:hint                12 lines   e.g. Start at 10 and count up to 17.  ||  Count each marshmallow.
-1.00  cbn:prompt                41 lines   e.g. Paint them black!  ||  Find the squares that make 7.
-1.00  cbn:praise                31 lines   e.g. Nice painting!  ||  Beautiful orange!
-1.00  cbn:hint                  21 lines   e.g. Look for the number 6.  ||  Look for the number 3.
-1.00  cbl:prompt               136 lines   e.g. Find every small R.  ||  Find every letter see.
-1.00  cbl:praise                31 lines   e.g. Nice painting!  ||  Beautiful yellow!
-1.00  cbl:hint                  49 lines   e.g. Look for the word me.  ||  Look for the word my.
-1.00  caterpillar:prompt        53 lines   e.g. Start with D.  ||  jay.
-1.00  caterpillar:praise        67 lines   e.g. Oh, pea, cue, R! What a long caterpillar!  ||  E, F, gee, H!
+1.00  count:prompt              13 lines   e.g. How many butterflies? Tap each one to count.  ||  How many flowers? Tap each one to count.
+1.00  count:hint                 2 lines   e.g. Tap each one and count out loud.  ||  Count the sticks by tens. Then count the ones.
+1.00  cookie:recap             148 lines   e.g. There were 9 cookies. Foxy ate 3.  ||  There were 9 cookies. Foxy took 2.
+1.00  cookie:prompt             45 lines   e.g. Foxy gave back 3 cookies!  ||  Foxy gave back 2 cookies!
+1.00  cookie:hint               35 lines   e.g. Start at 2 and count up to 6.  ||  Count the cookies in the jar.
+1.00  compare:prompt            38 lines   e.g. Which group has fewer fish? If they are the same, tap Same.  ||  Which group has more stars? If they are the same, tap Same.
+1.00  compare:hint               3 lines   e.g. Count each group. Try again.  ||  Count up from 1. Which comes later?
+1.00  cocoa:prompt              33 lines   e.g. Pip wants 17 marshmallows.  ||  Pip wants 19 marshmallows.
+1.00  cocoa:praise              28 lines   e.g. 4 marshmallows! Yum!  ||  10 and 7 make 17!
+1.00  cocoa:hint                12 lines   e.g. Start at 10 and count on.  ||  Start at 10 and count up to 18.
+1.00  cbn:prompt                41 lines   e.g. Find the squares that make 7.  ||  Find every number 16.
+1.00  cbn:praise                31 lines   e.g. Beautiful brown!  ||  Look at all that white!
+1.00  cbn:hint                  21 lines   e.g. Look for the number 4.  ||  Look for the number 8.
+1.00  cbl:prompt               136 lines   e.g. Find every letter pea.  ||  too.
+1.00  cbl:praise                31 lines   e.g. Beautiful brown!  ||  Look at all that white!
+1.00  cbl:hint                  49 lines   e.g. Look for the word get.  ||  Look for the word eat.
+1.00  caterpillar:prompt        53 lines   e.g. jay.  ||  something
+1.00  caterpillar:praise        67 lines   e.g. H, eye, jay, kay, L! What a long caterpillar!  ||  Bee, see, D, E! What a long caterpillar!
 1.00  caterpillar:hint           1 lines   e.g. Sing the ABC song in your head. Try again.
-1.00  butterfly:praise         122 lines   e.g. Duck starts with D. A butterfly!  ||  Big why, small why. A butterfly!
-1.00  butterfly:hint            54 lines   e.g. Say it slowly: gift. Try again.  ||  Say it slowly: zero. Try again.
-1.00  brew:prompt               18 lines   e.g. Spell rat.  ||  Spell pumpkin.
-1.00  brew:praise               18 lines   e.g. M, A, S, kay. mask! Your potion is ready!  ||  pea, you, M, pea, kay, eye, N. pumpkin! Your potion is ready!
-1.00  bowl:prompt               21 lines   e.g. Spell lemon.  ||  Spell corn.
-1.00  bowl:praise               21 lines   e.g. see, A, kay, E. cake! Into the bowl!  ||  bee, R, E, A, D. bread! Into the bowl!
-1.00  bells:prompt             130 lines   e.g. or coat?  ||  Boot.
-1.00  bells:praise              44 lines   e.g. Elf! 1 clap!  ||  Sock! 1 clap!
-1.00  bells:hint                45 lines   e.g. Clap with me: mon, key.  ||  Clap with me: sled.
-1.00  bee:prompt                59 lines   e.g. The bee is on flower 17.  ||  The bee is on flower 16.
-1.00  bee:praise                58 lines   e.g. One more than 17 is 18!  ||  One more than 14 is 15!
-1.00  bee:hint                  39 lines   e.g. Count down from 15.  ||  Count up from 14.
-1.00  app:tree-tens              9 lines   e.g. What comes after 30? Count by tens.  ||  What comes after 40? Count by tens.
-1.00  app:tree-start           100 lines   e.g. Start with 66.  ||  Start with 31.
-1.00  app:tree-find            100 lines   e.g. Find 43.  ||  Find 99.
-1.00  app:tree-after            21 lines   e.g. What comes after 2?  ||  What comes after 13?
-1.00  app:sticker-pages         17 lines   e.g. Winter Wonderland!  ||  You filled this page!
-1.00  app:sticker-page-count    15 lines   e.g. 1 of 15 stickers.  ||  10 of 15 stickers.
-1.00  app:sticker-next           8 lines   e.g. 8 more stars to find this one!  ||  6 more stars to find this one!
-1.00  app:start-letter          26 lines   e.g. Start with D.  ||  Start with eye.
-1.00  app:spell-hint            76 lines   e.g. Listen: moon. What letter comes next?  ||  Listen: log. What letter comes next?
-1.00  app:silly                 18 lines   e.g. Spooky!  ||  Too cute!
-1.00  app:shop-have             23 lines   e.g. Purple! You have this one.  ||  Flower! You have this one.
-1.00  app:shop-got              23 lines   e.g. You got the rope ladder!  ||  You got the green!
-1.00  app:shop-cost             23 lines   e.g. Rope ladder! It costs 10 stars.  ||  Twinkle lights! It costs 15 stars.
-1.00  app:round-end             31 lines   e.g. Good try! You got 2 stars!  ||  Good practice! You got 3 stars!
-1.00  app:rooms                  8 lines   e.g. Reading Room! Pick a game.  ||  Halloween Hollow! Pick a spooky game.
-1.00  app:potions               13 lines   e.g. Poof! Shooting stars!  ||  You found a new potion!
+1.00  butterfly:praise         122 lines   e.g. Big ex, small ex. A butterfly!  ||  They match! bee, and bee!
+1.00  butterfly:hint            54 lines   e.g. Say it slowly: volcano. Try again.  ||  Say it slowly: rabbit. Try again.
+1.00  brew:prompt               18 lines   e.g. Spell fog.  ||  Spell boo.
+1.00  brew:praise               18 lines   e.g. S, pea, eye, D, E, R. spider! Your potion is ready!  ||  H, A, tea. hat! Your potion is ready!
+1.00  bowl:prompt               21 lines   e.g. Spell jar.  ||  Spell cup.
+1.00  bowl:praise               21 lines   e.g. pea, E, A, R. pear! Into the bowl!  ||  S, oh, you, pea. soup! Into the bowl!
+1.00  bells:prompt             130 lines   e.g. Monkey.  ||  owl
+1.00  bells:praise              44 lines   e.g. Moe, ter, sigh, cull! 4 claps!  ||  Rain, deer! 2 claps!
+1.00  bells:hint                45 lines   e.g. Clap with me: sled.  ||  Clap with me: hot, koe, koe.
+1.00  bee:prompt                59 lines   e.g. Fly to the number that is one less than 5.  ||  Fly to the number that is one less than 3.
+1.00  bee:praise                58 lines   e.g. One more than 8 is 9!  ||  One more than 19 is 20!
+1.00  bee:hint                  39 lines   e.g. Count down from 17.  ||  Count down from 2.
+1.00  app:tree-tens              9 lines   e.g. What comes after 70? Count by tens.  ||  What comes after 30? Count by tens.
+1.00  app:tree-start           100 lines   e.g. Start with 1.  ||  Start with 33.
+1.00  app:tree-find            100 lines   e.g. Find 63.  ||  Find 15.
+1.00  app:tree-after            21 lines   e.g. Find the smallest number left.  ||  Find the smallest number.
+1.00  app:sticker-pages         17 lines   e.g. Wild Animals!  ||  Outer Space!
+1.00  app:sticker-page-count    15 lines   e.g. 2 of 15 stickers.  ||  5 of 15 stickers.
+1.00  app:sticker-next           8 lines   e.g. 1 more star to find this one!  ||  2 more stars to find this one!
+1.00  app:start-letter          26 lines   e.g. Start with bee.  ||  Start with cue.
+1.00  app:spell-hint            76 lines   e.g. Listen: bug. What letter comes next?  ||  Listen: van. What letter comes next?
+1.00  app:silly                 18 lines   e.g. Too cute!  ||  So cute!
+1.00  app:shop-have             23 lines   e.g. Flower! You have this one.  ||  Party hat! You have this one.
+1.00  app:shop-got              23 lines   e.g. You got the gold!  ||  You got the party hat!
+1.00  app:shop-cost             23 lines   e.g. Rope ladder! It costs 10 stars.  ||  Pink! It costs 5 stars.
+1.00  app:round-end             31 lines   e.g. Great job! You got 3 stars!  ||  Good try! You got 4 stars!
+1.00  app:rooms                  8 lines   e.g. Halloween Hollow! Pick a spooky game.  ||  Art Studio! Pick a game.
+1.00  app:potions               20 lines   e.g. Poof! A singing pumpkin!  ||  Poof! Finger Paint
 1.00  app:potion-parts           8 lines   e.g. A star!  ||  A bat!
-1.00  app:pizza-fix-2           40 lines   e.g. Oops! Piggy did not ask for olives. Tap them to take them off.  ||  Oops! Bunny did not ask for pineapples. Tap them to take them off.
-1.00  app:pizza-fix-1           15 lines   e.g. You have 5. We need 10. Add 5 more.  ||  You have 14. We need 10. Take off 4.
+1.00  app:pizza-fix-2           40 lines   e.g. Oops! Koala did not ask for pineapples. Tap them to take them off.  ||  Oops! Puppy did not ask for pineapples. Tap them to take them off.
+1.00  app:pizza-fix-1           15 lines   e.g. You have 1. We need 10. Add 9 more.  ||  You have 7. We need 10. Add 3 more.
 1.00  app:pizza-fix-0            1 lines   e.g. Hmm, let’s count all the toppings. We need 10.
 1.00  app:oops                   4 lines   e.g. Oops, try again!  ||  Here's a hint. Tap the one that's glowing.
-1.00  app:mini-titles           17 lines   e.g. What a memory!  ||  Great flying!
-1.00  app:mini-gallery          13 lines   e.g. Tallest cake yet!  ||  Your snowflake is in the Art Gallery.
+1.00  app:mini-titles           17 lines   e.g. What a snowman!  ||  What a ride!
+1.00  app:mini-gallery          13 lines   e.g. Most fireflies yet!  ||  Your snowman is in the Art Gallery.
 1.00  app:mini-end-potions      12 lines   e.g. You found 11 of 12 potions.  ||  You found 5 of 12 potions.
-1.00  app:mini-end-pairs        55 lines   e.g. You found all the pairs in 46 tries!  ||  You found all the pairs in 24 tries!
-1.00  app:mini-end-cake         60 lines   e.g. Your cake is 34 layers tall!  ||  Your cake is 51 layers tall!
-1.00  app:letter-taps           26 lines   e.g. jay.  ||  you.
-1.00  app:greet                  2 lines   e.g. Hi there! Pick a room.  ||  Hi! I'm Pip. Let's play and learn. Pick a room!
-1.00  app:game-names            37 lines   e.g. Haunted Doors!  ||  Snowball Toss!
-1.00  app:fixed                 44 lines   e.g. Alien Pop-Up! Tap the aliens before they hide. Golden aliens are worth five!  ||  Rocket Ride! Drag the rocket to catch the stars. Golden stars are worth five!
-1.00  app:find-letter           26 lines   e.g. Find the letter L.  ||  Find the letter eye.
-1.00  app:dots-start             4 lines   e.g. Start at 1.  ||  Start at 10.
-1.00  app:dots-fix              99 lines   e.g. Oops! What comes after 79?  ||  Oops! What comes after 45?
-1.00  app:counting             101 lines   e.g. 32  ||  64
-1.00  app:count-cheer           54 lines   e.g. 75!  ||  20!
-1.00  app:colors                11 lines   e.g. Yellow.  ||  Red.
-1.00  app:cheer                 14 lines   e.g. Wow!  ||  Awesome!
-1.00  app:bucket-1              20 lines   e.g. Hmm, let’s count again. We need 18.  ||  Hmm, let’s count again. We need 17.
-1.00  app:arcade                31 lines   e.g. Welcome to Pip’s Arcade! You have 22 game tokens. Pick a game!  ||  Welcome to Pip’s Arcade! You have 15 game tokens. Pick a game!
-1.00  app:after-letter          26 lines   e.g. What comes after bee?  ||  What comes after F?
-1.00  app:adventure            218 lines   e.g. And a new sticker: a caterpillar!  ||  And a new sticker: a drum!
-1.00  alien:recap               94 lines   e.g. There were 15 aliens. 4 more beamed down.  ||  There were 5 aliens. 4 more beamed down.
-1.00  alien:prompt              28 lines   e.g. There are 9 aliens on the moon.  ||  There are 8 aliens on the moon.
-1.00  alien:praise              92 lines   e.g. 6 take away 2 is 4! Bye-bye, aliens!  ||  8 take away 4 is 4! Bye-bye, aliens!
+1.00  app:mini-end-pairs        55 lines   e.g. You found all the pairs in 56 tries!  ||  You found all the pairs in 24 tries!
+1.00  app:mini-end-cake         60 lines   e.g. Your cake is 53 layers tall!  ||  Your cake is 22 layers tall!
+1.00  app:letter-taps           26 lines   e.g. jay.  ||  H.
+1.00  app:greet                  2 lines   e.g. Hi! I'm Pip. Let's play and learn. Pick a room!  ||  Hi there! Pick a room.
+1.00  app:game-names            37 lines   e.g. Letter Sounds!  ||  Rocket Launch!
+1.00  app:fixed                 49 lines   e.g. Keep earning stars to find this one!  ||  You need a game token. Move up a level or open the daily treasure chest to earn one!
+1.00  app:find-letter           26 lines   e.g. Find the letter H.  ||  Find the letter you.
+1.00  app:dots-start             4 lines   e.g. Start at 10.  ||  Start at 1.
+1.00  app:dots-fix              99 lines   e.g. Oops! What comes after 3?  ||  Oops! What comes after 86?
+1.00  app:counting             101 lines   e.g. 50  ||  41
+1.00  app:count-cheer           54 lines   e.g. 5!  ||  20 layers!
+1.00  app:colors                11 lines   e.g. Black.  ||  Green.
+1.00  app:cheer                 14 lines   e.g. Great job!  ||  Good thinking!
+1.00  app:bucket-1              20 lines   e.g. Hmm, let’s count again. We need 15.  ||  Hmm, let’s count again. We need 18.
+1.00  app:arcade                31 lines   e.g. Welcome to Pip’s Arcade! You have 18 game tokens. Pick a game!  ||  Welcome to Pip’s Arcade! You have 10 game tokens. Pick a game!
+1.00  app:after-letter          26 lines   e.g. What comes after eye?  ||  What comes after V?
+1.00  app:adventure            218 lines   e.g. And a new sticker: hot cocoa!  ||  And a new sticker: an ant!
+1.00  alien:recap               94 lines   e.g. There were 8 aliens. The spaceship beamed up 5.  ||  There were 5 aliens. 2 more beamed down.
+1.00  alien:prompt              28 lines   e.g. 5 more aliens beamed down!  ||  The spaceship beamed up 2 aliens!
+1.00  alien:praise              92 lines   e.g. 4 plus 5 is 9! Hello, aliens!  ||  3 plus 1 is 4! Hello, aliens!
 1.00  alien:hint                 1 lines   e.g. Count the aliens on the moon.
-1.00  add:prompt               107 lines   e.g. 1 plus 1. How many in all?  ||  What is 5 plus 7?
-1.00  add:praise               107 lines   e.g. 1 plus 9 is 10!  ||  9 plus 10 is 19!
-1.00  add:hint                   7 lines   e.g. Start at 6 and count up.  ||  Start at 10 and count up.
+1.00  add:prompt               107 lines   e.g. 8 plus 1. How many in all?  ||  6 plus 1. How many in all?
+1.00  add:praise               107 lines   e.g. 6 plus 7 is 13!  ||  1 plus 6 is 7!
+1.00  add:hint                   7 lines   e.g. Count them all. Try again.  ||  Start at 6 and count up.

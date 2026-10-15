@@ -1129,6 +1129,7 @@ v9c79be60a9,Find the letter you.,20,app:find-letter letters:prompt
 vb739c0f904,Find the letter Z.,18,app:find-letter letters:prompt
 vc3821289a9,Alien Pop-Up! Tap the aliens before they hide. Golden aliens are worth five!,76,app:fixed
 v7679a050c6,Almost! Trace the gray parts you missed.,40,app:fixed
+v3d8631eab3,Animal stamps! Tap the paper!,29,app:fixed
 vd8466a8284,Broom Ride! Tap to fly up. Grab the candy and watch out for bats!,65,app:fixed
 v1dd0e48594,"Bubble, bubble! Here it comes!",30,app:fixed
 v35b6ae9659,"Butterfly Painter! Paint one wing, and the other wing copies it like a mirror!",78,app:fixed
@@ -1166,11 +1167,15 @@ vc6ef3f830d,"Spin Art! Pick a color, then touch the spinning paper to paint. Try
 vd36ffb2cce,"Tap a crayon, then tap a shape to color it.",43,app:fixed
 v62e37f5b9e,The pizza is full!,18,app:fixed
 vea19549a8c,This is how fast I talk.,24,app:fixed
+vd0b1cff55f,Toddler Corner! Pick a game!,28,app:fixed
 vbeeb7b508c,Tree Lights! Watch the lights blink. Then tap them in the same order!,69,app:fixed
+vaf5faa9698,Whoosh! Clean paper!,20,app:fixed
+v3dd0adef0b,Wow! A golden bubble! Hooray!,29,app:fixed
 v7d09944a06,Wow! What a beautiful snowflake!,32,app:fixed
 v332663653f,You already opened today’s treasure. Come back tomorrow for a new adventure!,76,app:fixed
 vf47256960b,You need a game token. Move up a level or open the daily treasure chest to earn one!,84,app:fixed
 v0a624ef783,Your turn!,10,app:fixed
+v5627640625,Your turn! Tap the key that lights up!,38,app:fixed
 v3804f4a31d,Add It Up!,10,app:game-names
 v57f6d61ecf,Alien Beam-Up!,14,app:game-names
 v49598ff49f,Bee Flowers!,12,app:game-names
@@ -1781,9 +1786,16 @@ v73e46113a3,Poof! A frog prince!,20,app:potions
 v9ed5e1b66d,Poof! A giant lollipop!,23,app:potions
 vb934d5d81c,Poof! A rainbow unicorn!,24,app:potions
 v954e92a005,Poof! A singing pumpkin!,24,app:potions
+v94fde59a2a,Poof! Animal Band,17,app:potions
+v0a1de68ef6,Poof! Beep Beep!,16,app:potions
+v5de7da861e,Poof! Bubble Pop,16,app:potions
 v037e12986b,Poof! Bubbles everywhere!,25,app:potions
+vfdcf9fa857,Poof! Feed the Animals,22,app:potions
+va2f26c57af,Poof! Finger Paint,18,app:potions
 v2734521c3b,Poof! Foxy in a magic hat!,26,app:potions
+v53db4e8d8f,Poof! Peekaboo Barn,19,app:potions
 vf3da880481,Poof! Pip turned purple!,24,app:potions
+v76fdec734d,Poof! Shape Sorter,18,app:potions
 v5149f2fa11,Poof! Shooting stars!,21,app:potions
 veaafcc6007,You found a new potion!,23,app:potions
 v41e48e6d1f,Art Studio! Pick a game.,24,app:rooms

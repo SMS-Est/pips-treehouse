@@ -88,6 +88,14 @@ Needs internet (breaks car play), costs money per use, and needs a server to hid
   Toys and Games, Music Time, Halloween, Winter Wonderland). Page arrows, dots and swipe; locked
   stickers show as shadows. Stars earned after the first 30 were full don't count, so each new
   sticker still comes in a present.
+- v1.11: Toddler Corner for a 2–3 year old: Bubble Pop, Peekaboo Barn, Shape Sorter, Feed the
+  Animals (counting 1–3), Finger Paint, Animal Band (follow-the-lights songs), Beep Beep! No wrong
+  answers, no reading, every tap does something. It is a separate mode, not a room: Grown-ups →
+  "Who is playing?" switches this device into Toddler Corner, and it stays there (even after the
+  app is closed) until a grown-up holds the home button and answers the question. One wrong
+  answer closes the question again. The mode is kept on each device and never synced, and nothing
+  in the corner changes stars or levels. (Toddler lines are not in voice/lines.csv yet; add them
+  when the recorder is built.)
 
 ## More game ideas (later)
 - More Foxy: Foxy steals pizza toppings or cupcake sprinkles in other Bakery games.

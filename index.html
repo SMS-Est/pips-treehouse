@@ -19,7 +19,7 @@ body{margin:0;font:14px system-ui,sans-serif}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<!-- Pip's Treehouse v1.10.0 -->
+<!-- Pip's Treehouse v1.11.0 -->
 <link rel="stylesheet" href="fonts/fonts.css">
 <title>Pip's Treehouse</title>
 <style>
@@ -1252,6 +1252,142 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
 .stickers .note{font-size:clamp(16px,2.6vmin,20px)}
 .extra.stk{position:relative}
 .extra.stk.has-new::after{content:"New!";position:absolute;top:-12px;right:-8px;padding:1px 10px;border-radius:999px;background:#FFD93D;border:3px solid var(--ink);font-family:var(--f-display);font-weight:900;font-size:16px;transform:rotate(8deg);animation:pop 1.6s ease-in-out infinite}
+
+/* ---------- v1.11 Toddler Corner ---------- */
+.tod,.tgame{background:radial-gradient(circle 5px at 20px 20px,rgba(255,255,255,.7) 96%,transparent) 0 0/48px 48px,linear-gradient(180deg,#FFF0F6 0%,#FFF8E6 100%)}
+.tod-top{display:flex;align-items:center;gap:14px;min-height:64px}
+.tod-top h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(22px,4vmin,32px)}
+.tod-exit{position:relative;flex:none;width:64px;height:64px;border-radius:50%;background:var(--paper);border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);display:grid;place-items:center;touch-action:none}
+.tod-exit .ico{width:30px;height:30px}
+.tod-ring{position:absolute;inset:-9px;width:calc(100% + 18px);height:calc(100% + 18px);transform:rotate(-90deg);pointer-events:none}
+.tod-ring circle{fill:none;stroke:var(--berry);stroke-width:7;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset .15s}
+.tod-exit.holding .tod-ring circle{stroke-dashoffset:0;transition:stroke-dashoffset 1.2s linear}
+.tod-hint{position:absolute;left:calc(100% + 14px);top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--ink);color:#fff;border-radius:12px;padding:5px 12px;font-family:var(--f-display);font-weight:800;font-size:15px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
+.tod-exit.hint .tod-hint{opacity:1}
+.tod-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:clamp(12px,2.6vmin,24px);width:100%;max-width:1120px;margin:0 auto;padding:4px 4px 12px}
+.tod-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:0;border-radius:32px;background:var(--tc)}
+.tod-ic{font-size:clamp(56px,13vmin,124px);line-height:1.05}
+.tod-name{font-family:var(--f-display);font-weight:900;font-size:clamp(17px,2.9vmin,25px);text-align:center;padding:0 6px}
+.tod-area{flex:1;min-height:0;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.tod-area .mini-cv{border-radius:28px}
+
+/* Peekaboo Barn */
+.tb-wrap{position:relative;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;border:3px solid var(--ink);border-radius:28px;background:radial-gradient(circle at 88% 16%,#FFE27A 0 7%,rgba(255,226,122,.35) 7.2% 10%,transparent 10.2%),radial-gradient(ellipse 9% 5% at 20% 18%,#fff 96%,transparent),radial-gradient(ellipse 7% 4.5% at 26% 15%,#fff 96%,transparent),radial-gradient(ellipse 8% 4% at 58% 26%,#fff 96%,transparent),linear-gradient(180deg,#BDE5F2 0%,#E6F6FC 60%,#8FD16A 60%,#6FBF52 100%)}
+.tb-scene{flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:space-around;gap:2%;padding:0 3% 5%}
+.tb-spot{position:relative;width:31%;max-width:370px;display:flex;align-items:flex-end;justify-content:center;touch-action:none}
+.tb-cover{position:relative;z-index:2;display:block;width:100%;pointer-events:none}
+.tb-cover svg{display:block;width:100%;height:auto}
+.tb-critter{position:absolute;z-index:1;left:50%;bottom:40%;font-size:clamp(70px,17vmin,150px);line-height:1;opacity:0;transform:translate(-50%,40%) scale(.4);transition:transform .38s cubic-bezier(.3,1.6,.5,1),opacity .2s;pointer-events:none}
+.tb-spot.up .tb-critter{opacity:1;transform:translate(-50%,-48%) scale(1)}
+.tb-barn .tb-critter{z-index:3;bottom:3%;transform:translate(-50%,0) scale(.2)}
+.tb-spot.tb-barn.up .tb-critter{transform:translate(-50%,0) scale(1)}
+.tb-barn .door-l,.tb-barn .door-r{transform-box:fill-box;transition:transform .3s ease}
+.tb-barn .door-l{transform-origin:left center}.tb-barn .door-r{transform-origin:right center}
+.tb-barn.up .door-l,.tb-barn.up .door-r{transform:scaleX(.12)}
+.tb-spot.wig{animation:shake .4s ease}
+.tb-spot.yay .tb-critter{animation:tbjump .5s ease 3}
+@keyframes tbjump{50%{translate:0 -18%}}
+.tb-ask{position:absolute;z-index:6;top:4%;left:50%;transform:translateX(-50%);font-size:clamp(46px,10vmin,86px);line-height:1.2;background:var(--paper);border:4px solid var(--ink);border-radius:999px;padding:0 26px;box-shadow:0 6px 0 var(--ink);animation:pop 1.2s ease-in-out infinite}
+.tb-ask[hidden]{display:none}
+
+/* Shape Sorter */
+.ts-wrap{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:3vmin;padding:3vmin;overflow:hidden;background:var(--tc);border:3px solid var(--ink);border-radius:28px}
+.ts-box{display:flex;flex-wrap:wrap;justify-content:center;gap:3vmin;padding:3vmin 4vmin;background:#C98B55;border:5px solid var(--ink);border-radius:26px;box-shadow:0 8px 0 var(--ink)}
+.ts-box.shake{animation:shake .6s ease 2}
+.ts-hole,.ts-piece{width:clamp(84px,17vmin,170px);height:clamp(84px,17vmin,170px)}
+.ts-hole{border-radius:22px;background:#B57B48;display:grid;place-items:center;padding:8px;transition:box-shadow .2s}
+.ts-hole svg,.ts-piece svg{display:block;width:100%;height:100%}
+.ts-hole-svg g{stroke:#2A1C12}
+.ts-hole.glow{animation:holeglow 1.2s ease-in-out infinite}
+@keyframes holeglow{50%{box-shadow:0 0 0 6px #FFF3B0,0 0 26px 10px #FFD93D}}
+.ts-hole.in svg{animation:pop .4s ease}
+.ts-tray{display:flex;flex-wrap:wrap;gap:4vmin;justify-content:center}
+.ts-piece{padding:0;touch-action:none;filter:drop-shadow(0 6px 0 rgba(29,42,68,.35))}
+.ts-piece.lift{position:relative;z-index:10;filter:drop-shadow(0 14px 6px rgba(29,42,68,.35))}
+.ts-piece.wig{animation:shake .4s ease}
+
+/* Feed the Animals */
+.tf-wrap{width:100%;height:100%;display:flex;align-items:center;justify-content:space-around;gap:3vmin;padding:3vmin;overflow:hidden;background:linear-gradient(180deg,#FFF6DA 0%,#FFF6DA 68%,#E8C9A0 68%);border:3px solid var(--ink);border-radius:28px}
+.tf-plate{display:grid;grid-template-columns:repeat(3,auto);gap:2vmin;padding:4vmin 5vmin;background:#fff;border:5px solid var(--ink);border-radius:46%;box-shadow:inset 0 0 0 10px #EAF2F7,0 6px 0 var(--ink)}
+.tf-food{font-size:clamp(46px,10vmin,92px);line-height:1;padding:4px;border-radius:20px;touch-action:none;transition:opacity .3s}
+.tf-food.full{opacity:.3}
+.tf-side{position:relative;display:flex;flex-direction:column;align-items:center;gap:2vmin}
+.tf-animal{font-size:clamp(110px,30vmin,270px);line-height:1}
+.tf-animal.in{animation:tfin .7s cubic-bezier(.3,1.4,.5,1) both}
+.tf-animal.out{animation:tfout .6s ease-in forwards}
+.tf-animal.chomp{animation:chomp .35s ease}
+@keyframes tfin{from{transform:translateX(70vw) rotate(10deg)}}
+@keyframes tfout{to{transform:translateX(70vw) rotate(12deg)}}
+@keyframes chomp{30%{transform:scale(1.14,.88)}65%{transform:scale(.94,1.08)}}
+.tf-dots{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.tf-dot{width:clamp(36px,6.4vmin,56px);height:clamp(36px,6.4vmin,56px);border-radius:50%;border:4px dashed var(--ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:clamp(20px,3.8vmin,32px);background:rgba(255,255,255,.7)}
+.tf-dot.on{background:var(--math);border-style:solid;animation:pop .4s ease}
+.tf-yum{position:absolute;top:-8%;z-index:3;font-family:var(--f-display);font-weight:900;font-size:clamp(30px,6vmin,54px);color:#E8649A;-webkit-text-stroke:2px var(--ink);opacity:0;pointer-events:none}
+.tf-yum.show{animation:yum 1.6s ease}
+@keyframes yum{0%{opacity:0;transform:scale(.4)}20%{opacity:1;transform:scale(1.15)}75%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-30px)}}
+
+/* Finger Paint */
+.tp-wrap{width:100%;height:100%;display:flex;gap:12px}
+.tp-paper{position:relative;flex:1;min-width:0;min-height:0;overflow:hidden;background:#fff;border:3px solid var(--ink);border-radius:24px}
+.tp-cv{display:block;touch-action:none}
+.tp-paper.wipe::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0),#fff 30%,#fff 70%,rgba(255,255,255,0));animation:wipe .55s ease forwards;pointer-events:none}
+@keyframes wipe{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.tp-bar{display:grid;grid-template-columns:repeat(2,auto);gap:12px;align-content:center;justify-items:center}
+.tp-col,.tp-tool{width:clamp(50px,8.6vmin,72px);height:clamp(50px,8.6vmin,72px);border-radius:50%;border:4px solid var(--ink);box-shadow:0 4px 0 var(--ink);padding:0;touch-action:none}
+.tp-col.rainbow{background:conic-gradient(#FF5A4E,#FFD93D,#4CBA68,#3E8BEF,#9C6BE0,#FF5A4E)}
+.tp-tool{background:var(--paper);font-size:clamp(26px,4.6vmin,38px);display:grid;place-items:center}
+.tp-col.on,.tp-tool.on{outline:5px solid var(--ink);outline-offset:3px;transform:scale(1.06)}
+
+/* Animal Band */
+.tm-wrap{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:2vmin;padding:2vmin 2vmin 3vmin;overflow:hidden;background:linear-gradient(180deg,#FFE0EE,#FFF6FA);border:3px solid var(--ink);border-radius:28px}
+.tm-title{font-family:var(--f-display);font-weight:800;font-size:clamp(17px,3vmin,26px);color:var(--ink-soft)}
+.tm-keys{flex:1;min-height:0;width:100%;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:1.3vmin}
+.tm-key{position:relative;display:flex;align-items:flex-start;justify-content:center;padding-top:2.4vmin;border-radius:22px;border:4px solid var(--ink);background:var(--kc);box-shadow:0 8px 0 var(--ink);touch-action:none}
+.tm-key.hit{animation:keyhit .26s ease}
+@keyframes keyhit{40%{transform:translateY(6px);box-shadow:0 2px 0 var(--ink);filter:brightness(1.15)}}
+.tm-face{font-size:clamp(30px,7vmin,64px);line-height:1;pointer-events:none}
+.tm-key.hit .tm-face{animation:pop .3s ease}
+.tm-key.next{animation:keyglow 1s ease-in-out infinite}
+@keyframes keyglow{50%{box-shadow:0 8px 0 var(--ink),0 0 0 7px #fff,0 0 34px 12px #FFD93D}}
+.tm-note{position:absolute;top:0;left:50%;font-size:clamp(24px,5vmin,40px);pointer-events:none;animation:notefly .9s ease-out forwards}
+@keyframes notefly{from{transform:translate(-50%,0);opacity:1}to{transform:translate(-50%,-90px) rotate(15deg);opacity:0}}
+.tm-songs{display:flex;gap:2.4vmin}
+.tm-song{width:clamp(62px,10vmin,86px);height:clamp(62px,10vmin,86px);border-radius:50%;display:grid;place-items:center;font-size:clamp(32px,5.6vmin,46px);background:var(--paper)}
+.tm-song.on{background:var(--math)}
+
+/* Beep Beep! */
+.tg-scene{position:relative;width:100%;height:100%;overflow:hidden;border:3px solid var(--ink);border-radius:28px;background:linear-gradient(180deg,#BDE5F2 0%,#E6F6FC 32%,#8FD16A 32%,#8FD16A 52%,#6B7280 52%,#6B7280 74%,#8FD16A 74%,#8FD16A 78%,#5AA9EC 78%,#3E7BE0 100%)}
+.tg-lane{position:absolute;left:0;right:0}
+.tg-road::after{content:"";position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;background:repeating-linear-gradient(90deg,#fff 0 40px,transparent 40px 80px)}
+.tg-rail::after{content:"";position:absolute;left:0;right:0;bottom:4%;height:16%;background:linear-gradient(180deg,transparent 0 25%,#555 25% 40%,transparent 40% 62%,#555 62% 77%,transparent 77%),repeating-linear-gradient(90deg,#7A4A26 0 10px,transparent 10px 30px)}
+.tg-sea::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:radial-gradient(circle 12px at 12px 0,#fff 60%,transparent 64%) 0 0/36px 12px repeat-x;opacity:.6}
+.tg-v{position:absolute;left:0;bottom:6%;z-index:2;line-height:1;padding:0;background:none;border:0;white-space:nowrap;touch-action:none}
+.tg-in{display:inline-block}
+.tg-v.honk .tg-in{animation:honk .45s ease}
+@keyframes honk{30%{transform:translateY(-14%) scale(1.15)}60%{transform:translateY(2%) scale(.95)}}
+.tg-say{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-family:var(--f-display);font-weight:900;font-size:20px;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:2px 10px;white-space:nowrap;animation:pop .3s ease}
+
+@media (orientation:portrait){
+  .tod-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tf-wrap{flex-direction:column-reverse}
+  .tp-wrap{flex-direction:column}
+  .tp-bar{grid-template-columns:repeat(6,auto);grid-auto-flow:row}
+}
+@media (max-width:640px){
+  .tod-exit{width:54px;height:54px}
+  .tm-keys{gap:4px}
+  .tm-key{border-radius:14px;border-width:3px}
+}
+
+.who-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:4px 0 8px}
+.who-btn{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:20px;text-align:left;background:var(--paper)}
+.who-btn .emoji{font-size:36px;line-height:1}
+.who-t{display:flex;flex-direction:column;min-width:0}
+.who-t b{font-family:var(--f-display);font-weight:900;font-size:20px}
+.who-t small{font-size:14px;color:var(--ink-soft)}
+.who-btn.on{background:var(--math-tint);outline:4px solid var(--math);outline-offset:2px}
+.who-btn.tod.on{background:#FFE0EE;outline-color:var(--berry)}
+@media (max-width:640px){.who-btns{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1412,6 +1548,16 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
     <div class="mini-result end-card" id="mini-result" hidden></div>
   </section>
 
+  <section class="screen tod" id="s-tod" hidden>
+    <div class="tod-top"><button class="tod-exit" id="tod-exit" aria-label="Hold to go back"></button><h2>Toddler Corner</h2></div>
+    <div class="tod-grid" id="tod-grid"></div>
+  </section>
+
+  <section class="screen tgame" id="s-tgame" hidden>
+    <div class="tod-top"><button class="tod-exit" id="tgame-exit" aria-label="Hold to go back"></button><h2 id="tgame-title"></h2></div>
+    <div class="tod-area" id="tod-area"></div>
+  </section>
+
   <section class="screen parents" id="s-parents" hidden>
     <div class="pwrap" id="pwrap"></div>
   </section>
@@ -1419,7 +1565,7 @@ canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:non
   <div class="gate" id="gate" hidden>
     <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gate-h">
       <h3 id="gate-h">Grown-ups only</h3>
-      <p>Type the answer to open progress and settings.</p>
+      <p id="gate-msg">Type the answer to open progress and settings.</p>
       <div class="gate-q" id="gate-q"></div>
       <div class="gate-in" id="gate-in" aria-live="polite"></div>
       <div class="keys" id="gate-keys"></div>
@@ -2774,7 +2920,7 @@ window.PipContent = (function () {
    ===================================================================== */
 (function () {
   'use strict';
-  var C = window.PipContent, R = C.R, L = C.L, GAMES = C.GAMES, STICKERS = C.STICKERS, STICKER_PAGES = C.STICKER_PAGES;
+  var C = window.PipContent, R = C.R, L = C.L, cap = C.cap, GAMES = C.GAMES, STICKERS = C.STICKERS, STICKER_PAGES = C.STICKER_PAGES;
   var G = {}; GAMES.forEach(function (g) { G[g.id] = g; });
   var STARS_PER_STICKER = 8, ROUND_LEN = 5;
   var $ = function (s, root) { return (root || document).querySelector(s); };
@@ -2907,6 +3053,15 @@ window.PipContent = (function () {
   function stickerSayMid(st) { return /^[A-Z]/.test(st.name) ? st.say : st.say.charAt(0).toLowerCase() + st.say.slice(1); }
 
   /* ---------------- cloud sync (signed-in viewers) ---------------- */
+  /* Toddler Corner mode belongs to this device only (never synced), so
+     switching the little one's iPad does not switch her big sister's. */
+  var modeMem;
+  function todMode() {
+    if (modeMem == null) { try { modeMem = localStorage.getItem('pips-treehouse-mode') || 'big'; } catch (e) { modeMem = 'big'; } }
+    return modeMem === 'toddler';
+  }
+  function setMode(m) { modeMem = m; try { localStorage.setItem('pips-treehouse-mode', m); } catch (e) {} }
+
   var Cloud = {
     ref: null, writing: false, again: false, on: false,
     init: function () {
@@ -3087,6 +3242,12 @@ window.PipContent = (function () {
       hic: function () { if (!on()) return; sweep(500, 1150, 0, 0.09, 'square', 0.05); },
       rumble: function () { if (!on()) return; noise(0, 1.6, 0.3, 160, 'lowpass'); sweep(70, 40, 0, 1.6, 'sawtooth', 0.05); },
       beam: function () { if (!on()) return; sweep(300, 900, 0, 0.35, 'sine', 0.08); sweep(900, 450, 0.3, 0.3, 'sine', 0.06); },
+      /* a soft marimba note for the Animal Band */
+      note: function (f) { if (!on()) return; tone(f, 0, 0.7, 'sine', 0.2); tone(f * 2, 0, 0.22, 'triangle', 0.05); tone(f * 4, 0, 0.07, 'sine', 0.02); },
+      horn: function () { if (!on()) return; tone(392, 0, 0.16, 'square', 0.06); tone(494, 0, 0.16, 'square', 0.04); tone(392, 0.22, 0.2, 'square', 0.06); tone(494, 0.22, 0.2, 'square', 0.04); },
+      siren: function () { if (!on()) return; for (var i = 0; i < 2; i++) { tone(880, i * 0.5, 0.24, 'triangle', 0.08); tone(660, i * 0.5 + 0.25, 0.24, 'triangle', 0.08); } },
+      choo: function () { if (!on()) return; tone(587, 0, 0.3, 'triangle', 0.08); tone(740, 0, 0.3, 'triangle', 0.06); tone(587, 0.35, 0.45, 'triangle', 0.08); tone(740, 0.35, 0.45, 'triangle', 0.06); noise(0.85, 0.12, 0.2, 900); noise(1.05, 0.12, 0.2, 900); },
+      ring: function () { if (!on()) return; tone(1568, 0, 0.12, 'sine', 0.09); tone(1568, 0.16, 0.25, 'sine', 0.09); },
       /* a jingle-bell note: i picks the note (C E G C E) */
       bell: function (i) { if (!on()) return; var f = [523, 659, 784, 1047, 1319][((i || 0) % 5 + 5) % 5]; tone(f, 0, 0.5, 'triangle', 0.12); tone(f * 2.76, 0, 0.16, 'sine', 0.035); tone(f * 2, 0.02, 0.3, 'sine', 0.04); }
     };
@@ -3268,12 +3429,13 @@ window.PipContent = (function () {
   /* ---------------- screens ---------------- */
   var current = 'splash';
   function show(name) {
-    ['splash', 'home', 'room', 'game', 'end', 'stickers', 'parents', 'adv', 'shop', 'sleep', 'arcade', 'mini'].forEach(function (n) { $('#s-' + n).hidden = n !== name; });
+    ['splash', 'home', 'room', 'game', 'end', 'stickers', 'parents', 'adv', 'shop', 'sleep', 'arcade', 'mini', 'tod', 'tgame'].forEach(function (n) { $('#s-' + n).hidden = n !== name; });
     current = name;
     if (name !== 'game') Voice.stop();
   }
 
   function renderHome(speak) {
+    if (todMode()) { renderToddler(speak); return; }
     if (isSleepy()) { renderSleep(); return; }
     var name = S.name.trim();
     $('#home-stars').innerHTML = ICON.star() + '<span>' + wallet() + '</span>';
@@ -6825,9 +6987,481 @@ window.PipContent = (function () {
     return stop;
   }
 
+  /* ================= TODDLER CORNER: big, gentle games for a 2 to 3 year old =================
+     Nothing here can be lost or failed, nothing changes the big sister's stars or levels, and
+     leaving a game takes a long press, so a busy little hand can't wander off by accident. */
+  var TOD_ANIMALS = [
+    { e: '🐮', n: 'cow', s: 'Moo!' }, { e: '🐷', n: 'pig', s: 'Oink oink!' }, { e: '🦆', n: 'duck', s: 'Quack quack!' }, { e: '🐑', n: 'sheep', s: 'Baa!' },
+    { e: '🐴', n: 'horse', s: 'Neigh!' }, { e: '🐶', n: 'puppy', s: 'Woof woof!' }, { e: '🐱', n: 'kitty', s: 'Meow!' }, { e: '🐔', n: 'chicken', s: 'Cluck cluck!' },
+    { e: '🐸', n: 'frog', s: 'Ribbit!' }, { e: '🦁', n: 'lion', s: 'Roar!' }, { e: '🦉', n: 'owl', s: 'Hoo hoo!' }, { e: '🐭', n: 'mouse', s: 'Squeak!' },
+    { e: '🐝', n: 'bee', s: 'Buzz buzz!' }, { e: '🐒', n: 'monkey', s: 'Ooh ooh, ah ah!' }, { e: '🐘', n: 'elephant', s: 'Toot toot!' }, { e: '🐐', n: 'goat', s: 'Maa!' },
+    { e: '🦃', n: 'turkey', s: 'Gobble gobble!' }, { e: '🐻', n: 'bear', s: 'Grr!' }, { e: '🐍', n: 'snake', s: 'Hiss!' }, { e: '🐓', n: 'rooster', s: 'Cock-a-doodle-doo!' }
+  ];
+  function todA(n) { return (/^[aeiou]/.test(n) ? 'an ' : 'a ') + n; }
+  var TOD_COLORS = [['red', '#FF5A4E'], ['orange', '#FF9A2E'], ['yellow', '#FFD93D'], ['green', '#4CBA68'], ['blue', '#3E8BEF'], ['purple', '#9C6BE0'], ['pink', '#F58FC0'], ['brown', '#9A6234']];
+
+  /* hold for a moment to leave (a quick tap just shows the grown-up hint) */
+  function holdToLeave(btn, go) {
+    var timer = 0, hint = 0;
+    function cancel() { clearTimeout(timer); btn.classList.remove('holding'); }
+    btn.addEventListener('pointerdown', function (e) {
+      e.preventDefault(); cancel(); void btn.offsetWidth; btn.classList.add('holding');
+      timer = setTimeout(function () { btn.classList.remove('holding'); go(); }, 1200);
+    });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) {
+      btn.addEventListener(ev, function () {
+        if (btn.classList.contains('holding')) { btn.classList.add('hint'); clearTimeout(hint); hint = setTimeout(function () { btn.classList.remove('hint'); }, 1800); }
+        cancel();
+      });
+    });
+    btn.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  }
+
+  var TOD_GAMES = [
+    { id: 'bubbles', name: 'Bubble Pop', icon: '🫧', col: '#BDE5F2', hello: 'Bubble Pop! Pop the bubbles!', fn: todBubbles },
+    { id: 'barn', name: 'Peekaboo Barn', icon: '🐮', col: '#FFD6CC', hello: 'Peekaboo! Who is hiding? Tap to find out!', fn: todBarn },
+    { id: 'shapes', name: 'Shape Sorter', icon: '🔺', col: '#FFE9A8', hello: 'Shape Sorter! Put the shapes in the box!', fn: todShapes },
+    { id: 'feed', name: 'Feed the Animals', icon: '🍎', col: '#D8F2C8', hello: 'Feed the animals! They are hungry!', fn: todFeed },
+    { id: 'paint', name: 'Finger Paint', icon: '🖍️', col: '#F3E0FF', hello: 'Finger Paint! Draw with your finger!', fn: todPaint },
+    { id: 'band', name: 'Animal Band', icon: '🎹', col: '#FFE0EE', hello: 'Animal Band! Tap the keys to make music!', fn: todBand },
+    { id: 'go', name: 'Beep Beep!', icon: '🚗', col: '#D6ECFB', hello: 'Beep beep! Tap the trucks and cars!', fn: todGo }
+  ];
+  var todStop = null;
+  function renderToddler(speak) {
+    if (todStop) { todStop(); todStop = null; }
+    var grid = $('#tod-grid'); grid.innerHTML = '';
+    TOD_GAMES.forEach(function (gm) {
+      grid.append(el('button', { class: 'chunk tod-tile', style: '--tc:' + gm.col, 'aria-label': gm.name, onclick: function () { startToddler(gm.id); } },
+        [el('span', { class: 'tod-ic emoji', text: gm.icon }), el('span', { class: 'tod-name', text: gm.name })]));
+    });
+    show('tod');
+    if (speak) Voice.say('Toddler Corner! Pick a game!');
+  }
+  function startToddler(id) {
+    var gm = TOD_GAMES.filter(function (g) { return g.id === id; })[0];
+    $('#tgame-title').textContent = gm.name;
+    var area = $('#tod-area'); area.innerHTML = ''; area.style.setProperty('--tc', gm.col);
+    show('tgame');
+    SFX.unlock(); SFX.pop();
+    Voice.say(gm.hello);
+    todStop = gm.fn(area) || null;
+  }
+  /* a gentle nudge if nothing has been tapped for a while */
+  function todIdle(area, lines) {
+    var t = 0, gone = false;
+    function arm() { clearTimeout(t); if (!gone) t = setTimeout(function () { if (!gone && current === 'tgame') { Voice.say(R.pick(lines)); arm(); } }, 14000); }
+    area.addEventListener('pointerdown', arm, true); arm();
+    return function () { gone = true; clearTimeout(t); };
+  }
+  function todBurst(node, n, theme) { if (!node) return; var c = centerOf(node); FX.burst(c.x, c.y, { n: n || 24, speed: 8, spooky: theme || false }); }
+
+  /* ---- Bubble Pop: bubbles float up; pop one and an animal, a car or a color comes out ---- */
+  var TOD_POP_THINGS = [{ e: '🚗', say: 'A car! Beep beep!' }, { e: '🚂', say: 'A train! Choo choo!' }, { e: '✈️', say: 'An airplane! Zoom!' }, { e: '⭐', say: 'A star!' },
+    { e: '🍎', say: 'An apple!' }, { e: '🍌', say: 'A banana!' }, { e: '⚽', say: 'A ball!' }, { e: '🌸', say: 'A flower!' }, { e: '🦋', say: 'A butterfly!' }, { e: '🐠', say: 'A fish!' }];
+  function todBubbles(area) {
+    var g = miniCanvas(area), ctx = g.ctx, W = g.W, H = g.H, cv = g.cv, sc = Math.max(0.75, Math.min(W, H) / 600);
+    var bubbles = [], drops = [], parts = [], spawnT = 0, pops = 0, raf = 0, over = false, last = 0;
+    function newBubble() {
+      var kind = Math.random(), item, col = R.pick(TOD_COLORS);
+      if (pops > 0 && pops % 12 === 0 && !bubbles.some(function (b) { return b.gold; })) item = { gold: true };
+      else if (kind < 0.5) { var a = R.pick(TOD_ANIMALS); item = { e: a.e, say: cap(todA(a.n)) + '! ' + a.s }; }
+      else if (kind < 0.75) item = R.pick(TOD_POP_THINGS);
+      else item = { color: col };
+      var r = (item.gold ? 88 : 50 + Math.random() * 26) * sc;
+      bubbles.push({ x: r + Math.random() * (W - 2 * r), y: H + r, r: r, vy: (0.55 + Math.random() * 0.5) * sc, ph: Math.random() * 6, col: col[1], item: item, gold: !!item.gold });
+    }
+    function drawBubble(b) {
+      var x = b.x + Math.sin(b.ph) * 10 * sc, y = b.y;
+      b.dx = x;
+      var gr = ctx.createRadialGradient(x - b.r * 0.35, y - b.r * 0.35, b.r * 0.1, x, y, b.r);
+      gr.addColorStop(0, 'rgba(255,255,255,.95)'); gr.addColorStop(0.55, b.gold ? 'rgba(255,215,90,.55)' : hexA(b.col, 0.28)); gr.addColorStop(1, b.gold ? 'rgba(255,190,40,.8)' : hexA(b.col, 0.6));
+      ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, b.r, 0, 6.283); ctx.fill();
+      ctx.lineWidth = 3; ctx.strokeStyle = b.gold ? '#E8A400' : hexA(b.col, 0.9); ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.beginPath(); ctx.ellipse(x - b.r * 0.38, y - b.r * 0.42, b.r * 0.18, b.r * 0.1, -0.7, 0, 6.283); ctx.fill();
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      if (b.gold) { ctx.font = emojiFont(b.r * 0.95); ctx.fillText('🌟', x, y + 2); }
+      else if (b.item.e) { ctx.font = emojiFont(b.r * 0.95); ctx.fillText(b.item.e, x, y + 2); }
+    }
+    function hexA(hex, a) { var n = parseInt(hex.slice(1), 16); return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')'; }
+    cv.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
+      var bx = cv.getBoundingClientRect(), x = (e.clientX - bx.left) * W / bx.width, y = (e.clientY - bx.top) * H / bx.height, hit = -1, bd = 1e9;
+      bubbles.forEach(function (b, i) { var d = Math.hypot((b.dx || b.x) - x, b.y - y); if (d < b.r * 1.2 && d < bd) { bd = d; hit = i; } });
+      if (hit < 0) return;
+      var b = bubbles.splice(hit, 1)[0]; pops++;
+      for (var k = 0; k < 16; k++) { var a = k / 16 * 6.283; parts.push({ x: b.dx, y: b.y, vx: Math.cos(a) * 5 * sc, vy: Math.sin(a) * 5 * sc, life: 500, col: b.gold ? '#FFC43F' : b.col }); }
+      SFX.pop();
+      var sp = onScreen(cv, b.dx, b.y);
+      if (b.gold) { SFX.streak(); FX.fireworks(3); Voice.say('Wow! A golden bubble! Hooray!'); }
+      else if (b.item.color) { FX.burst(sp.x, sp.y, { n: 14, speed: 6, kinds: ['dot', 'star'], cols: [b.item.color[1], '#FFFFFF'] }); Voice.say(cap(b.item.color[0]) + '!'); }
+      else { drops.push({ e: b.item.e, x: b.dx, y: b.y, vy: -4 * sc, s: b.r * 1.1, rot: 0, life: 1600 }); Voice.say(b.item.say); }
+    });
+    for (var i = 0; i < 4; i++) { newBubble(); bubbles[i].y = H * (0.35 + i * 0.18); }
+    var sky = ctx.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, '#BDE5F2'); sky.addColorStop(1, '#F3FBFF');
+    (function frame(now) {
+      if (over) return;
+      var dt = last ? Math.min(3, (now - last) / 16.7) : 1; last = now;
+      ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+      spawnT -= 16.7 * dt;
+      if (spawnT <= 0 && bubbles.length < 9) { newBubble(); spawnT = 650 + Math.random() * 500; }
+      bubbles.forEach(function (b) { b.y -= b.vy * dt; b.ph += 0.025 * dt; });
+      bubbles = bubbles.filter(function (b) { return b.y > -b.r - 10; });
+      bubbles.forEach(drawBubble);
+      parts.forEach(function (p) { p.x += p.vx * dt; p.y += p.vy * dt; p.life -= 16.7 * dt; ctx.globalAlpha = Math.max(0, p.life / 500); ctx.fillStyle = p.col; ctx.beginPath(); ctx.arc(p.x, p.y, 5 * sc, 0, 6.283); ctx.fill(); });
+      ctx.globalAlpha = 1; parts = parts.filter(function (p) { return p.life > 0; });
+      drops.forEach(function (d) {
+        d.vy += 0.18 * dt; d.y += d.vy * dt; d.rot += 0.03 * dt; d.life -= 16.7 * dt;
+        if (d.y > H - d.s * 0.5) { d.y = H - d.s * 0.5; d.vy *= -0.5; }
+        ctx.save(); ctx.globalAlpha = Math.min(1, d.life / 400); ctx.translate(d.x, d.y); ctx.rotate(Math.sin(d.rot) * 0.3); ctx.font = emojiFont(d.s); ctx.fillText(d.e, 0, 0); ctx.restore();
+      });
+      drops = drops.filter(function (d) { return d.life > 0; });
+      raf = requestAnimationFrame(frame);
+    })(performance.now());
+    var idle = todIdle(area, ['Pop a bubble!', 'Look at all the bubbles! Pop one!']);
+    return function () { over = true; cancelAnimationFrame(raf); idle(); };
+  }
+
+  /* ---- Peekaboo Barn: tap the barn, the haystack or the bush to see who is hiding ---- */
+  var TOD_HIDE = {
+    barn: '<svg viewBox="0 0 200 190" aria-hidden="true"><path d="M10 70 L100 8 L190 70 L190 186 L10 186 Z" fill="#E2483D" stroke="#1D2A44" stroke-width="6" stroke-linejoin="round"/><path d="M10 70 L100 8 L190 70" fill="none" stroke="#fff" stroke-width="8" stroke-linejoin="round"/><rect x="58" y="96" width="84" height="90" fill="#fff" stroke="#1D2A44" stroke-width="5"/><rect class="door-l" x="62" y="100" width="38" height="86" fill="#B8322A" stroke="#1D2A44" stroke-width="4"/><rect class="door-r" x="100" y="100" width="38" height="86" fill="#B8322A" stroke="#1D2A44" stroke-width="4"/><path d="M62 100 L100 186 M100 100 L62 186 M100 100 L138 186 M138 100 L100 186" stroke="#fff" stroke-width="4"/><circle cx="100" cy="52" r="14" fill="#fff" stroke="#1D2A44" stroke-width="4"/></svg>',
+    hay: '<svg viewBox="0 0 200 150" aria-hidden="true"><path d="M8 146 C8 60 40 18 100 18 C160 18 192 60 192 146 Z" fill="#F4C64E" stroke="#1D2A44" stroke-width="6" stroke-linejoin="round"/><path d="M40 60 L48 80 M70 40 L74 62 M110 36 L106 58 M140 50 L132 72 M160 84 L150 100 M60 100 L66 120 M100 80 L98 104 M130 108 L124 128 M30 120 L40 132" stroke="#C9952A" stroke-width="5" stroke-linecap="round"/></svg>',
+    bush: '<svg viewBox="0 0 200 150" aria-hidden="true"><g fill="#4CBA68" stroke="#1D2A44" stroke-width="6"><circle cx="50" cy="100" r="44"/><circle cx="150" cy="100" r="44"/><circle cx="100" cy="70" r="54"/><rect x="20" y="100" width="160" height="46" rx="20" stroke="none"/></g><path d="M8 146 L192 146" stroke="#1D2A44" stroke-width="6"/><g fill="#FF8FAB" stroke="#1D2A44" stroke-width="3"><circle cx="70" cy="60" r="8"/><circle cx="134" cy="72" r="8"/><circle cx="104" cy="110" r="8"/><circle cx="40" cy="96" r="7"/></g></svg>'
+  };
+  function todBarn(area) {
+    var scene = el('div', { class: 'tb-scene' }), spots = [], opens = 0, finding = null, over = false, timers = [];
+    function later(fn, ms) { timers.push(setTimeout(function () { if (!over) fn(); }, ms)); }
+    var kinds = ['hay', 'barn', 'bush'];
+    function fresh(not) { var a; do { a = R.pick(TOD_ANIMALS); } while (not.indexOf(a) >= 0); return a; }
+    kinds.forEach(function (k, i) {
+      var critter = el('span', { class: 'tb-critter emoji' }), cover = el('span', { class: 'tb-cover', html: TOD_HIDE[k] });
+      var spot = el('button', { class: 'tb-spot tb-' + k, 'aria-label': 'Who is hiding?' }, [critter, cover]);
+      spot._i = i; spots.push({ el: spot, critter: critter, a: null, up: false });
+      spot.addEventListener('pointerdown', function (e) { e.preventDefault(); tap(i); });
+      scene.append(spot);
+    });
+    var ask = el('div', { class: 'tb-ask', hidden: true });
+    area.append(el('div', { class: 'tb-wrap' }, [ask, scene, el('div', { class: 'tb-grass' })]));
+    function assign() { var used = []; spots.forEach(function (s) { s.a = fresh(used); used.push(s.a); s.critter.textContent = s.a.e; }); }
+    assign();
+    function reveal(s, on) { s.up = on; s.el.classList.toggle('up', on); }
+    function tap(i) {
+      var s = spots[i];
+      if (finding) {
+        if (s.a === finding) {
+          s.el.classList.add('yay'); SFX.streak(); todBurst(s.critter, 40);
+          Voice.say('Yes! You found the ' + finding.n + '! ' + finding.s);
+          finding = null; ask.hidden = true;
+          later(function () { spots.forEach(function (x) { reveal(x, false); x.el.classList.remove('yay'); }); later(assign, 450); }, 2200);
+        } else {
+          s.el.classList.remove('wig'); void s.el.offsetWidth; s.el.classList.add('wig'); SFX.boing();
+          Voice.say('That is the ' + s.a.n + '! ' + s.a.s + ' Where is the ' + finding.n + '?');
+        }
+        return;
+      }
+      if (s.up) { s.el.classList.remove('wig'); void s.el.offsetWidth; s.el.classList.add('wig'); Voice.say(s.a.s); SFX.boing(); return; }
+      reveal(s, true); opens++; SFX.pop(); Voice.say('Peekaboo! ' + cap(todA(s.a.n)) + '! ' + s.a.s);
+      todBurst(s.critter, 14);
+      if (opens % 5 === 0) {
+        later(function () {
+          spots.forEach(function (x) { reveal(x, true); });
+          finding = R.pick(spots).a; ask.hidden = false; ask.textContent = finding.e + '?';
+          Voice.say('Where is the ' + finding.n + '? Tap the ' + finding.n + '!');
+        }, 2600);
+      } else later(function () {
+        if (finding) return;
+        reveal(s, false);
+        later(function () { if (!s.up && !finding) { var others = spots.filter(function (x) { return x !== s; }).map(function (x) { return x.a; }); s.a = fresh(others); s.critter.textContent = s.a.e; } }, 450);
+      }, 2400);
+    }
+    var idle = todIdle(area, ['Who is hiding? Tap to see!', 'Peekaboo! Tap the barn!']);
+    return function () { over = true; timers.forEach(clearTimeout); idle(); };
+  }
+
+  /* ---- Shape Sorter: put each shape in its hole (tap or drag) ---- */
+  var TOD_SHAPES = ['circle', 'square', 'triangle', 'star', 'heart', 'diamond'];
+  function todShapePath(k) {
+    if (k === 'circle') return '<circle cx="50" cy="50" r="40"/>';
+    if (k === 'square') return '<rect x="13" y="13" width="74" height="74" rx="6"/>';
+    if (k === 'triangle') return '<path d="M50 10 L92 86 L8 86 Z" stroke-linejoin="round"/>';
+    if (k === 'diamond') return '<path d="M50 6 L90 50 L50 94 L10 50 Z" stroke-linejoin="round"/>';
+    if (k === 'heart') return '<path d="M50 88 C10 62 4 36 20 22 C34 10 48 18 50 30 C52 18 66 10 80 22 C96 36 90 62 50 88 Z" stroke-linejoin="round"/>';
+    var p = []; for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? 19 : 44; p.push((50 + Math.cos(a) * r).toFixed(1) + ',' + (54 + Math.sin(a) * r).toFixed(1)); }
+    return '<polygon points="' + p.join(' ') + '" stroke-linejoin="round"/>';
+  }
+  function todShapeSVG(k, fill, cls) { return '<svg class="' + (cls || '') + '" viewBox="0 0 100 100" aria-hidden="true"><g fill="' + fill + '" stroke="#1D2A44" stroke-width="5">' + todShapePath(k) + '</g></svg>'; }
+  function todShapes(area) {
+    var wrap = el('div', { class: 'ts-wrap' }), box = el('div', { class: 'ts-box' }), tray = el('div', { class: 'ts-tray' });
+    wrap.append(box, tray); area.append(wrap);
+    var n = 2, done = 0, holes = [], pieces = [], target = 0, over = false, timers = [], busy = false;
+    function later(fn, ms) { timers.push(setTimeout(function () { if (!over) fn(); }, ms)); }
+    function round() {
+      box.innerHTML = ''; tray.innerHTML = ''; holes = []; pieces = []; busy = false;
+      var ks = R.sample(TOD_SHAPES, n), cols = R.sample(TOD_COLORS.slice(0, 7), n);
+      ks.forEach(function (k, i) {
+        var h = el('div', { class: 'ts-hole', html: todShapeSVG(k, '#3B2A1E', 'ts-hole-svg') }); h._k = k; holes.push(h); box.append(h);
+      });
+      R.shuffle(ks.map(function (k, i) { return { k: k, c: cols[i] }; })).forEach(function (o) {
+        var p = el('button', { class: 'ts-piece', 'aria-label': o.c[0] + ' ' + o.k, html: todShapeSVG(o.k, o.c[1]) }); p._k = o.k; p._c = o.c;
+        drag(p); pieces.push(p); tray.append(p);
+      });
+      target = 0; aim();
+    }
+    function aim() {
+      var open = holes.filter(function (h) { return !h._done; });
+      if (!open.length) return;
+      var h = R.pick(open); target = holes.indexOf(h);
+      holes.forEach(function (x, i) { x.classList.toggle('glow', i === target); });
+      Voice.say('Where is the ' + h._k + '?');
+    }
+    function fill(p, h) {
+      busy = true; h._done = true; h.classList.remove('glow');
+      var from = p.getBoundingClientRect(), to = h.getBoundingClientRect();
+      p.style.transition = 'transform .45s cubic-bezier(.3,1.4,.6,1)';
+      p.style.transform = 'translate(' + (to.left + to.width / 2 - from.left - from.width / 2) + 'px,' + (to.top + to.height / 2 - from.top - from.height / 2) + 'px)';
+      SFX.pop(); Voice.say(cap(p._c[0]) + ' ' + p._k + '! In it goes!');
+      later(function () {
+        h.innerHTML = todShapeSVG(p._k, p._c[1]); h.classList.add('in'); p.style.visibility = 'hidden';
+        todBurst(h, 16);
+        busy = false;
+        if (holes.every(function (x) { return x._done; })) {
+          done++; box.classList.add('shake'); SFX.streak(); FX.fireworks(2);
+          later(function () { Voice.say(R.pick(['Hooray! You did it!', 'All the shapes are in! Yay!', 'Great job!'])); }, 600);
+          if (done % 3 === 0 && n < 4) n++;
+          later(function () { box.classList.remove('shake'); round(); }, 3200);
+        } else later(aim, 900);
+      }, 470);
+    }
+    function wrong(p) {
+      p.classList.remove('wig'); void p.offsetWidth; p.classList.add('wig'); SFX.boing();
+      var h = holes[target];
+      Voice.say('That is the ' + p._k + '! Find the ' + h._k + '!');
+    }
+    function drag(p) {
+      var sx = 0, sy = 0, dx = 0, dy = 0, down = false, id = null;
+      p.addEventListener('pointerdown', function (e) {
+        if (busy || over) return; e.preventDefault(); down = true; id = e.pointerId; sx = e.clientX; sy = e.clientY; dx = dy = 0;
+        try { p.setPointerCapture(id); } catch (x) {}
+        p.style.transition = 'none'; p.classList.add('lift');
+      });
+      p.addEventListener('pointermove', function (e) {
+        if (!down || e.pointerId !== id) return; dx = e.clientX - sx; dy = e.clientY - sy;
+        p.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(1.08)';
+      });
+      function up(e) {
+        if (!down || (e && e.pointerId !== id)) return; down = false; p.classList.remove('lift');
+        if (Math.hypot(dx, dy) < 14) { p.style.transform = ''; var h = holes[target]; if (h && p._k === h._k) fill(p, h); else if (h) wrong(p); return; }
+        var r = p.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        var hit = holes.filter(function (h) { var b = h.getBoundingClientRect(); return !h._done && cx > b.left - 30 && cx < b.right + 30 && cy > b.top - 30 && cy < b.bottom + 30; })[0];
+        if (hit && hit._k === p._k) { p.style.transform = ''; target = holes.indexOf(hit); fill(p, hit); return; }
+        p.style.transition = 'transform .35s ease'; p.style.transform = '';
+        if (hit) { SFX.boing(); Voice.say('That is the ' + p._k + '! Try another hole!'); }
+      }
+      p.addEventListener('pointerup', up); p.addEventListener('pointercancel', up);
+    }
+    round();
+    var idle = todIdle(area, ['Where does it go? Tap a shape!', 'Put the shape in the hole!']);
+    return function () { over = true; timers.forEach(clearTimeout); idle(); };
+  }
+
+  /* ---- Feed the Animals: count the food into a hungry animal (1 to 5) ---- */
+  var TOD_FEED = [['🐻', 'bear', '🍎', 'apple', 'apples'], ['🐒', 'monkey', '🍌', 'banana', 'bananas'], ['🐰', 'bunny', '🥕', 'carrot', 'carrots'],
+    ['🐭', 'mouse', '🍓', 'strawberry', 'strawberries'], ['🐶', 'puppy', '🦴', 'bone', 'bones'], ['🐱', 'kitty', '🐟', 'fish', 'fish'],
+    ['🦛', 'hippo', '🍉', 'watermelon', 'watermelons'], ['🐸', 'frog', '🪰', 'fly', 'flies'], ['🐘', 'elephant', '🥜', 'peanut', 'peanuts'], ['🐼', 'panda', '🍪', 'cookie', 'cookies']];
+  var TOD_NUM = ['zero', 'one', 'two', 'three', 'four', 'five'];
+  function todFeed(area) {
+    var wrap = el('div', { class: 'tf-wrap' }), plate = el('div', { class: 'tf-plate' }), side = el('div', { class: 'tf-side' });
+    var who = el('div', { class: 'tf-animal emoji' }), dots = el('div', { class: 'tf-dots' }), yum = el('div', { class: 'tf-yum', text: 'Yum!' });
+    side.append(yum, who, dots); wrap.append(plate, side); area.append(wrap);
+    var fed = 0, want = 3, meals = 0, cur = null, over = false, timers = [], prev = null;
+    function later(fn, ms) { timers.push(setTimeout(function () { if (!over) fn(); }, ms)); }
+    function next() {
+      do { cur = R.pick(TOD_FEED); } while (cur === prev); prev = cur;
+      var max = meals < 4 ? 3 : meals < 9 ? 4 : 5;
+      want = R.int(meals < 2 ? 1 : 2, max); fed = 0;
+      who.textContent = cur[0]; who.className = 'tf-animal emoji in';
+      dots.innerHTML = ''; for (var i = 0; i < want; i++) dots.append(el('span', { class: 'tf-dot' }));
+      plate.innerHTML = '';
+      var extra = Math.min(6, want + 2);
+      for (i = 0; i < extra; i++) {
+        (function () {
+          var f = el('button', { class: 'tf-food emoji', text: cur[2], 'aria-label': cur[3] });
+          f.addEventListener('pointerdown', function (e) { e.preventDefault(); feed(f); });
+          plate.append(f);
+        })();
+      }
+      later(function () { Voice.say('The ' + cur[1] + ' is hungry! Give ' + want + ' ' + (want === 1 ? cur[3] : cur[4]) + '!'); }, 300);
+    }
+    function feed(f) {
+      if (over || f.disabled || fed >= want) return;
+      f.disabled = true; fed++;
+      var from = centerOf(f), to = centerOf(who);
+      f.style.visibility = 'hidden';
+      var n = fed;
+      flyThing('<span class="emoji" style="font-size:64px;line-height:1;display:block">' + cur[2] + '</span>', 'fly-ck', from, { x: to.x, y: to.y }, 64, 420, function () {
+        if (over) return;
+        who.classList.remove('chomp'); void who.offsetWidth; who.classList.add('chomp'); SFX.crunch();
+        var d = dots.children[n - 1]; if (d) { d.classList.add('on'); d.textContent = n; }
+        if (n === want) {
+          Voice.say(cap(TOD_NUM[want]) + '! Yum yum! Thank you!');
+          yum.classList.remove('show'); void yum.offsetWidth; yum.classList.add('show');
+          Array.prototype.forEach.call(plate.children, function (x) { x.disabled = true; x.classList.add('full'); });
+          todBurst(who, 36); SFX.fanfare(); meals++;
+          later(function () { who.className = 'tf-animal emoji out'; }, 1900);
+          later(next, 2500);
+        } else Voice.say(cap(TOD_NUM[n]) + '!');
+      });
+    }
+    next();
+    var idle = todIdle(area, ['Tap the food to feed the animal!', 'The animal is still hungry!']);
+    return function () { over = true; timers.forEach(clearTimeout); idle(); };
+  }
+
+  /* ---- Finger Paint: big colors, rainbow paint and animal stamps; more than one finger at a time ---- */
+  function todPaint(area) {
+    var holder = el('div', { class: 'tp-paper' }), bar = el('div', { class: 'tp-bar' });
+    area.append(el('div', { class: 'tp-wrap' }, [holder, bar]));
+    var cv = el('canvas', { class: 'tp-cv', 'aria-label': 'Paper to paint on' }); holder.append(cv);
+    var W = Math.max(200, holder.clientWidth), H = Math.max(200, holder.clientHeight), dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    var color = TOD_COLORS[4], mode = 'paint', hue = 0, strokes = {};
+    function white() { ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, W, H); }
+    white();
+    function pick(btn) { Array.prototype.forEach.call(bar.children, function (x) { x.classList.remove('on'); }); if (btn) btn.classList.add('on'); }
+    TOD_COLORS.concat([['rainbow', null]]).forEach(function (c, i) {
+      var b = el('button', { class: 'tp-col' + (c[0] === 'blue' ? ' on' : '') + (c[1] ? '' : ' rainbow'), style: c[1] ? 'background:' + c[1] : '', 'aria-label': c[0] });
+      b.addEventListener('pointerdown', function (e) { e.preventDefault(); color = c; mode = c[1] ? 'paint' : 'rainbow'; pick(b); SFX.tick(); Voice.say(c[1] ? cap(c[0]) + '!' : 'Rainbow!'); });
+      bar.append(b);
+    });
+    var stampBtn = el('button', { class: 'tp-tool emoji', text: '🐾', 'aria-label': 'Animal stamps' });
+    stampBtn.addEventListener('pointerdown', function (e) { e.preventDefault(); mode = 'stamp'; pick(stampBtn); SFX.tick(); Voice.say('Animal stamps! Tap the paper!'); });
+    var clearBtn = el('button', { class: 'tp-tool emoji', text: '🧽', 'aria-label': 'Clean the paper' });
+    clearBtn.addEventListener('pointerdown', function (e) {
+      e.preventDefault(); SFX.whoosh(); holder.classList.remove('wipe'); void holder.offsetWidth; holder.classList.add('wipe');
+      setTimeout(white, 250); Voice.say('Whoosh! Clean paper!');
+    });
+    bar.append(stampBtn, clearBtn);
+    function pt(e) { var b = cv.getBoundingClientRect(); return { x: (e.clientX - b.left) * W / b.width, y: (e.clientY - b.top) * H / b.height }; }
+    function ink() { if (mode === 'rainbow') { hue = (hue + 5) % 360; return 'hsl(' + hue + ',90%,55%)'; } return color[1]; }
+    cv.addEventListener('pointerdown', function (e) {
+      e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch (x) {}
+      var p = pt(e);
+      if (mode === 'stamp') {
+        var a = R.pick(TOD_ANIMALS), s = 70 + Math.random() * 40;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate((Math.random() - 0.5) * 0.5); ctx.font = emojiFont(s); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(a.e, 0, 0); ctx.restore();
+        SFX.pop(); Voice.say(a.s); return;
+      }
+      strokes[e.pointerId] = p;
+      ctx.fillStyle = ink(); ctx.beginPath(); ctx.arc(p.x, p.y, 11, 0, 6.283); ctx.fill();
+    });
+    cv.addEventListener('pointermove', function (e) {
+      var a = strokes[e.pointerId]; if (!a) return; e.preventDefault();
+      var p = pt(e); ctx.strokeStyle = ink(); ctx.lineWidth = 22; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+      strokes[e.pointerId] = p;
+    });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (ev) { cv.addEventListener(ev, function (e) { delete strokes[e.pointerId]; }); });
+    var idle = todIdle(area, ['Draw with your finger!', 'Pick a color and draw!']);
+    return function () { idle(); };
+  }
+
+  /* ---- Animal Band: eight keys to play, plus songs to follow by the lights ---- */
+  var TOD_NOTES = [262, 294, 330, 349, 392, 440, 494, 523];
+  var TOD_SONGS = [
+    { icon: '⭐', name: 'Twinkle Twinkle', notes: [0, 0, 4, 4, 5, 5, 4, 3, 3, 2, 2, 1, 1, 0, 4, 4, 3, 3, 2, 2, 1, 4, 4, 3, 3, 2, 2, 1, 0, 0, 4, 4, 5, 5, 4, 3, 3, 2, 2, 1, 1, 0] },
+    { icon: '🐑', name: 'Mary Had a Little Lamb', notes: [2, 1, 0, 1, 2, 2, 2, 1, 1, 1, 2, 4, 4, 2, 1, 0, 1, 2, 2, 2, 2, 1, 1, 2, 1, 0] },
+    { icon: '⛵', name: 'Row Row Row Your Boat', notes: [0, 0, 0, 1, 2, 2, 1, 2, 3, 4, 7, 7, 7, 4, 4, 4, 2, 2, 2, 0, 0, 0, 4, 3, 2, 1, 0] }
+  ];
+  function todBand(area) {
+    var band = el('div', { class: 'tm-band' }), keys = el('div', { class: 'tm-keys' }), songs = el('div', { class: 'tm-songs' });
+    area.append(el('div', { class: 'tm-wrap' }, [band, keys, songs]));
+    var players = ['🐶', '🐱', '🐸', '🐷', '🐵', '🐰', '🐼', '🦁'], over = false, timers = [], song = null, pos = 0, demo = false;
+    function later(fn, ms) { timers.push(setTimeout(function () { if (!over) fn(); }, ms)); }
+    var ks = TOD_NOTES.map(function (f, i) {
+      var k = el('button', { class: 'tm-key', style: '--kc:' + ['#FF5A4E', '#FF9A2E', '#FFD93D', '#4CBA68', '#3EC1D3', '#3E8BEF', '#9C6BE0', '#F58FC0'][i], 'aria-label': 'Note ' + (i + 1) },
+        [el('span', { class: 'tm-face emoji', text: players[i] })]);
+      k.addEventListener('pointerdown', function (e) { e.preventDefault(); play(i, true); });
+      keys.append(k); return k;
+    });
+    function noteFloat(k) {
+      var n = el('span', { class: 'tm-note emoji', text: R.pick(['🎵', '🎶']) }); k.append(n);
+      setTimeout(function () { n.remove(); }, 900);
+    }
+    function play(i, byHand) {
+      var k = ks[i]; SFX.note(TOD_NOTES[i]);
+      k.classList.remove('hit'); void k.offsetWidth; k.classList.add('hit'); noteFloat(k);
+      if (!byHand || demo || !song) return;
+      if (i === song.notes[pos]) {
+        pos++;
+        if (pos >= song.notes.length) {
+          ks.forEach(function (x) { x.classList.remove('next'); });
+          SFX.fanfare(); FX.fireworks(3); Voice.say('Hooray! You played ' + song.name + '!'); song = null;
+          Array.prototype.forEach.call(songs.children, function (b) { b.classList.remove('on'); });
+        } else glowNext();
+      }
+    }
+    function glowNext() { ks.forEach(function (x, j) { x.classList.toggle('next', song && j === song.notes[pos]); }); }
+    TOD_SONGS.forEach(function (sg) {
+      var b = el('button', { class: 'chunk tm-song', 'aria-label': sg.name }, [el('span', { class: 'emoji', text: sg.icon })]);
+      b.addEventListener('pointerdown', function (e) {
+        e.preventDefault(); if (demo) return;
+        Array.prototype.forEach.call(songs.children, function (x) { x.classList.remove('on'); }); b.classList.add('on');
+        song = sg; pos = 0; demo = true; ks.forEach(function (x) { x.classList.remove('next'); });
+        Voice.say(sg.name + '! Listen first.');
+        var short = sg.notes.slice(0, Math.min(sg.notes.length, 14));
+        short.forEach(function (n, j) { later(function () { play(n, false); }, 1600 + j * 380); });
+        later(function () { demo = false; Voice.say('Your turn! Tap the key that lights up!'); glowNext(); }, 1800 + short.length * 380);
+      });
+      songs.append(b);
+    });
+    band.append(el('span', { class: 'tm-title', text: 'Tap a key, or pick a song!' }));
+    var idle = todIdle(area, ['Tap the keys to make music!', 'Pick a song! Tap the star!']);
+    return function () { over = true; timers.forEach(clearTimeout); idle(); };
+  }
+
+  /* ---- Beep Beep!: cars, trucks, trains, boats and planes go by; tap one to hear it ---- */
+  var TOD_GO = {
+    sky: [{ e: '✈️', n: 'airplane', s: 'Zoom!', fx: 'zoom', rot: -135 }, { e: '🚁', n: 'helicopter', s: 'Chop chop chop!', fx: 'zoom' }, { e: '🎈', n: 'balloon', s: 'Up, up, up!', fx: 'pop' }, { e: '🛸', n: 'flying saucer', s: 'Beep boop!', fx: 'zoom' }],
+    road: [{ e: '🚗', n: 'car', s: 'Beep beep!', fx: 'horn' }, { e: '🚌', n: 'bus', s: 'Honk honk!', fx: 'horn' }, { e: '🚒', n: 'fire truck', s: 'Nee naw, nee naw!', fx: 'siren' }, { e: '🚓', n: 'police car', s: 'Wee woo, wee woo!', fx: 'siren' },
+      { e: '🚑', n: 'ambulance', s: 'Nee naw!', fx: 'siren' }, { e: '🚜', n: 'tractor', s: 'Putt putt putt!', fx: 'horn' }, { e: '🚚', n: 'truck', s: 'Honk honk!', fx: 'horn' }, { e: '🏎️', n: 'race car', s: 'Vroom vroom!', fx: 'zoom' }, { e: '🚲', n: 'bike', s: 'Ring ring!', fx: 'bell' }],
+    rail: [{ e: '🚂', n: 'train', s: 'Choo choo!', fx: 'choo', cars: 2 }],
+    sea: [{ e: '⛵', n: 'sailboat', s: 'Whoosh!', fx: 'zoom' }, { e: '🚤', n: 'speedboat', s: 'Vroom!', fx: 'zoom' }, { e: '🐳', n: 'whale', s: 'Splash!', fx: 'pop' }]
+  };
+  function todGo(area) {
+    var scene = el('div', { class: 'tg-scene' }), over = false, timers = [], lanes = {};
+    area.append(scene);
+    [['sky', 4, 26], ['rail', 34, 14], ['road', 52, 22], ['sea', 78, 20]].forEach(function (l) {
+      var lane = el('div', { class: 'tg-lane tg-' + l[0], style: 'top:' + l[1] + '%;height:' + l[2] + '%' }); scene.append(lane); lanes[l[0]] = lane;
+    });
+    function later(fn, ms) { timers.push(setTimeout(function () { if (!over) fn(); }, ms)); }
+    function launch(lane) {
+      if (over) return;
+      var v = R.pick(TOD_GO[lane]), box = lanes[lane], h = box.clientHeight;
+      var size = Math.max(54, Math.min(h * (v.rot ? 0.7 : 0.95), lane === 'sky' ? 120 : 140));
+      var txt = v.e + (v.cars ? '🚃'.repeat(v.cars) : '');
+      var car = el('button', { class: 'tg-v emoji', 'aria-label': v.n, style: 'font-size:' + size + 'px' }, el('span', { class: 'tg-in' }, el('span', { text: txt, style: v.rot ? 'display:inline-block;transform:rotate(' + v.rot + 'deg)' : '' })));
+      box.append(car);
+      var W = scene.clientWidth, w = car.offsetWidth, dur = (lane === 'rail' ? 9000 : lane === 'sky' ? 10000 : 7000) + Math.random() * 3000;
+      var anim = car.animate ? car.animate([{ transform: 'translateX(' + W + 'px)' }, { transform: 'translateX(' + (-w - 20) + 'px)' }], { duration: dur, easing: 'linear' }) : null;
+      if (anim) anim.onfinish = function () { car.remove(); }; else setTimeout(function () { car.remove(); }, dur);
+      car.addEventListener('pointerdown', function (e) {
+        e.preventDefault();
+        car.classList.remove('honk'); void car.offsetWidth; car.classList.add('honk');
+        var sfx = { horn: SFX.horn, siren: SFX.siren, choo: SFX.choo, zoom: SFX.whoosh, pop: SFX.pop, bell: SFX.ring }[v.fx]; if (sfx) sfx();
+        Voice.say(cap(todA(v.n)) + '! ' + v.s);
+        var bub = el('span', { class: 'tg-say', text: v.s }); car.append(bub); setTimeout(function () { bub.remove(); }, 1400);
+      });
+      later(function () { launch(lane); }, dur * (lane === 'road' ? 0.35 : 0.6) + Math.random() * 1500);
+    }
+    later(function () { launch('road'); }, 200); later(function () { launch('sky'); }, 1200); later(function () { launch('rail'); }, 2600); later(function () { launch('sea'); }, 1800);
+    var idle = todIdle(area, ['Tap a truck!', 'Look! Tap the train!', 'Beep beep! Tap a car!']);
+    return function () { over = true; timers.forEach(clearTimeout); idle(); scene.querySelectorAll('.tg-v').forEach(function (v) { v.getAnimations && v.getAnimations().forEach(function (a) { a.cancel(); }); }); };
+  }
+
   /* ---------------- grown-ups gate ---------------- */
-  var gateAns = '', gateTyped = '';
-  function openGate() {
+  var gateAns = '', gateTyped = '', gatePass = null;
+  function openGate(onPass, msg) {
+    gatePass = typeof onPass === 'function' ? onPass : null;
+    $('#gate-msg').textContent = msg || 'Type the answer to open progress and settings.';
     var a = R.int(6, 9), b = R.int(6, 9);
     gateAns = String(a * b); gateTyped = '';
     $('#gate-q').textContent = a + ' × ' + b + ' = ?';
@@ -6844,13 +7478,17 @@ window.PipContent = (function () {
         else if (gateTyped.length < 3) gateTyped += d;
         var inp = $('#gate-in'); inp.textContent = gateTyped; inp.classList.remove('bad');
         if (gateTyped.length >= gateAns.length && d !== 'del' && d !== 'clear') {
-          if (gateTyped === gateAns) { $('#gate').hidden = true; Cloud.pull(function () { renderParents(); }); }
-          else { void inp.offsetWidth; inp.classList.add('bad'); gateTyped = ''; setTimeout(function () { inp.textContent = ''; }, 400); }
+          if (gateTyped === gateAns) { $('#gate').hidden = true; var then = gatePass; gatePass = null; if (then) then(); else Cloud.pull(function () { renderParents(); }); }
+          else {
+            void inp.offsetWidth; inp.classList.add('bad'); gateTyped = ''; setTimeout(function () { inp.textContent = ''; }, 400);
+            /* leaving Toddler Corner: one wrong try closes it again, so button mashing can't guess its way out */
+            if (gatePass) { gatePass = null; setTimeout(function () { $('#gate').hidden = true; }, 450); }
+          }
         }
       } }));
     });
   })();
-  $('#gate-x').addEventListener('click', function () { $('#gate').hidden = true; });
+  $('#gate-x').addEventListener('click', function () { $('#gate').hidden = true; gatePass = null; });
 
   /* ---------------- grown-ups page ---------------- */
   var STATUS = { 'new': ['Not tried yet', 'new'], working: ['Working toward K goal', 'working'], meets: ['Meets K goal', 'meets'], ahead: ['Ahead of K', 'ahead'] };
@@ -6875,6 +7513,17 @@ window.PipContent = (function () {
       el('button', { class: 'chunk icon-btn', 'aria-label': 'Back to games', html: ICON.home, onclick: function () { renderHome(false); } }),
       el('h2', { text: 'Grown-ups' })
     ]));
+
+    /* who is playing: big-kid games or Toddler Corner */
+    var tod = todMode(), who = el('section', { class: 'panel who-panel' });
+    who.append(el('h3', { text: 'Who is playing?' }));
+    who.append(el('div', { class: 'who-btns' }, [
+      el('button', { class: 'chunk who-btn' + (tod ? '' : ' on'), 'aria-pressed': String(!tod), onclick: function () { setMode('big'); renderHome(true); } },
+        [el('span', { class: 'emoji', text: '📚' }), el('span', { class: 'who-t' }, [el('b', { text: 'Big kid games' }), el('small', { text: 'reading, math, rooms and Arcade' })])]),
+      el('button', { class: 'chunk who-btn tod' + (tod ? ' on' : ''), 'aria-pressed': String(tod), onclick: function () { setMode('toddler'); renderToddler(true); } },
+        [el('span', { class: 'emoji', text: '🧸' }), el('span', { class: 'who-t' }, [el('b', { text: 'Toddler Corner' }), el('small', { text: 'simple games for a 2 to 3 year old' })])])]));
+    who.append(el('p', { class: 'lede', text: 'Toddler Corner has bubbles, peekaboo, shapes, counting, finger painting, music and cars. This device stays there, even after the app is closed, until a grown-up switches back: hold the home button in the corner, then answer the question. Nothing in Toddler Corner changes stars or levels. Tip for trips: iPad Guided Access (Settings, Accessibility) keeps her inside this app.' }));
+    w.append(who);
 
     /* summary + week */
     var days = weekKeys(), wq = 0, wc = 0, wd = 0, max = 1;
@@ -7037,6 +7686,7 @@ window.PipContent = (function () {
 
   $('#go-btn').addEventListener('click', function () {
     SFX.unlock();
+    if (todMode()) { renderToddler(true); return; }
     renderHome(false);
     var name = S.name.trim();
     Voice.say("Hi" + (name ? ' ' + name : '') + "! I'm Pip. Let's play and learn. Pick a room!");
@@ -7052,6 +7702,12 @@ window.PipContent = (function () {
   $('#room-snow').addEventListener('click', function () { renderRoom('snow', true); });
   $('#mix-btn').addEventListener('click', function () { startRound('mix'); });
   $('#stk-btn').addEventListener('click', function () { renderStickers(); });
+  [['#tod-exit', 'Grown-ups: hold to switch'], ['#tgame-exit', 'Hold to go back']].forEach(function (b) { $(b[0]).innerHTML = ICON.home + '<svg class="tod-ring" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="31" pathLength="100"/></svg><span class="tod-hint">' + b[1] + '</span>'; });
+  $('#tod-exit').setAttribute('aria-label', 'Grown-ups: hold to switch to the big-kid games');
+  holdToLeave($('#tod-exit'), function () {
+    openGate(function () { setMode('big'); renderHome(true); }, 'Type the answer to switch back to the big-kid games.');
+  });
+  holdToLeave($('#tgame-exit'), function () { if (todStop) { todStop(); todStop = null; } renderToddler(true); });
   $('#stk-prev').innerHTML = ICON.back; $('#stk-next').innerHTML = ICON.back;
   $('#stk-prev').addEventListener('click', function () { turnStickerPage(-1); });
   $('#stk-next').addEventListener('click', function () { turnStickerPage(1); });

@@ -4522,6 +4522,10 @@
 "text": "Almost! Trace the gray parts you missed."
 },
 {
+"id": "v3d8631eab3",
+"text": "Animal stamps! Tap the paper!"
+},
+{
 "id": "vd8466a8284",
 "text": "Broom Ride! Tap to fly up. Grab the candy and watch out for bats!"
 },
@@ -4670,8 +4674,20 @@
 "text": "This is how fast I talk."
 },
 {
+"id": "vd0b1cff55f",
+"text": "Toddler Corner! Pick a game!"
+},
+{
 "id": "vbeeb7b508c",
 "text": "Tree Lights! Watch the lights blink. Then tap them in the same order!"
+},
+{
+"id": "vaf5faa9698",
+"text": "Whoosh! Clean paper!"
+},
+{
+"id": "v3dd0adef0b",
+"text": "Wow! A golden bubble! Hooray!"
 },
 {
 "id": "v7d09944a06",
@@ -4688,6 +4704,10 @@
 {
 "id": "v0a624ef783",
 "text": "Your turn!"
+},
+{
+"id": "v5627640625",
+"text": "Your turn! Tap the key that lights up!"
 },
 {
 "id": "v3804f4a31d",
@@ -7130,16 +7150,44 @@
 "text": "Poof! A singing pumpkin!"
 },
 {
+"id": "v94fde59a2a",
+"text": "Poof! Animal Band"
+},
+{
+"id": "v0a1de68ef6",
+"text": "Poof! Beep Beep!"
+},
+{
+"id": "v5de7da861e",
+"text": "Poof! Bubble Pop"
+},
+{
 "id": "v037e12986b",
 "text": "Poof! Bubbles everywhere!"
+},
+{
+"id": "vfdcf9fa857",
+"text": "Poof! Feed the Animals"
+},
+{
+"id": "va2f26c57af",
+"text": "Poof! Finger Paint"
 },
 {
 "id": "v2734521c3b",
 "text": "Poof! Foxy in a magic hat!"
 },
 {
+"id": "v53db4e8d8f",
+"text": "Poof! Peekaboo Barn"
+},
+{
 "id": "vf3da880481",
 "text": "Poof! Pip turned purple!"
+},
+{
+"id": "v76fdec734d",
+"text": "Poof! Shape Sorter"
 },
 {
 "id": "v5149f2fa11",
