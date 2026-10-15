@@ -1,9 +1,9 @@
-/* Pip's Treehouse service worker v1.11.0
+/* Pip's Treehouse service worker v1.11.1
    Offline-first: every file the app needs is saved on the device the first time
    it opens online. After that it always opens instantly from the saved copy (no
    waiting on a weak car hotspot) and quietly checks for a newer version in the
    background; a new version shows up the next time the app is opened. */
-const CACHE = 'pips-treehouse-v1.11.0';
+const CACHE = 'pips-treehouse-v1.11.1';
 const CORE = ["./", "index.html", "manifest.webmanifest", "fonts/fonts.css", "fonts/andika-latin-400-normal.woff2", "fonts/andika-latin-700-normal.woff2", "fonts/grandstander-latin-600-normal.woff2", "fonts/grandstander-latin-700-normal.woff2", "fonts/grandstander-latin-800-normal.woff2", "fonts/grandstander-latin-900-normal.woff2", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener('install', (e) => {

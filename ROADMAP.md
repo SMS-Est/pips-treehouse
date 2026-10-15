@@ -96,6 +96,9 @@ Needs internet (breaks car play), costs money per use, and needs a server to hid
   answer closes the question again. The mode is kept on each device and never synced, and nothing
   in the corner changes stars or levels. (Toddler lines are not in voice/lines.csv yet; add them
   when the recorder is built.)
+- v1.11.1: Grown-ups question fits short landscape screens (Fire tablets with the browser bar,
+  phones on their side) by putting the keypad beside the question. Lock-to-one-app tip now covers
+  Fire and Android tablets too.
 
 ## More game ideas (later)
 - More Foxy: Foxy steals pizza toppings or cupcake sprinkles in other Bakery games.
